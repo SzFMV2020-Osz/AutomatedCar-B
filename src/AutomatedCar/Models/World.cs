@@ -3,16 +3,15 @@ using System.Collections.ObjectModel;
 using ReactiveUI;
 
 namespace AutomatedCar.Models {
+    using System;
     using Avalonia;
-    using Avalonia.Collections;
-    using Avalonia.Controls.Shapes;
     using Avalonia.Media;
 
     public class World : ReactiveObject, IWorld {
 
         private static System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
 
-        public ObservableCollection<WorldObject> WorldObjects { get; } = new ObservableCollection<WorldObject> ();
+        public ObservableCollection<IWorldObject> WorldObjects { get; } = new ObservableCollection<IWorldObject> ();
 
         private AutomatedCar _controlledCar;
         public AutomatedCar ControlledCar {
@@ -24,7 +23,7 @@ namespace AutomatedCar.Models {
         public int Height { get; set; }
 
         private World () { }
-        public void addObject (WorldObject worldObject) {
+        public void addObject (IWorldObject worldObject) {
             WorldObjects.Add (worldObject);
         }
 
@@ -39,7 +38,7 @@ namespace AutomatedCar.Models {
             PolylineGeometry geometry = new PolylineGeometry();
             geometry.Points = new Points();
             points.ForEach(p => geometry.Points.Add(p));
-            foreach (IWorldObject worldObject in this.GetInstance().WorldObjects)
+            foreach (IWorldObject worldObject in this.WorldObjects)
             {
                 if (geometry.FillContains(worldObject.PositionPoint))
                 {
@@ -58,14 +57,19 @@ namespace AutomatedCar.Models {
         public List<IWorldObject> GetNPCs()
         {
             List<IWorldObject> result = new List<IWorldObject>();
-            foreach (IWorldObject worldObject in this.GetInstance().WorldObjects)
+            for (int i = 0; i < this.WorldObjects.Count; i++)
             {
-                if(worldObject is IMoveable)
+                try
                 {
-                    result.Add(worldObject);
+                    if (this.WorldObjects[i] is IMoveable)
+                    {
+                        result.Add(this.WorldObjects[i]);
+                    }
                 }
+                catch (InvalidCastException ex)
+                {}
+               
             }
-
             return result;
         }
     }
