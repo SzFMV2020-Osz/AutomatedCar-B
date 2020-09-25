@@ -42,7 +42,7 @@ namespace AutomatedCar {
                 circle.Width = 40;
                 circle.Height = 40;
                 circle.ZIndex = 2;
-                world.addObject (circle);
+                world.addObject ((IWorldObject)circle);
 
                 var controlledCar = new Models.AutomatedCar (50, 50, "car_1_white.png");
                 controlledCar.Width = 108;

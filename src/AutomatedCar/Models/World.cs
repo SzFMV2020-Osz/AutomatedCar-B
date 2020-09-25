@@ -9,8 +9,7 @@ namespace AutomatedCar.Models {
 
     public class World : ReactiveObject, IWorld {
 
-        private static System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
-
+        public static World Instance { get; } = new World ();
         public ObservableCollection<IWorldObject> WorldObjects { get; } = new ObservableCollection<IWorldObject> ();
 
         private AutomatedCar _controlledCar;
@@ -22,14 +21,14 @@ namespace AutomatedCar.Models {
         public int Width { get; set; }
         public int Height { get; set; }
 
-        private World () { }
+        public World () { }
         public void addObject (IWorldObject worldObject) {
             WorldObjects.Add (worldObject);
         }
 
         public World GetInstance()
         {
-            return lazySingleton.Value;
+            return Instance;
         }
 
         public List<IWorldObject> SearchInRange(List<Point> points)

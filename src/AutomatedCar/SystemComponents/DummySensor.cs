@@ -17,8 +17,8 @@ namespace AutomatedCar.SystemComponents {
             virtualFunctionBus.DummyPacket = dummyPacket;
         }
         override public void Process () {
-            dummyPacket.DistanceX = World.Instance.WorldObjects[0].X - World.Instance.ControlledCar.X;
-            dummyPacket.DistanceY = World.Instance.WorldObjects[0].Y - World.Instance.ControlledCar.Y;
+            dummyPacket.DistanceX = (int)World.Instance.WorldObjects[0].PositionPoint.X - World.Instance.ControlledCar.X;
+            dummyPacket.DistanceY = (int)World.Instance.WorldObjects[0].PositionPoint.Y - World.Instance.ControlledCar.Y;
         }
     }
 }

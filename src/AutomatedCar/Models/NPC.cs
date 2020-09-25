@@ -35,6 +35,10 @@ namespace AutomatedCar.Models
             IsHighlighted = isHighlighted;
         }
 
+        public NPC()
+        {
+        }
+
         public void SetNextPosition(Point point)
         {
             this.PositionPoint = new Point(point.X, point.Y);
