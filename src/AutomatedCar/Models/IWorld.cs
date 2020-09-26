@@ -5,7 +5,6 @@ namespace AutomatedCar.Models
 
     public interface IWorld
     {
-        public World GetInstance();
         public List<IWorldObject> SearchInRange(List<Point> points);
         public AutomatedCar GetControlledCar();
         public List<IWorldObject> GetNPCs();

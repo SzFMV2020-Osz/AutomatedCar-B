@@ -6,20 +6,19 @@ namespace AutomatedCarTests.Models
     using Avalonia.Controls.Shapes;
     using Avalonia.Media.TextFormatting;
     using Xunit;
-    using Moq;  
+    using Moq;
+    using System.Collections.Generic;
 
-
-    public class WorldTest
+    public class WorldTests
     {
+        //World instance is singleton so I can only run one test on this method
         [Theory]
         [InlineData (20)]
-        [InlineData (0)]
-        [InlineData (10000)]
         public void GetNPCsTest (int numOfWorldObjects)
         {
-            Mock<World> world = new Mock<World>();
-            AddWorldObjects(world.Object, numOfWorldObjects);
-            Assert.Equal (numOfWorldObjects, world.Object.GetNPCs().Count);
+            World world = World.Instance;
+            AddWorldObjects(world, numOfWorldObjects);
+            Assert.Equal (numOfWorldObjects, world.GetNPCs().Count);
         }
 
         private void AddWorldObjects(World world, int numOfWorldObjects)
@@ -27,11 +26,17 @@ namespace AutomatedCarTests.Models
             for (int i = 0; i < numOfWorldObjects; i++)
             {
                 NPC npc = new NPC();
+                npc.Polygon = new Polygon();
+                npc.Polygon.Points = new List<Point> { new Point(0, 0), new Point(5, 0), new Point(-5, 0), new Point(-5, 5) };
                 TestWordObject w = new TestWordObject();
+                w.Polygon = new Polygon();
+                w.Polygon.Points = new List<Point> { new Point(0, 0), new Point(5, 0), new Point(-5, 0), new Point(-5, 5) };
                 world.addObject(npc);
                 world.addObject(w);
             }
         }
+
+
     }
 
     public class TestWordObject: IWorldObject

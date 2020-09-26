@@ -21,25 +21,21 @@ namespace AutomatedCar.Models {
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public World () { }
+        private World () { }
         public void addObject (IWorldObject worldObject) {
             WorldObjects.Add (worldObject);
-        }
-
-        public World GetInstance()
-        {
-            return Instance;
         }
 
         public List<IWorldObject> SearchInRange(List<Point> points)
         {
             List<IWorldObject> result = new List<IWorldObject>();
-            PolylineGeometry geometry = new PolylineGeometry();
-            geometry.Points = new Points();
-            points.ForEach(p => geometry.Points.Add(p));
+            PolylineGeometry area = new PolylineGeometry();
+            area.Points = new Points();
+            points.ForEach(p => area.Points.Add(p));
             foreach (IWorldObject worldObject in this.WorldObjects)
             {
-                if (geometry.FillContains(worldObject.PositionPoint))
+                Rect rect = new PolylineGeometry(worldObject.Polygon.Points, true).GetRenderBounds(new Pen());
+                if (area.FillContains(rect.TopLeft) || area.FillContains(rect.TopRight) || area.FillContains(rect.BottomLeft) || area.FillContains(rect.BottomRight) || area.FillContains(rect.Center))
                 {
                     result.Add(worldObject);
                 }
@@ -50,7 +46,7 @@ namespace AutomatedCar.Models {
 
         public AutomatedCar GetControlledCar()
         {
-            return this.GetInstance().ControlledCar;
+            return Instance.ControlledCar;
         }
 
         public List<IWorldObject> GetNPCs()
