@@ -38,6 +38,5 @@ namespace AutomatedCar.Models
         {
             return new List<double> {n11, n12, n21, n22};
         }
-
     }
 }

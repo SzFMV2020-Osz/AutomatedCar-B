@@ -36,20 +36,18 @@ namespace AutomatedCarTests.Models
             }
         }
 
-
-    }
-
-    public class TestWordObject: IWorldObject
-    {
-        public string FileName { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public Point PositionPoint { get; }
-        public int ZIndex { get; set; }
-        public Point RotationPoint { get; set; }
-        public Polygon Polygon { get; set; }
-        public bool IsCollidable { get; set; }
-        public MatrixTwoByTwo RotationMatrix { get; set; }
-        public bool IsHighlighted { get; set; }
+        private class TestWordObject: IWorldObject
+            {
+                public string FileName { get; set; }
+                public int Width { get; set; }
+                public int Height { get; set; }
+                public Point PositionPoint { get; }
+                public int ZIndex { get; set; }
+                public Point RotationPoint { get; set; }
+                public Polygon Polygon { get; set; }
+                public bool IsCollidable { get; set; }
+                public MatrixTwoByTwo RotationMatrix { get; set; }
+                public bool IsHighlighted { get; set; }
+            }
     }
 }

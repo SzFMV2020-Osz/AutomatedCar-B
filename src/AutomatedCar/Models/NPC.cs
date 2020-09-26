@@ -18,7 +18,6 @@ namespace AutomatedCar.Models
         public bool IsHighlighted { get; set; }
         public Point Speed { get; }
         public Point Acceleration { get; }
-        
 
         public NPC(NPCType type, string fileName, int width, int height, Point positionPoint, int zIndex, Point rotationPoint, Polygon polygon, bool isCollidable, MatrixTwoByTwo rotationMatrix, bool isHighlighted)
         {
@@ -43,8 +42,6 @@ namespace AutomatedCar.Models
         {
             this.PositionPoint = new Point(point.X, point.Y);
         }
-
-
     }
 
     public enum NPCType
