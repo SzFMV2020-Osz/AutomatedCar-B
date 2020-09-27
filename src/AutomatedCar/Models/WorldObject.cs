@@ -17,7 +17,9 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
-        public int Angle { get; set; }
+        public int Angle {
+            get => this._angle;
+        }
 
         public int Width { get; set; }
 

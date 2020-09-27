@@ -6,11 +6,12 @@ using Avalonia.Data.Converters;
 
 namespace AutomatedCar.Visualization
 {
-    class Rotator : IValueConverter
+    public class Rotator : IValueConverter
     {
+        public static Rotator Instance { get; } = new Rotator();
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return (int)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

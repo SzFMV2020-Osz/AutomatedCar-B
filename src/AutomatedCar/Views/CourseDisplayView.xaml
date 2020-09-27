@@ -45,12 +45,16 @@
                     <Canvas>
 
 
-						<LayoutTransformControl Grid.Column="0"  Width="{Binding Width}" Height="{Binding Height}">
+						<LayoutTransformControl Grid.Column="0"  
+												Width="{Binding Width}"
+												Height="{Binding Height}">
 							<LayoutTransformControl.LayoutTransform>
-								<RotateTransform Angle="0"/>
+								<RotateTransform
+									Angle="{Binding Angle, Converter={x:Static visualization:Rotator.Instance}}"/>
 							</LayoutTransformControl.LayoutTransform>
 							<Image
-                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+                            Source="{Binding Filename,
+							Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 						</LayoutTransformControl>
 						
 						
