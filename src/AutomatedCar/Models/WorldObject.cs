@@ -6,6 +6,7 @@ namespace AutomatedCar.Models
     {
         private int _x;
         private int _y;
+        private int _angle = 90; // mocking
 
         public WorldObject(int x, int y, string filename)
         {
@@ -16,6 +17,7 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
+        public int Angle { get; set; }
 
         public int Width { get; set; }
 
