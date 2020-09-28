@@ -7,9 +7,9 @@ namespace AutomatedCar.Models
     {
         public NPCType Type { get; set; }
 
-        public Point Speed { get; }
+        public Point Speed { get; set; }
 
-        public Point Acceleration { get; }
+        public Point Acceleration { get; set; }
 
         public NPC(int x, int y, string filename, NPCType type, Point speed, Point acceleration)
             : base(x, y, filename)

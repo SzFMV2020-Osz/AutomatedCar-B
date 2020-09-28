@@ -25,11 +25,13 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
-        public Point Speed { get; }
+        /// <summary>Gets or sets Speed in px/s.</summary>
+        public Point Speed { get; set; }
 
-        public Point Acceleration { get; }
-
-        public Point PositionPoint { get; private set; }
+        /// <summary>
+        /// Alternative for Speed. Not decided yet.
+        /// </summary>
+        public Point Acceleration { get; set; }
 
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Start()
