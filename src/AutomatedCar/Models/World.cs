@@ -33,7 +33,7 @@
             this.WorldObjects.Add(worldObject);
         }
 
-        public List<World> SearchInRange(List<Point> points)
+        public List<WorldObject> SearchInRange(List<Point> points)
         {
             throw new NotImplementedException();
         }
