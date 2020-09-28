@@ -31,7 +31,7 @@ namespace AutomatedCar.Models
 
         public Polygon Polygon { get; set; }
 
-        public bool IsCollidable { get; set; }
+        public bool IsCollidable { get; }
 
         public MatrixTwoByTwo RotationMatrix { get; set; }
 
