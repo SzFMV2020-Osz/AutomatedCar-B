@@ -45,22 +45,7 @@
 
         public List<WorldObject> GetNPCs()
         {
-            List<WorldObject> result = new List<WorldObject>();
-            for (int i = 0; i < this.WorldObjects.Count; i++)
-            {
-                try
-                {
-                    if (this.WorldObjects[i] is IMoveable)
-                    {
-                        result.Add(this.WorldObjects[i]);
-                    }
-                }
-                catch (InvalidCastException ex)
-                {
-                }
-            }
-
-            return result;
+            throw new NotImplementedException();
         }
     }
 }
