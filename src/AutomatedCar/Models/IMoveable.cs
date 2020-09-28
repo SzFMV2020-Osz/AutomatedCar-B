@@ -6,8 +6,8 @@ namespace AutomatedCar.Models
     {
         public void SetNextPosition(Point point);
 
-        public Point Speed { get; }
+        public Point Speed { get; set; }
 
-        public Point Acceleration { get; }
+        public Point Acceleration { get; set; }
     }
 }
