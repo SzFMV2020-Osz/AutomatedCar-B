@@ -12,6 +12,8 @@ namespace AutomatedCar.Models
         public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename)
         {
+            this.IsCollidable = true;
+            this.IsHighlighted = false;
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
