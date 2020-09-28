@@ -17,23 +17,23 @@ namespace AutomatedCar.Models
             this.ZIndex = 1;
         }
 
-        public int ZIndex { get; set; }
+        public int ZIndex { get; protected set; }
 
-        public int Width { get; set; }
+        public int Width { get; protected set; }
 
-        public int Height { get; set; }
+        public int Height { get; protected set; }
 
-        public string FileName { get; set; }
+        public string FileName { get; protected set; }
 
-        public Point PositionPoint { get; set; }
+        public Point PositionPoint { get; protected set; }
 
-        public Point RotationPoint { get; set; }
+        public Point RotationPoint { get; protected set; }
 
-        public Polygon Polygon { get; set; }
+        public Polygon Polygon { get; protected set; }
 
-        public bool IsCollidable { get; }
+        public bool IsCollidable { get; protected set; }
 
-        public MatrixTwoByTwo RotationMatrix { get; set; }
+        public MatrixTwoByTwo RotationMatrix { get; protected set; }
 
         public bool IsHighlighted { get; set; }
 
