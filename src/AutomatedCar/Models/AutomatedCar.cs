@@ -3,7 +3,6 @@ namespace AutomatedCar.Models
     using Avalonia.Media;
     using SystemComponents;
     using Avalonia;
-    using Avalonia.Controls.Shapes;
 
     public class AutomatedCar : Car, IMoveable
     {
@@ -24,24 +23,11 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
-        public string FileName { get; set; }
-
-        /// <summary>Gets positionPoint.</summary>
-        public Point PositionPoint { get; private set; }
-
-        public Point RotationPoint { get; set; }
-
-        public Polygon Polygon { get; set; }
-
-        public bool IsCollidable { get; private set; }
-
-        public MatrixTwoByTwo RotationMatrix { get; set; }
-
-        public bool IsHighlighted { get; set; } = false;
-
         public Point Speed { get; }
 
         public Point Acceleration { get; }
+
+        public Point PositionPoint { get; private set; }
 
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Start()
@@ -57,7 +43,7 @@ namespace AutomatedCar.Models
 
         public void SetNextPosition(Point point)
         {
-            this.PositionPoint = new Point(point.X, point.Y);
+            base.SetPositionPoint(new Point(point.X, point.Y));
         }
     }
 }

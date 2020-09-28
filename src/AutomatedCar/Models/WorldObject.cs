@@ -1,5 +1,7 @@
 namespace AutomatedCar.Models
 {
+    using Avalonia;
+    using Avalonia.Controls.Shapes;
     using ReactiveUI;
 
     public abstract class WorldObject : ReactiveObject
@@ -20,6 +22,20 @@ namespace AutomatedCar.Models
         public int Width { get; set; }
 
         public int Height { get; set; }
+
+        public string FileName { get; set; }
+
+        public Point PositionPoint { get; set; }
+
+        public Point RotationPoint { get; set; }
+
+        public Polygon Polygon { get; set; }
+
+        public bool IsCollidable { get; set; }
+
+        public MatrixTwoByTwo RotationMatrix { get; set; }
+
+        public bool IsHighlighted { get; set; }
 
         public int X
         {
