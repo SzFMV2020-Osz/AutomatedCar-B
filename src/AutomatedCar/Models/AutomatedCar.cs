@@ -33,7 +33,5 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus.Stop();
         }
-
-        public string TransformValue { get => $"rotate({Angle}deg)"; }
     }
 }

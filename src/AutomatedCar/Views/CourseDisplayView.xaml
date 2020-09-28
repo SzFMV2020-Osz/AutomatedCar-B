@@ -19,12 +19,6 @@
             <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
         </Style>
-		<Style Selector="Image#EgoCar, Polyline#EgoCarPolygon">
-
-			<Setter Property="RenderTransform" Value="{Binding TransformValue}"/>
-			<Setter Property="Width" Value="{Binding Width}"/>
-			<Setter Property="Height" Value="{Binding Heigth}"/>
-		</Style>
     </UserControl.Styles>
 
     <ScrollViewer Width="960" Height="720" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -47,20 +41,17 @@
                         <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
                     </Canvas>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type models:AutomatedCar}">
-                    <Canvas>
-
+				<DataTemplate DataType="{x:Type models:AutomatedCar}">
+					<Canvas RenderTransformOrigin="{Binding CenterPoint}" >
+						<Canvas.RenderTransform>
+							<RotateTransform  Angle="{Binding Angle}" />
+						</Canvas.RenderTransform>
 						<Image
-							Name="EgoCar"
-                            Source="{Binding Filename,
-							Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-                        
-                        <Polyline
-							Name="EgoCarPolygon"
-							Stroke="{Binding Brush, Mode=OneWay}"
-						    Points="{Binding Geometry.Points, Mode=OneWay}" />
-                    </Canvas>
-                </DataTemplate>
+							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />
+					</Canvas>
+				</DataTemplate>
             </ItemsControl.DataTemplates>
         </ItemsControl>
     </ScrollViewer>
