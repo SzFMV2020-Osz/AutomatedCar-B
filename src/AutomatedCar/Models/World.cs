@@ -1,6 +1,10 @@
 ﻿namespace AutomatedCar.Models
 {
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using Avalonia;
+    using Avalonia.Media;
     using ReactiveUI;
 
     public class World : ReactiveObject
@@ -27,6 +31,36 @@
         public void AddObject(WorldObject worldObject)
         {
             this.WorldObjects.Add(worldObject);
+        }
+
+        public List<World> SearchInRange(List<Point> points)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AutomatedCar GetControlledCar()
+        {
+            return Instance.ControlledCar;
+        }
+
+        public List<WorldObject> GetNPCs()
+        {
+            List<WorldObject> result = new List<WorldObject>();
+            for (int i = 0; i < this.WorldObjects.Count; i++)
+            {
+                try
+                {
+                    if (this.WorldObjects[i] is IMoveable)
+                    {
+                        result.Add(this.WorldObjects[i]);
+                    }
+                }
+                catch (InvalidCastException ex)
+                {
+                }
+            }
+
+            return result;
         }
     }
 }
