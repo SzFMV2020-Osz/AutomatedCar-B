@@ -17,11 +17,11 @@ namespace AutomatedCar.Models
             this.ZIndex = 1;
         }
 
-        public int ZIndex { get; protected set; }
+        public int ZIndex { get; set; }
 
-        public int Width { get; protected set; }
+        public int Width { get; set; }
 
-        public int Height { get; protected set; }
+        public int Height { get; set; }
 
         public string FileName { get; protected set; }
 
