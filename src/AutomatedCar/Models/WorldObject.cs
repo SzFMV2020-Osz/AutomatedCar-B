@@ -8,7 +8,6 @@ namespace AutomatedCar.Models
         private int _y;
         private int _angle = 91; // mocking
 
-        public string CenterPoint = "100,0";
 
         public WorldObject(int x, int y, string filename)
         {
