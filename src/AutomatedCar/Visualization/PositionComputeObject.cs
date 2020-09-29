@@ -25,6 +25,5 @@ namespace AutomatedCar.Visualization
         {
             throw new NotImplementedException();
         }
-
     }
 }
