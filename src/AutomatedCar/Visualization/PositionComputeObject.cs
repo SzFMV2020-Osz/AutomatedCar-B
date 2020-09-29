@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace AutomatedCar.Visualization
@@ -11,5 +12,19 @@ namespace AutomatedCar.Visualization
         {
            this.centerCar = centerCar;
         }
+
+        public Point[] getScreenSquare(AutomatedCar.Models.WorldObject worldObject)
+        {
+            throw new NotImplementedException();
+        }
+        public Point getPositionFromCenter(AutomatedCar.Models.WorldObject worldObject)
+        {
+            throw new NotImplementedException();
+        }
+        public Point getPositionFromScreen(AutomatedCar.Models.WorldObject worldObject)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
