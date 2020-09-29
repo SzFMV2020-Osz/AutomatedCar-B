@@ -4,7 +4,7 @@ namespace AutomatedCar.Models
     using SystemComponents;
     using Avalonia;
 
-    public class AutomatedCar : Car, IMoveable
+    public class AutomatedCar : WorldObject, IMoveable
     {
         private VirtualFunctionBus virtualFunctionBus;
         private DummySensor dummySensor;
@@ -25,6 +25,11 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
+        public void SetNextPosition(Point point)
+        {
+            this.PositionPoint = point;
+        }
+
         /// <summary>Gets or sets Speed in px/s.</summary>
         public Point Speed { get; set; }
 
@@ -43,11 +48,6 @@ namespace AutomatedCar.Models
         public void Stop()
         {
             this.virtualFunctionBus.Stop();
-        }
-
-        public void SetNextPosition(Point point)
-        {
-            base.SetPositionPoint(new Point(point.X, point.Y));
         }
     }
 }
