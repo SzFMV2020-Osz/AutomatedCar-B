@@ -42,13 +42,13 @@
                     </Canvas>
                 </DataTemplate>
 				<DataTemplate DataType="{x:Type models:AutomatedCar}">
-					<Canvas  >
+					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
 						
 						<Canvas.RenderTransform>
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />
-								<TranslateTransform  X="{Binding Width}" />
-								<TranslateTransform  Y="{Binding Height}" />
+								<TranslateTransform  X="{Binding RotationCenterPointX}" />
+								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
 							</TransformGroup>
 							
 						</Canvas.RenderTransform>
