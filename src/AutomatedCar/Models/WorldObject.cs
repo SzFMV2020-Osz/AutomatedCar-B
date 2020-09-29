@@ -33,7 +33,7 @@ namespace AutomatedCar.Models
 
         public bool IsCollidable { get; protected set; }
 
-        public MatrixTwoByTwo RotationMatrix { get; protected set; }
+        public double RotationAngle { get; protected set; }
 
         public bool IsHighlighted { get; set; }
 
