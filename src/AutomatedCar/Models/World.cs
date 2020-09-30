@@ -1,8 +1,10 @@
 ﻿namespace AutomatedCar.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Avalonia;
+    using Avalonia.Media;
     using ReactiveUI;
 
     public class World : ReactiveObject, IWorld
@@ -31,22 +33,19 @@
             this.WorldObjects.Add(worldObject);
         }
 
-        /// <inheritdoc/>
+        public List<WorldObject> SearchInRange(List<Point> points)
+        {
+            throw new NotImplementedException();
+        }
+
         public AutomatedCar GetControlledCar()
         {
-            throw new System.NotImplementedException();
+            return Instance.ControlledCar;
         }
 
-        /// <inheritdoc/>
         public List<WorldObject> GetNPCs()
         {
-            throw new System.NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public List<WorldObject> SearchInRange(List<Point> searchArea)
-        {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
