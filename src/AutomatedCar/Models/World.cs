@@ -1,9 +1,11 @@
 ﻿namespace AutomatedCar.Models
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using Avalonia;
     using ReactiveUI;
 
-    public class World : ReactiveObject
+    public class World : ReactiveObject, IWorld
     {
         // private static readonly System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
         // public static World Instance { get { return lazySingleton.Value; } }
@@ -27,6 +29,24 @@
         public void AddObject(WorldObject worldObject)
         {
             this.WorldObjects.Add(worldObject);
+        }
+
+        /// <inheritdoc/>
+        public AutomatedCar GetControlledCar()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public List<WorldObject> GetNPCs()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public List<WorldObject> SearchInRange(List<Point> searchArea)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
