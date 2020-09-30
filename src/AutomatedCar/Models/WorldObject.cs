@@ -41,15 +41,15 @@ namespace AutomatedCar.Models
 
         public string FileName { get; protected set; }
 
-        public Point PositionPoint { get; protected set; }
+        public int RotationCenterPointX { get; protected set; }
 
-        public Point RotationPoint { get; protected set; }
+        public int RotationCenterPointY { get; protected set; }
 
         public Polygon Polygon { get; protected set; }
-
+        
         public bool IsCollidable { get; protected set; }
 
-        public double RotationAngle { get; protected set; }
+        public double Angle { get; protected set; }
 
         public bool IsHighlighted { get; set; }
 
