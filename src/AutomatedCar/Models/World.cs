@@ -29,7 +29,6 @@
         private List<WorldObject> trees;
         private List<WorldObject> signs;
         private List<WorldObject> roads;
-        private List<WorldObject> road;
         private List<WorldObject> npcs; // for 2nd sprint
 
         private struct SerializeObject
@@ -46,12 +45,16 @@
             public bool IsHighlighted;
             public int X;
             public int Y;
+
             public string Filename { get; set; }
+
         }
 
         public int Width { get; set; }
 
         public int Height { get; set; }
+
+        public List<WorldObject> NPCs { get; set; }
 
         private World()
         {
@@ -64,37 +67,13 @@
         }
 
         /// <summary>
-        /// For sensors: Returns a list of worldobject that can be found in an area defined by the given list of points.
-        /// </summary>
-        /// <param name="searchArea">Area to be searched, defined by a list of points.</param>
-        /// <returns>Returns a list of worldobjects in a given area.</returns>
-        public List<WorldObject> SearchInRange(List<Point> searchArea)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// For getting the controlledCars position, geometry etc.
         /// </summary>
         /// <returns>Returns the instance of the controlled car as an AutomatedCar.</returns>
-        public AutomatedCar GetControlledCar()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// For getting the NPC-s position, geometry etc.
-        /// </summary>
-        /// <returns>Returns a list of WorldObjects containing all the NPCs</returns>
-        public List<WorldObject> GetNPCs()
-        {
-            throw new NotImplementedException();
-        }
 
         private List<WorldObject> JSONLoadWorldObjectsFromFile(string filename)
         {
             List<WorldObject> list = new List<WorldObject>();
-
 
             // newtonsoft json object
             // -> worldobject
@@ -118,6 +97,67 @@
                 // instance manipulation
                 return Instance;
             }
+        }
+
+        /// <summary>
+        /// Getting NPCs in given area.
+        /// </summary>
+        /// <param name="a">Point A of defined area</param>
+        /// <param name="b">Point B of defined area</param>
+        /// <param name="c">Point C of defined area</param>
+        /// <returns>List of world objects containing all NPCs in given area.</returns>
+        public List<WorldObject> getNPCsInTriangle(int a, int b, int c)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Getting Roads in given area.
+        /// </summary>
+        /// <param name="a">Point A of defined area</param>
+        /// <param name="b">Point B of defined area</param>
+        /// <param name="c">Point C of defined area</param>
+        /// <returns>List of world objects containing all Roads in given area.</returns>
+        public List<WorldObject> getRoadsInTriangle(int a, int b, int c)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Getting Trees in given area.
+        /// </summary>
+        /// <param name="a">Point A of defined area</param>
+        /// <param name="b">Point B of defined area</param>
+        /// <param name="c">Point C of defined area</param>
+        /// <returns>List of world objects containing all Trees in given area.</returns>
+        public List<WorldObject> getTreesInTriangle(int a, int b, int c)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Getting Signs in given area.
+        /// </summary>
+        /// <param name="a">Point A of defined area</param>
+        /// <param name="b">Point B of defined area</param>
+        /// <param name="c">Point C of defined area</param>
+        /// <returns>List of world objects containing all Signs in given area.</returns>
+        public List<WorldObject> getSignsInTriangle(int a, int b, int c)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Getting WorldObjects in given rectangle area.
+        /// </summary>
+        /// <param name="a">Point A of defined area</param>
+        /// <param name="b">Point B of defined area</param>
+        /// <param name="c">Point C of defined area</param>
+        /// <param name="d">Point D of defined area</param>
+        /// <returns>List of world objects containing all WorldObjects in given area.</returns>
+        public List<WorldObject> getWorldObjectsInRectangle(int a, int b, int c, int d)
+        {
+            throw new NotImplementedException();
         }
     }
 }
