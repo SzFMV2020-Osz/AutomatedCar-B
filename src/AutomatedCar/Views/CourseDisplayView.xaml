@@ -41,13 +41,24 @@
                         <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
                     </Canvas>
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type models:AutomatedCar}">
-                    <Canvas>
-                        <Image Width="{Binding Width}" Height="{Binding Height}"
-                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Geometry.Points, Mode=OneWay}" />
-                    </Canvas>
-                </DataTemplate>
+				<DataTemplate DataType="{x:Type models:AutomatedCar}">
+					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
+						
+						<Canvas.RenderTransform>
+							<TransformGroup>
+								<RotateTransform  Angle="{Binding Angle}" />
+								<TranslateTransform  X="{Binding RotationCenterPointX}" />
+								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+							</TransformGroup>
+							
+						</Canvas.RenderTransform>
+
+						<Image
+							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />
+					</Canvas>
+				</DataTemplate>
             </ItemsControl.DataTemplates>
         </ItemsControl>
     </ScrollViewer>
