@@ -29,7 +29,6 @@
         private List<WorldObject> trees;
         private List<WorldObject> signs;
         private List<WorldObject> roads;
-        private List<WorldObject> road;
         private List<WorldObject> npcs; // for 2nd sprint
 
         private struct SerializeObject
@@ -38,15 +37,15 @@
             public int Width;
             public int Height;
             public string FileName;
-            public Point PositionPoint;
-            public Point RotationPoint;
+            public int RotationCenterPointX;
+            public int RotationCenterPointY;
             public Polygon Polygon;
             public bool IsCollidable;
-            public double RotationAngle;
+            public double Angle;
             public bool IsHighlighted;
             public int X;
             public int Y;
-            public string Filename { get; set; }
+            public string Filename;
         }
 
         public int Width { get; set; }
