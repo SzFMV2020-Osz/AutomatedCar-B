@@ -64,15 +64,6 @@
         }
 
         /// <summary>
-        /// Returns an instance of a World object.
-        /// </summary>
-        /// <returns>Returns an instance of the World.</returns>
-        public static World GetInstance()
-        {
-            return new World();
-        }
-
-        /// <summary>
         /// For sensors: Returns a list of worldobject that can be found in an area defined by the given list of points.
         /// </summary>
         /// <param name="searchArea">Area to be searched, defined by a list of points.</param>
