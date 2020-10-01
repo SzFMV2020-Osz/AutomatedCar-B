@@ -21,7 +21,7 @@ namespace AutomatedCar.Models
 
         public void SetNextPosition(Point point)
         {
-            base.PositionPoint = new Point(point.X, point.Y);
+            //base.PositionPoint = new Point(point.X, point.Y);
         }
     }
 

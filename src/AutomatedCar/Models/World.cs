@@ -4,9 +4,12 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using Avalonia;
     using Avalonia.Controls.Shapes;
     using Avalonia.Media;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using ReactiveUI;
 
     public class World : ReactiveObject
@@ -27,26 +30,9 @@
         }
 
         private List<WorldObject> trees;
-        private List<WorldObject> signs;
+        private List<Sign> signs;
         private List<WorldObject> roads;
         private List<WorldObject> npcs; // for 2nd sprint
-
-        private struct SerializeObject
-        {
-            public int ZIndex;
-            public int Width;
-            public int Height;
-            public string FileName;
-            public int RotationCenterPointX;
-            public int RotationCenterPointY;
-            public Polygon Polygon;
-            public bool IsCollidable;
-            public double Angle;
-            public bool IsHighlighted;
-            public int X;
-            public int Y;
-            public string Filename;
-        }
 
         public int Width { get; set; }
 
@@ -64,37 +50,37 @@
             this.WorldObjects.Add(worldObject);
         }
 
-        /// <summary>
-        /// For getting the controlledCars position, geometry etc.
-        /// </summary>
-        /// <returns>Returns the instance of the controlled car as an AutomatedCar.</returns>
-
-        private List<WorldObject> JSONLoadWorldObjectsFromFile(string filename)
-        {
-            List<WorldObject> list = new List<WorldObject>();
-
-            // newtonsoft json object
-            // -> worldobject
-
-            return list;
-        }
-
         public static World GetInstance()
         {
+            // string[] Filenames = File.ReadAllLines("config.txt");
+            // XDocument worldObjectsInFile = XDocument.Load("..\\..\\..\\Assets\\test_world.json"); // System.Xml.XmlException: 'Data at the root level is invalid. Line 1, position 1.'
 
-            if (Instance != null)
+            JObject worldObjectsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\test_world.json"));
+
+            IList<JToken> results = worldObjectsInFile["objects"].Children().ToList();
+
+            List<WorldObject> allObjects = results.Select(r => new WorldObject
             {
-                return Instance;
-            }
-            else
+                X = (int)r["x"],
+                Y = (int)r["y"],
+                FileName = (string)r["type"],
+                Angle = Math.Acos((double)r["m11"]),
+            }).ToList();
+
+            Instance.roads = allObjects.Where(r => r.FileName.Contains("road_")).ToList();
+            Instance.trees = allObjects.Where(r => r.FileName.Contains("tree")).ToList();
+            Instance.signs = allObjects.Where(r => r.FileName.Contains("roadsign_")).Select(s => new Sign
             {
-                // loadstuff
-                // config elérés
-                string[] Filenames = File.ReadAllLines("config.txt");
-                // configból filenevek és deserialize
-                // instance manipulation
-                return Instance;
-            }
+                X = s.X,
+                Y = s.Y,
+                FileName = s.FileName,
+                Angle = s.Angle,
+                Text = s.FileName.Substring(s.FileName.LastIndexOf("_")+1),
+            }).ToList();
+
+
+            return Instance; // is this required?
+
         }
 
         /// <summary>

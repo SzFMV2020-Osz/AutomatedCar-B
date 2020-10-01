@@ -16,6 +16,12 @@
     <EmbeddedResource Include="Assets\**;Resources\**" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Remove="Assets\test_world_without_hw.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\test_world_without_hw.json" />
+  </ItemGroup>
+  <ItemGroup>
     <!-- Avalonia 0.9.12 is the latest, but 0.10.0 preview solves a bug, so that's in use -->
     <PackageReference Include="Avalonia" Version="0.10.0-preview5" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview5" />

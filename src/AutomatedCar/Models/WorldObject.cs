@@ -4,27 +4,35 @@ namespace AutomatedCar.Models
     using Avalonia.Controls.Shapes;
     using ReactiveUI;
 
-    public abstract class WorldObject : ReactiveObject
+    public class WorldObject : ReactiveObject
     {
         private int _x;
         private int _y;
-        private double _angle = 90; // mocking
+        //private double _angle = 90; // mocking
         public int _rotationCenterPointX = 90; // = width/2
         public int _rotationCenterPointY = 120; // = height/2
+
+        public WorldObject()
+        {
+
+        }
 
         public WorldObject(int x, int y, string filename)
         {
             this.X = x;
             this.Y = y;
-            this.Filename = filename;
+            this.FileName = filename;
             this.ZIndex = 1;
         }
 
         public int ZIndex { get; set; }
-        public double Angle
-        {
-            get => this._angle;
-        }
+        //public double Angle
+        //{
+        //    get => this._angle;
+        //    set => this._angle = value;
+        //}
+
+        public double Angle { get; set; }
 
         public int RotationCenterPointX 
         {
@@ -39,7 +47,7 @@ namespace AutomatedCar.Models
 
         public int Height { get; set; }
 
-        public string FileName { get; protected set; }
+        public string FileName { get; set; }
 
         public Polygon Polygon { get; protected set; }
         
@@ -59,6 +67,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref this._y, value);
         }
 
-        public string Filename { get; set; }
+       
     }
 }

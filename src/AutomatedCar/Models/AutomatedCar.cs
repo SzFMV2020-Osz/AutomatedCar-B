@@ -27,7 +27,7 @@ namespace AutomatedCar.Models
 
         public void SetNextPosition(Point point)
         {
-            this.PositionPoint = point;
+            //this.PositionPoint = point;
         }
 
         /// <summary>Gets or sets Speed in px/s.</summary>
