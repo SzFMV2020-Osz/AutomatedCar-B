@@ -14,7 +14,6 @@
         /* private static readonly System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
          public static World Instance { get { return lazySingleton.Value; } }*/
 
-
         private World()
         {
         }
