@@ -10,6 +10,8 @@
 
         private AutomatedCar _controlledCar;
 
+        public bool DebugOn = false;
+
         public static World Instance { get; } = new World();
 
         public ObservableCollection<WorldObject> WorldObjects { get; } = new ObservableCollection<WorldObject>();
