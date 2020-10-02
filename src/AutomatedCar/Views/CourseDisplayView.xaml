@@ -58,7 +58,8 @@
 						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 
-						<Polyline 
+						<Polyline
+							IsVisible="{Binding RadarVisible, Mode=OneWay}"
 							Opacity=".4"
 							Fill="{Binding RadarBrush, Mode=OneWay}"
 							Points="{Binding RadarGeometry.Points, Mode=OneWay}" />

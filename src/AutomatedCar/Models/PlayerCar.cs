@@ -18,5 +18,6 @@ namespace AutomatedCar.Models
         public SolidColorBrush RadarBrush { get; set; }
 
         public Geometry RadarGeometry { get; set; }
+        public bool RadarVisible{ get; set; }
     }
 }

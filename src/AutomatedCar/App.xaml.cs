@@ -64,6 +64,7 @@ namespace AutomatedCar
 
                 controlledCar.RadarGeometry = new PolylineGeometry(sensorpoints, false);
                 controlledCar.Geometry = geom;
+                controlledCar.RadarVisible = true;
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();
