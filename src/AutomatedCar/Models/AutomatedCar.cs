@@ -20,9 +20,9 @@ namespace AutomatedCar.Models
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
 
         public Geometry Geometry { get; set; }
-
+        
         public SolidColorBrush Brush { get; private set; }
-
+       
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Start()
         {

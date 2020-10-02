@@ -45,9 +45,29 @@ namespace AutomatedCar
                 circle.ZIndex = 2;
                 world.AddObject(circle);
 
-                var controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
+                var mockedCar = new Models.AutomatedCar(150, 50, "car_1_red.png");
+                mockedCar.Width = 108;
+                mockedCar.Height = 240;
+                mockedCar.Geometry = geom;
+                world.AddObject(mockedCar);
+
+
+
+
+
+                var controlledCar = new Models.PlayerCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
+
+
+                controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
+
+                var sensorpoints = new List<Point>();
+                sensorpoints.Add(new Point(51, 239));
+                sensorpoints.Add(new Point(200, 100));
+                sensorpoints.Add(new Point(100, 300));
+
+                controlledCar.RadarGeometry = new PolylineGeometry(sensorpoints, false);
                 controlledCar.Geometry = geom;
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;

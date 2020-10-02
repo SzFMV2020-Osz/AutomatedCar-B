@@ -41,7 +41,7 @@
                         <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
                     </Canvas>
                 </DataTemplate>
-				<DataTemplate DataType="{x:Type models:AutomatedCar}">
+				<DataTemplate DataType="{x:Type models:PlayerCar}">
 					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
 						
 						<Canvas.RenderTransform>
@@ -51,6 +51,31 @@
 								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
 							</TransformGroup>
 							
+						</Canvas.RenderTransform>
+
+						<Image
+							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />
+
+						<Polyline 
+							Opacity=".4"
+							Fill="{Binding RadarBrush, Mode=OneWay}"
+							Points="{Binding RadarGeometry.Points, Mode=OneWay}" />
+
+
+					</Canvas>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type models:WorldObject}">
+					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
+
+						<Canvas.RenderTransform>
+							<TransformGroup>
+								<RotateTransform  Angle="{Binding Angle}" />
+								<TranslateTransform  X="{Binding RotationCenterPointX}" />
+								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+							</TransformGroup>
+
 						</Canvas.RenderTransform>
 
 						<Image

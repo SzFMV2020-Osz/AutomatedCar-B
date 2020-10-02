@@ -11,8 +11,8 @@ namespace AutomatedCar.SystemComponents
     public class DummySensor : SystemComponent
     {
         private DummyPacket dummyPacket;
-        public PolylineGeometry geometry;
-        public string color = "#313abc";
+        
+
         public bool isVisible = true;
 
         public DummySensor(VirtualFunctionBus virtualFunctionBus)
@@ -23,13 +23,8 @@ namespace AutomatedCar.SystemComponents
 
             this.dummyPacket = new DummyPacket();
             virtualFunctionBus.DummyPacket = this.dummyPacket;
+            
 
-            var points = new List<Point>();
-            points.Add(new Point(10, 10));
-            points.Add(new Point(12, 12));
-            points.Add(new Point(10, 12));
-
-            this.geometry =  new PolylineGeometry(points, false);
         }
 
         public override void Process()
