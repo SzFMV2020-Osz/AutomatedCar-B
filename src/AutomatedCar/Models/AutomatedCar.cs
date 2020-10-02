@@ -1,8 +1,10 @@
 namespace AutomatedCar.Models
 {
+    using System;
     using Avalonia.Media;
     using SystemComponents;
     using Avalonia;
+    using Avalonia.Controls.Primitives;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -25,9 +27,14 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
-        public void SetNextPosition(Point point)
+        /// <summary>
+        /// Example usage add
+        /// </summary>
+        /// <param name="point"></param>
+        public void SetNextPosition(int x, int y)
         {
-            this.PositionPoint = point;
+            this.X = x;
+            this.Y = y;
         }
 
         /// <summary>Gets or sets Speed in px/s.</summary>

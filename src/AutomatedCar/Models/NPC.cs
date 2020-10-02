@@ -1,5 +1,6 @@
 namespace AutomatedCar.Models
 {
+    using System;
     using Avalonia;
     using Avalonia.Controls.Shapes;
 
@@ -19,9 +20,10 @@ namespace AutomatedCar.Models
             this.Acceleration = acceleration;
         }
 
-        public void SetNextPosition(Point point)
+        public void SetNextPosition(int x, int y)
         {
-            base.PositionPoint = new Point(point.X, point.Y);
+            base.X = x;
+            base.Y = y;
         }
     }
 
