@@ -1,13 +1,14 @@
 namespace AutomatedCar.Models
 {
     using Avalonia.Media;
+    using System.Collections.ObjectModel;
     using SystemComponents;
 
     public class AutomatedCar : Car
     {
         private VirtualFunctionBus virtualFunctionBus;
         private DummySensor dummySensor;
-
+        public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
         public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename)
         {
