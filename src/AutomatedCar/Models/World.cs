@@ -48,54 +48,6 @@
         }
 
         /// <summary>
-        /// Getting NPCs in given area.
-        /// </summary>
-        /// <param name="a">Point A of defined area</param>
-        /// <param name="b">Point B of defined area</param>
-        /// <param name="c">Point C of defined area</param>
-        /// <returns>List of world objects containing all NPCs in given area.</returns>
-        public List<WorldObject> getNPCsInTriangle(int a, int b, int c)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Getting Roads in given area.
-        /// </summary>
-        /// <param name="a">Point A of defined area</param>
-        /// <param name="b">Point B of defined area</param>
-        /// <param name="c">Point C of defined area</param>
-        /// <returns>List of world objects containing all Roads in given area.</returns>
-        public List<WorldObject> getRoadsInTriangle(int a, int b, int c)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Getting Trees in given area.
-        /// </summary>
-        /// <param name="a">Point A of defined area</param>
-        /// <param name="b">Point B of defined area</param>
-        /// <param name="c">Point C of defined area</param>
-        /// <returns>List of world objects containing all Trees in given area.</returns>
-        public List<WorldObject> getTreesInTriangle(int a, int b, int c)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Getting Signs in given area.
-        /// </summary>
-        /// <param name="a">Point A of defined area</param>
-        /// <param name="b">Point B of defined area</param>
-        /// <param name="c">Point C of defined area</param>
-        /// <returns>List of world objects containing all Signs in given area.</returns>
-        public List<WorldObject> getSignsInTriangle(int a, int b, int c)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Getting WorldObjects in given rectangle area.
         /// </summary>
         /// <param name="a">Point A of defined area</param>
