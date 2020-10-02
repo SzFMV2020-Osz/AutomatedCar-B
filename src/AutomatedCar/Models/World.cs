@@ -11,8 +11,13 @@
 
     public class World : ReactiveObject
     {
-        // private static readonly System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
-        // public static World Instance { get { return lazySingleton.Value; } }
+        /* private static readonly System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
+         public static World Instance { get { return lazySingleton.Value; } }*/
+
+
+        private World()
+        {
+        }
 
         private AutomatedCar _controlledCar;
 
@@ -36,11 +41,6 @@
         public int Height { get; set; }
 
         public List<WorldObject> NPCs { get; set; }
-
-        private World()
-        {
-
-        }
 
         public void AddObject(WorldObject worldObject)
         {
