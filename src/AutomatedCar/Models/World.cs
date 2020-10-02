@@ -48,21 +48,6 @@
         }
 
         /// <summary>
-        /// For getting the controlledCars position, geometry etc.
-        /// </summary>
-        /// <returns>Returns the instance of the controlled car as an AutomatedCar.</returns>
-
-        private List<WorldObject> JSONLoadWorldObjectsFromFile(string filename)
-        {
-            List<WorldObject> list = new List<WorldObject>();
-
-            // newtonsoft json object
-            // -> worldobject
-
-            return list;
-        }
-
-        /// <summary>
         /// Getting NPCs in given area.
         /// </summary>
         /// <param name="a">Point A of defined area</param>
