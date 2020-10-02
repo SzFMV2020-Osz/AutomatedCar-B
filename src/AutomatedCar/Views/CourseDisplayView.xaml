@@ -19,6 +19,9 @@
             <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
         </Style>
+        <Style Selector="Polyline.Polygon">
+            <!-- <Setter Property="IsVisible" Value="{Binding Visible, Mode=OneWay}"/> -->
+        </Style>
     </UserControl.Styles>
 
     <ScrollViewer Width="960" Height="720" HorizontalAlignment="Left" VerticalAlignment="Top">
@@ -55,7 +58,7 @@
 
 						<Image
 							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
+						<Polyline Stroke="{Binding Brush, Mode=OneWay}" Classes="Polygon" IsVisible="{Binding Visible}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 					</Canvas>
 				</DataTemplate>
