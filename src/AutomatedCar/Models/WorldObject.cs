@@ -6,6 +6,9 @@ namespace AutomatedCar.Models
     {
         private int _x;
         private int _y;
+        private double _angle = 90; // mocking
+        public int _rotationCenterPointX = 90; // = width/2
+        public int _rotationCenterPointY = 120; // = height/2
 
         public WorldObject(int x, int y, string filename)
         {
@@ -16,6 +19,19 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
+        public double Angle
+        {
+            get => this._angle;
+        }
+
+        public int RotationCenterPointX 
+        {
+             get => this._rotationCenterPointX;
+        }
+        public int RotationCenterPointY
+        {
+             get => this._rotationCenterPointY;
+        }
 
         public int Width { get; set; }
 
