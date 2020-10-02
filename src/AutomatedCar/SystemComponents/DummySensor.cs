@@ -11,7 +11,6 @@ namespace AutomatedCar.SystemComponents
     public class DummySensor : SystemComponent
     {
         private DummyPacket dummyPacket;
-        
 
         public bool isVisible = true;
 
@@ -23,8 +22,6 @@ namespace AutomatedCar.SystemComponents
 
             this.dummyPacket = new DummyPacket();
             virtualFunctionBus.DummyPacket = this.dummyPacket;
-            
-
         }
 
         public override void Process()

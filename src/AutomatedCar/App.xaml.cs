@@ -51,14 +51,9 @@ namespace AutomatedCar
                 mockedCar.Geometry = geom;
                 world.AddObject(mockedCar);
 
-
-
-
-
                 var controlledCar = new Models.PlayerCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
-
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
 
