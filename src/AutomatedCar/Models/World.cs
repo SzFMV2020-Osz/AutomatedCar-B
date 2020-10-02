@@ -31,25 +31,6 @@
         private List<WorldObject> roads;
         private List<WorldObject> npcs; // for 2nd sprint
 
-        private struct SerializeObject
-        {
-            public int ZIndex;
-            public int Width;
-            public int Height;
-            public string FileName;
-            public Point PositionPoint;
-            public Point RotationPoint;
-            public Polygon Polygon;
-            public bool IsCollidable;
-            public double RotationAngle;
-            public bool IsHighlighted;
-            public int X;
-            public int Y;
-
-            public string Filename { get; set; }
-
-        }
-
         public int Width { get; set; }
 
         public int Height { get; set; }
@@ -79,24 +60,6 @@
             // -> worldobject
 
             return list;
-        }
-
-        public static World GetInstance()
-        {
-
-            if (Instance != null)
-            {
-                return Instance;
-            }
-            else
-            {
-                // loadstuff
-                // config elérés
-                string[] Filenames = File.ReadAllLines("config.txt");
-                // configból filenevek és deserialize
-                // instance manipulation
-                return Instance;
-            }
         }
 
         /// <summary>
