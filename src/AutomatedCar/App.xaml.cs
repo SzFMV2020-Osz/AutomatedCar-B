@@ -58,11 +58,11 @@ namespace AutomatedCar
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
 
                 List<Point> sensorPoints = new List<Point>();
-                sensorpoints.Add(new Point(51, 239));
-                sensorpoints.Add(new Point(200, 100));
-                sensorpoints.Add(new Point(100, 300));
+                sensorPoints.Add(new Point(51, 239));
+                sensorPoints.Add(new Point(200, 100));
+                sensorPoints.Add(new Point(100, 300));
 
-                controlledCar.RadarGeometry = new PolylineGeometry(sensorpoints, false);
+                controlledCar.RadarGeometry = new PolylineGeometry(sensorPoints, false);
                 controlledCar.Geometry = geom;
                 controlledCar.RadarVisible = true;
                 world.AddObject(controlledCar);
