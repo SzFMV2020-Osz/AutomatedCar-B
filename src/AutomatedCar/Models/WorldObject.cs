@@ -47,7 +47,7 @@ namespace AutomatedCar.Models
 
         public string FileName { get; set; }
 
-        public Polygon Polygon { get; protected set; }
+        public Polygon[] Polygon { get; set; }
         
         public bool IsCollidable { get; protected set; }
 
