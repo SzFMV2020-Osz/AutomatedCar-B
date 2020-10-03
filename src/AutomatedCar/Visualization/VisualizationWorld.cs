@@ -8,12 +8,9 @@ namespace AutomatedCar.Visualization
 {
     public class VisualizationWorld: World
     {
-
         public void AddVisibleObject(WorldObject worldObject)
         {
             this.WorldObjects.Add(worldObject);
         }
     }
-
-    
 }
