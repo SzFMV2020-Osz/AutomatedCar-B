@@ -53,7 +53,7 @@
 
         private static List<WorldObject> ReadWorldObjects(string filename)
         {
-            List<WorldObject> allObjects = null;
+            List<WorldObject> allObjects;
 
             JObject worldObjectsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
 
@@ -72,39 +72,36 @@
 
         private static List<WorldObject> ReadPolygons(string filename)
         {
-            List<WorldObject> polygons = null;
+            List<WorldObject> polygons;
 
             JObject polygonsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
 
             IList<JToken> polygonsInJson = polygonsInFile["objects"].Children().ToList();
 
-            var testList = polygonsInJson.Select(p => new WorldObject
+            polygons = polygonsInJson.Select(polygon => new WorldObject
             {
-                FileName = (string)p["typename"],
-                Polygon = p["polys"].Children()["points"].Select(l => new Polygon
+                FileName = (string)polygon["typename"],
+                Polygon = polygon["polys"].Children()["points"].Select(pointlist => new Polygon
                 {
-                    Points = l.Select(p => new Point((double)p[0], (double)p[1])).ToList(),
+                    Points = pointlist.Select(point => new Point((double)point[0], (double)point[1])).ToList(),
                 }).ToList().ToArray(),
             }).ToList();
-
-            //var anotherTestList = testList.Select(l => l.Select(p => p.))
-            //polygons = polygonsInJson.Select(p => new PolygonWithName
-            //{
-            //    Filename = (string)p["typename"],
-            //    Points = (IList<Point>)p["polys"]["points"],
-
-            //}).ToList();
 
             return polygons;
         }
 
-        private static IList<JToken> ReadRotationPoints(string filename)
+        private static List<WorldObject> ReadRotationPoints(string filename)
         {
-            IList<JToken> rotationPoints = null;
+            List<WorldObject> rotationPoints;
 
             var rotationPointsInFile = JArray.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
 
-            rotationPoints = rotationPointsInFile.Children().ToList(); // could be refactored JArray might be IList<JToken> -> unnecessary cast (not 100% sure)
+            rotationPoints = rotationPointsInFile.Children().ToList().Select(rotationpoint => new WorldObject
+            {
+                FileName = rotationpoint["name"].ToString().Substring(0, rotationpoint["name"].ToString().LastIndexOf(".")),
+                RotationCenterPointX = (int)rotationpoint["x"],
+                RotationCenterPointY = (int)rotationpoint["y"],
+            }).ToList();
 
             return rotationPoints;
         }
@@ -114,23 +111,42 @@
             JObject configFilenames = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\config.json"));
 
             var allObjects = ReadWorldObjects(configFilenames["world_objects"].ToString());
-            var polygons = ReadPolygons(configFilenames["polygons"].ToString());
-            var rotPoints = ReadRotationPoints(configFilenames["rotation_points"].ToString());
+            var onlyPolygons = ReadPolygons(configFilenames["polygons"].ToString());
+            var onlyRotationPoints = ReadRotationPoints(configFilenames["rotation_points"].ToString());
 
-            //allObjects.Select(o => polygons.Where(p => o.FileName == p.))
+            // got bored with LINQ, could be refactored in necessary
+            foreach (var worldObject in allObjects)
+            {
+                foreach (var polygon in onlyPolygons)
+                {
+                    if (worldObject.FileName == polygon.FileName) worldObject.Polygon = polygon.Polygon;
+                }
 
-            //Instance.roads = allObjects.Where(r => r.FileName.Contains("road_")).ToList();
-            //Instance.trees = allObjects.Where(r => r.FileName.Contains("tree")).ToList();
-            //Instance.signs = allObjects.Where(r => r.FileName.Contains("roadsign_")).Select(s => new Sign
-            //{
-            //    X = s.X,
-            //    Y = s.Y,
-            //    FileName = s.FileName,
-            //    Angle = s.Angle,
-            //    Text = s.FileName.Substring(s.FileName.LastIndexOf("_") + 1),
-            //}).ToList();
+                foreach (var rotationPoint in onlyRotationPoints)
+                {
+                    if (worldObject.FileName == rotationPoint.FileName)
+                    {
+                        worldObject.RotationCenterPointX = rotationPoint.RotationCenterPointX;
+                        worldObject.RotationCenterPointY = rotationPoint.RotationCenterPointY;
+                    }
+                }
+            }
 
-            return Instance; // is this required?
+            Instance.roads = allObjects.Where(r => r.FileName.Contains("road_")).ToList();
+            Instance.trees = allObjects.Where(r => r.FileName.Contains("tree")).ToList();
+            Instance.signs = allObjects.Where(r => r.FileName.Contains("roadsign_")).Select(s => new Sign
+            {
+                X = s.X,
+                Y = s.Y,
+                FileName = s.FileName,
+                Angle = s.Angle,
+                Text = s.FileName.Substring(s.FileName.LastIndexOf("_") + 1),
+                RotationCenterPointX = s.RotationCenterPointX,
+                RotationCenterPointY = s.RotationCenterPointY,
+                Polygon = s.Polygon,
+            }).ToList();
+
+            return Instance; // is this required? the method could be void
         }
 
         /// <summary>
