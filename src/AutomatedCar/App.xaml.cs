@@ -38,20 +38,14 @@ namespace AutomatedCar
 
                 var world = World.Instance;
 
-                VisualizationWorld visualizationWorld = new VisualizationWorld(world);
-
                 world.Width = 2000;
                 world.Height = 1000;
-
-                visualizationWorld.Width = 500;
-                visualizationWorld.Height = 500;
 
                 var circle = new Circle(400, 200, "circle.png", 20);
                 circle.Width = 40;
                 circle.Height = 40;
                 circle.ZIndex = 2;
                 world.AddObject(circle);
-                visualizationWorld.AddVisibleObject(circle);
 
                 var controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
@@ -59,13 +53,13 @@ namespace AutomatedCar
                 controlledCar.Geometry = geom;
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
-                visualizationWorld.AddVisibleObject(controlledCar);
-                visualizationWorld.ControlledCar = controlledCar;
+                world.ControlledCar = controlledCar;
                 controlledCar.Start();
 
                 var game = new Game(world);
                 game.Start();
 
+                VisualizationWorld visualizationWorld = new VisualizationWorld(world);
                 desktop.MainWindow = new MainWindow {DataContext = new MainWindowViewModel(visualizationWorld)};
             }
 

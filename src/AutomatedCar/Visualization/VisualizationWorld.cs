@@ -12,7 +12,13 @@ namespace AutomatedCar.Visualization
 
         public VisualizationWorld(World realWorld)
         {
+            this.Width = 500;
+            this.Height = 500;
 
+         
+
+            this.VisibleWorldObjects.Add(realWorld.WorldObjects[0]);
+            this.VisibleWorldObjects.Add(realWorld.WorldObjects[1]);
         }
 
         public void AddVisibleObject(WorldObject worldObject)
