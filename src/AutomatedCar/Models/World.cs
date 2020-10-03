@@ -74,12 +74,9 @@
         {
             IList<JToken> polygons = null;
 
-            // TODO
-            // read from file
-            // create polygon
-            // create point list
-            // put point list in polygon
-            // put polygon in list
+            JObject polygonsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
+
+            polygons = polygonsInFile["objects"].Children().ToList();
 
             return polygons;
         }
@@ -100,7 +97,7 @@
             //IList<JToken> results = configFilenames["objects"].Children().ToList();
 
             var allObjects = ReadWorldObjects(configFilenames["world_objects"].ToString());
-            
+            var polygons = ReadPolygons(configFilenames["polygons"].ToString());
             
 
 
