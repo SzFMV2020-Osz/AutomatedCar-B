@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Drawing.Printing;
     using System.IO;
     using System.Linq;
     using Avalonia;
@@ -50,10 +51,39 @@
             this.WorldObjects.Add(worldObject);
         }
 
+        private List<WorldObject> ReadWorldObjects(string filename)
+        {
+            List<WorldObject> allObjects = null;
+
+            return allObjects;
+        }
+
+        private IList<JToken> ReadPolygons(string filename)
+        {
+            IList<JToken> polygons = null;
+
+            // TODO
+            // read from file
+            // create polygon
+            // create point list
+            // put point list in polygon
+            // put polygon in list
+
+            return polygons;
+        }
+
+        private IList<JToken> ReadRotationPoints(string filename)
+        {
+            IList<JToken> rotPoints = null;
+
+
+
+            return rotPoints;
+        }
+
         public static World GetInstance()
         {
             // string[] Filenames = File.ReadAllLines("config.txt");
-            // XDocument worldObjectsInFile = XDocument.Load("..\\..\\..\\Assets\\test_world.json"); // System.Xml.XmlException: 'Data at the root level is invalid. Line 1, position 1.'
 
             JObject worldObjectsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\test_world.json"));
 
@@ -75,12 +105,10 @@
                 Y = s.Y,
                 FileName = s.FileName,
                 Angle = s.Angle,
-                Text = s.FileName.Substring(s.FileName.LastIndexOf("_")+1),
+                Text = s.FileName.Substring(s.FileName.LastIndexOf("_") + 1),
             }).ToList();
 
-
             return Instance; // is this required?
-
         }
 
         /// <summary>

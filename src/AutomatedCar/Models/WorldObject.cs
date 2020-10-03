@@ -26,21 +26,19 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
-        //public double Angle
-        //{
-        //    get => this._angle;
-        //    set => this._angle = value;
-        //}
 
         public double Angle { get; set; }
 
         public int RotationCenterPointX 
         {
              get => this._rotationCenterPointX;
+             set => this._rotationCenterPointX = value;
         }
+
         public int RotationCenterPointY
         {
              get => this._rotationCenterPointY;
+             set => this._rotationCenterPointY = value;
         }
 
         public int Width { get; set; }
