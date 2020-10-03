@@ -51,14 +51,26 @@
             this.WorldObjects.Add(worldObject);
         }
 
-        private List<WorldObject> ReadWorldObjects(string filename)
+        private static List<WorldObject> ReadWorldObjects(string filename)
         {
             List<WorldObject> allObjects = null;
+
+            JObject worldObjectsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
+
+            IList<JToken> results = worldObjectsInFile["objects"].Children().ToList();
+
+            allObjects = results.Select(r => new WorldObject
+            {
+                X = (int)r["x"],
+                Y = (int)r["y"],
+                FileName = (string)r["type"],
+                Angle = Math.Acos((double)r["m11"]),
+            }).ToList();
 
             return allObjects;
         }
 
-        private IList<JToken> ReadPolygons(string filename)
+        private static IList<JToken> ReadPolygons(string filename)
         {
             IList<JToken> polygons = null;
 
@@ -72,7 +84,7 @@
             return polygons;
         }
 
-        private IList<JToken> ReadRotationPoints(string filename)
+        private static IList<JToken> ReadRotationPoints(string filename)
         {
             IList<JToken> rotPoints = null;
 
@@ -83,30 +95,26 @@
 
         public static World GetInstance()
         {
-            // string[] Filenames = File.ReadAllLines("config.txt");
+            JObject configFilenames = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\config.json"));
 
-            JObject worldObjectsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\test_world.json"));
+            //IList<JToken> results = configFilenames["objects"].Children().ToList();
 
-            IList<JToken> results = worldObjectsInFile["objects"].Children().ToList();
+            var allObjects = ReadWorldObjects(configFilenames["world_objects"].ToString());
+            
+            
 
-            List<WorldObject> allObjects = results.Select(r => new WorldObject
-            {
-                X = (int)r["x"],
-                Y = (int)r["y"],
-                FileName = (string)r["type"],
-                Angle = Math.Acos((double)r["m11"]),
-            }).ToList();
 
-            Instance.roads = allObjects.Where(r => r.FileName.Contains("road_")).ToList();
-            Instance.trees = allObjects.Where(r => r.FileName.Contains("tree")).ToList();
-            Instance.signs = allObjects.Where(r => r.FileName.Contains("roadsign_")).Select(s => new Sign
-            {
-                X = s.X,
-                Y = s.Y,
-                FileName = s.FileName,
-                Angle = s.Angle,
-                Text = s.FileName.Substring(s.FileName.LastIndexOf("_") + 1),
-            }).ToList();
+
+            //Instance.roads = allObjects.Where(r => r.FileName.Contains("road_")).ToList();
+            //Instance.trees = allObjects.Where(r => r.FileName.Contains("tree")).ToList();
+            //Instance.signs = allObjects.Where(r => r.FileName.Contains("roadsign_")).Select(s => new Sign
+            //{
+            //    X = s.X,
+            //    Y = s.Y,
+            //    FileName = s.FileName,
+            //    Angle = s.Angle,
+            //    Text = s.FileName.Substring(s.FileName.LastIndexOf("_") + 1),
+            //}).ToList();
 
             return Instance; // is this required?
         }
