@@ -8,9 +8,10 @@ namespace AutomatedCar.Visualization
 {
     public class VisualizationWorld: World
     {
+        public ObservableCollection<WorldObject> VisibleWorldObjects { get; } = new ObservableCollection<WorldObject>();
         public void AddVisibleObject(WorldObject worldObject)
         {
-            this.WorldObjects.Add(worldObject);
+            this.VisibleWorldObjects.Add(worldObject);
         }
     }
 }
