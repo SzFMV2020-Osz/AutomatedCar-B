@@ -38,7 +38,7 @@ namespace AutomatedCar
 
                 var world = World.Instance;
 
-                VisualizationWorld visualizationWorld = new VisualizationWorld();
+                VisualizationWorld visualizationWorld = new VisualizationWorld(world);
 
                 world.Width = 2000;
                 world.Height = 1000;
