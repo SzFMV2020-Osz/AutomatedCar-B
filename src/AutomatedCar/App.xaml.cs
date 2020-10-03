@@ -57,7 +57,7 @@ namespace AutomatedCar
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
 
-                List<Point> sensorpoints = new List<Point>();
+                List<Point> sensorPoints = new List<Point>();
                 sensorpoints.Add(new Point(51, 239));
                 sensorpoints.Add(new Point(200, 100));
                 sensorpoints.Add(new Point(100, 300));
