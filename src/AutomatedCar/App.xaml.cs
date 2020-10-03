@@ -6,6 +6,7 @@ namespace AutomatedCar
     using AutomatedCar.Models;
     using AutomatedCar.ViewModels;
     using AutomatedCar.Views;
+    using AutomatedCar.Visualization;
     using Avalonia;
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Markup.Xaml;
@@ -36,14 +37,21 @@ namespace AutomatedCar
                 var geom = new PolylineGeometry(points, false);
 
                 var world = World.Instance;
+
+                VisualizationWorld visualizationWorld = new VisualizationWorld();
+
                 world.Width = 2000;
                 world.Height = 1000;
+
+                visualizationWorld.Width = 500;
+                visualizationWorld.Height = 500;
 
                 var circle = new Circle(400, 200, "circle.png", 20);
                 circle.Width = 40;
                 circle.Height = 40;
                 circle.ZIndex = 2;
                 world.AddObject(circle);
+                visualizationWorld.AddVisibleObject(circle);
 
                 var controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
@@ -51,12 +59,14 @@ namespace AutomatedCar
                 controlledCar.Geometry = geom;
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
+                visualizationWorld.AddVisibleObject(controlledCar);
+                visualizationWorld.ControlledCar = controlledCar;
                 controlledCar.Start();
 
                 var game = new Game(world);
                 game.Start();
 
-                desktop.MainWindow = new MainWindow {DataContext = new MainWindowViewModel(world)};
+                desktop.MainWindow = new MainWindow {DataContext = new MainWindowViewModel(visualizationWorld)};
             }
 
             base.OnFrameworkInitializationCompleted();
