@@ -70,37 +70,54 @@
             return allObjects;
         }
 
-        private static IList<JToken> ReadPolygons(string filename)
+        private static List<WorldObject> ReadPolygons(string filename)
         {
-            IList<JToken> polygons = null;
+            List<WorldObject> polygons = null;
 
             JObject polygonsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
 
-            polygons = polygonsInFile["objects"].Children().ToList();
+            IList<JToken> polygonsInJson = polygonsInFile["objects"].Children().ToList();
+
+            var testList = polygonsInJson.Select(p => new WorldObject
+            {
+                FileName = (string)p["typename"],
+                Polygon = p["polys"].Children()["points"].Select(l => new Polygon
+                {
+                    Points = l.Select(p => new Point((double)p[0], (double)p[1])).ToList(),
+                }).ToList().ToArray(),
+            }).ToList();
+
+            //var anotherTestList = testList.Select(l => l.Select(p => p.))
+            //polygons = polygonsInJson.Select(p => new PolygonWithName
+            //{
+            //    Filename = (string)p["typename"],
+            //    Points = (IList<Point>)p["polys"]["points"],
+
+            //}).ToList();
 
             return polygons;
         }
 
         private static IList<JToken> ReadRotationPoints(string filename)
         {
-            IList<JToken> rotPoints = null;
+            IList<JToken> rotationPoints = null;
 
+            var rotationPointsInFile = JArray.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
 
+            rotationPoints = rotationPointsInFile.Children().ToList(); // could be refactored JArray might be IList<JToken> -> unnecessary cast (not 100% sure)
 
-            return rotPoints;
+            return rotationPoints;
         }
 
         public static World GetInstance()
         {
             JObject configFilenames = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\config.json"));
 
-            //IList<JToken> results = configFilenames["objects"].Children().ToList();
-
             var allObjects = ReadWorldObjects(configFilenames["world_objects"].ToString());
             var polygons = ReadPolygons(configFilenames["polygons"].ToString());
-            
+            var rotPoints = ReadRotationPoints(configFilenames["rotation_points"].ToString());
 
-
+            //allObjects.Select(o => polygons.Where(p => o.FileName == p.))
 
             //Instance.roads = allObjects.Where(r => r.FileName.Contains("road_")).ToList();
             //Instance.trees = allObjects.Where(r => r.FileName.Contains("tree")).ToList();
