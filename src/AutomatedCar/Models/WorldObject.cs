@@ -14,15 +14,16 @@ namespace AutomatedCar.Models
 
         public WorldObject()
         {
-
+            this.ZIndex = 0;
+            this.Angle = 0;
+            this.IsHighlighted = false;
         }
 
-        public WorldObject(int x, int y, string filename)
+        public WorldObject(int x, int y, string filename): this()
         {
             this.X = x;
             this.Y = y;
             this.FileName = filename;
-            this.ZIndex = 1;
         }
 
         public int ZIndex { get; set; }
