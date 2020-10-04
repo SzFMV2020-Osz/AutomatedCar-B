@@ -61,11 +61,9 @@
             }
             else
             {
-                if (deltaRPM > 0 && currentRPM > UpShiftRPMThreshold)
-                {
-                    this.NextDriveGear();
-                }
+                if (deltaRPM > 0 && currentRPM > UpShiftRPMThreshold) { this.NextDriveGear(); }
                 else if (deltaRPM < 0 && currentRPM < DownShiftRPMThreshold) { this.PreviousDriveGear(); }
+                else { this.State = ChangeState.None; }
             }
         }
 
