@@ -1,6 +1,7 @@
 ﻿namespace AutomatedCar.ViewModels
 {
     using AutomatedCar.Models;
+    using AutomatedCar.Visualization;
     using ReactiveUI;
 
     public class MainWindowViewModel : ViewModelBase
@@ -17,9 +18,10 @@
 
         public MainWindowViewModel(World world)
         {
-            this.CourseDisplay = new CourseDisplayViewModel(world);
+            VisualizationWorld visualizationWorld = new VisualizationWorld(world);
+            this.CourseDisplay = new CourseDisplayViewModel(visualizationWorld);
             this.Dashboard = new DashboardViewModel(world.ControlledCar);
-            this.World = world;
+            this.World = visualizationWorld;
         }
 
         public ViewModelBase CourseDisplay

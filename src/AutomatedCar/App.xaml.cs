@@ -59,8 +59,8 @@ namespace AutomatedCar
                 var game = new Game(world);
                 game.Start();
 
-                VisualizationWorld visualizationWorld = new VisualizationWorld(world);
-                desktop.MainWindow = new MainWindow {DataContext = new MainWindowViewModel(visualizationWorld)};
+               
+                desktop.MainWindow = new MainWindow {DataContext = new MainWindowViewModel(world) };
             }
 
             base.OnFrameworkInitializationCompleted();
