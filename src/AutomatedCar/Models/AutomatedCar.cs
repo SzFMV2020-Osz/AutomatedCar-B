@@ -1,6 +1,7 @@
 namespace AutomatedCar.Models
 {
     using System;
+    using System.Numerics;
     using Avalonia.Media;
     using System.Collections.ObjectModel;
     using SystemComponents;
@@ -38,13 +39,11 @@ namespace AutomatedCar.Models
             this.Y = y;
         }
 
-        /// <summary>Gets or sets Speed in px/s.</summary>
-        public Point Speed { get; set; }
+        public void Move(Vector2 with)
+        {
+            throw new NotImplementedException();
+        }
 
-        /// <summary>
-        /// Alternative for Speed. Not decided yet.
-        /// </summary>
-        public Point Acceleration { get; set; }
 
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public SolidColorBrush RadarBrush { get; set; }
