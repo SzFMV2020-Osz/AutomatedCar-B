@@ -5,7 +5,7 @@
 
     public class SteeringController
     {
-        private const int WheelBaseInPixels = 130;
+        private const int WheelBaseInPixels = 156;
         private const double SteeringWheelConversionConstant = 0.6;
 
         private Vector2 CarLocation
