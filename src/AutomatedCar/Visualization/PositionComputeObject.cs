@@ -20,7 +20,7 @@ namespace AutomatedCar.Visualization
         }
         public Point getPositionFromCenter(AutomatedCar.Models.WorldObject worldObject)
         {
-            return new Point(this.centerCar.X - worldObject.X, this.centerCar.Y - worldObject.Y);
+            return new Point(worldObject.X - this.centerCar.X, worldObject.Y - this.centerCar.Y);
         }
         public Point getPositionFromScreen(AutomatedCar.Models.WorldObject worldObject)
         {
