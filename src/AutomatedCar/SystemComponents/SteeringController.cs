@@ -21,10 +21,10 @@ namespace AutomatedCar.SystemComponents
             get => World.Instance.ControlledCar.Angle;
         }
 
-        public double SteeringWheelAngle
+        public double SteeringAngle
         {
-            get => this.SteeringWheelAngle;
-            set => this.SteeringWheelAngle = value * SteeringWheelConversionConstant;
+            get => this.SteeringAngle;
+            set => this.SteeringAngle = value * SteeringWheelConversionConstant;
         }
 
         private double Velocity
@@ -36,6 +36,10 @@ namespace AutomatedCar.SystemComponents
 
         private Vector2 BackWheel { get; set; }
 
-        public Vector2
+        public void SetWheelPositions()
+        {
+            this.FrontWheel = Vector2.Multiply(this.CarLocation.Length() + (WheelBaseInPixels / 2), new Vector2((float)Math.Cos(this.SteeringAngle), (float)Math.Sin(this.SteeringAngle)));
+            this.BackWheel = Vector2.Multiply(this.CarLocation.Length() - (WheelBaseInPixels / 2), new Vector2((float)Math.Cos(this.SteeringAngle), (float)Math.Sin(this.SteeringAngle)));
+        }
     }
 }
