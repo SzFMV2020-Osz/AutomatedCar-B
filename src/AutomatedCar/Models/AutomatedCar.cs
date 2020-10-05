@@ -12,7 +12,9 @@ namespace AutomatedCar.Models
     {
         private VirtualFunctionBus virtualFunctionBus;
         private DummySensor dummySensor;
+
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
+
         public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename)
         {
@@ -26,7 +28,7 @@ namespace AutomatedCar.Models
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
 
         public Geometry Geometry { get; set; }
-        
+
         public SolidColorBrush Brush { get; private set; }
 
         /// <summary>
@@ -49,6 +51,7 @@ namespace AutomatedCar.Models
         public SolidColorBrush RadarBrush { get; set; }
 
         public Geometry RadarGeometry { get; set; }
+
         public bool RadarVisible { get; set; }
 
 
