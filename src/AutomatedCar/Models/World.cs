@@ -59,13 +59,13 @@ namespace AutomatedCar.Models
         /// <param name="c">Point C of defined area.</param>
         /// <param name="d">Point D of defined area.</param>
         /// <returns>List of world objects containing all WorldObjects in given area.</returns>
+        public List<WorldObject> getWorldObjectsInRectangle(Point a, Point b, Point c, Point d)
         /// </summary>
-        /// <param name="a">Point A of defined area</param>
-        /// <param name="b">Point B of defined area</param>
-        /// <param name="c">Point C of defined area</param>
-        /// <param name="d">Point D of defined area</param>
+        /// <param name="a">Point A of the triangle.</param>
+        /// <param name="b">Point B of the triangle.</param>
+        /// <param name="c">Point C of the triangle.</param>
         /// <returns>List of world objects containing all WorldObjects in given area.</returns>
-        public List<WorldObject> getWorldObjectsInRectangle(int a, int b, int c, int d)
+        public List<WorldObject> getWorldObjectsInTriangle(int a, int b, int c)
         {
             throw new NotImplementedException();
         }
