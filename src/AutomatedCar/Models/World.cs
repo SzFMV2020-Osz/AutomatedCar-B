@@ -60,6 +60,16 @@ namespace AutomatedCar.Models
         /// <param name="d">Point D of defined area.</param>
         /// <returns>List of world objects containing all WorldObjects in given area.</returns>
         public List<WorldObject> getWorldObjectsInRectangle(Point a, Point b, Point c, Point d)
+        {
+            var rectangle = new LinearRing(new[]
+            {
+                new Coordinate(a.X, a.Y), new Coordinate(b.X, b.Y), new Coordinate(c.X, c.Y),
+                new Coordinate(d.X, d.Y),
+            });
+            var ret = this.WorldObjects.Where(x => x.NetPolygon.Intersects(rectangle)).ToList();
+            return ret;
+        }
+
         /// </summary>
         /// <param name="a">Point A of the triangle.</param>
         /// <param name="b">Point B of the triangle.</param>
