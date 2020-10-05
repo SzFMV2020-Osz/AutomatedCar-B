@@ -47,7 +47,7 @@
         }
 
         /// <summary>
-        /// Getting WorldObjects in given rectangle area.
+        /// Getting WorldObjects in given rectangle area, mostly for visualization.
         /// </summary>
         /// <param name="a">Point A of defined area</param>
         /// <param name="b">Point B of defined area</param>
@@ -55,6 +55,19 @@
         /// <param name="d">Point D of defined area</param>
         /// <returns>List of world objects containing all WorldObjects in given area.</returns>
         public List<WorldObject> getWorldObjectsInRectangle(int a, int b, int c, int d)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Getting WorldObject in given triangle area, mostly for sensors.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<WorldObject> getWorldObjectsInTriangle(int a, int b, int c)
         {
             throw new NotImplementedException();
         }
