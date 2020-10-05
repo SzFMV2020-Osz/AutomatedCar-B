@@ -1,7 +1,8 @@
 ﻿namespace AutomatedCar.SystemComponents
 {
-    using AutomatedCar.Models;
+    using System;
     using System.Numerics;
+    using AutomatedCar.Models;
 
     public class SteeringController
     {
@@ -27,6 +28,16 @@
         private double Velocity
         {
             get => World.Instance.ControlledCar.Speed;
+        }
+
+        private Vector2 FrontWheel { get; set; }
+
+        private Vector2 BackWheel { get; set; }
+
+        public void SetWheelPositions()
+        {
+            this.FrontWheel = Vector2.Multiply(this.CarLocation.Length() + (WheelBaseInPixels / 2), new Vector2((float)Math.Cos(this.SteeringAngle), (float)Math.Sin(this.SteeringAngle)));
+            this.BackWheel = Vector2.Multiply(this.CarLocation.Length() - (WheelBaseInPixels / 2), new Vector2((float)Math.Cos(this.SteeringAngle), (float)Math.Sin(this.SteeringAngle)));
         }
     }
 }
