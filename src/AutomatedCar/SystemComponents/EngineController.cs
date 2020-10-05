@@ -23,7 +23,7 @@
         public double VelocityInPixels { get; private set; }
 
         // Packet, tartalmazza a HMI-tol erkezo inputot
-        private IPowerTrainPacket PowerTrainPacket { get; private set; }
+        private IPowerTrainPacket PowerTrainPacket { get; set; }
 
         // Konstruktor, jovoben a packet-et majd az ot tartalmazo PowerTrain osztalytol kapja meg.
         public EngineController(IPowerTrainPacket packet)
