@@ -12,8 +12,6 @@ namespace AutomatedCar.SystemComponents
     {
         private DummyPacket dummyPacket;
 
-        public bool isVisible = true;
-
         public DummySensor(VirtualFunctionBus virtualFunctionBus)
             : base(virtualFunctionBus)
         {
