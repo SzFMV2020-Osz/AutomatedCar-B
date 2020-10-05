@@ -9,6 +9,8 @@
     {
         private const int WheelBaseInPixels = 156;
         private const double SteeringWheelConversionConstant = 0.6;
+        
+        private bool IsInReverseGear { get; set; }
 
         public Vector2 NewCarPosition
         {
@@ -40,7 +42,17 @@
 
         private float VelocityPixelPerTick
         {
-            get => World.Instance.ControlledCar.Speed / this.deltaTime;
+            get
+            {
+                if (this.IsInReverseGear)
+                {
+                    return (World.Instance.ControlledCar.Speed / this.deltaTime) * -1;
+                }
+                else
+                {
+                    return World.Instance.ControlledCar.Speed / this.deltaTime;
+                }
+            }
         }
 
         private Vector2 FrontWheel { get; set; }
@@ -70,6 +82,7 @@
         public void UpdateSteeringProperties(IPowerTrainPacket packet)
         {
             this.SteeringAngle = packet.SteeringWheel;
+            this.IsInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;
             this.SetWheelPositions();
             this.MoveWheelPositions();
         }
