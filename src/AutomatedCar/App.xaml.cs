@@ -36,17 +36,17 @@ namespace AutomatedCar
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
                 World world = World.Instance;
-                world.Width = 2000;
-                world.Height = 1000;
+                world.Width = 500;
+                world.Height = 500;
 
-                Circle circle = new Circle(400, 200, "circle.png", 20);
+                Circle circle = new Circle(0, 0, "circle.png", 20);
                 circle.Width = 40;
                 circle.Height = 40;
                 circle.ZIndex = 2;
                 world.AddObject(circle);
 
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
+                AutomatedCar controlledCar = new Models.AutomatedCar(0, 0, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
 

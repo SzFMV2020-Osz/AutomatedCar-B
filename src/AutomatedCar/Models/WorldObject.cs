@@ -6,7 +6,7 @@ namespace AutomatedCar.Models
     {
         private int _x;
         private int _y;
-        private double _angle = 90; // mocking
+        private double _angle = 0; // mocking
         public int _rotationCenterPointX = 90; // = width/2
         public int _rotationCenterPointY = 120; // = height/2
 
