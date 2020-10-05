@@ -4,7 +4,6 @@
 
     class EngineController
     {
-
         private const double GearRatioReverse = 2.9; // Az egyik linkelt pelda atteteibol nezve, konzisztens a tobbi attettel
         private const int RPMDecayPerTick = -500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
         private const double MinimumBrakeForce = 500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
