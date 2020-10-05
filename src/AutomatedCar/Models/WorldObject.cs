@@ -5,7 +5,7 @@ namespace AutomatedCar.Models
     using ReactiveUI;
     using NetTopologySuite.Geometries;
 
-    public abstract class WorldObject : ReactiveObject
+    public class WorldObject : ReactiveObject
     {
         private int _x;
         private int _y;
@@ -49,11 +49,11 @@ namespace AutomatedCar.Models
 
         public int Height { get; set; }
 
-        public string FileName { get; protected set; }
+        public string FileName { get; set; }
 
-        public Avalonia.Controls.Shapes.Polygon Polygon { get; protected set; }
+        public Avalonia.Controls.Shapes.Polygon[] Polygon { get; set; }
 
-        public NetTopologySuite.Geometries.Polygon NetPolygon { get; protected set; }
+        public NetTopologySuite.Geometries.Polygon NetPolygon { get; set; }
 
         public bool IsCollidable { get; protected set; }
 
