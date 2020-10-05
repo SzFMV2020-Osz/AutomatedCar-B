@@ -8,8 +8,8 @@
     public class SteeringController
     {
         private const int WheelBaseInPixels = 156;
-        private const double SteeringWheelConversionConstant = 0.6;
-        
+        private const double SteeringWheelConversionConstant = 0.6; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
+
         private bool IsInReverseGear { get; set; }
 
         public Vector2 NewCarPosition
