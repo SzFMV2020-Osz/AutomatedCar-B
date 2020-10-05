@@ -33,9 +33,19 @@ namespace AutomatedCar.Models
              get => this._rotationCenterPointY;
         }
 
-        public int Width { get; set; }
+        private int _width;
+        public int Width
+        {
+            get => this._width;
+            set => this.RaiseAndSetIfChanged(ref this._width, value);
+        }
 
-        public int Height { get; set; }
+        private int _height;
+        public int Height
+        {
+            get => this._height;
+            set => this.RaiseAndSetIfChanged(ref this._height, value);
+        }
 
         public int X
         {
