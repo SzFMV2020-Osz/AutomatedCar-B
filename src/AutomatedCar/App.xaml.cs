@@ -1,5 +1,6 @@
 namespace AutomatedCar
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
@@ -8,6 +9,7 @@ namespace AutomatedCar
     using AutomatedCar.Views;
     using Avalonia;
     using Avalonia.Controls.ApplicationLifetimes;
+    using Avalonia.Controls.Shapes;
     using Avalonia.Markup.Xaml;
     using Avalonia.Media;
     using Newtonsoft.Json.Linq;
@@ -49,7 +51,21 @@ namespace AutomatedCar
                 var controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
-                controlledCar.Geometry = geom;
+                //controlledCar.Geometry = geom;
+                controlledCar.Polygon = new Polygon[3];
+                controlledCar.Polygon[0] = new Polygon();
+
+                controlledCar.Polygon[0].Points = new List<Point>();
+                controlledCar.Polygon[0].Points.Add(new Point(300, 300));
+                controlledCar.Polygon[0].Points.Add(new Point(100, 100));
+                controlledCar.Polygon[1] = new Polygon();
+                controlledCar.Polygon[1].Points = new List<Point>();
+                controlledCar.Polygon[1].Points.Add(new Point(100, 50));
+                controlledCar.Polygon[1].Points.Add(new Point(120, 50));
+                controlledCar.Polygon[2] = new Polygon();
+                controlledCar.Polygon[2].Points = new List<Point>();
+                controlledCar.Polygon[2].Points.Add(new Point(120, 50));
+                controlledCar.Polygon[2].Points.Add(new Point(300, 300));
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();

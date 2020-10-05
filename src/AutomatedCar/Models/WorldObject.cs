@@ -1,6 +1,7 @@
 namespace AutomatedCar.Models
 {
     using Avalonia;
+
     using Avalonia.Controls.Shapes;
     using ReactiveUI;
 
@@ -46,6 +47,7 @@ namespace AutomatedCar.Models
 
         public int Height { get; set; }
 
+
         public string FileName { get; set; }
 
         public Polygon[] Polygon { get; set; }
@@ -53,6 +55,7 @@ namespace AutomatedCar.Models
         public bool IsCollidable { get; protected set; }
 
         public bool IsHighlighted { get; set; }
+
 
         public int X
         {
