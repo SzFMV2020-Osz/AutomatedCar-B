@@ -70,6 +70,9 @@ namespace AutomatedCar.Models
             return ret;
         }
 
+
+        /// <summary>
+        /// Getting WorldObject in given triangle area, mostly for sensors.
         /// </summary>
         /// <param name="a">Point A of the triangle.</param>
         /// <param name="b">Point B of the triangle.</param>
