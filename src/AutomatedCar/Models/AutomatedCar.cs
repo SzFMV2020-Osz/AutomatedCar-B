@@ -28,6 +28,8 @@ namespace AutomatedCar.Models
         public Geometry RadarGeometry { get; set; }
         public bool RadarVisible { get; set; }
 
+        public int Speed { get; set; }
+
         /// <summary>Starts the automated car by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Start()
         {
