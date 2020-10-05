@@ -54,15 +54,15 @@ namespace AutomatedCar.Models
 
         public bool RadarVisible { get; set; }
 
-        public void Start()
-        {
-            this.virtualFunctionBus.Start();
-        }
-
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()
         {
             this.virtualFunctionBus.Stop();
+        }
+
+        public void Start()
+        {
+            this.virtualFunctionBus.Start();
         }
     }
 }
