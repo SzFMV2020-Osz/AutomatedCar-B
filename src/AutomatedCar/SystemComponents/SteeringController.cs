@@ -7,7 +7,7 @@
 
     public class SteeringController
     {
-        private const int WheelBaseInPixels = 156;
+        private const float WheelBaseInPixels = 156;
         private const double SteeringWheelConversionConstant = 0.6; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
         private bool isInReverseGear;
         private float deltaTime = 1 / Game.TicksPerSecond;
@@ -67,16 +67,6 @@
             get => new Vector2((float)Math.Cos(this.CarCurrentAngle+this.SteeringAngle), (float)Math.Sin(this.CarCurrentAngle + this.SteeringAngle));
         }
 
-        private float FrontWheelVectorLength
-        {
-            get => this.CarLocation.Length() + (WheelBaseInPixels / 2);
-        }
-
-        private float BackWheelVectorLength
-        {
-            get => this.CarLocation.Length() - (WheelBaseInPixels / 2);
-        }
-
         public void UpdateSteeringProperties(IPowerTrainPacket packet)
         {
             this.SteeringAngle = packet.SteeringWheel;
@@ -87,8 +77,8 @@
 
         private void SetWheelPositions()
         {
-            this.FrontWheel = Vector2.Multiply(this.FrontWheelVectorLength, this.CarDirectionUnitVector);
-            this.BackWheel = Vector2.Multiply(this.BackWheelVectorLength, this.CarDirectionUnitVector);
+            this.FrontWheel = Vector2.Add(this.CarLocation, Vector2.Multiply(WheelBaseInPixels / 2, this.CarDirectionUnitVector));
+            this.BackWheel = Vector2.Subtract(this.CarLocation, Vector2.Multiply(WheelBaseInPixels / 2, this.CarDirectionUnitVector));
         }
 
         private void MoveWheelPositions()
