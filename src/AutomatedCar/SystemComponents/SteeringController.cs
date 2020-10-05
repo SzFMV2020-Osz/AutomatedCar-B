@@ -9,8 +9,8 @@
     {
         private const int WheelBaseInPixels = 156;
         private const double SteeringWheelConversionConstant = 0.6; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
-
-        private bool IsInReverseGear { get; set; }
+        private bool isInReverseGear;
+        private float deltaTime = 1 / Game.TicksPerSecond;
 
         public Vector2 NewCarPosition
         {
@@ -21,8 +21,6 @@
         {
             get => Math.Atan2(this.FrontWheel.Y - this.BackWheel.Y, this.FrontWheel.X - this.BackWheel.X);
         }
-
-        private float deltaTime = 1 / Game.TicksPerSecond;
 
         private Vector2 CarLocation
         {
@@ -44,7 +42,7 @@
         {
             get
             {
-                if (this.IsInReverseGear)
+                if (this.isInReverseGear)
                 {
                     return (World.Instance.ControlledCar.Speed / this.deltaTime) * -1;
                 }
@@ -82,7 +80,7 @@
         public void UpdateSteeringProperties(IPowerTrainPacket packet)
         {
             this.SteeringAngle = packet.SteeringWheel;
-            this.IsInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;
+            this.isInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;
             this.SetWheelPositions();
             this.MoveWheelPositions();
         }
