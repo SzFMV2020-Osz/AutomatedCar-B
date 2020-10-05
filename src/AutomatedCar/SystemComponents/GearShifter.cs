@@ -12,13 +12,13 @@
     // A 6 Drive-on beluli belso valtoallas
     public enum DriveGear
     {
-        NotInDrive = 0,
-        One = 1,
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5,
-        Six = 6
+        NotInDrive,
+        DriveOne,
+        DriveTwo,
+        DriveThree,
+        DriveFour,
+        DriveFive,
+        DriveSix
     }
 
     // A 3 lehetseges allapotvaltozas Drive-on beluli allas allapotanak trackelesere
@@ -33,7 +33,7 @@
     {
         private const int UpShiftRPMThreshold = 3000;
         private const int DownShiftRPMThreshold = 1000;
-        private DriveGear[] driveGearLabels = { DriveGear.NotInDrive, DriveGear.One, DriveGear.Two, DriveGear.Three, DriveGear.Four, DriveGear.Five, DriveGear.Six };
+        private DriveGear[] driveGearLabels = { DriveGear.NotInDrive, DriveGear.DriveOne, DriveGear.DriveTwo, DriveGear.DriveThree, DriveGear.DriveFour, DriveGear.DriveFive, DriveGear.DriveSix };
         private double[] driveGearRatios = { 0, 2.66, 1.78, 1.3, 1, 0.74, 0.5 };
 
         // Trackeli, valtozott-e a DriveGear az aktualis ciklusban
@@ -89,7 +89,7 @@
             }
         }
 
-        // Drive-on belul felfele valt 1et, ha lehet meg
+        // Drive-on belul felfele valt egyet, ha lehet meg
         private void NextDriveGear()
         {
             if (this.CurrentDriveGear.SequenceNumber < 6)
@@ -103,7 +103,7 @@
             }
         }
 
-        // Drive-on belul lefele valt 1et, ha lehet meg
+        // Drive-on belul lefele valt egyet, ha lehet meg
         private void PreviousDriveGear()
         {
             if (this.CurrentDriveGear.SequenceNumber > 1)
