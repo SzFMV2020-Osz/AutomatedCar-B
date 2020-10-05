@@ -12,12 +12,18 @@ namespace AutomatedCar.Models
         public int _rotationCenterPointX = 90; // = width/2
         public int _rotationCenterPointY = 120; // = height/2
 
-        public WorldObject(int x, int y, string filename)
+        public WorldObject()
+        {
+            this.ZIndex = 0;
+            this.Angle = 0;
+            this.IsHighlighted = false;
+        }
+
+        public WorldObject(int x, int y, string filename): this()
         {
             this.X = x;
             this.Y = y;
-            this.Filename = filename;
-            this.ZIndex = 1;
+            this.FileName = filename;
         }
 
         public int ZIndex { get; set; }
