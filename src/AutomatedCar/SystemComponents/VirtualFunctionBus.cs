@@ -1,5 +1,6 @@
 namespace AutomatedCar.SystemComponents
 {
+    using AutomatedCar.SystemComponents.Packets;
     using System.Collections.Generic;
 
     public class VirtualFunctionBus : GameBase
@@ -7,6 +8,8 @@ namespace AutomatedCar.SystemComponents
         private List<SystemComponent> components = new List<SystemComponent>();
 
         public IReadOnlyDummyPacket DummyPacket { get; set; }
+
+        public IPowerTrainPacket PowerTrainPacket { get; set; }
 
         public void RegisterComponent(SystemComponent component)
         {
