@@ -19,15 +19,18 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
+
         public double Angle
         {
             get => this._angle;
+            set => this._angle = value;
         }
 
         public int RotationCenterPointX 
         {
              get => this._rotationCenterPointX;
         }
+
         public int RotationCenterPointY
         {
              get => this._rotationCenterPointY;

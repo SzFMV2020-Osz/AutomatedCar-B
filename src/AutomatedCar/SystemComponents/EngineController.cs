@@ -32,6 +32,11 @@
             this.GearShifter = new GearShifter();
         }
 
+        public EngineController()
+        {
+
+        }
+
         // Ez a metodus frissiti az osztaly belso ertekeit: Valtoallas, azon belul DriveGear, RPM, es sebesseg
         public void UpdateEngineProperties()
         {
