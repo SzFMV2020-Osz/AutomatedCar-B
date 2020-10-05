@@ -4,6 +4,7 @@
     using System.Numerics;
     using AutomatedCar.Models;
     using AutomatedCar.SystemComponents.Packets;
+    using Avalonia.Markup.Xaml.Templates;
 
     public class SteeringController
     {
@@ -11,6 +12,7 @@
         private const double SteeringWheelConversionConstant = 0.6; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
         private bool isInReverseGear;
         private float deltaTime = 1 / Game.TicksPerSecond;
+        private Vector2 carCenterPoint;
 
         public Vector2 NewCarPosition
         {
@@ -22,9 +24,15 @@
             get => Math.Atan2(this.FrontWheel.Y - this.BackWheel.Y, this.FrontWheel.X - this.BackWheel.X);
         }
 
-        private Vector2 CarLocation
+        private Vector2 CarCenterPoint
         {
-            get => new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
+            get => this.carCenterPoint;
+            set
+            {
+                float distanceToCarCenterFromCorner = (float)Math.Sqrt(Math.Pow(World.Instance.ControlledCar.Width / 2, 2) + Math.Pow(World.Instance.ControlledCar.Height / 2, 2));
+                Vector2 displacementFromCarCorner = Vector2.Multiply(distanceToCarCenterFromCorner, new Vector2((float)Math.Cos(this.CarCurrentAngle - 45), (float)Math.Sin(this.CarCurrentAngle - 45)));
+                this.carCenterPoint = Vector2.Add(new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y), displacementFromCarCorner);
+            }
         }
 
         private double CarCurrentAngle
@@ -77,8 +85,8 @@
 
         private void SetWheelPositions()
         {
-            this.FrontWheel = Vector2.Add(this.CarLocation, Vector2.Multiply(WheelBaseInPixels / 2, this.CarDirectionUnitVector));
-            this.BackWheel = Vector2.Subtract(this.CarLocation, Vector2.Multiply(WheelBaseInPixels / 2, this.CarDirectionUnitVector));
+            this.FrontWheel = Vector2.Add(this.CarCenterPoint, Vector2.Multiply(WheelBaseInPixels / 2, this.CarDirectionUnitVector));
+            this.BackWheel = Vector2.Subtract(this.CarCenterPoint, Vector2.Multiply(WheelBaseInPixels / 2, this.CarDirectionUnitVector));
         }
 
         private void MoveWheelPositions()
