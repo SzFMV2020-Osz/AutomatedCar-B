@@ -41,7 +41,7 @@
                         <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
                     </Canvas>
                 </DataTemplate>
-				<DataTemplate DataType="{x:Type models:PlayerCar}">
+				<DataTemplate DataType="{x:Type models:AutomatedCar}">
 					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
 						
 						<Canvas.RenderTransform>

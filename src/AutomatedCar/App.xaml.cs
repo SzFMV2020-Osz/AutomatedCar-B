@@ -45,13 +45,8 @@ namespace AutomatedCar
                 circle.ZIndex = 2;
                 world.AddObject(circle);
 
-                AutomatedCar mockedCar = new Models.AutomatedCar(150, 50, "car_1_red.png");
-                mockedCar.Width = 108;
-                mockedCar.Height = 240;
-                mockedCar.Geometry = geom;
-                world.AddObject(mockedCar);
 
-                PlayerCar controlledCar = new Models.PlayerCar(50, 50, "car_1_white.png");
+                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
 
