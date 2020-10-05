@@ -3,11 +3,22 @@
     using System;
     using System.Numerics;
     using AutomatedCar.Models;
+    using AutomatedCar.SystemComponents.Packets;
 
     public class SteeringController
     {
         private const int WheelBaseInPixels = 156;
         private const double SteeringWheelConversionConstant = 0.6;
+
+        public Vector2 NewCarPosition
+        {
+            get => Vector2.Divide(Vector2.Add(this.FrontWheel, this.BackWheel), 2);
+        }
+
+        public double NewCarAngle
+        {
+            get => Math.Atan2(this.FrontWheel.Y - this.BackWheel.Y, this.FrontWheel.X - this.BackWheel.X);
+        }
 
         private float deltaTime = 1 / Game.TicksPerSecond;
 
@@ -21,7 +32,7 @@
             get => World.Instance.ControlledCar.Angle;
         }
 
-        public double SteeringAngle
+        private double SteeringAngle
         {
             get => this.SteeringAngle;
             set => this.SteeringAngle = value * SteeringWheelConversionConstant;
@@ -43,7 +54,7 @@
 
         private Vector2 FrontWheelDirectionUnitVector
         {
-            get => new Vector2((float)Math.Cos(this.CarCurrentAngle+this.SteeringAngle), (float)Math.Sin(this.CarCurrentAngle+this.SteeringAngle));
+            get => new Vector2((float)Math.Cos(this.CarCurrentAngle+this.SteeringAngle), (float)Math.Sin(this.CarCurrentAngle + this.SteeringAngle));
         }
 
         private float FrontWheelVectorLength
@@ -56,13 +67,20 @@
             get => this.CarLocation.Length() - (WheelBaseInPixels / 2);
         }
 
-        public void SetWheelPositions()
+        public void UpdateSteeringProperties(IPowerTrainPacket packet)
+        {
+            this.SteeringAngle = packet.SteeringWheel;
+            this.SetWheelPositions();
+            this.MoveWheelPositions();
+        }
+
+        private void SetWheelPositions()
         {
             this.FrontWheel = Vector2.Multiply(this.FrontWheelVectorLength, this.CarDirectionUnitVector);
             this.BackWheel = Vector2.Multiply(this.BackWheelVectorLength, this.CarDirectionUnitVector);
         }
 
-        public void MoveWheelPositions()
+        private void MoveWheelPositions()
         {
             this.FrontWheel = Vector2.Add(this.FrontWheel, Vector2.Multiply(this.VelocityPixelPerTick, this.FrontWheelDirectionUnitVector));
             this.BackWheel = Vector2.Add(this.BackWheel, Vector2.Multiply(this.VelocityPixelPerTick, this.CarDirectionUnitVector));
