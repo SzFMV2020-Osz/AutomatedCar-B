@@ -1,13 +1,18 @@
-﻿namespace AutomatedCar.Models
+namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using Avalonia;
     using Avalonia.Controls.Shapes;
     using Avalonia.Media;
+    using NetTopologySuite.Geometries;
+    using Newtonsoft.Json.Serialization;
     using ReactiveUI;
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     public class World : ReactiveObject
     {
@@ -47,26 +52,14 @@
         }
 
         /// <summary>
-        /// Getting WorldObjects in given rectangle area, mostly for visualization.
+        /// Getting WorldObjects in given rectangle area.
         /// </summary>
-        /// <param name="a">Point A of defined area.</param>
-        /// <param name="b">Point B of defined area.</param>
-        /// <param name="c">Point C of defined area.</param>
-        /// <param name="d">Point D of defined area.</param>
+        /// <param name="a">Point A of defined area</param>
+        /// <param name="b">Point B of defined area</param>
+        /// <param name="c">Point C of defined area</param>
+        /// <param name="d">Point D of defined area</param>
         /// <returns>List of world objects containing all WorldObjects in given area.</returns>
         public List<WorldObject> getWorldObjectsInRectangle(int a, int b, int c, int d)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Getting WorldObject in given triangle area, mostly for sensors.
-        /// </summary>
-        /// <param name="a">Point A of the triangle.</param>
-        /// <param name="b">Point B of the triangle.</param>
-        /// <param name="c">Point C of the triangle.</param>
-        /// <returns>List of world objects containing all WorldObjects in given area.</returns>
-        public List<WorldObject> getWorldObjectsInTriangle(int a, int b, int c)
         {
             throw new NotImplementedException();
         }
