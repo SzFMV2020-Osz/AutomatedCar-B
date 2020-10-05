@@ -52,7 +52,13 @@ namespace AutomatedCar.Models
         }
 
         /// <summary>
-        /// Getting WorldObjects in given rectangle area.
+        /// Getting WorldObjects in given rectangle area, mostly for visualization.
+        /// </summary>
+        /// <param name="a">Point A of defined area.</param>
+        /// <param name="b">Point B of defined area.</param>
+        /// <param name="c">Point C of defined area.</param>
+        /// <param name="d">Point D of defined area.</param>
+        /// <returns>List of world objects containing all WorldObjects in given area.</returns>
         /// </summary>
         /// <param name="a">Point A of defined area</param>
         /// <param name="b">Point B of defined area</param>
