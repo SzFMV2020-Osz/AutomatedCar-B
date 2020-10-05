@@ -9,6 +9,8 @@
         private const int WheelBaseInPixels = 156;
         private const double SteeringWheelConversionConstant = 0.6;
 
+        private float deltaTime = 1 / Game.TicksPerSecond;
+
         private Vector2 CarLocation
         {
             get => new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
@@ -25,19 +27,45 @@
             set => this.SteeringAngle = value * SteeringWheelConversionConstant;
         }
 
-        private double Velocity
+        private float VelocityPixelPerTick
         {
-            get => World.Instance.ControlledCar.Speed;
+            get => World.Instance.ControlledCar.Speed / this.deltaTime;
         }
 
         private Vector2 FrontWheel { get; set; }
 
         private Vector2 BackWheel { get; set; }
 
+        private Vector2 CarDirectionUnitVector
+        {
+            get => new Vector2((float)Math.Cos(this.CarCurrentAngle), (float)Math.Sin(this.CarCurrentAngle));
+        }
+
+        private Vector2 FrontWheelDirectionUnitVector
+        {
+            get => new Vector2((float)Math.Cos(this.CarCurrentAngle+this.SteeringAngle), (float)Math.Sin(this.CarCurrentAngle+this.SteeringAngle));
+        }
+
+        private float FrontWheelVectorLength
+        {
+            get => this.CarLocation.Length() + (WheelBaseInPixels / 2);
+        }
+
+        private float BackWheelVectorLength
+        {
+            get => this.CarLocation.Length() - (WheelBaseInPixels / 2);
+        }
+
         public void SetWheelPositions()
         {
-            this.FrontWheel = Vector2.Multiply(this.CarLocation.Length() + (WheelBaseInPixels / 2), new Vector2((float)Math.Cos(this.SteeringAngle), (float)Math.Sin(this.SteeringAngle)));
-            this.BackWheel = Vector2.Multiply(this.CarLocation.Length() - (WheelBaseInPixels / 2), new Vector2((float)Math.Cos(this.SteeringAngle), (float)Math.Sin(this.SteeringAngle)));
+            this.FrontWheel = Vector2.Multiply(this.FrontWheelVectorLength, this.CarDirectionUnitVector);
+            this.BackWheel = Vector2.Multiply(this.BackWheelVectorLength, this.CarDirectionUnitVector);
+        }
+
+        public void MoveWheelPositions()
+        {
+            this.FrontWheel = Vector2.Add(this.FrontWheel, Vector2.Multiply(this.VelocityPixelPerTick, this.FrontWheelDirectionUnitVector));
+            this.BackWheel = Vector2.Add(this.BackWheel, Vector2.Multiply(this.VelocityPixelPerTick, this.CarDirectionUnitVector));
         }
     }
 }
