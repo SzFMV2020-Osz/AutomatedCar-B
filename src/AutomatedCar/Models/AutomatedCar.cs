@@ -54,7 +54,6 @@ namespace AutomatedCar.Models
 
         public bool RadarVisible { get; set; }
 
-
         public void Start()
         {
             this.virtualFunctionBus.Start();
