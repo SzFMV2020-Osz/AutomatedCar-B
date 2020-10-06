@@ -20,6 +20,9 @@
 
         private AutomatedCar _controlledCar;
 
+        private bool debugOn = false;
+        public bool DebugOn { get => this.debugOn; }
+
         public static World Instance { get; } = new World();
 
         public ObservableCollection<WorldObject> WorldObjects { get; } = new ObservableCollection<WorldObject>();
