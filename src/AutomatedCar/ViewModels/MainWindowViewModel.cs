@@ -18,7 +18,7 @@
 
         public MainWindowViewModel(World world)
         {
-            VisualizationWorld visualizationWorld = new VisualizationWorld(world);
+            VisualizationWorld visualizationWorld = VisualizationWorld.Instance;
             this.CourseDisplay = new CourseDisplayViewModel(visualizationWorld);
             this.Dashboard = new DashboardViewModel(world.ControlledCar);
             this.World = visualizationWorld;
