@@ -19,26 +19,8 @@ namespace AutomatedCar.Models
                 .GetManifestResourceStream($"AutomatedCar.Assets." + configFilename)).ReadToEnd());
 
             var allObjects = ReadWorldObjects(configFilenames["world_objects"].ToString());
-            var onlyPolygons = ReadPolygons(configFilenames["polygons"].ToString());
-            var onlyRotationPoints = ReadRotationPoints(configFilenames["rotation_points"].ToString());
-
-            // ez másik függvénybe megy -> merge a függvényekkel
-            foreach (var worldObject in allObjects)
-            {
-                foreach (var polygon in onlyPolygons)
-                {
-                    if (worldObject.FileName == polygon.FileName) worldObject.Polygon = polygon.Polygon;
-                }
-
-                foreach (var rotationPoint in onlyRotationPoints)
-                {
-                    if (worldObject.FileName == rotationPoint.FileName)
-                    {
-                        worldObject.RotationCenterPointX = rotationPoint.RotationCenterPointX;
-                        worldObject.RotationCenterPointY = rotationPoint.RotationCenterPointY;
-                    }
-                }
-            }
+            ReadPolygons(configFilenames["polygons"].ToString(), allObjects);
+            ReadRotationPoints(configFilenames["rotation_points"].ToString(), allObjects);
 
             return allObjects;
         }
@@ -63,42 +45,46 @@ namespace AutomatedCar.Models
             return allObjects;
         }
 
-        private static List<WorldObject> ReadPolygons(string filename)
+        private static void ReadPolygons(string filename, List<WorldObject> allObjects)
         {
-            List<WorldObject> polygons;
-
             JObject polygonsInFile = JObject.Parse(new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
 
             IList<JToken> polygonsInJson = polygonsInFile["objects"].Children().ToList();
 
-            polygons = polygonsInJson.Select(polygon => new WorldObject
+            foreach (var worldObject in allObjects)
             {
-                FileName = (string)polygon["typename"],
-                Polygon = polygon["polys"].Children()["points"].Select(pointlist => new Polygon
+                foreach (var polygons in polygonsInJson)
                 {
-                    Points = pointlist.Select(point => new Point((double)point[0], (double)point[1])).ToList(),
-                }).ToList().ToArray(),
-            }).ToList();
-
-            return polygons;
+                    if (worldObject.FileName == (string)polygons["typename"])
+                    {
+                        worldObject.Polygon = polygons["polys"].Children()["points"].Select(pointlist => new Polygon
+                        {
+                            Points = pointlist.Select(point => new Point((double)point[0], (double)point[1])).ToList(),
+                        }).ToList().ToArray();
+                    }
+                }
+            }
         }
 
-        private static List<WorldObject> ReadRotationPoints(string filename)
+        private static void ReadRotationPoints(string filename, List<WorldObject> allObjects)
         {
-            List<WorldObject> rotationPoints;
-
             var rotationPointsInFile = JArray.Parse(new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
 
-            rotationPoints = rotationPointsInFile.Children().ToList().Select(rotationpoint => new WorldObject
-            {
-                FileName = rotationpoint["name"].ToString().Substring(0, rotationpoint["name"].ToString().LastIndexOf(".")),
-                RotationCenterPointX = (int)rotationpoint["x"],
-                RotationCenterPointY = (int)rotationpoint["y"],
-            }).ToList();
+            var rotationPointsInJSON = rotationPointsInFile.Children().ToList();
 
-            return rotationPoints;
+            foreach (var worldObject in allObjects)
+            {
+                foreach (var rotationPoint in rotationPointsInFile)
+                {
+                    if (worldObject.FileName == rotationPoint["name"].ToString().Substring(0, rotationPoint["name"].ToString().LastIndexOf(".")))
+                    {
+                        worldObject.RotationCenterPointX = (int)rotationPoint["x"];
+                        worldObject.RotationCenterPointY = (int)rotationPoint["y"];
+                    }
+                }
+            }
         }
     }
 }
