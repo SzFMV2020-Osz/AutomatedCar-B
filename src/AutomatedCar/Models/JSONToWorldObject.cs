@@ -5,16 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace AutomatedCar.Models
 {
     public static class JSONToWorldObject
     {
-        public static List<WorldObject> LoadAllObjectsFromJSON()
+        public static List<WorldObject> LoadAllObjectsFromJSON(string configFilename)
         {
             // másik függvény
-            JObject configFilenames = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\config.json"));
+            JObject configFilenames = JObject.Parse(new StreamReader(Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream($"AutomatedCar.Assets." + configFilename)).ReadToEnd());
 
             var allObjects = ReadWorldObjects(configFilenames["world_objects"].ToString());
             var onlyPolygons = ReadPolygons(configFilenames["polygons"].ToString());
@@ -45,7 +47,8 @@ namespace AutomatedCar.Models
         {
             List<WorldObject> allObjects;
 
-            JObject worldObjectsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
+            JObject worldObjectsInFile = JObject.Parse(new StreamReader(Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
 
             IList<JToken> results = worldObjectsInFile["objects"].Children().ToList();
 
@@ -64,7 +67,8 @@ namespace AutomatedCar.Models
         {
             List<WorldObject> polygons;
 
-            JObject polygonsInFile = JObject.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
+            JObject polygonsInFile = JObject.Parse(new StreamReader(Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
 
             IList<JToken> polygonsInJson = polygonsInFile["objects"].Children().ToList();
 
@@ -84,7 +88,8 @@ namespace AutomatedCar.Models
         {
             List<WorldObject> rotationPoints;
 
-            var rotationPointsInFile = JArray.Parse(File.ReadAllText("..\\..\\..\\Assets\\" + filename));
+            var rotationPointsInFile = JArray.Parse(new StreamReader(Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
 
             rotationPoints = rotationPointsInFile.Children().ToList().Select(rotationpoint => new WorldObject
             {

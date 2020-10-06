@@ -36,7 +36,7 @@ namespace AutomatedCar
                 var geom = new PolylineGeometry(points, false);
 
                 var world = World.Instance;
-                World.GetInstance(); // for testing, if you see this remove
+                
                 world.Width = 2000;
                 world.Height = 1000;
 
