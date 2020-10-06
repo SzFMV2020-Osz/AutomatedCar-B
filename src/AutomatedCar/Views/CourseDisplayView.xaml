@@ -15,9 +15,18 @@
             <Setter Property="Background" Value="#97D1A2"/>
         </Style>
         <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
-            <Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay}"/>
+            <Setter Property="Canvas.Left" Value="{Binding X, Converter={x:Static visualization:Offset.Instance}, Mode=OneWay}"/>
             <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
+
+            <Setter Property="Canvas.Left">
+        <Setter.Value>
+            <MultiBinding Converter="{x:Static visualization:MultiOffset.Instance}">
+                <Binding Path="X" />
+                <Binding Path="Offset" />
+            </MultiBinding>
+        </Setter.Value>
+    </Setter>
         </Style>
     </UserControl.Styles>
 
@@ -42,8 +51,14 @@
                     </Canvas>
                 </DataTemplate>
 				<DataTemplate DataType="{x:Type models:AutomatedCar}">
-					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
-						
+					<Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
+					<!-- <Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
+						<Canvas.Styles>
+                        <Style Selector="Canvas#AC">
+                            <Setter Property="Left" Value="{Binding X, Mode=OneWay}"/>
+                            <Setter Property="Top" Value="{Binding Y, Mode=OneWay}"/>
+                        </Style>
+						</Canvas.Styles> -->
 						<Canvas.RenderTransform>
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />

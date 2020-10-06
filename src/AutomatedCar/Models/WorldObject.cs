@@ -24,13 +24,13 @@ namespace AutomatedCar.Models
             get => this._angle;
         }
 
-        public int RotationCenterPointX 
+        public int RotationCenterPointX
         {
-             get => this._rotationCenterPointX;
+            get => this._rotationCenterPointX;
         }
         public int RotationCenterPointY
         {
-             get => this._rotationCenterPointY;
+            get => this._rotationCenterPointY;
         }
 
         public int Width { get; set; }
@@ -50,5 +50,6 @@ namespace AutomatedCar.Models
         }
 
         public string Filename { get; set; }
+        public int Offset { get => 50; }
     }
 }
