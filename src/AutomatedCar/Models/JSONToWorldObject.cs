@@ -12,9 +12,13 @@ namespace AutomatedCar.Models
 {
     public static class JSONToWorldObject
     {
+        /// <summary>
+        /// Loads WorldOjbect from JSON files given in input.
+        /// </summary>
+        /// <param name="configFilename">This json file specifies the other files used.</param>
+        /// <returns>A list of WorldObjects populated by data from the files.</returns>
         public static List<WorldObject> LoadAllObjectsFromJSON(string configFilename)
         {
-            // másik függvény
             JObject configFilenames = JObject.Parse(new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream($"AutomatedCar.Assets." + configFilename)).ReadToEnd());
 
@@ -71,8 +75,6 @@ namespace AutomatedCar.Models
         {
             var rotationPointsInFile = JArray.Parse(new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
-
-            var rotationPointsInJSON = rotationPointsInFile.Children().ToList();
 
             foreach (var worldObject in allObjects)
             {
