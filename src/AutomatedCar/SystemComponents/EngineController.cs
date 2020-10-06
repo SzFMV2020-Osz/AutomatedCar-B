@@ -13,31 +13,19 @@
         private const int BrakePedalScaling = 100; // Ugy valasztottam, hogy a max fekezesi ero kozelitse a max eloremeneti erot (jelenleg eloremenetMax: 11500, fekMax: 10500). Valtozhat meg
         private const int GasPedalScaling = 1; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
 
-        // RPM erteke
         public int RPM { get; private set; }
 
-        // Automata sebvaltot megvalosito osztaly
         public GearShifter GearShifter { get; private set; }
 
-        // Gyorsulas erteke (px/tick)
-        public double VelocityInPixels { get; private set; }
+        public double VelocityPixelsPerSecond { get; private set; }
 
-        // Packet, tartalmazza a HMI-tol erkezo inputot
         private IPowerTrainPacket PowerTrainPacket { get; set; }
-
-        // Konstruktor, jovoben a packet-et majd az ot tartalmazo PowerTrain osztalytol kapja meg.
-        public EngineController(IPowerTrainPacket packet)
-        {
-            this.PowerTrainPacket = packet;
-            this.GearShifter = new GearShifter();
-        }
 
         public EngineController()
         {
             this.GearShifter = new GearShifter();
         }
 
-        // Ez a metodus frissiti az osztaly belso ertekeit: Valtoallas, azon belul DriveGear, RPM, es sebesseg
         public void UpdateEngineProperties(IPowerTrainPacket packet)
         {
             this.PowerTrainPacket = packet;
@@ -47,11 +35,6 @@
             this.SetVelocityInPixels();
         }
 
-        // Beallitja az RPM erteket, valto- es gazpedal allasnak megfeleloen.:
-        // Drive: korrigalja az RPM-et, ha DriveGear valtas tortent
-        // Neutral: "porgeti" a motort, egy relative nagy konstans ertekkel
-        // Reverse: Semmi - feltetelezzuk, hogy nem lehet eloremenet kozben Reverse-be valtani, igy nincs szukseg ujraszamolni attet alapjan
-        // Park: Nullazza az RPM-et - doku alapjan ugy vesszuk, hogy a Park egyenlo a kezifek behuzasaval is
         private void SetRPM()
         {
             double tempRPM = this.RPM + this.CalculateRPMChange();
@@ -73,7 +56,6 @@
             this.RPM = ((int)tempRPM > MaxRPM) ? (int)tempRPM : MaxRPM;
         }
 
-        // Egy szorzot ad vissza, ami DriveGear-ek kozotti valtasnal korrigalja az RPM-et az uj attetnek megfeleloen, hogy az eloremeneti ero ne valtozzon
         private double AdjustRPMOnGearChange()
         {
             switch (this.GearShifter.DriveGearChangeState)
@@ -87,23 +69,18 @@
             }
         }
 
-        // RPM a pedallallassal aranyosan (0-100) valtozik tickenkent, felengedett pedal eseten pedig RPMDecayPerTick ertekkel csokken
         private int CalculateRPMChange() =>
             this.PowerTrainPacket.GasPedal != 0 ? this.PowerTrainPacket.GasPedal * GasPedalScaling : RPMDecayPerTick;
 
-        // A kiszamolt eredo erot pixel gyorsulas ertekre forditja
         private void SetVelocityInPixels() =>
-            this.VelocityInPixels = this.CalculateResultantForce() / ForceToPixelVelocityConversionConstant;
+            this.VelocityPixelsPerSecond = this.CalculateResultantForce() / ForceToPixelVelocityConversionConstant;
 
-        // Eredo ero kiszamitasa, ami nem mehet 0 ala 
         private double CalculateResultantForce() =>
             (this.CalculateDriveForce() - this.CalculateBrakeForce() > 0) ? this.CalculateDriveForce() - this.CalculateBrakeForce() : 0;
 
-        // Fekezesi ero kiszamitasa, plusz egy konstans minimalis ertek
         private double CalculateBrakeForce() =>
             MinimumBrakeForce + (this.PowerTrainPacket.BrakePedal * BrakePedalScaling);
 
-        // Eloremeneti ero kiszamitasa, valtoallastol fuggoen. Irannyal itt nem foglalkozunk, csak nagysaggal
         private double CalculateDriveForce()
         {
             switch (this.GearShifter.Position)
