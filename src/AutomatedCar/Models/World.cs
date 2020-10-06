@@ -50,11 +50,6 @@
 
         public List<WorldObject> NPCs { get; set; }
 
-        private World()
-        {
-
-        }
-
         public void PopulateInstance(string configFilename)
         {
             JSONToWorldObject.LoadAllObjectsFromJSON(configFilename).ForEach(o => AddObject(o));
