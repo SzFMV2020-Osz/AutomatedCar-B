@@ -51,6 +51,7 @@ namespace AutomatedCar
                 controlledCar.Height = 240;
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
+                controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));
 
                 List<Point> sensorPoints = new List<Point>();
                 sensorPoints.Add(new Point(51, 239));
@@ -58,8 +59,10 @@ namespace AutomatedCar
                 sensorPoints.Add(new Point(100, 300));
 
                 controlledCar.RadarGeometry = new PolylineGeometry(sensorPoints, false);
+
                 controlledCar.Geometry = geom;
                 controlledCar.RadarVisible = true;
+                controlledCar.UltraSoundVisible = true;
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();
