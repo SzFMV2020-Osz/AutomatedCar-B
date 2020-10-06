@@ -22,7 +22,7 @@ namespace AutomatedCar.Visualization
         }
         public Point getPositionFromScreen(AutomatedCar.Models.WorldObject worldObject, int screenWidth, int screenHeight )
         {
-            return new Point(worldObject.X - this.centerCar.X + screenWidth / 2, worldObject.Y - this.centerCar.Y + screenHeight / 2);
+            return new Point(worldObject.X - this.centerCar.X + (screenWidth / 2), worldObject.Y - this.centerCar.Y + (screenHeight / 2));
         }
     }
 }
