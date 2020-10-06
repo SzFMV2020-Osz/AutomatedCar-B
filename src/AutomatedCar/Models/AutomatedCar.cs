@@ -83,7 +83,8 @@ namespace AutomatedCar.Models
             //     ultraSoundGeometries.Add(new PolylineGeometry(ultraSoundPoints.GetRange(i * 3, 3), false));
             // }
             
-            return new List<Geometry>{
+            return new List<Geometry>
+            {
                 new PolylineGeometry(ultraSoundPoints.GetRange(0 * 3, 3), false),
                 new PolylineGeometry(ultraSoundPoints.GetRange(1 * 3, 3), false),
                 new PolylineGeometry(ultraSoundPoints.GetRange(2 * 3, 3), false),
