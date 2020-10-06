@@ -11,6 +11,7 @@ namespace AutomatedCar.Models
         private double _angle;
         public int _rotationCenterPointX = 90; // = width/2
         public int _rotationCenterPointY = 120; // = height/2
+        private bool visible = true;
 
         public WorldObject()
         {
@@ -33,13 +34,13 @@ namespace AutomatedCar.Models
             set => this._angle = value;
         }
 
-        public int RotationCenterPointX 
+        public int RotationCenterPointX
         {
-             get => this._rotationCenterPointX;
+            get => this._rotationCenterPointX;
         }
         public int RotationCenterPointY
         {
-             get => this._rotationCenterPointY;
+            get => this._rotationCenterPointY;
         }
 
         public int Width { get; set; }
@@ -67,5 +68,10 @@ namespace AutomatedCar.Models
         }
 
         public string Filename { get; set; }
+        public bool Visible
+        {
+            get => this.visible;
+            set => this.RaiseAndSetIfChanged(ref this.visible, value);
+        }
     }
 }

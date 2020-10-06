@@ -35,6 +35,10 @@ namespace AutomatedCar
             {
                 this.world.ControlledCar.X += 5;
             }
+            else if (Keyboard.IsKeyDown(Key.Space))
+            {
+                this.world.ControlledCar.Visible = !this.world.ControlledCar.Visible;
+            }
         }
     }
 }
