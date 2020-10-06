@@ -10,7 +10,7 @@ namespace AutomatedCar.Visualization
     {
         World realWorld;
         public ObservableCollection<WorldObject> VisibleWorldObjects { get; } = new ObservableCollection<WorldObject>();
-        public static VisualizationWorld Instance { get; } = new VisualizationWorld();
+        public static new VisualizationWorld Instance { get; } = new VisualizationWorld();
         private VisualizationWorld()
         {
             this.realWorld = World.Instance;

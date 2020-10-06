@@ -28,10 +28,11 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
+
         public double Angle
         {
             get => this._angle;
-            set => this._angle = value;
+            set => this.RaiseAndSetIfChanged(ref this._angle, value);
         }
 
         public int RotationCenterPointX

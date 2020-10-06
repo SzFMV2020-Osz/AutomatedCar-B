@@ -20,8 +20,11 @@
 
         private AutomatedCar _controlledCar;
 
-        private bool debugOn = false;
-        public bool DebugOn { get => this.debugOn; }
+        private bool debugOn = true;
+        public bool DebugOn {
+            get => this.debugOn;
+            set => this.RaiseAndSetIfChanged(ref this.debugOn, value);
+        }
 
         public static World Instance { get; } = new World();
 
