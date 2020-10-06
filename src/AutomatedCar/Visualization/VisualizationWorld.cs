@@ -15,8 +15,8 @@ namespace AutomatedCar.Visualization
         {
             this.realWorld = World.Instance;
 
-            this.Width = 500;
-            this.Height = 500;
+            this.Width = 960;
+            this.Height = 720;
 
             // new positionComputeObject(realWorld.controlledCar)
             // positionComputeObject.getScreenSquare(width, height)
