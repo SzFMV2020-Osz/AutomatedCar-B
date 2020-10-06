@@ -18,10 +18,10 @@ namespace AutomatedCar.Visualization
         {
             return new Point[4]
             {
-                new Point(this.centerCar.X - screenWidth / 2,this.centerCar.Y - screenHeight / 2),
-                new Point(this.centerCar.X + screenWidth / 2,this.centerCar.Y - screenHeight / 2),
-                new Point(this.centerCar.X - screenWidth / 2,this.centerCar.Y + screenHeight / 2),
-                new Point(this.centerCar.X + screenWidth / 2,this.centerCar.Y + screenHeight / 2)
+                new Point(this.centerCar.X - (screenWidth / 2),this.centerCar.Y - (screenHeight / 2)),
+                new Point(this.centerCar.X + (screenWidth / 2),this.centerCar.Y - (screenHeight / 2)),
+                new Point(this.centerCar.X - (screenWidth / 2),this.centerCar.Y + (screenHeight / 2)),
+                new Point(this.centerCar.X + (screenWidth / 2),this.centerCar.Y + (screenHeight / 2))
             };
         }
         public Point getPositionFromCenter(AutomatedCar.Models.WorldObject worldObject)
