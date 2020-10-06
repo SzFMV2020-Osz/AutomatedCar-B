@@ -75,7 +75,8 @@ namespace AutomatedCar.Models
             this.virtualFunctionBus.Start();
         }
 
-        private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints){
+        private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)
+        {
             
             // List<Geometry> ultraSoundGeometries = new List<Geometry>().;
             // for (int i = 0; i < 8; i++)
@@ -95,32 +96,34 @@ namespace AutomatedCar.Models
                 new PolylineGeometry(ultraSoundPoints.GetRange(7 * 3, 3), false)
             };
         }
-        private List<Point> generateUltraSoundPoints(){
-            return new List<Point>(){
-            new Point(51, 239),
-            new Point(10, 10),
-            new Point(200, 300),
-            new Point(18, 231),
-            new Point(200, 100),
-            new Point(100, 300),
-            new Point(0, 92),
-            new Point(200, 100),
-            new Point(100, 300),
-            new Point(7, 27),
-            new Point(200, 100),
-            new Point(100, 300),
-            new Point(17, 10),
-            new Point(200, 100),
-            new Point(100, 300),
-            new Point(40, 2),
-            new Point(200, 100),
-            new Point(100, 300),
-            new Point(79, 5),
-            new Point(200, 100),
-            new Point(100, 300),
-            new Point(99, 91),
-            new Point(200, 100),
-            new Point(100, 300)
+        private List<Point> generateUltraSoundPoints()
+        {
+            return new List<Point>()
+            {
+                new Point(51, 239),
+                new Point(10, 10),
+                new Point(200, 300),
+                new Point(18, 231),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(0, 92),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(7, 27),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(17, 10),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(40, 2),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(79, 5),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(99, 91),
+                new Point(200, 100),
+                new Point(100, 300)
             };
         }
     }
