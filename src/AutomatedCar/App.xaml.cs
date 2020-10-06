@@ -49,6 +49,9 @@ namespace AutomatedCar
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
                 controlledCar.Geometry = geom;
+                controlledCar.AddGeom(new Avalonia.Media.EllipseGeometry(new Rect(30, 30, 80, 80)));
+                var g = new Avalonia.Media.EllipseGeometry(new Rect(30, 30, 80, 80));
+                
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();
@@ -56,7 +59,7 @@ namespace AutomatedCar
                 var game = new Game(world);
                 game.Start();
 
-                desktop.MainWindow = new MainWindow {DataContext = new MainWindowViewModel(world)};
+                desktop.MainWindow = new MainWindow { DataContext = new MainWindowViewModel(world) };
             }
 
             base.OnFrameworkInitializationCompleted();

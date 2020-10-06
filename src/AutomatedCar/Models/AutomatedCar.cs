@@ -2,6 +2,7 @@ namespace AutomatedCar.Models
 {
     using Avalonia.Media;
     using SystemComponents;
+    using System.Collections.Generic;
 
     public class AutomatedCar : Car
     {
@@ -33,5 +34,12 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus.Stop();
         }
+
+        public List<EllipseGeometry> geoms = new List<EllipseGeometry>();
+        public void AddGeom(EllipseGeometry geom)
+        {
+            this.geoms.Add(geom);
+        }
+        public List<EllipseGeometry> Geoms { get => this.geoms; }
     }
 }
