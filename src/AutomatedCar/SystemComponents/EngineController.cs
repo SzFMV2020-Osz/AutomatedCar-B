@@ -32,9 +32,15 @@
             this.GearShifter = new GearShifter();
         }
 
-        // Ez a metodus frissiti az osztaly belso ertekeit: Valtoallas, azon belul DriveGear, RPM, es sebesseg
-        public void UpdateEngineProperties()
+        public EngineController()
         {
+            this.GearShifter = new GearShifter();
+        }
+
+        // Ez a metodus frissiti az osztaly belso ertekeit: Valtoallas, azon belul DriveGear, RPM, es sebesseg
+        public void UpdateEngineProperties(IPowerTrainPacket packet)
+        {
+            this.PowerTrainPacket = packet;
             this.GearShifter.Position = this.PowerTrainPacket.GearShifterPosition;
             this.GearShifter.SetDriveGear(this.RPM, this.CalculateRPMChange());
             this.SetRPM();
