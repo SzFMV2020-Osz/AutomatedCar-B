@@ -31,6 +31,8 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
+        public int Speed { get; set; }
+
         /// <summary>
         /// Example usage add
         /// </summary>
