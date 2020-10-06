@@ -35,13 +35,12 @@
         private const int DownShiftRPMThreshold = 1000;
         private DriveGear[] driveGearLabels = { DriveGear.NotInDrive, DriveGear.DriveOne, DriveGear.DriveTwo, DriveGear.DriveThree, DriveGear.DriveFour, DriveGear.DriveFive, DriveGear.DriveSix };
         private double[] driveGearRatios = { 0, 2.66, 1.78, 1.3, 1, 0.74, 0.5 };
-        private GearShifterPosition position;
 
         // Trackeli, valtozott-e a DriveGear az aktualis ciklusban
         public ChangeState DriveGearChangeState { get; private set; }
 
         // Az aktualis Drive-on beluli allas
-        public Gear CurrentDriveGear { get; set; }
+        public Gear CurrentDriveGear { get; private set; }
 
         // A 7 (NotInDrive+6) lehetseges valtoallas Drive-on belul
         public Gear[] DriveGears { get; private set; }
@@ -51,30 +50,33 @@
         {
             get
             {
-                return this.position;
+                return this.Position;
             }
 
             set
             {
-                if (this.position != GearShifterPosition.D && value == GearShifterPosition.D)
+                if (this.Position != GearShifterPosition.D && value == GearShifterPosition.D)
                 {
                     this.CurrentDriveGear = this.DriveGears[1];
                 }
 
-                this.position = value;
+                this.Position = value;
             }
         }
 
         // Konstruktor, a driveGearLabels es driveGearRatios alapjan feltolti a DriveGears tombot - ezek lesznek a Drive belso fokozatai
         public GearShifter()
         {
-            this.Position = GearShifterPosition.N;
             this.DriveGears = new Gear[7];
             for (int i = 0; i < this.DriveGears.Length; i++)
             {
                 this.DriveGears[i] = new Gear(this.driveGearRatios[i], this.driveGearLabels[i], i);
             }
+<<<<<<< Updated upstream
+=======
             this.CurrentDriveGear = this.DriveGears[0];
+            this.DriveGearChangeState = ChangeState.None;
+>>>>>>> Stashed changes
         }
 
         // Beallitja a Drive-on beluli valtoallast, a tarolt RPM, es az RPM valtozas alapjan. Allitja az ehhez tartozo DriveGearChangeState-et is
@@ -83,7 +85,6 @@
             if (this.Position != GearShifterPosition.D)
             {
                 this.CurrentDriveGear = this.DriveGears[0];
-                this.DriveGearChangeState = ChangeState.None;
             }
             else
             {
