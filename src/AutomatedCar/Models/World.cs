@@ -41,6 +41,11 @@
 
         }
 
+        public void PopulateInstance(string configFilename)
+        {
+            JSONToWorldObject.LoadAllObjectsFromJSON(configFilename).ForEach(o => AddObject(o));
+        }
+
         public void AddObject(WorldObject worldObject)
         {
             this.WorldObjects.Add(worldObject);
