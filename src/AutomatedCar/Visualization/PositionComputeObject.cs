@@ -11,12 +11,18 @@ namespace AutomatedCar.Visualization
         AutomatedCar.Models.AutomatedCar centerCar;
         public PositionComputeObject(AutomatedCar.Models.AutomatedCar centerCar )
         {
-           this.centerCar = centerCar;
+            this.centerCar = centerCar;
         }
 
-        public Point[] getScreenSquare(AutomatedCar.Models.WorldObject worldObject)
+        public Point[] getScreenSquare(AutomatedCar.Models.WorldObject worldObject, int screenWidth, int screenHeight)
         {
-            throw new NotImplementedException();
+            return new Point[4]
+            {
+                new Point(this.centerCar.X - screenWidth / 2,this.centerCar.Y - screenHeight / 2),
+                new Point(this.centerCar.X + screenWidth / 2,this.centerCar.Y - screenHeight / 2),
+                new Point(this.centerCar.X - screenWidth / 2,this.centerCar.Y + screenHeight / 2),
+                new Point(this.centerCar.X + screenWidth / 2,this.centerCar.Y + screenHeight / 2)
+            };
         }
         public Point getPositionFromCenter(AutomatedCar.Models.WorldObject worldObject)
         {
