@@ -36,7 +36,5 @@ namespace AutomatedCar.Models
         {
             this.Text = text;
         }
-
-
     }
 }

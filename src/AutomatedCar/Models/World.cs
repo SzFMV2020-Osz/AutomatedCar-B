@@ -9,16 +9,25 @@
     using Avalonia;
     using Avalonia.Controls.Shapes;
     using Avalonia.Media;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
+    using System.IO;
+    using Avalonia;
+    using Avalonia.Controls.Shapes;
+    using Avalonia.Media;
     using ReactiveUI;
 
     public class World : ReactiveObject
     {
-        // private static readonly System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
-        // public static World Instance { get { return lazySingleton.Value; } }
+        /* private static readonly System.Lazy<World> lazySingleton = new System.Lazy<World> (() => new World());
+         public static World Instance { get { return lazySingleton.Value; } }*/
+
+        private World()
+        {
+        }
 
         private AutomatedCar _controlledCar;
+
+        private bool debugOn = false;
+        public bool DebugOn { get => this.debugOn; }
 
         public static World Instance { get; } = new World();
 
@@ -29,6 +38,11 @@
             get => this._controlledCar;
             set => this.RaiseAndSetIfChanged(ref this._controlledCar, value);
         }
+
+        private List<WorldObject> trees;
+        private List<WorldObject> signs;
+        private List<WorldObject> roads;
+        private List<WorldObject> npcs; // for 2nd sprint
 
         public int Width { get; set; }
 
