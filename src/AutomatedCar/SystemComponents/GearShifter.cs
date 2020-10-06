@@ -72,6 +72,11 @@
             {
                 this.DriveGears[i] = new Gear(this.driveGearRatios[i], this.driveGearLabels[i], i);
             }
+<<<<<<< Updated upstream
+=======
+            this.CurrentDriveGear = this.DriveGears[0];
+            this.DriveGearChangeState = ChangeState.None;
+>>>>>>> Stashed changes
         }
 
         // Beallitja a Drive-on beluli valtoallast, a tarolt RPM, es az RPM valtozas alapjan. Allitja az ehhez tartozo DriveGearChangeState-et is
