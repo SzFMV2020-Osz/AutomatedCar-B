@@ -56,16 +56,16 @@ namespace AutomatedCar
                 controlledCar.Polygon[0] = new Polygon();
 
                 controlledCar.Polygon[0].Points = new List<Point>();
-                controlledCar.Polygon[0].Points.Add(new Point(300, 300));
-                controlledCar.Polygon[0].Points.Add(new Point(100, 100));
+                controlledCar.Polygon[0].Points.Add(new Point(0, 0));
+                controlledCar.Polygon[0].Points.Add(new Point(50, 100));
                 controlledCar.Polygon[1] = new Polygon();
                 controlledCar.Polygon[1].Points = new List<Point>();
-                controlledCar.Polygon[1].Points.Add(new Point(100, 50));
-                controlledCar.Polygon[1].Points.Add(new Point(120, 50));
+                controlledCar.Polygon[1].Points.Add(new Point(0, -100));
+                controlledCar.Polygon[1].Points.Add(new Point(50,100));
                 controlledCar.Polygon[2] = new Polygon();
                 controlledCar.Polygon[2].Points = new List<Point>();
-                controlledCar.Polygon[2].Points.Add(new Point(120, 50));
-                controlledCar.Polygon[2].Points.Add(new Point(300, 300));
+                controlledCar.Polygon[2].Points.Add(new Point(0, 0));
+                controlledCar.Polygon[2].Points.Add(new Point(50,100));
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();

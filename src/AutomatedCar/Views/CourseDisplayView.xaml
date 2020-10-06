@@ -53,21 +53,20 @@
 							
 						</Canvas.RenderTransform>
 
+						<Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Gray"></Rectangle>
 						<Image
 							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 
-						<ItemsControl
-							Items="{Binding Polygon, Mode=OneWay}"
-							>
-							<ItemsControl.DataTemplates>
-								<DataTemplate>
+						<ItemsRepeater Items="{Binding Polygon}">
+							<ItemsRepeater.ItemTemplate>
+								<DataTemplate DataType="{x:Type Polygon}">				
 									<Polygon
 									Stroke="Red"
-									Points="{Binding Points, Mode=OneWay}" 
+									Points="{Binding Points, Mode=OneWay}"
 									StrokeThickness="1" Fill="Violet" />
 								</DataTemplate>
-							</ItemsControl.DataTemplates>
-						</ItemsControl>
+							</ItemsRepeater.ItemTemplate>
+						</ItemsRepeater>
 						
 					</Canvas>
 				</DataTemplate>
