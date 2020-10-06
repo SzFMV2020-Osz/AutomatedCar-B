@@ -1,6 +1,7 @@
 ﻿namespace AutomatedCar.SystemComponents
 {
     using System;
+    using AutomatedCar.Models;
     using AutomatedCar.SystemComponents.Packets;
 
     public class PowerTrain : SystemComponent
@@ -20,7 +21,15 @@
 
         public override void Process()
         {
-            throw new NotImplementedException();
+            this.Engine.UpdateEngineProperties(this.Packet);
+            this.Steering.UpdateSteeringProperties(this.Packet);
+            this.UpdateCarPosition();
+        }
+
+        private void UpdateCarPosition()
+        {
+            World.Instance.ControlledCar.Move(this.Steering.NewCarPosition);
+            World.Instance.ControlledCar.Angle = this.Steering.NewCarAngle;
         }
     }
 }

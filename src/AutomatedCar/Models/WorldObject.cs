@@ -30,7 +30,7 @@ namespace AutomatedCar.Models
         public double Angle
         {
             get => this._angle;
-            set => _angle = value;
+            set => this._angle = value;
         }
 
         public int RotationCenterPointX 
