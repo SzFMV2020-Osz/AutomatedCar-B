@@ -41,7 +41,7 @@
         public ChangeState DriveGearChangeState { get; private set; }
 
         // Az aktualis Drive-on beluli allas
-        public Gear CurrentDriveGear { get; private set; }
+        public Gear CurrentDriveGear { get; set; }
 
         // A 7 (NotInDrive+6) lehetseges valtoallas Drive-on belul
         public Gear[] DriveGears { get; private set; }
@@ -83,6 +83,7 @@
             if (this.Position != GearShifterPosition.D)
             {
                 this.CurrentDriveGear = this.DriveGears[0];
+                this.DriveGearChangeState = ChangeState.None;
             }
             else
             {
