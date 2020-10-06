@@ -11,6 +11,7 @@
         {
             this.Engine = new EngineController();
             this.Steering = new SteeringController();
+            this.Packet = this.virtualFunctionBus.PowerTrainPacket;
         }
 
         private EngineController Engine { get; set; }
