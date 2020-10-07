@@ -69,12 +69,12 @@ namespace AutomatedCar.Models
 
                         worldObject.NetPolygon = polygons["polys"].Children()["points"].Select(pointlist =>
                             new NetTopologySuite.Geometries.LineString(
-                                pointlist.Select(p => new Coordinate((double)p[0], (double)p[1])).ToArray()
-                            )).ToList().ToArray();
+                                pointlist.Select(p => new Coordinate((double)p[0] + worldObject.X, (double)p[1] + worldObject.Y)).ToArray()
+                            )).ToArray();
 
                         worldObject.Polygon = polygons["polys"].Children()["points"].Select(pointlist => new Polygon
                         {
-                            Points = pointlist.Select(point => new Point((double)point[0], (double)point[1])).ToList(),
+                            Points = pointlist.Select(point => new Point((double)point[0] + worldObject.X, (double)point[1] + worldObject.Y)).ToList(),
                         }).ToList().ToArray();
                     }
                 }
