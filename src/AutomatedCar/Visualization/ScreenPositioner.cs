@@ -33,6 +33,7 @@ namespace AutomatedCar
             else world.ControlledCar.VisibleX = computeX(world, world.VisibleWidth/2);
 
             if(this.closeToTopEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeY(world, world.ControlledCar.Y);
+            else if(this.closeToBottomEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = world.VisibleHeight - (world.Height - world.ControlledCar.Y)-world.ControlledCar._rotationCenterPointY;
             else world.ControlledCar.VisibleY = computeY(world, world.VisibleHeight/2);
         }
  
