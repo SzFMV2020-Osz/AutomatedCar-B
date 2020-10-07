@@ -20,8 +20,8 @@ namespace AutomatedCar
                 wo.VisibleY = world.ControlledCar.Y*(-1);
             }
 
-            world.ControlledCar.VisibleX = (world.Width/2)-world.ControlledCar._rotationCenterPointX;
-            world.ControlledCar.VisibleY = (world.Height/2)-world.ControlledCar._rotationCenterPointY;
+            world.ControlledCar.VisibleX = (world.Width/2)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+            world.ControlledCar.VisibleY = (world.Height/2)-world.ControlledCar._rotationCenterPointY - world.ControlledCar.Height/2;
         }
 
     }
