@@ -12,7 +12,7 @@ namespace AutomatedCar.Visualization
             this.centerCar = centerCar;
         }
 
-        public Point[] getScreenSquare(AutomatedCar.Models.WorldObject worldObject, int screenWidth, int screenHeight)
+        public Point[] getScreenSquare(int screenWidth, int screenHeight)
         {
             return new Point[4]
             {

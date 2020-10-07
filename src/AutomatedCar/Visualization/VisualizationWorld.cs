@@ -1,4 +1,5 @@
 ﻿using AutomatedCar.Models;
+using Avalonia;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,12 +19,14 @@ namespace AutomatedCar.Visualization
             this.Width = 960;
             this.Height = 720;
 
-            // new positionComputeObject(realWorld.controlledCar)
-            // positionComputeObject.getScreenSquare(width, height)
-            // realWorld.getWorldsObjectsInRectangle(int a, int b, int c, int d): List
+            PositionComputeObject pco = new PositionComputeObject(realWorld.ControlledCar);
+            Point[] point = pco.getScreenSquare(this.Width, this.Height);
+            List<WorldObject> wos = realWorld.getWorldObjectsInRectangle(point[0], point[1], point[2], point[3]);
 
-            this.VisibleWorldObjects.Add(realWorld.WorldObjects[0]);
-            this.VisibleWorldObjects.Add(realWorld.WorldObjects[1]);
+
+            foreach(WorldObject wo in wos) {
+                this.VisibleWorldObjects.Add(wo);
+            }
         }
 
         public void AddVisibleObject(WorldObject worldObject)
