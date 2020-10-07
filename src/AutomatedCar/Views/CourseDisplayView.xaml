@@ -75,7 +75,7 @@
 							Opacity=".4"
 							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
 							Points="{Binding UltraSoundGeometries[1].Points, Mode=OneWay}" />
-                        
+
                         <Polyline
 							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
 							Opacity=".4"
@@ -99,7 +99,7 @@
 							Opacity=".4"
 							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
 							Points="{Binding UltraSoundGeometries[5].Points, Mode=OneWay}" />
-                            
+
                         <Polyline
 							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
 							Opacity=".4"
@@ -111,6 +111,12 @@
 							Opacity=".4"
 							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
 							Points="{Binding UltraSoundGeometries[7].Points, Mode=OneWay}" />
+
+						<Polyline
+							IsVisible="{Binding CameraVisible, Mode=OneWay}"
+							Opacity=".6"
+							Fill="{Binding CameraBrush, Mode=OneWay}"
+							Points="{Binding CameraGeometry.Points, Mode=OneWay}" />
 
 					</Canvas>
 				</DataTemplate>

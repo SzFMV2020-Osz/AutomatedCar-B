@@ -14,6 +14,7 @@
         private float deltaTime = 1 / Game.TicksPerSecond;
         private Vector2 carCenterPoint;
         private Vector2 displacementFromCarCornerToCenter;
+        private double steeringAngle;
 
         public Vector2 NewCarPosition
         {
@@ -41,8 +42,8 @@
 
         private double SteeringAngle
         {
-            get => this.SteeringAngle;
-            set => this.SteeringAngle = value * SteeringWheelConversionConstant;
+            get => this.steeringAngle;
+            set => this.steeringAngle = value * SteeringWheelConversionConstant;
         }
 
         private float VelocityPixelPerTick
