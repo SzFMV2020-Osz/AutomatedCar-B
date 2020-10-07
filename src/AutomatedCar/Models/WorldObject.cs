@@ -53,7 +53,7 @@ namespace AutomatedCar.Models
 
         public Avalonia.Controls.Shapes.Polygon[] Polygon { get; set; }
 
-        public NetTopologySuite.Geometries.Polygon NetPolygon { get; set; }
+        public NetTopologySuite.Geometries.LineString[] NetPolygon { get; set; }
 
         public bool IsCollidable { get; protected set; }
 
