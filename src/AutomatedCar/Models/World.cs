@@ -17,6 +17,7 @@ namespace AutomatedCar.Models
     using NetTopologySuite.Geometries;
     using Newtonsoft.Json.Serialization;
     using ReactiveUI;
+    using Geometry = Avalonia.Media.Geometry;
     using Point = Avalonia.Point;
     using Polygon = Avalonia.Controls.Shapes.Polygon;
 
@@ -76,12 +77,14 @@ namespace AutomatedCar.Models
         public List<WorldObject> getWorldObjectsInRectangle(Point a, Point b, Point c, Point d)
         {
             // TODO: quick ugly solution refactor needed
-            var rectangle = new LinearRing(new[]
+            var lr1 = new LinearRing(new[]
             {
-                new Coordinate(a.X, a.Y), new Coordinate(b.X, b.Y), new Coordinate(c.X, c.Y),
-                new Coordinate(d.X, d.Y), new Coordinate(a.X, a.Y),
+                new Coordinate(a.X, a.Y), new Coordinate(b.X, b.Y),
+                new Coordinate(c.X, c.Y), new Coordinate(d.X, d.Y),
+                new Coordinate(a.X, a.Y),
             });
 
+            NetTopologySuite.Geometries.Geometry rec = new NetTopologySuite.Geometries.Polygon(lr1);
             var ret = new List<WorldObject>();
             foreach (var wo in WorldObjectsForTesting)
             {
@@ -89,7 +92,7 @@ namespace AutomatedCar.Models
                 {
                     foreach (var np in wo.NetPolygon)
                     {
-                        if (np.Intersects(rectangle))
+                        if (rec.Intersects(np))
                         {
                             ret.Add(wo);
                             break;
