@@ -23,7 +23,9 @@ namespace AutomatedCar.Models
             this.IsHighlighted = false;
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
+
             // this.powerTrain = new PowerTrain(this.virtualFunctionBus);
+
             this.Brush = new SolidColorBrush(Color.Parse("red"));
         }
 
