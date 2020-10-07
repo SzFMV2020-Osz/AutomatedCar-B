@@ -36,11 +36,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref this._angle, value);
         }
 
-        
-
-      
-
-
         public int RotationCenterPointX
         {
              get => this._rotationCenterPointX;

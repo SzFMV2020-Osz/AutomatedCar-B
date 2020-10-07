@@ -36,9 +36,11 @@ namespace AutomatedCar.Models
         private static List<WorldObject> ReadWorldObjects(string filename)
         {
             List<WorldObject> allObjects;
-
-            JObject worldObjectsInFile = JObject.Parse(new StreamReader(Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream($"AutomatedCar.Assets." + filename)).ReadToEnd());
+            var loc = $"AutomatedCar.Assets.{filename}";
+            var b = Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream(loc);
+            var a = new StreamReader(b).ReadToEnd();
+            JObject worldObjectsInFile = JObject.Parse(a);
 
             IList<JToken> results = worldObjectsInFile["objects"].Children().ToList();
 
