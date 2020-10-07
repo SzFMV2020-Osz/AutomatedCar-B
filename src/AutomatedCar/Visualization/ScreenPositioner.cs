@@ -15,13 +15,15 @@ namespace AutomatedCar
 
            
 
-            foreach(WorldObject wo in world.WorldObjects){
-                wo.VisibleX = world.ControlledCar.X*(-1);
-                wo.VisibleY = world.ControlledCar.Y*(-1);
+            foreach(WorldObject wo in world.WorldObjects) {
+
+                Point p = pco.getPositionFromScreen(wo, world.VisibleWidth, world.VisibleHeight);
+                wo.VisibleX = Convert.ToInt32(p.X);
+                wo.VisibleY = Convert.ToInt32(p.Y);
             }
 
-            world.ControlledCar.VisibleX = (world.Width/2)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
-            world.ControlledCar.VisibleY = (world.Height/2)-world.ControlledCar._rotationCenterPointY - world.ControlledCar.Height/2;
+            world.ControlledCar.VisibleX = (world.VisibleWidth/2)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+            world.ControlledCar.VisibleY = (world.VisibleHeight/2)-world.ControlledCar._rotationCenterPointY - world.ControlledCar.Height/2;
         }
 
     }
