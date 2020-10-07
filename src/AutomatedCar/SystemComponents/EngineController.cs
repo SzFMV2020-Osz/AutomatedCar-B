@@ -2,7 +2,7 @@
 {
     using SystemComponents.Packets;
 
-    class EngineController
+    public class EngineController
     {
         private const double GearRatioReverse = 2.9; // Az egyik linkelt pelda atteteibol nezve, konzisztens a tobbi attettel
         private const int RPMDecayPerTick = -500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
@@ -24,6 +24,8 @@
         public EngineController()
         {
             this.GearShifter = new GearShifter();
+            this.RPM = 0;
+            this.VelocityPixelsPerSecond = 0;
         }
 
         public void UpdateEngineProperties(IPowerTrainPacket packet)
@@ -53,7 +55,7 @@
                     break;
             }
 
-            this.RPM = ((int)tempRPM > MaxRPM) ? (int)tempRPM : MaxRPM;
+            this.RPM = ((int)tempRPM < MaxRPM) ? (int)tempRPM : MaxRPM;
         }
 
         private double AdjustRPMOnGearChange()
