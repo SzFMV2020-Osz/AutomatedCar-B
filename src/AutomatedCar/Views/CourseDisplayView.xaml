@@ -7,7 +7,6 @@
              xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
              xmlns:local="clr-namespace:AutomatedCar;assembly=AutomatedCar"
              xmlns:visualization="clr-namespace:AutomatedCar.Visualization;assembly=AutomatedCar"
-             DataContext="{Binding World}"
              >
 
     <UserControl.Styles>
@@ -24,6 +23,7 @@
 
     <ScrollViewer Width="960" Height="720" HorizontalAlignment="Left" VerticalAlignment="Top">
         <ItemsControl Name="CourseDisplay"
+			DataContext="{Binding World}"
             Items="{Binding WorldObjects, Mode=OneWay}"
             Width="{Binding Width, Mode=OneWay}"
             Height="{Binding Height, Mode=OneWay}"
@@ -55,8 +55,8 @@
 						
 					
 						<Image
-							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
+							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+						<Polyline IsVisible="{Binding $parent[ItemsControl].DataContext.DebugOn}" Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 
 						<Polyline
@@ -81,7 +81,7 @@
 						</Canvas.RenderTransform>
 
 						<Image
-							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 					</Canvas>
