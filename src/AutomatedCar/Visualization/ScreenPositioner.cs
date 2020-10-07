@@ -22,11 +22,14 @@ namespace AutomatedCar
                 wo.VisibleY = Convert.ToInt32(p.Y);
             }
 
-            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = world.ControlledCar.X-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
-            else world.ControlledCar.VisibleX = (world.VisibleWidth/2)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = computeX(world, world.ControlledCar.X);
+            else world.ControlledCar.VisibleX = computeX(world, world.VisibleWidth/2);
             world.ControlledCar.VisibleY = (world.VisibleHeight/2)-world.ControlledCar._rotationCenterPointY - world.ControlledCar.Height/2;
         }
 
+        private int computeX(World world, int currentX) {
+            return currentX-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+        }
 
         private bool closeToLeftEdge(World world, AutomatedCar car){
             return  car.X < (world.VisibleWidth/2);
