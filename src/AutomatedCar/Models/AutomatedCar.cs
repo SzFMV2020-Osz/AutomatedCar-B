@@ -77,7 +77,6 @@ namespace AutomatedCar.Models
 
         private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)
         {
-            
             // List<Geometry> ultraSoundGeometries = new List<Geometry>().;
             // for (int i = 0; i < 8; i++)
             // {
