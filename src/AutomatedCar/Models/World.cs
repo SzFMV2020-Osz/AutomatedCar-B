@@ -43,6 +43,10 @@
 
         public int Height { get; set; }
 
+         public int VisibleWidth { get; set; }
+
+        public int VisibleHeight { get; set; }
+
         public List<WorldObject> NPCs { get; set; }
 
         public void PopulateInstance(string configFilename)
