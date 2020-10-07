@@ -72,14 +72,27 @@ namespace AutomatedCar.Models
         /// <returns>List of world objects containing all WorldObjects in given area.</returns>
         public List<WorldObject> getWorldObjectsInRectangle(Point a, Point b, Point c, Point d)
         {
+            // TODO: quick ugly solution refactor needed
             var rectangle = new LinearRing(new[]
             {
                 new Coordinate(a.X, a.Y), new Coordinate(b.X, b.Y), new Coordinate(c.X, c.Y),
                 new Coordinate(d.X, d.Y),
             });
 
-            // TODO: not finished yet.
-            return null;
+            var ret = new List<WorldObject>();
+            foreach (var wo in WorldObjectsForTesting)
+            {
+                foreach (var np in wo.NetPolygon)
+                {
+                    if (np.Intersects(rectangle))
+                    {
+                        ret.Add(wo);
+                        break;
+                    }
+                }
+            }
+
+            return ret;
         }
 
         public static World GetInstance()
