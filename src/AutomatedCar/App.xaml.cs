@@ -49,8 +49,6 @@ namespace AutomatedCar
                 circle.ZIndex = 2;
                 world.AddObject(circle);
 
-                
-
                 AutomatedCar controlledCar = new Models.AutomatedCar(1000, 500, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
