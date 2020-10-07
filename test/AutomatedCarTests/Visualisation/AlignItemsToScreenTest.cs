@@ -78,7 +78,6 @@ namespace VisualisationTests
 
             // Act
             ScreenPositioner.Instance.AlignItemsToScreen(w);
-            
 
             // Assert
             Assert.AreEqual(0, wo.VisibleX);
