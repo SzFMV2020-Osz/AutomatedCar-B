@@ -36,6 +36,8 @@ namespace AutomatedCar
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
                 World world = World.Instance;
+                world.PopulateInstance("config.json");
+
                 world.Width = 2000;
                 world.Height = 1000;
 
@@ -45,21 +47,30 @@ namespace AutomatedCar
                 circle.ZIndex = 2;
                 world.AddObject(circle);
 
-
                 AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
+                controlledCar.CameraBrush = new SolidColorBrush(Color.Parse("red"));
 
                 List<Point> sensorPoints = new List<Point>();
                 sensorPoints.Add(new Point(51, 239));
                 sensorPoints.Add(new Point(200, 100));
                 sensorPoints.Add(new Point(100, 300));
 
+                List<Point> cameraSensorPoints = new List<Point>();
+                cameraSensorPoints.Add(new Point(100, 200));
+                cameraSensorPoints.Add(new Point(300, 200));
+                cameraSensorPoints.Add(new Point(150, 300));
+
                 controlledCar.RadarGeometry = new PolylineGeometry(sensorPoints, false);
                 controlledCar.Geometry = geom;
                 controlledCar.RadarVisible = true;
+
+                controlledCar.CameraGeometry = new PolylineGeometry(cameraSensorPoints, false);
+                controlledCar.CameraVisible = true;
+
                 world.AddObject(controlledCar);
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();

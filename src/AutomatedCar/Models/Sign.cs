@@ -16,7 +16,12 @@ namespace AutomatedCar.Models
         /// <summary>
         /// Gets stores the text or numbers of the sign in a string. Can be set only when loaded.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; set; }
+
+        public Sign()
+        {
+
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sign"/> class.

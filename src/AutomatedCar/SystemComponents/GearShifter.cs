@@ -35,6 +35,7 @@
         private const int DownShiftRPMThreshold = 1000;
         private DriveGear[] driveGearLabels = { DriveGear.NotInDrive, DriveGear.DriveOne, DriveGear.DriveTwo, DriveGear.DriveThree, DriveGear.DriveFour, DriveGear.DriveFive, DriveGear.DriveSix };
         private double[] driveGearRatios = { 0, 2.66, 1.78, 1.3, 1, 0.74, 0.5 };
+        private GearShifterPosition position;
 
         // Trackeli, valtozott-e a DriveGear az aktualis ciklusban
         public ChangeState DriveGearChangeState { get; private set; }
@@ -50,33 +51,32 @@
         {
             get
             {
-                return this.Position;
+                return this.position;
             }
 
             set
             {
-                if (this.Position != GearShifterPosition.D && value == GearShifterPosition.D)
+                if (this.position != GearShifterPosition.D && value == GearShifterPosition.D)
                 {
                     this.CurrentDriveGear = this.DriveGears[1];
                 }
 
-                this.Position = value;
+                this.position = value;
             }
         }
 
         // Konstruktor, a driveGearLabels es driveGearRatios alapjan feltolti a DriveGears tombot - ezek lesznek a Drive belso fokozatai
         public GearShifter()
         {
+            this.Position = GearShifterPosition.N;
             this.DriveGears = new Gear[7];
             for (int i = 0; i < this.DriveGears.Length; i++)
             {
                 this.DriveGears[i] = new Gear(this.driveGearRatios[i], this.driveGearLabels[i], i);
             }
-<<<<<<< Updated upstream
-=======
+
             this.CurrentDriveGear = this.DriveGears[0];
             this.DriveGearChangeState = ChangeState.None;
->>>>>>> Stashed changes
         }
 
         // Beallitja a Drive-on beluli valtoallast, a tarolt RPM, es az RPM valtozas alapjan. Allitja az ehhez tartozo DriveGearChangeState-et is
