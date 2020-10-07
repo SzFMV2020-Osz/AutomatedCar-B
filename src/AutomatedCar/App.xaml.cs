@@ -40,8 +40,8 @@ namespace AutomatedCar
                 world.PopulateInstance("config.json");
 
 
-                world.VisibleWidth = 860;
-                world.VisibleHeight = 620;
+                world.VisibleWidth = 960;
+                world.VisibleHeight = 720;
                 world.Width = 2000;
                 world.Height = 1000;
  

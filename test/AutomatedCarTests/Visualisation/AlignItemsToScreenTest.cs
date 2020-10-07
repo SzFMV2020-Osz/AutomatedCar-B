@@ -99,7 +99,7 @@ namespace VisualisationTests
             
 
             // Assert
-            Assert.AreEqual(-15, ac.VisibleY);
+            Assert.AreEqual(0, ac.VisibleY);
         }
 
         [TestMethod]
