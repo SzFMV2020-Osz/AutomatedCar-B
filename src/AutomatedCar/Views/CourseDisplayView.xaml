@@ -68,6 +68,11 @@
 							Fill="{Binding RadarBrush, Mode=OneWay}"
 							Points="{Binding RadarGeometry.Points, Mode=OneWay}" />
 
+						<Polyline
+							IsVisible="{Binding CameraVisible, Mode=OneWay}"
+							Opacity=".6"
+							Fill="{Binding CameraBrush, Mode=OneWay}"
+							Points="{Binding CameraGeometry.Points, Mode=OneWay}" />
 
 					</Canvas>
 				</DataTemplate>
@@ -86,6 +91,7 @@
 						<Image
 							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 						<Polyline Stroke="{Binding Brush, Mode=OneWay}" Classes="Polygon" IsVisible="{Binding Visible}"
+
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 					</Canvas>
 				</DataTemplate>

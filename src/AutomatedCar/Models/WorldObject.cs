@@ -3,8 +3,9 @@ namespace AutomatedCar.Models
     using Avalonia;
     using Avalonia.Controls.Shapes;
     using ReactiveUI;
+    using NetTopologySuite.Geometries;
 
-    public abstract class WorldObject : ReactiveObject
+    public class WorldObject : ReactiveObject
     {
         private int _x;
         private int _y;
@@ -35,23 +36,33 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref this._angle, value);
         }
 
+        
+
+      
+
+
         public int RotationCenterPointX
         {
-            get => this._rotationCenterPointX;
+             get => this._rotationCenterPointX;
+             set => this._rotationCenterPointX = value;
         }
+
         public int RotationCenterPointY
         {
-            get => this._rotationCenterPointY;
+             get => this._rotationCenterPointY;
+             set => this._rotationCenterPointY = value;
         }
 
         public int Width { get; set; }
 
         public int Height { get; set; }
 
-        public string FileName { get; protected set; }
+        public string FileName { get; set; }
 
-        public Polygon Polygon { get; protected set; }
-        
+        public Avalonia.Controls.Shapes.Polygon[] Polygon { get; set; }
+
+        public NetTopologySuite.Geometries.LineString[] NetPolygon { get; set; }
+
         public bool IsCollidable { get; protected set; }
 
         public bool IsHighlighted { get; set; }
@@ -74,5 +85,6 @@ namespace AutomatedCar.Models
             get => this.visible;
             set => this.RaiseAndSetIfChanged(ref this.visible, value);
         }
+
     }
 }
