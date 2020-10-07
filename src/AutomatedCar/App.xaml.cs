@@ -66,7 +66,19 @@ namespace AutomatedCar
                 circle4.ZIndex = 2;
                 world.AddObject(circle4);
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(0, 0, "car_1_white.png");
+                Circle circle5 = new Circle(900, 550, "circle.png", 20);
+                circle5.Width = 40;
+                circle5.Height = 40;
+                circle5.ZIndex = 2;
+                world.AddObject(circle5);
+
+                 Circle circle6 = new Circle(900, 150, "circle.png", 20);
+                circle6.Width = 40;
+                circle6.Height = 40;
+                circle6.ZIndex = 2;
+                world.AddObject(circle6);
+
+                AutomatedCar controlledCar = new Models.AutomatedCar(1000, 500, "car_1_white.png");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
