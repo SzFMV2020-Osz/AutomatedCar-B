@@ -12,6 +12,7 @@ namespace AutomatedCar.Models
     {
         private VirtualFunctionBus virtualFunctionBus;
         private DummySensor dummySensor;
+        private PowerTrain powerTrain;
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
@@ -22,6 +23,9 @@ namespace AutomatedCar.Models
             this.IsHighlighted = false;
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
+
+            // this.powerTrain = new PowerTrain(this.virtualFunctionBus);
+
             this.Brush = new SolidColorBrush(Color.Parse("red"));
         }
 
@@ -30,6 +34,9 @@ namespace AutomatedCar.Models
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
+
+
+        public int Speed { get; set; }
 
         /// <summary>
         /// Example usage add
@@ -41,18 +48,24 @@ namespace AutomatedCar.Models
             this.Y = y;
         }
 
-        public void Move(Vector2 with)
+        public void Move(Vector2 newPosition)
         {
-            throw new NotImplementedException();
+            this.X = (int)newPosition.X;
+            this.Y = (int)newPosition.Y;
         }
-
 
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public SolidColorBrush RadarBrush { get; set; }
 
         public Geometry RadarGeometry { get; set; }
-
+        
         public bool RadarVisible { get; set; }
+
+        public SolidColorBrush CameraBrush { get; set; }
+
+        public Geometry CameraGeometry { get; set; }
+
+        public bool CameraVisible { get; set; }       
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()

@@ -3,6 +3,12 @@ namespace AutomatedCar.Models
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Drawing.Printing;
+    using System.IO;
+    using System.Linq;
+    using Avalonia;
+    using Avalonia.Controls.Shapes;
+    using Avalonia.Media;
     using System.IO;
     using System.Linq;
     using Avalonia;
@@ -25,26 +31,31 @@ namespace AutomatedCar.Models
 
         private AutomatedCar _controlledCar;
 
+        private bool debugOn = false;
+
+        public bool DebugOn { get => this.debugOn; }
+
         public static World Instance { get; } = new World();
 
         public ObservableCollection<WorldObject> WorldObjects { get; } = new ObservableCollection<WorldObject>();
-
+        public ObservableCollection<WorldObject> WorldObjectsForTesting { get; } = new ObservableCollection<WorldObject>();
         public AutomatedCar ControlledCar
         {
             get => this._controlledCar;
             set => this.RaiseAndSetIfChanged(ref this._controlledCar, value);
         }
 
-        private List<WorldObject> trees;
-        private List<WorldObject> signs;
-        private List<WorldObject> roads;
-        private List<WorldObject> npcs; // for 2nd sprint
-
         public int Width { get; set; }
 
         public int Height { get; set; }
 
         public List<WorldObject> NPCs { get; set; }
+
+        public void PopulateInstance(string configFilename)
+        {
+            //JSONToWorldObject.LoadAllObjectsFromJSON(configFilename).ForEach(o => AddObject(o));
+            JSONToWorldObject.LoadAllObjectsFromJSON(configFilename).ForEach(i => WorldObjectsForTesting.Add(i));
+        }
 
         public void AddObject(WorldObject worldObject)
         {
@@ -69,6 +80,11 @@ namespace AutomatedCar.Models
 
             // TODO: not finished yet.
             return null;
+        }
+
+        public static World GetInstance()
+        {
+            return Instance;
         }
     }
 }
