@@ -44,25 +44,7 @@ namespace VisualisationTests
             Assert.AreEqual(wo2.VisibleY, 100);
         }
 
-        [TestMethod]
-        public void CarisAtTheCenter()
-        {
-            // Arrange
-            AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(250,200, "");
-            ac.Width = 20;
-            ac.Height = 30;
-            ac.RotationCenterPointX = 0;
-            ac.RotationCenterPointY = 0;
-            this.w.ControlledCar = ac;
-
-            // Act
-            ScreenPositioner.Instance.AlignItemsToScreen(w);
-            
-
-            // Assert
-            Assert.AreEqual((w.VisibleWidth/2)-w.ControlledCar._rotationCenterPointX - w.ControlledCar.Width/2, ac.VisibleX);
-            Assert.AreEqual((w.VisibleHeight/2)-w.ControlledCar._rotationCenterPointY - w.ControlledCar.Height/2, ac.VisibleY);
-        }
+        
 
         [TestMethod]
         public void CarisCloseToLeft()
@@ -83,24 +65,7 @@ namespace VisualisationTests
             Assert.AreEqual(90, ac.VisibleX);
         }
 
-        [TestMethod]
-        public void CarisCloseToTop()
-        {
-            // Arrange
-            AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(0,0, "");
-            ac.Width = 20;
-            ac.Height = 30;
-            ac.RotationCenterPointX = 0;
-            ac.RotationCenterPointY = 0;
-            this.w.ControlledCar = ac;
 
-            // Act
-            ScreenPositioner.Instance.AlignItemsToScreen(w);
-            
-
-            // Assert
-            Assert.AreEqual(0, ac.VisibleY);
-        }
 
         [TestMethod]
         public void CarisCloseToLeftHandleOtherWorldObjects()
