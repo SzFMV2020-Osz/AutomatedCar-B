@@ -23,27 +23,27 @@ namespace AutomatedCar
                 else wo.VisibleY = Convert.ToInt32(p.Y);
             }
 
-            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeHorisontal(world, world.ControlledCar.X);
-            else if(this.closeToRightEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeHorisontalRight(world);
-            else world.ControlledCar.VisibleX = ComputeHorisontal(world, world.VisibleWidth/2);
+            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeCarPositionHorisontal(world, world.ControlledCar.X);
+            else if(this.closeToRightEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeCarPositionHorisontalRight(world);
+            else world.ControlledCar.VisibleX = ComputeCarPositionHorisontal(world, world.VisibleWidth/2);
 
-            if(this.closeToTopEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeVertical(world, world.ControlledCar.Y);
-            else if(this.closeToBottomEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeVerticalBottom(world);
-            else world.ControlledCar.VisibleY = computeVertical(world, world.VisibleHeight/2);
+            if(this.closeToTopEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeCarPositionVertical(world, world.ControlledCar.Y);
+            else if(this.closeToBottomEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeCarPositionVerticalBottom(world);
+            else world.ControlledCar.VisibleY = computeCarPositionVertical(world, world.VisibleHeight/2);
         }
  
-        private int ComputeHorisontal(World world, int currentX) {
-            return currentX-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+        private int ComputeCarPositionHorisontal(World world, int currentX) {
+            return currentX-world.ControlledCar._rotationCenterPointX - (world.ControlledCar.Width/2);
         }
-        private int ComputeHorisontalRight(World world) {
-            return world.VisibleWidth - (world.Width - world.ControlledCar.X)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+        private int ComputeCarPositionHorisontalRight(World world) {
+            return world.VisibleWidth - (world.Width - world.ControlledCar.X)-world.ControlledCar._rotationCenterPointX - (world.ControlledCar.Width/2);
         }
-        
-        private int computeVertical(World world, int currentY) {
+
+        private int computeCarPositionVertical(World world, int currentY) {
             return currentY-world.ControlledCar._rotationCenterPointY;
         }
 
-        private int computeVerticalBottom(World world) {
+        private int computeCarPositionVerticalBottom(World world) {
             return world.VisibleHeight - (world.Height - world.ControlledCar.Y)-world.ControlledCar._rotationCenterPointY;
         }
 
