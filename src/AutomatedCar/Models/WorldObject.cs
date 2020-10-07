@@ -5,10 +5,10 @@ namespace AutomatedCar.Models
     public abstract class WorldObject : ReactiveObject
     {
         private int _x;
-        private int _y;
-        private double _angle = 90; // mocking
-        public int _rotationCenterPointX = 90; // = width/2
-        public int _rotationCenterPointY = 120; // = height/2
+        private int y;
+        private double angle = 90; // mocking
+        public int rotationCenterPointX = 90; // = width/2
+        public int rotationCenterPointY = 120; // = height/2
 
         public WorldObject(int x, int y, string filename)
         {
@@ -19,18 +19,20 @@ namespace AutomatedCar.Models
         }
 
         public int ZIndex { get; set; }
+
         public double Angle
         {
-            get => this._angle;
+            get => this.angle;
         }
 
         public int RotationCenterPointX
         {
-            get => this._rotationCenterPointX;
+            get => this.rotationCenterPointX;
         }
+
         public int RotationCenterPointY
         {
-            get => this._rotationCenterPointY;
+            get => this.rotationCenterPointY;
         }
 
         public int Width { get; set; }
@@ -45,11 +47,12 @@ namespace AutomatedCar.Models
 
         public int Y
         {
-            get => this._y;
-            set => this.RaiseAndSetIfChanged(ref this._y, value);
+            get => this.y;
+            set => this.RaiseAndSetIfChanged(ref this.y, value);
         }
 
         public string Filename { get; set; }
+
         public int Offset { get => 50; }
     }
 }

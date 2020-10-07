@@ -49,11 +49,10 @@ namespace AutomatedCar
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
                 controlledCar.Geometry = geom;
-                var g = new Avalonia.Media.EllipseGeometry(new Rect(30, 30, 80, 80));
-                // controlledCar.AddGeom(g);
-                var l1 = new Avalonia.Media.PolylineGeometry(new List<Point> { new Point(30, 30), new Point(70, 30) }, false);
-                var l2 = new Avalonia.Media.PolylineGeometry(new List<Point> { new Point(40, 40), new Point(70, 40) }, false);
-                var l3 = new Avalonia.Media.PolylineGeometry(new List<Point> { new Point(50, 60), new Point(70, 60) }, false);
+
+                var l1 = new PolylineGeometry(new List<Point> { new Point(30, 30), new Point(70, 30) }, false);
+                var l2 = new PolylineGeometry(new List<Point> { new Point(40, 40), new Point(70, 40) }, false);
+                var l3 = new PolylineGeometry(new List<Point> { new Point(50, 60), new Point(70, 60) }, false);
                 controlledCar.AddGeom(l1);
                 controlledCar.AddGeom(l2);
                 controlledCar.AddGeom(l3);

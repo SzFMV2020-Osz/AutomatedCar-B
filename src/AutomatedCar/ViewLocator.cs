@@ -1,12 +1,11 @@
 // Copyright (c) The Avalonia Project. All rights reserved.
 // Licensed under the MIT license. See licence.md file in the project root for full license information.
 
-using System;
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
-
 namespace AutomatedCar
 {
+    using System;
+    using Avalonia.Controls;
+    using Avalonia.Controls.Templates;
     using ViewModels;
 
     public class ViewLocator : IDataTemplate
@@ -24,7 +23,7 @@ namespace AutomatedCar
             }
             else
             {
-                return new TextBlock {Text = "Not Found: " + name};
+                return new TextBlock { Text = "Not Found: " + name };
             }
         }
 

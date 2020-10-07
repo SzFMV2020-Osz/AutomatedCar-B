@@ -15,8 +15,6 @@ namespace AutomatedCar
 
         public World World { get => this.world; }
 
-        private Random Random { get; } = new Random();
-
         protected override void Tick()
         {
             if (Keyboard.IsKeyDown(Key.Up))

@@ -15,8 +15,8 @@
             <Setter Property="Background" Value="#97D1A2"/>
         </Style>
         <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
-            <!-- <Setter Property="Canvas.Left" Value="{Binding X, Converter={x:Static visualization:Offset.Instance}, Mode=OneWay}"/> -->
-            <Setter Property="Canvas.Left" Value="{Binding X}"/>
+            <Setter Property="Canvas.Left" Value="{Binding X, Converter={x:Static visualization:Offset.Instance}, Mode=OneWay}"/>
+            <!-- <Setter Property="Canvas.Left" Value="{Binding X}"/> -->
             <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
 
