@@ -16,6 +16,7 @@ namespace AutomatedCar.Visualization
 
         static Bitmap GetCachedImage(string filename)
         {
+            filename+=".png";
             if (!cache.ContainsKey(filename))
             {
                 cache.Add(filename,
