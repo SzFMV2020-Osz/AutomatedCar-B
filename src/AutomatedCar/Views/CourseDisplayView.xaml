@@ -48,7 +48,7 @@
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />
 								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<!-- <TranslateTransform  Y="{Binding RotationCenterPointY}" /> -->
+								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
 							</TransformGroup>						
 						</Canvas.RenderTransform>
 						

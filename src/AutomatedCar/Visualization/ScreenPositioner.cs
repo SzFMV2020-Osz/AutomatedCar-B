@@ -31,7 +31,7 @@ namespace AutomatedCar
         }
 
         private int computeCarPositionVertical(World world, int currentY) {
-            return currentY-world.ControlledCar._rotationCenterPointY;
+            return currentY-world.ControlledCar._rotationCenterPointY-world.ControlledCar.RotationCenterPointY;
         }
 
         private int computeCarPositionVerticalBottom(World world) {
