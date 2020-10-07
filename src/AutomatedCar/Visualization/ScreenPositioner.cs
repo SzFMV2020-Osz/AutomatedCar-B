@@ -13,8 +13,6 @@ namespace AutomatedCar
             
             PositionComputeObject pco = new PositionComputeObject(world.ControlledCar);
 
-           
-
             foreach(WorldObject wo in world.WorldObjects) {
 
                 Point p = pco.getPositionFromScreen(wo, world.VisibleWidth, world.VisibleHeight);
