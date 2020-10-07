@@ -1,0 +1,5 @@
+{
+    "world_objects": "test_world.json",
+    "rotation_points": "reference_points.json",
+    "polygons": "worldobject_polygons.json"
+ }

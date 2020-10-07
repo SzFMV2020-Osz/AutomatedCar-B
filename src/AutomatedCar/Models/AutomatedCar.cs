@@ -23,6 +23,9 @@ namespace AutomatedCar.Models
             this.IsHighlighted = false;
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
+
+            // this.powerTrain = new PowerTrain(this.virtualFunctionBus);
+
             this.Brush = new SolidColorBrush(Color.Parse("red"));
         }
 
@@ -31,6 +34,7 @@ namespace AutomatedCar.Models
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
+
 
         public int Speed { get; set; }
 
