@@ -58,8 +58,14 @@ namespace AutomatedCar.Models
         public SolidColorBrush RadarBrush { get; set; }
 
         public Geometry RadarGeometry { get; set; }
-
+        
         public bool RadarVisible { get; set; }
+
+        public SolidColorBrush CameraBrush { get; set; }
+
+        public Geometry CameraGeometry { get; set; }
+
+        public bool CameraVisible { get; set; }       
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()
