@@ -5,8 +5,8 @@
     public class EngineController
     {
         private const double GearRatioReverse = 2.9; // Az egyik linkelt pelda atteteibol nezve, konzisztens a tobbi attettel
-        private const int RPMDecayPerTick = -500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
-        private const double MinimumBrakeForce = 500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
+        private const int RPMDecayPerTick = -50; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
+        private const double MinimumBrakeForce = 200; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
         private const int ForceToPixelVelocityConversionConstant = 5; // Nagyjabol 10 autohossz/sec-re akartam maximalizalni a sebesseget (~162 km/h 4,5m hosszu autonal), ez a szam azt kozeliti (230px az auto, MaxRPM miatt max ResultantForce 11500)
         private const int MaxRPM = 6000; // Nagyjabol realisztikus maximum, de ez is valtozhat, ha szukseges
         private const int NeutralRPMIncrease = 500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
@@ -46,7 +46,10 @@
                     tempRPM *= this.AdjustRPMOnGearChange();
                     break;
                 case GearShifterPosition.N:
-                    tempRPM += NeutralRPMIncrease;
+                    if (this.PowerTrainPacket.GasPedal != 0)
+                    {
+                        tempRPM += NeutralRPMIncrease;
+                    }
                     break;
                 case GearShifterPosition.R:
                     break;
@@ -54,8 +57,15 @@
                     tempRPM = 0;
                     break;
             }
-
-            this.RPM = ((int)tempRPM < MaxRPM) ? (int)tempRPM : MaxRPM;
+            if ((int)tempRPM < MaxRPM)
+            {
+                if ((int)tempRPM <= 0) { this.RPM = 0; }
+                else { this.RPM = (int)tempRPM; }
+            }
+            else
+            {
+                this.RPM = MaxRPM;
+            }
         }
 
         private double AdjustRPMOnGearChange()
