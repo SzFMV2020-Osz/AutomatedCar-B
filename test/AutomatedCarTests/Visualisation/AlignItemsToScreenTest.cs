@@ -83,6 +83,29 @@ namespace VisualisationTests
             Assert.AreEqual(90, ac.VisibleX);
         }
 
+        [TestMethod]
+        public void CarisCloseToLeftHandleOtherWorldObjects()
+        {
+            // Arrange
+            AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(100,200, "");
+            ac.Width = 20;
+            ac.Height = 30;
+            ac.RotationCenterPointX = 0;
+            ac.RotationCenterPointY = 0;
+            this.w.ControlledCar = ac;
+
+            WorldObject wo = new WorldObject(0,0, "");
+            this.w.ControlledCar = ac;
+            this.w.AddObject(wo);
+
+            // Act
+            ScreenPositioner.Instance.AlignItemsToScreen(w);
+            
+
+            // Assert
+            Assert.AreEqual(0, wo.VisibleX);
+        }
+
 
         [TestMethod]
         public void CarAt250x200_ObjectAtTheWorldOrigo()

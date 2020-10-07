@@ -18,7 +18,8 @@ namespace AutomatedCar
             foreach(WorldObject wo in world.WorldObjects) {
 
                 Point p = pco.getPositionFromScreen(wo, world.VisibleWidth, world.VisibleHeight);
-                wo.VisibleX = Convert.ToInt32(p.X);
+                if(this.closeToLeftEdge(world, world.ControlledCar)) wo.VisibleX = wo.X;
+                else wo.VisibleX = Convert.ToInt32(p.X);
                 wo.VisibleY = Convert.ToInt32(p.Y);
             }
 
