@@ -58,6 +58,12 @@
 						<Polyline IsVisible="{Binding $parent[ItemsControl].DataContext.DebugOn}" Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 
+						<Polyline IsVisible="{Binding IsHighlighted, Mode=OneWay}"
+									Stroke="yellow"
+									StrokeThickness="4"
+									Opacity=".7"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />
+
 						<Polyline
 							IsVisible="{Binding RadarVisible, Mode=OneWay}"
 							Opacity=".4"
@@ -136,6 +142,12 @@
 							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
+
+						<Polyline IsVisible="{Binding IsHighlighted, Mode=OneWay}"
+									Stroke="yellow"
+									StrokeThickness="4"
+									Opacity=".6"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />						
 					</Canvas>
 				</DataTemplate>
             </ItemsControl.DataTemplates>
