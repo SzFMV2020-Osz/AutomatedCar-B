@@ -10,13 +10,13 @@
             : base(functionBus)
         {
             this.Engine = new EngineController();
-            this.Steering = new SteeringController();
+            this.Steering = new TestSteering();
             this.Packet = this.virtualFunctionBus.PowerTrainPacket;
         }
 
         private EngineController Engine { get; set; }
 
-        private SteeringController Steering { get; set; }
+        private ISteeringController Steering { get; set; }
 
         private IPowerTrainPacket Packet { get; set; }
 
@@ -25,12 +25,19 @@
             this.Engine.UpdateEngineProperties(this.Packet);
             this.Steering.UpdateSteeringProperties(this.Packet);
             this.UpdateCarPosition();
+            this.UpdateHMIPacket();
         }
 
         private void UpdateCarPosition()
         {
             World.Instance.ControlledCar.Move(this.Steering.NewCarPosition);
             World.Instance.ControlledCar.Angle = this.Steering.NewCarAngle;
+            World.Instance.ControlledCar.Speed = (int)this.Engine.VelocityPixelsPerSecond;
+        }
+
+        private void UpdateHMIPacket()
+        {
+            this.virtualFunctionBus.HMIPacket.UpdateHMIPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
         }
     }
 }
