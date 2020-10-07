@@ -24,9 +24,7 @@ namespace AutomatedCar
                 if(this.closeToTopEdge(world, world.ControlledCar)) wo.VisibleY = wo.Y;
                 else if(this.closeToBottomEdge(world, world.ControlledCar)) wo.VisibleY = world.VisibleHeight - wo.Height;
                 else wo.VisibleY = Convert.ToInt32(p.Y);
-                
             }
-
 
             if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeHorisontal(world, world.ControlledCar.X);
             else if(this.closeToRightEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeHorisontalRight(world);
@@ -66,6 +64,5 @@ namespace AutomatedCar
         private bool closeToBottomEdge(World world, AutomatedCar car){
             return  car.Y > (world.Height - (world.VisibleHeight/2));
         }
-
     }
 }

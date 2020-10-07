@@ -35,7 +35,6 @@ namespace VisualisationTests
 
             // Act
             ScreenPositioner.Instance.AlignItemsToScreen(w);
-            
 
             // Assert
             Assert.AreEqual(wo.VisibleX, 0);
@@ -43,8 +42,6 @@ namespace VisualisationTests
             Assert.AreEqual(wo2.VisibleX, 100);
             Assert.AreEqual(wo2.VisibleY, 100);
         }
-
-        
 
         [TestMethod]
         public void CarisCloseToLeft()
@@ -59,13 +56,10 @@ namespace VisualisationTests
 
             // Act
             ScreenPositioner.Instance.AlignItemsToScreen(w);
-            
 
             // Assert
             Assert.AreEqual(90, ac.VisibleX);
         }
-
-
 
         [TestMethod]
         public void CarisCloseToLeftHandleOtherWorldObjects()
@@ -90,7 +84,6 @@ namespace VisualisationTests
             Assert.AreEqual(0, wo.VisibleX);
         }
 
-
         [TestMethod]
         public void CarAt250x200_ObjectAtTheWorldOrigo()
         {
@@ -99,7 +92,7 @@ namespace VisualisationTests
             AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(250,200, "");
             this.w.ControlledCar = ac;
             this.w.AddObject(wo);
-
+            
             // Act
             ScreenPositioner.Instance.AlignItemsToScreen(w);
             
@@ -108,7 +101,5 @@ namespace VisualisationTests
             Assert.AreEqual(wo.VisibleX, 0);
             Assert.AreEqual(wo.VisibleY, 0);
         }
-
-        
     }
 }
