@@ -51,39 +51,36 @@
                         <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
                     </Canvas>
                 </DataTemplate>
-				<DataTemplate DataType="{x:Type models:AutomatedCar}">
-					<Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
-					<!-- <Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
-						<Canvas.Styles>
+                <DataTemplate DataType="{x:Type models:AutomatedCar}">
+                    <Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
+                    <!-- <Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
+                        <Canvas.Styles>
                         <Style Selector="Canvas#AC">
                             <Setter Property="Left" Value="{Binding X, Mode=OneWay}"/>
                             <Setter Property="Top" Value="{Binding Y, Mode=OneWay}"/>
                         </Style>
-						</Canvas.Styles> -->
-						<Canvas.RenderTransform>
-							<TransformGroup>
-								<RotateTransform  Angle="{Binding Angle}" />
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
-							</TransformGroup>
-							
-						</Canvas.RenderTransform>
+                        </Canvas.Styles> -->
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform  Angle="{Binding Angle}" />
+                                <TranslateTransform  X="{Binding RotationCenterPointX}" />
+                                <TranslateTransform  Y="{Binding RotationCenterPointY}" />
+                            </TransformGroup>
+                            
+                        </Canvas.RenderTransform>
 
-						<Image
-							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-						<Polyline Stroke="red" Points="{Binding Geometry.Points, Mode=OneWay}" />
-						<!-- <Canvas Left="0" Top="25">
-						<Ellipse Fill="Violet" Width="30" Height="50" ZIndex="50"/>
-						</Canvas> -->
-						<ItemsControl Items="{Binding Geoms}">
-							<ItemsControl.ItemTemplate>
-								<DataTemplate>
+                        <Image
+                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+                        <Polyline Stroke="red" Points="{Binding Geometry.Points, Mode=OneWay}" />
+                        <ItemsControl Items="{Binding Geoms}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
                                 <Polyline Stroke="blue" StrokeThickness="3" Points="{Binding Points, Mode=OneWay}" ZIndex="85"/>
-								</DataTemplate>
-							</ItemsControl.ItemTemplate>
-						</ItemsControl>
-					</Canvas>
-				</DataTemplate>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Canvas>
+                </DataTemplate>
             </ItemsControl.DataTemplates>
         </ItemsControl>
     </ScrollViewer>
