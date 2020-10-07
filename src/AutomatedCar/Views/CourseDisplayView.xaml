@@ -15,7 +15,8 @@
             <Setter Property="Background" Value="#97D1A2"/>
         </Style>
         <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
-            <Setter Property="Canvas.Left" Value="{Binding X, Converter={x:Static visualization:Offset.Instance}, Mode=OneWay}"/>
+            <!-- <Setter Property="Canvas.Left" Value="{Binding X, Converter={x:Static visualization:Offset.Instance}, Mode=OneWay}"/> -->
+            <Setter Property="Canvas.Left" Value="{Binding X}"/>
             <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
 
@@ -70,20 +71,17 @@
 
 						<Image
 							Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-						<Polyline Stroke="red"
-									Points="{Binding Geometry.Points, Mode=OneWay}" />
-                        <ItemsRepeater Items="{Binding Geoms}">
-                        <ItemsRepeater.ItemTemplate>
-                            <DataTemplate DataType="{x:Type EllipseGeometry}">
-                            <Canvas  Left="{Binding X}" Top="{Binding Y}">
-									<Ellipse
-									Fill="Violet"
-								Width="{Binding Width}" Height="{Binding Height}" ZIndex="50"
-									/>
-                            </Canvas>
-                            </DataTemplate>
-                            </ItemsRepeater.ItemTemplate>
-						</ItemsRepeater>
+						<Polyline Stroke="red" Points="{Binding Geometry.Points, Mode=OneWay}" />
+						<!-- <Canvas Left="0" Top="25">
+						<Ellipse Fill="Violet" Width="30" Height="50" ZIndex="50"/>
+						</Canvas> -->
+						<ItemsControl Items="{Binding Geoms}">
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+                                <Polyline Stroke="blue" StrokeThickness="3" Points="{Binding Points, Mode=OneWay}" ZIndex="85"/>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
 					</Canvas>
 				</DataTemplate>
             </ItemsControl.DataTemplates>

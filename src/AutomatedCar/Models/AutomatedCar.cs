@@ -36,11 +36,11 @@ namespace AutomatedCar.Models
             this.virtualFunctionBus.Stop();
         }
 
-        public ObservableCollection<EllipseGeometry> geoms = new ObservableCollection<EllipseGeometry>();
-        public void AddGeom(EllipseGeometry geom)
+        public ObservableCollection<PolylineGeometry> geoms = new ObservableCollection<PolylineGeometry>();
+        public void AddGeom(PolylineGeometry geom)
         {
             this.geoms.Add(geom);
         }
-        public ObservableCollection<EllipseGeometry> Geoms { get => this.geoms; }
+        public ObservableCollection<PolylineGeometry> Geoms { get => this.geoms; }
     }
 }
