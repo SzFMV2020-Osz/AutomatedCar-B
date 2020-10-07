@@ -28,20 +28,27 @@ namespace AutomatedCar
             }
 
 
-            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = computeX(world, world.ControlledCar.X);
-            else if(this.closeToRightEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = world.VisibleWidth - (world.Width - world.ControlledCar.X)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
-            else world.ControlledCar.VisibleX = computeX(world, world.VisibleWidth/2);
+            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeHorisontal(world, world.ControlledCar.X);
+            else if(this.closeToRightEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = ComputeHorisontalRight(world);
+            else world.ControlledCar.VisibleX = ComputeHorisontal(world, world.VisibleWidth/2);
 
-            if(this.closeToTopEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeY(world, world.ControlledCar.Y);
-            else if(this.closeToBottomEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = world.VisibleHeight - (world.Height - world.ControlledCar.Y)-world.ControlledCar._rotationCenterPointY;
-            else world.ControlledCar.VisibleY = computeY(world, world.VisibleHeight/2);
+            if(this.closeToTopEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeVertical(world, world.ControlledCar.Y);
+            else if(this.closeToBottomEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = computeVerticalBottom(world);
+            else world.ControlledCar.VisibleY = computeVertical(world, world.VisibleHeight/2);
         }
  
-        private int computeX(World world, int currentX) {
+        private int ComputeHorisontal(World world, int currentX) {
             return currentX-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
         }
-        private int computeY(World world, int currentY) {
+        private int ComputeHorisontalRight(World world) {
+            return world.VisibleWidth - (world.Width - world.ControlledCar.X)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+        }
+        private int computeVertical(World world, int currentY) {
             return currentY-world.ControlledCar._rotationCenterPointY;
+        }
+
+        private int computeVerticalBottom(World world) {
+            return world.VisibleHeight - (world.Height - world.ControlledCar.Y)-world.ControlledCar._rotationCenterPointY;
         }
 
         private bool closeToLeftEdge(World world, AutomatedCar car){
