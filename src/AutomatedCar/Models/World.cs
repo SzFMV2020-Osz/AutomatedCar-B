@@ -43,7 +43,7 @@
 
         public int Height { get; set; }
 
-         public int VisibleWidth { get; set; }
+        public int VisibleWidth { get; set; }
 
         public int VisibleHeight { get; set; }
 
@@ -59,7 +59,6 @@
         {
             this.WorldObjects.Add(worldObject);
         }
-
 
         public static World GetInstance()
         {
