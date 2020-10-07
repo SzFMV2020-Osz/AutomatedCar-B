@@ -15,8 +15,8 @@
         </Style>
         <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
 			<Setter Property="Canvas.Left" Value="{Binding VisibleX, Mode=OneWay}"/>
-            <Setter Property="Canvas.Top" Value="{Binding VisibleY, Mode=OneWay}"/>
-            <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
+			<Setter Property="Canvas.Top" Value="{Binding VisibleY, Mode=OneWay}"/>
+			<Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
         </Style>
     </UserControl.Styles>
 
