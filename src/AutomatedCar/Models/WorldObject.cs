@@ -9,6 +9,9 @@ namespace AutomatedCar.Models
         private int _x;
         private int _y;
 
+        private int _visibleX;
+        private int _visibleY;
+
         private double _angle;
 
         public int _rotationCenterPointX = 90; // = width/2
@@ -76,6 +79,18 @@ namespace AutomatedCar.Models
         {
             get => this._y;
             set => this.RaiseAndSetIfChanged(ref this._y, value);
+        }
+
+        public int VisibleX
+        {
+            get => this._visibleX;
+            set => this.RaiseAndSetIfChanged(ref this._visibleX, value);
+        }
+
+        public int VisibleY
+        {
+            get => this._visibleY;
+            set => this.RaiseAndSetIfChanged(ref this._visibleY, value);
         }
 
         public string Filename { get; set; }

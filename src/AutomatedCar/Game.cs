@@ -35,6 +35,8 @@ namespace AutomatedCar
             {
                 this.world.ControlledCar.X += 5;
             }
+
+            ScreenPositioner.AlignItemsToScreen(this.world);
         }
     }
 }

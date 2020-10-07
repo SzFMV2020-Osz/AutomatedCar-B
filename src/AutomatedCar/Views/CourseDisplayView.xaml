@@ -14,9 +14,8 @@
             <Setter Property="Background" Value="#97D1A2"/>
         </Style>
         <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
-			<!--
-			<Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay, Converter={x:Static visualization:TranslateSetback.Instance}}"/>
-            <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>-->
+			<Setter Property="Canvas.Left" Value="{Binding VisibleX, Mode=OneWay}"/>
+            <Setter Property="Canvas.Top" Value="{Binding VisibleY, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
         </Style>
     </UserControl.Styles>
@@ -69,7 +68,7 @@
 					</Canvas>
 				</DataTemplate>
 				<DataTemplate DataType="{x:Type models:WorldObject}">
-					<Canvas Top="{Binding Y, Mode=OneWay}" Left="{Binding X, Mode=OneWay}" Width="{Binding Width}" Height="{Binding Height}" >
+					<Canvas Width="{Binding Width}" Height="{Binding Height}" >
 
 						<Canvas.RenderTransform>
 							<TransformGroup>
