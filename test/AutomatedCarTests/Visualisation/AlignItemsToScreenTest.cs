@@ -34,7 +34,7 @@ namespace VisualisationTests
             this.w.AddObject(wo2);
 
             // Act
-            ScreenPositioner.AlignItemsToScreen(w);
+            ScreenPositioner.Instance.AlignItemsToScreen(w);
             
 
             // Assert
@@ -44,24 +44,47 @@ namespace VisualisationTests
             Assert.AreEqual(wo2.VisibleY, 100);
         }
 
+        [TestMethod]
         public void CarisAtTheCenter()
         {
             // Arrange
-            WorldObject wo = new WorldObject(100,100, "");
             AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(250,200, "");
+            ac.Width = 20;
+            ac.Height = 30;
+            ac.RotationCenterPointX = 0;
+            ac.RotationCenterPointY = 0;
             this.w.ControlledCar = ac;
-            this.w.AddObject(wo);
 
             // Act
-            ScreenPositioner.AlignItemsToScreen(w);
+            ScreenPositioner.Instance.AlignItemsToScreen(w);
             
 
             // Assert
-            Assert.AreEqual(ac.VisibleX, w.VisibleWidth/2);
-            Assert.AreEqual(ac.VisibleY, w.VisibleHeight/2);
+            Assert.AreEqual((w.VisibleWidth/2)-w.ControlledCar._rotationCenterPointX - w.ControlledCar.Width/2, ac.VisibleX);
+            Assert.AreEqual((w.VisibleHeight/2)-w.ControlledCar._rotationCenterPointY - w.ControlledCar.Height/2, ac.VisibleY);
+        }
+
+        [TestMethod]
+        public void CarisCloseToLeft()
+        {
+            // Arrange
+            AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(100,200, "");
+            ac.Width = 20;
+            ac.Height = 30;
+            ac.RotationCenterPointX = 0;
+            ac.RotationCenterPointY = 0;
+            this.w.ControlledCar = ac;
+
+            // Act
+            ScreenPositioner.Instance.AlignItemsToScreen(w);
+            
+
+            // Assert
+            Assert.AreEqual(90, ac.VisibleX);
         }
 
 
+        [TestMethod]
         public void CarAt250x200_ObjectAtTheWorldOrigo()
         {
             // Arrange
@@ -71,7 +94,7 @@ namespace VisualisationTests
             this.w.AddObject(wo);
 
             // Act
-            ScreenPositioner.AlignItemsToScreen(w);
+            ScreenPositioner.Instance.AlignItemsToScreen(w);
             
 
             // Assert

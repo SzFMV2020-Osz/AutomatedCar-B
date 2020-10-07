@@ -9,13 +9,11 @@ namespace AutomatedCar
     public class ScreenPositioner 
     {
 
-        public static void AlignItemsToScreen(World world) {
+        public static ScreenPositioner Instance { get; } = new ScreenPositioner();
+
+        public void AlignItemsToScreen(World world) {
             
             PositionComputeObject pco = new PositionComputeObject(world.ControlledCar);
-
-
-            
-
 
             foreach(WorldObject wo in world.WorldObjects) {
 
@@ -24,7 +22,8 @@ namespace AutomatedCar
                 wo.VisibleY = Convert.ToInt32(p.Y);
             }
 
-            world.ControlledCar.VisibleX = (world.VisibleWidth/2)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+            if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = world.ControlledCar.X-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
+            else world.ControlledCar.VisibleX = (world.VisibleWidth/2)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
             world.ControlledCar.VisibleY = (world.VisibleHeight/2)-world.ControlledCar._rotationCenterPointY - world.ControlledCar.Height/2;
         }
 
