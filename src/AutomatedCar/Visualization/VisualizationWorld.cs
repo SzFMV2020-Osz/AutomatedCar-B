@@ -21,11 +21,16 @@ namespace AutomatedCar.Visualization
 
             PositionComputeObject pco = new PositionComputeObject(realWorld.ControlledCar);
             Point[] point = pco.getScreenSquare(this.Width, this.Height);
-            List<WorldObject> wos = realWorld.getWorldObjectsInRectangle(point[0], point[1], point[2], point[3]);
+            List<WorldObject> wos = realWorld.getWorldObjectsInRectangle(new Point(0, 0), new Point(6000, 0), new Point(6000, 4000),
+                new Point(0, 4000));
 
 
             foreach(WorldObject wo in wos) {
-                this.VisibleWorldObjects.Add(wo);
+                if (wo != null)
+                {
+                    this.VisibleWorldObjects.Add(wo);
+                }
+
             }
         }
 
