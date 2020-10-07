@@ -7,9 +7,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using NetTopologySuite.Geometries;
 
 namespace AutomatedCar.Models
 {
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
+
     public static class JSONToWorldObject
     {
         /// <summary>
@@ -62,6 +66,12 @@ namespace AutomatedCar.Models
                 {
                     if (worldObject.FileName == (string)polygons["typename"])
                     {
+
+                        worldObject.NetPolygon = polygons["polys"].Children()["points"].Select(pointlist =>
+                            new NetTopologySuite.Geometries.LineString(
+                                pointlist.Select(p => new Coordinate((double)p[0], (double)p[1])).ToArray()
+                            )).ToList().ToArray();
+
                         worldObject.Polygon = polygons["polys"].Children()["points"].Select(pointlist => new Polygon
                         {
                             Points = pointlist.Select(point => new Point((double)point[0], (double)point[1])).ToList(),
