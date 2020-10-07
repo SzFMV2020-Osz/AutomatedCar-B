@@ -48,11 +48,11 @@
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />
 								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<!-- <TranslateTransform  Y="{Binding RotationCenterPointY}" /> -->
 							</TransformGroup>						
 						</Canvas.RenderTransform>
 						
-					
+					<Rectangle Width="{Binding Width}" Height="{Binding Height}" Fill="Red"></Rectangle>
 						<Image
 							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 						<Polyline IsVisible="{Binding $parent[ItemsControl].DataContext.DebugOn}" Stroke="{Binding Brush, Mode=OneWay}"

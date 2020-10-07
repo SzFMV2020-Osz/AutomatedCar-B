@@ -84,6 +84,25 @@ namespace VisualisationTests
         }
 
         [TestMethod]
+        public void CarisCloseToTop()
+        {
+            // Arrange
+            AutomatedCar.Models.AutomatedCar ac = new AutomatedCar.Models.AutomatedCar(0,0, "");
+            ac.Width = 20;
+            ac.Height = 30;
+            ac.RotationCenterPointX = 0;
+            ac.RotationCenterPointY = 0;
+            this.w.ControlledCar = ac;
+
+            // Act
+            ScreenPositioner.Instance.AlignItemsToScreen(w);
+            
+
+            // Assert
+            Assert.AreEqual(-15, ac.VisibleY);
+        }
+
+        [TestMethod]
         public void CarisCloseToLeftHandleOtherWorldObjects()
         {
             // Arrange

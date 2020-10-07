@@ -40,8 +40,8 @@ namespace AutomatedCar
                 world.PopulateInstance("config.json");
 
 
-                world.VisibleWidth = 960;
-                world.VisibleHeight = 720;
+                world.VisibleWidth = 860;
+                world.VisibleHeight = 620;
                 world.Width = 2000;
                 world.Height = 1000;
  
@@ -50,7 +50,6 @@ namespace AutomatedCar
                 circle.Height = 40;
                 circle.ZIndex = 2;
                 world.AddObject(circle);
-
 
                 Circle circle2 = new Circle(2000-40, 1000-40, "circle.png", 20);
                 circle2.Width = 40;
@@ -72,6 +71,7 @@ namespace AutomatedCar
 
 
                 AutomatedCar controlledCar = new Models.AutomatedCar(0, 0, "car_1_white.png");
+
 
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;

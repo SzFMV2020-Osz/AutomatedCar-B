@@ -20,12 +20,16 @@ namespace AutomatedCar
                 Point p = pco.getPositionFromScreen(wo, world.VisibleWidth, world.VisibleHeight);
                 if(this.closeToLeftEdge(world, world.ControlledCar)) wo.VisibleX = wo.X;
                 else wo.VisibleX = Convert.ToInt32(p.X);
-                wo.VisibleY = Convert.ToInt32(p.Y);
+                if(this.closeToTopEdge(world, world.ControlledCar)) wo.VisibleY = wo.Y;
+                else wo.VisibleY = Convert.ToInt32(p.Y);
+                
             }
+
 
             if(this.closeToLeftEdge(world, world.ControlledCar)) world.ControlledCar.VisibleX = computeX(world, world.ControlledCar.X);
             else world.ControlledCar.VisibleX = computeX(world, world.VisibleWidth/2);
-            world.ControlledCar.VisibleY = (world.VisibleHeight/2)-world.ControlledCar._rotationCenterPointY - world.ControlledCar.Height/2;
+            if(this.closeToTopEdge(world, world.ControlledCar)) world.ControlledCar.VisibleY = world.ControlledCar.Y-world.ControlledCar._rotationCenterPointY;
+            else world.ControlledCar.VisibleY = (world.VisibleHeight/2)-world.ControlledCar._rotationCenterPointY;
         }
 
         private int computeX(World world, int currentX) {
