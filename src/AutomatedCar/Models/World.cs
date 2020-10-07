@@ -76,18 +76,21 @@ namespace AutomatedCar.Models
             var rectangle = new LinearRing(new[]
             {
                 new Coordinate(a.X, a.Y), new Coordinate(b.X, b.Y), new Coordinate(c.X, c.Y),
-                new Coordinate(d.X, d.Y),
+                new Coordinate(d.X, d.Y), new Coordinate(a.X, a.Y),
             });
 
             var ret = new List<WorldObject>();
             foreach (var wo in WorldObjectsForTesting)
             {
-                foreach (var np in wo.NetPolygon)
+                if (wo.NetPolygon != null)
                 {
-                    if (np.Intersects(rectangle))
+                    foreach (var np in wo.NetPolygon)
                     {
-                        ret.Add(wo);
-                        break;
+                        if (np.Intersects(rectangle))
+                        {
+                            ret.Add(wo);
+                            break;
+                        }
                     }
                 }
             }
