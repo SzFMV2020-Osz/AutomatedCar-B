@@ -43,40 +43,13 @@ namespace AutomatedCar
                 world.Width = 2000;
                 world.Height = 1000;
  
-                Circle circle = new Circle(0, 0, "circle.png", 20);
+                Circle circle = new Circle(1000, 500, "circle.png", 20);
                 circle.Width = 40;
                 circle.Height = 40;
                 circle.ZIndex = 2;
                 world.AddObject(circle);
 
-                Circle circle2 = new Circle(2000-40, 1000-40, "circle.png", 20);
-                circle2.Width = 40;
-                circle2.Height = 40;
-                circle2.ZIndex = 2;
-                world.AddObject(circle2);
-
-                Circle circle3 = new Circle(2000-40, 0, "circle.png", 20);
-                circle3.Width = 40;
-                circle3.Height = 40;
-                circle3.ZIndex = 2;
-                world.AddObject(circle3);
-                Circle circle4 = new Circle(0, 1000-40, "circle.png", 20);
-                circle4.Width = 40;
-                circle4.Height = 40;
-                circle4.ZIndex = 2;
-                world.AddObject(circle4);
-
-                Circle circle5 = new Circle(900, 550, "circle.png", 20);
-                circle5.Width = 40;
-                circle5.Height = 40;
-                circle5.ZIndex = 2;
-                world.AddObject(circle5);
-
-                 Circle circle6 = new Circle(900, 150, "circle.png", 20);
-                circle6.Width = 40;
-                circle6.Height = 40;
-                circle6.ZIndex = 2;
-                world.AddObject(circle6);
+                
 
                 AutomatedCar controlledCar = new Models.AutomatedCar(1000, 500, "car_1_white.png");
                 controlledCar.Width = 108;
