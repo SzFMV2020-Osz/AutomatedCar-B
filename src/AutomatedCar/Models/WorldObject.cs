@@ -81,7 +81,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref this._y, value);
         }
 
-
         public int VisibleX
         {
             get => this._visibleX;
@@ -95,6 +94,5 @@ namespace AutomatedCar.Models
         }
 
         public string Filename { get; set; }
-
     }
 }

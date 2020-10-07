@@ -8,15 +8,12 @@ namespace AutomatedCar
 
     public class ScreenPositioner 
     {
-
         public static ScreenPositioner Instance { get; } = new ScreenPositioner();
 
-        public void AlignItemsToScreen(World world) {
-            
+        public void AlignItemsToScreen(World world) { 
             PositionComputeObject pco = new PositionComputeObject(world.ControlledCar);
 
             foreach(WorldObject wo in world.WorldObjects) {
-
                 Point p = pco.getPositionFromScreen(wo, world.VisibleWidth, world.VisibleHeight);
                 if(this.closeToLeftEdge(world, world.ControlledCar)) wo.VisibleX = wo.X;
                 else if(this.closeToRightEdge(world, world.ControlledCar)) wo.VisibleX = world.VisibleWidth - wo.Width;
@@ -41,6 +38,7 @@ namespace AutomatedCar
         private int ComputeHorisontalRight(World world) {
             return world.VisibleWidth - (world.Width - world.ControlledCar.X)-world.ControlledCar._rotationCenterPointX - world.ControlledCar.Width/2;
         }
+        
         private int computeVertical(World world, int currentY) {
             return currentY-world.ControlledCar._rotationCenterPointY;
         }

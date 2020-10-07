@@ -38,8 +38,6 @@ namespace AutomatedCar
                 World world = World.Instance;
 
                 world.PopulateInstance("config.json");
-
-
                 world.VisibleWidth = 960;
                 world.VisibleHeight = 720;
                 world.Width = 2000;
@@ -68,14 +66,9 @@ namespace AutomatedCar
                 circle4.ZIndex = 2;
                 world.AddObject(circle4);
 
-
-
                 AutomatedCar controlledCar = new Models.AutomatedCar(0, 0, "car_1_white.png");
-
-
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
-
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.CameraBrush = new SolidColorBrush(Color.Parse("red"));
 
@@ -92,7 +85,6 @@ namespace AutomatedCar
                 controlledCar.RadarGeometry = new PolylineGeometry(sensorPoints, false);
                 controlledCar.Geometry = geom;
                 controlledCar.RadarVisible = true;
-
                 controlledCar.CameraGeometry = new PolylineGeometry(cameraSensorPoints, false);
                 controlledCar.CameraVisible = true;
 
