@@ -31,6 +31,14 @@ namespace AutomatedCar
             {
                 this.world.ControlledCar.X -= 5;
             }
+            else if (Keyboard.IsKeyDown(Key.A))
+            {
+                this.world.ControlledCar.Angle += 5;
+            }
+            else if (Keyboard.IsKeyDown(Key.D))
+            {
+                this.world.ControlledCar.Angle -= 5;
+            }
             else if (Keyboard.IsKeyDown(Key.Right))
             {
                 this.world.ControlledCar.X += 5;

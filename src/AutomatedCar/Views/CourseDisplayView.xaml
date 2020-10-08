@@ -57,11 +57,65 @@
 						<Polyline IsVisible="{Binding $parent[ItemsControl].DataContext.DebugOn}" Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
 
+						<Polyline IsVisible="{Binding IsHighlighted, Mode=OneWay}"
+									Stroke="yellow"
+									StrokeThickness="4"
+									Opacity=".7"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />
+
 						<Polyline
 							IsVisible="{Binding RadarVisible, Mode=OneWay}"
 							Opacity=".4"
 							Fill="{Binding RadarBrush, Mode=OneWay}"
 							Points="{Binding RadarGeometry.Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[0].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[1].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[2].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[3].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[4].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[5].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[6].Points, Mode=OneWay}" />
+
+                        <Polyline
+							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
+							Opacity=".4"
+							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
+							Points="{Binding UltraSoundGeometries[7].Points, Mode=OneWay}" />
 
 						<Polyline
 							IsVisible="{Binding CameraVisible, Mode=OneWay}"
@@ -87,6 +141,12 @@
 							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
 						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
 									Points="{Binding Geometry.Points, Mode=OneWay}" />
+
+						<Polyline IsVisible="{Binding IsHighlighted, Mode=OneWay}"
+									Stroke="yellow"
+									StrokeThickness="4"
+									Opacity=".6"
+									Points="{Binding Geometry.Points, Mode=OneWay}" />						
 					</Canvas>
 				</DataTemplate>
             </ItemsControl.DataTemplates>
