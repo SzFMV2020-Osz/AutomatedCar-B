@@ -48,6 +48,10 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref this._y, value);
         }
 
+        public int RotationCenterPointX { get; set; }
+
+        public int RotationCenterPointY { get; set; }
+
         public string Filename { get; set; }
     }
 }

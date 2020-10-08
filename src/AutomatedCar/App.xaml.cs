@@ -43,7 +43,16 @@ namespace AutomatedCar
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
+                AutomatedCar controlledCar2 = new Models.AutomatedCar(50, 50, "car_1_white");
+                controlledCar2.Geometry = geom;
+                controlledCar2.Width = 108;
+                controlledCar2.Height = 240;
+                World.Instance.AddObject(controlledCar2);
+
                 AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white");
+                controlledCar.Angle = 180;
+                controlledCar.RotationCenterPointX = +(120 - 56);
+                controlledCar.RotationCenterPointY = -(120 + 56);
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
 
