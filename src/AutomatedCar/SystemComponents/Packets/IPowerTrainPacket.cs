@@ -2,12 +2,14 @@
 {
     public interface IPowerTrainPacket
     {
-        public int GasPedal { get; set; }
+        public int GasPedal { get; }
 
-        public int BrakePedal { get; set; }
+        public int BrakePedal { get; }
 
-        public int SteeringWheel { get; set; }
+        public int SteeringWheel { get; }
 
-        public GearShifterPosition GearShifterPosition { get; set; }
+        public GearShifterPosition GearShifterPosition { get; }
+
+        public void UpdatePowerTrainPacket(int gasPedal, int brakePedal, int steeringWheel, GearShifterPosition position);
     }
 }
