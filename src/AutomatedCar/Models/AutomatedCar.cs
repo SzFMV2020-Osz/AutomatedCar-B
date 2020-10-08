@@ -1,12 +1,11 @@
 namespace AutomatedCar.Models
 {
-    using System;
     using System.Numerics;
     using Avalonia.Media;
     using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     using SystemComponents;
     using Avalonia;
-    using Avalonia.Controls.Primitives;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -27,6 +26,7 @@ namespace AutomatedCar.Models
             // this.powerTrain = new PowerTrain(this.virtualFunctionBus);
 
             this.Brush = new SolidColorBrush(Color.Parse("red"));
+            this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -61,6 +61,11 @@ namespace AutomatedCar.Models
         
         public bool RadarVisible { get; set; }
 
+        public SolidColorBrush UltraSoundBrush { get; set; }
+
+        public List<Geometry> UltraSoundGeometries { get; set; }
+
+        public bool UltraSoundVisible { get; set; } 
         public SolidColorBrush CameraBrush { get; set; }
 
         public Geometry CameraGeometry { get; set; }
@@ -76,6 +81,57 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
+        }
+
+        private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)
+        {
+            // List<Geometry> ultraSoundGeometries = new List<Geometry>().;
+            // for (int i = 0; i < 8; i++)
+            // {
+            //     ultraSoundGeometries.Add(new PolylineGeometry(ultraSoundPoints.GetRange(i * 3, 3), false));
+            // }
+            
+            return new List<Geometry>
+            {
+                new PolylineGeometry(ultraSoundPoints.GetRange(0 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(1 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(2 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(3 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(4 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(5 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(6 * 3, 3), false),
+                new PolylineGeometry(ultraSoundPoints.GetRange(7 * 3, 3), false)
+            };
+        }
+        private List<Point> generateUltraSoundPoints()
+        {
+            return new List<Point>()
+            {
+                new Point(51, 239),
+                new Point(10, 10),
+                new Point(200, 300),
+                new Point(18, 231),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(0, 92),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(7, 27),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(17, 10),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(40, 2),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(79, 5),
+                new Point(200, 100),
+                new Point(100, 300),
+                new Point(99, 91),
+                new Point(200, 100),
+                new Point(100, 300)
+            };
         }
     }
 }
