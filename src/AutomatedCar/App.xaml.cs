@@ -43,18 +43,22 @@ namespace AutomatedCar
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
-                AutomatedCar controlledCar2 = new Models.AutomatedCar(50, 50, "car_1_white");
+                AutomatedCar controlledCar2 = new Models.AutomatedCar(50, 50, "car_1_red");
                 controlledCar2.Geometry = geom;
                 controlledCar2.Width = 108;
                 controlledCar2.Height = 240;
                 World.Instance.AddObject(controlledCar2);
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white");
-                controlledCar.Angle = 180;
-                controlledCar.RotationCenterPointX = +(120 - 56);
-                controlledCar.RotationCenterPointY = -(120 + 56);
-                controlledCar.Width = 108;
-                controlledCar.Height = 240;
+
+                int W = 108;
+                int H = 240;
+
+                AutomatedCar controlledCar = new Models.AutomatedCar(50+W/2, 50+H/2, "car_1_white");
+                controlledCar.Angle = 90;
+                controlledCar.Width = W;
+                controlledCar.Height = H;
+                controlledCar.RotationCenterPointX = -(controlledCar.Width/2);
+                controlledCar.RotationCenterPointY = -(controlledCar.Height/2);
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));

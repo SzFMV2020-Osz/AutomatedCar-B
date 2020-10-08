@@ -44,16 +44,28 @@
                 <DataTemplate DataType="{x:Type models:AutomatedCar}">
                     <Canvas>
                         <Canvas.RenderTransform>
-                            <TransformGroup>
-                                <TranslateTransform  X="{Binding RotationCenterPointX}" />
-                                <TranslateTransform  Y="{Binding RotationCenterPointY}" />
-                                <RotateTransform  Angle="{Binding Angle}" />
-                            </TransformGroup>
-                        </Canvas.RenderTransform>
+							<TransformGroup>
+								<RotateTransform  Angle="{Binding Angle}" />
+							</TransformGroup>						
+						</Canvas.RenderTransform>
+                        <Image Opacity=".4" Width="{Binding Width}" Height="{Binding Height}"
+                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                        <Image.RenderTransform>
+							<TransformGroup>
+								<TranslateTransform  X="{Binding RotationCenterPointX}" />
+								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+							</TransformGroup>						
+						</Image.RenderTransform>
+                        </Image>
+                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Geometry.Points, Mode=OneWay}">
+                        <Polyline.RenderTransform>
+							<TransformGroup>
+								<TranslateTransform  X="{Binding RotationCenterPointX}" />
+								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+							</TransformGroup>						
+						</Polyline.RenderTransform>
+                        </Polyline>
 
-                        <Image Width="{Binding Width}" Height="{Binding Height}"
-                               Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Geometry.Points, Mode=OneWay}" />
                     </Canvas>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:Road}">
