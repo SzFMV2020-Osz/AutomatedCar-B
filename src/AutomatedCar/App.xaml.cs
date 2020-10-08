@@ -10,6 +10,7 @@ namespace AutomatedCar
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Markup.Xaml;
     using Avalonia.Media;
+    using Logic;
     using Newtonsoft.Json.Linq;
 
     public class App : Application
@@ -23,6 +24,13 @@ namespace AutomatedCar
         {
             if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+
+                JsonParser parser = new JsonParser($"AutomatedCar.Assets.test_world.json", $"AutomatedCar.Assets.worldobject_polygons.json");
+
+                var world = parser.CreateWorld();
+
+
+
                 StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream($"AutomatedCar.Assets.worldobject_polygons.json"));
                 string json_text = reader.ReadToEnd();
@@ -34,18 +42,6 @@ namespace AutomatedCar
                 }
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
-
-                World world = World.Instance;
-                world.PopulateInstance("config.json");
-
-                world.Width = 2000;
-                world.Height = 1000;
-
-                Circle circle = new Circle(400, 200, "circle.png", 20);
-                circle.Width = 40;
-                circle.Height = 40;
-                circle.ZIndex = 2;
-                world.AddObject(circle);
 
                 AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
                 controlledCar.Width = 108;

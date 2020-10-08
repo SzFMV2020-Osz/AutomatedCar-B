@@ -11,20 +11,17 @@ namespace AutomatedCar.Models
     {
         private VirtualFunctionBus virtualFunctionBus;
         private DummySensor dummySensor;
+        private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
         public AutomatedCar(int x, int y, string filename)
-            : base(x, y, filename)
+            : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))
         {
-            this.IsCollidable = true;
-            this.IsHighlighted = false;
             this.virtualFunctionBus = new VirtualFunctionBus();
+            this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
-
-            // this.powerTrain = new PowerTrain(this.virtualFunctionBus);
-
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
         }
@@ -58,19 +55,19 @@ namespace AutomatedCar.Models
         public SolidColorBrush RadarBrush { get; set; }
 
         public Geometry RadarGeometry { get; set; }
-        
+
         public bool RadarVisible { get; set; }
 
         public SolidColorBrush UltraSoundBrush { get; set; }
 
         public List<Geometry> UltraSoundGeometries { get; set; }
 
-        public bool UltraSoundVisible { get; set; } 
+        public bool UltraSoundVisible { get; set; }
         public SolidColorBrush CameraBrush { get; set; }
 
         public Geometry CameraGeometry { get; set; }
 
-        public bool CameraVisible { get; set; }       
+        public bool CameraVisible { get; set; }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()
@@ -90,7 +87,7 @@ namespace AutomatedCar.Models
             // {
             //     ultraSoundGeometries.Add(new PolylineGeometry(ultraSoundPoints.GetRange(i * 3, 3), false));
             // }
-            
+
             return new List<Geometry>
             {
                 new PolylineGeometry(ultraSoundPoints.GetRange(0 * 3, 3), false),

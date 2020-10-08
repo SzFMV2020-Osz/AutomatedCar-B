@@ -1,58 +1,40 @@
 namespace AutomatedCar.Models
 {
-    using Avalonia;
+    using System;
     using Avalonia.Controls.Shapes;
     using ReactiveUI;
+    using System.Collections.Generic;
 
-    public class WorldObject : ReactiveObject
+    public abstract class WorldObject : ReactiveObject
     {
         private int _x;
         private int _y;
-        private double _angle;
-        public int _rotationCenterPointX = 90; // = width/2
-        public int _rotationCenterPointY = 120; // = height/2
 
-        public WorldObject()
-        {
-            this.ZIndex = 0;
-            this.Angle = 0;
-            this.IsHighlighted = false;
-        }
+        public RotationMatrix RotMatrix { get; set; }
 
-        public WorldObject(int x, int y, string filename): this()
+        public WorldObject(int x, int y, string filename, bool iscolliding, RotationMatrix rotmatrix)
         {
             this.X = x;
             this.Y = y;
-            this.FileName = filename;
+            this.Filename = filename;
+            this.IsColliding = iscolliding;
+            this.ZIndex = 1;
+            this.Polygons = new List<Polygon>();
+            this.RotMatrix = rotmatrix;
+            this.Angle = Math.Acos(rotmatrix.N11);
         }
 
-        public int ZIndex { get; set; }
-        
         public double Angle { get; set; }
 
-        public int RotationCenterPointX 
-        {
-             get => this._rotationCenterPointX;
-             set => this._rotationCenterPointX = value;
-        }
+        public bool IsColliding { get; set; }
 
-        public int RotationCenterPointY
-        {
-             get => this._rotationCenterPointY;
-             set => this._rotationCenterPointY = value;
-        }
+        public List<Polygon> Polygons { get; set; }
+
+        public int ZIndex { get; set; }
 
         public int Width { get; set; }
 
         public int Height { get; set; }
-
-        public string FileName { get; set; }
-
-        public Polygon[] Polygon { get; set; }
-        
-        public bool IsCollidable { get; protected set; }
-
-        public bool IsHighlighted { get; set; }
 
         public int X
         {
@@ -66,6 +48,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref this._y, value);
         }
 
-       
+        public string Filename { get; set; }
     }
 }
