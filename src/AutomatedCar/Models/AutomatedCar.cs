@@ -51,6 +51,16 @@ namespace AutomatedCar.Models
             this.Y = (int)newPosition.Y;
         }
 
+        public void MoveX(int x)
+        {
+            this.X += x;
+        }
+
+        public void MoveY(int y)
+        {
+            this.Y += y;
+        }
+
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public SolidColorBrush RadarBrush { get; set; }
 

@@ -45,13 +45,13 @@ namespace AutomatedCar.Models
         public int X
         {
             get => this._x;
-            set => this.RaiseAndSetIfChanged(ref this._x, value);
+            protected set => this.RaiseAndSetIfChanged(ref this._x, value);
         }
 
         public int Y
         {
             get => this._y;
-            set => this.RaiseAndSetIfChanged(ref this._y, value);
+            protected set => this.RaiseAndSetIfChanged(ref this._y, value);
         }
 
         public int RotationCenterPointX { get; set; }
