@@ -39,6 +39,8 @@ namespace AutomatedCar.Logic
             // world szélessség, magasság beállítása
             world.Height = int.Parse(unparsedObjectList["height"].ToString());
             world.Width = int.Parse(unparsedObjectList["width"].ToString());
+            world.VisibleWidth = 960;
+            world.VisibleHeight = 720;
 
             // Objectek átadása a listának
             this.objectList = unparsedObjectList["objects"].Children().ToList();

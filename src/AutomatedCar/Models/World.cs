@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.Models
+namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -40,6 +40,9 @@
 
         public int Height { get; set; }
 
+        public int VisibleWidth { get; set; }
+
+        public int VisibleHeight { get; set; }
         public void AddObject(WorldObject worldObject)
         {
             this.WorldObjects.Add(worldObject);
