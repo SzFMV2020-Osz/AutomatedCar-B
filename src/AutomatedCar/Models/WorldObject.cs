@@ -24,7 +24,13 @@ namespace AutomatedCar.Models
             this.Angle = Math.Acos(rotmatrix.N11);
         }
 
-        public double Angle { get; set; }
+        private double _angle;
+
+        public double Angle
+        {
+            get { return _angle; }
+            set => this.RaiseAndSetIfChanged(ref this._angle, value);
+        }
 
         public bool IsColliding { get; set; }
 
