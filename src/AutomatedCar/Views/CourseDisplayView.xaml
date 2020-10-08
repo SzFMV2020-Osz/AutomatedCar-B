@@ -46,11 +46,12 @@
             </ItemsControl.ItemsPanel>
 
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="{x:Type models:Circle}">
-                    <Canvas>
-                        <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
-                    </Canvas>
-                </DataTemplate>
+<DataTemplate DataType="{x:Type models:Circle}">
+    <Canvas>
+        <!-- <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/> -->
+        <Image Source="{Binding Image}"/>
+    </Canvas>
+</DataTemplate>
                 <DataTemplate DataType="{x:Type models:AutomatedCar}">
                     <Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
                     <!-- <Canvas Name="AC" Width="{Binding Width}" Height="{Binding Height}" >
