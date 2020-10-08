@@ -26,7 +26,7 @@
 
         private AutomatedCar _controlledCar;
 
-        private bool debugOn = false;
+        private bool debugOn = true;
         public bool DebugOn { get => this.debugOn; }
 
         public static World Instance { get; } = new World();
