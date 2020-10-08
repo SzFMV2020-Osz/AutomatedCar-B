@@ -25,10 +25,10 @@ namespace AutomatedCar
             if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
 
-                JsonParser parser = new JsonParser($"AutomatedCar.Assets.test_world.json", $"AutomatedCar.Assets.worldobject_polygons.json");
+                JsonParser parser = new JsonParser($"AutomatedCar.Assets.test_world.json", $"AutomatedCar.Assets.worldobject_polygons.json", World.Instance);
+                parser.CreateWorld();
 
-                var world = parser.CreateWorld();
-
+                var world = World.Instance;
 
 
                 StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly()
@@ -43,7 +43,7 @@ namespace AutomatedCar
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
+                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white");
                 controlledCar.Width = 108;
                 controlledCar.Height = 240;
 

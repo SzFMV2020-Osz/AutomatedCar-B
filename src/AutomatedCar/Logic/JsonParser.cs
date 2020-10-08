@@ -25,20 +25,19 @@ namespace AutomatedCar.Logic
         /// </summary>
         /// <param name="wojson">World object json location.</param>
         /// <param name="polygonjson">Polygon json location.</param>
-        public JsonParser(string woJson, string polygonJson)
+        public JsonParser(string woJson, string polygonJson, World world)
         {
             StreamReader worldReader = new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(woJson));
             StreamReader polygonReader = new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(polygonJson));
-            this.world = new World();
 
             JObject unparsedObjectList = JObject.Parse(worldReader.ReadToEnd());
             JObject unparsedPolygonList = JObject.Parse(polygonReader.ReadToEnd());
 
             // world szélessség, magasság beállítása
-            this.world.Height = int.Parse(unparsedObjectList["height"].ToString());
-            this.world.Width = int.Parse(unparsedObjectList["width"].ToString());
+            world.Height = int.Parse(unparsedObjectList["height"].ToString());
+            world.Width = int.Parse(unparsedObjectList["width"].ToString());
 
             // Objectek átadása a listának
             this.objectList = unparsedObjectList["objects"].Children().ToList();
@@ -46,21 +45,21 @@ namespace AutomatedCar.Logic
             // Polygon Objectek átadása a listának
             this.polygonList = unparsedPolygonList["objects"].Children().ToList();
 
+            this.world = world;
+
         }
 
         /// <summary>
         /// Creates the world.
         /// </summary>
         /// <returns>Retun world object.</returns>
-        public World CreateWorld()
+        public void CreateWorld()
         {
             // Feltöltjük a polygonokkal a polygon listát
             this.parsedPolygonList = this.PolygonLoader();
 
             // Feltöltjük a worldobjectekkel a world-t
             this.WorldObjectLoader();
-
-            return this.world;
         }
 
         private void WorldObjectLoader()
