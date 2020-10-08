@@ -8,7 +8,7 @@
              xmlns:local="clr-namespace:AutomatedCar;assembly=AutomatedCar"
              xmlns:visualization="clr-namespace:AutomatedCar.Visualization;assembly=AutomatedCar"
              DataContext="{Binding World}"
-             >
+>
 
     <UserControl.Styles>
         <Style Selector="ItemsControl#CourseDisplay">
@@ -21,14 +21,21 @@
         </Style>
     </UserControl.Styles>
 
-    <ScrollViewer Width="960" Height="720" HorizontalAlignment="Left" VerticalAlignment="Top">
-        <ItemsControl Name="CourseDisplay"
-            Items="{Binding WorldObjects, Mode=OneWay}"
-            Width="{Binding Width, Mode=OneWay}"
-            Height="{Binding Height, Mode=OneWay}"
-            HorizontalAlignment="Left" VerticalAlignment="Top"
-            >
 
+
+    <ScrollViewer Name="MyScrollViewer"
+                  Width="{Binding VisibleWidth, Mode=OneWay}"
+                  Height="{Binding VisibleHeight, Mode=OneWay}"
+                  VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Hidden"
+                  HorizontalAlignment="Left" VerticalAlignment="Top">
+
+        <ItemsControl Name="CourseDisplay"
+                      Items="{Binding WorldObjects, Mode=OneWay}"
+                      Width="{Binding Width, Mode=OneWay}"
+                      Height="{Binding Height, Mode=OneWay}"
+                      HorizontalAlignment="Left" VerticalAlignment="Top"
+        >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
@@ -46,7 +53,7 @@
                         <Canvas.RenderTransform>
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />
-							</TransformGroup>						
+							</TransformGroup>
 						</Canvas.RenderTransform>
                         <Image Opacity=".4" Width="{Binding Width}" Height="{Binding Height}"
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
@@ -54,7 +61,7 @@
 							<TransformGroup>
 								<TranslateTransform  X="{Binding RotationCenterPointX}" />
 								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
-							</TransformGroup>						
+							</TransformGroup>
 						</Image.RenderTransform>
                         </Image>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Geometry.Points, Mode=OneWay}">
@@ -62,7 +69,7 @@
 							<TransformGroup>
 								<TranslateTransform  X="{Binding RotationCenterPointX}" />
 								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
-							</TransformGroup>						
+							</TransformGroup>
 						</Polyline.RenderTransform>
                         </Polyline>
 

@@ -1,4 +1,4 @@
-namespace AutomatedCar.Models
+﻿namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,9 @@ namespace AutomatedCar.Models
     using Avalonia.Controls.Shapes;
     using Avalonia.Media;
     using System.IO;
+    using System.Reactive;
     using Avalonia;
+    using Avalonia.Controls;
     using Avalonia.Controls.Shapes;
     using Avalonia.Media;
     using ReactiveUI;
@@ -23,6 +25,10 @@ namespace AutomatedCar.Models
         private AutomatedCar _controlledCar;
 
         private bool debugOn = false;
+
+        public delegate void OnTickHangler(object sender, EventArgs args);
+
+        public OnTickHangler OnTick;
 
         public bool DebugOn { get => this.debugOn; }
 
@@ -43,6 +49,12 @@ namespace AutomatedCar.Models
         public int VisibleWidth { get; set; }
 
         public int VisibleHeight { get; set; }
+
+        public void Tick()
+        {
+            OnTick.Invoke(this, EventArgs.Empty);
+        }
+
         public void AddObject(WorldObject worldObject)
         {
             this.WorldObjects.Add(worldObject);

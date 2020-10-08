@@ -51,7 +51,7 @@ namespace AutomatedCar
                 this.world.ControlledCar.Angle -= 5;
             }
 
-            ScreenPositioner.Instance.AlignItemsToScreen(this.world);
+            World.Instance.Tick();
         }
     }
 }
