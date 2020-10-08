@@ -53,11 +53,13 @@ namespace AutomatedCar.Models
 
         public void MoveX(int x)
         {
+            VisibleX = this.X - World.Instance.VisibleWidth/2;
             this.X += x;
         }
 
         public void MoveY(int y)
         {
+            VisibleY = this.Y-World.Instance.VisibleHeight/2;
             this.Y += y;
         }
 
@@ -78,6 +80,8 @@ namespace AutomatedCar.Models
         public Geometry CameraGeometry { get; set; }
 
         public bool CameraVisible { get; set; }
+        public int VisibleX { get; set; }
+        public int VisibleY { get; set; }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()
