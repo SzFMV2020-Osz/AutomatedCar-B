@@ -70,7 +70,16 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:Road}">
                     <Canvas>
-                        <Image Width="100" Height="100"
+                        <Image Width="{Binding Width}" Height="{Binding Height}"
+                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
+                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[0].Points, Mode=OneWay}" />
+                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[1].Points, Mode=OneWay}" />
+                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[2].Points, Mode=OneWay}" />
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:WorldObject}">
+                    <Canvas>
+                        <Image Width="{Binding Width}" Height="{Binding Height}"
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[0].Points, Mode=OneWay}" />
                     </Canvas>
