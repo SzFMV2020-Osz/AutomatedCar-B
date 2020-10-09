@@ -14,7 +14,7 @@ namespace AutomatedCar.Views
 
             var cw = this.Get<ScrollViewer>("MyScrollViewer");
 
-            World.Instance.OnTick += (x,y ) =>
+            World.Instance.OnTick += (x,y) =>
             {
                 cw.Offset = ScreenPositioner.CalcCameraPosition();
             };

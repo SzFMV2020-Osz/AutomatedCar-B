@@ -13,8 +13,6 @@ namespace AutomatedCar
             this.world = world;
         }
 
-        public World World { get => this.world; }
-
         private Random Random { get; } = new Random();
 
         const int speed = 5;
