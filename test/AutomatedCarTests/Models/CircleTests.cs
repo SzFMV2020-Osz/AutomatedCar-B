@@ -3,6 +3,8 @@ using Xunit;
 
 namespace AutomatedCarTests.Models
 {
+    using Avalonia.Controls.Shapes;
+
     public class CircleTests
     {
         [Theory]
@@ -10,7 +12,7 @@ namespace AutomatedCarTests.Models
         [InlineData(200, 400, "circle.png", 42, 5541.76944093239527264344)]
         public void CalculateAreaTest(int x, int y, string filename, int radius, double expected)
         {
-            var circle1 = new Circle(x, y, filename, radius);
+            var circle1 = new Circle(x, y, filename, radius,false,new RotationMatrix(1,0,0,1), new Polygon() );
 
             Assert.Equal(expected, circle1.CalculateArea(), 6);
         }
