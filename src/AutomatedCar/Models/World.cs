@@ -52,7 +52,7 @@
 
         public void Tick()
         {
-            OnTick.Invoke(this, EventArgs.Empty);
+            OnTick?.Invoke(this, EventArgs.Empty);
         }
 
         public void AddObject(WorldObject worldObject)

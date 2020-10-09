@@ -1,4 +1,4 @@
-namespace AutomatedCar.Models
+﻿namespace AutomatedCar.Models
 {
     using Avalonia.Controls.Shapes;
     using System.Collections.Generic;
@@ -9,6 +9,7 @@ namespace AutomatedCar.Models
             : base(x, y, filename, iscolliding, rotmatrix)
         {
             this.Polygons.Add(bollard);
+            this.ZIndex = 2;
         }
     }
 }

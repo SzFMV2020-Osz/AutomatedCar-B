@@ -8,7 +8,7 @@ namespace AutomatedCar.Models
             : base(x, y, filename, iscolliding, rotmatrix)
         {
             this.Polygons.Add(wood);
-            this.ZIndex = 2;
+            this.ZIndex = 3;
         }
     }
 }
