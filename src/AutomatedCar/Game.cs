@@ -1,16 +1,19 @@
 namespace AutomatedCar
 {
     using System;
+    using System.Runtime.CompilerServices;
     using AutomatedCar.Models;
     using Avalonia.Input;
 
     public class Game : GameBase
     {
         private readonly World world;
+        private TemporaryControlsForPowerTrain tempControl;
 
         public Game(World world)
         {
             this.world = world;
+            this.tempControl = new TemporaryControlsForPowerTrain();
         }
 
         public World World { get => this.world; }
@@ -19,22 +22,7 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
-            if (Keyboard.IsKeyDown(Key.Up))
-            {
-                this.world.ControlledCar.Y -= 5;
-            }
-            else if (Keyboard.IsKeyDown(Key.Down))
-            {
-                this.world.ControlledCar.Y += 5;
-            }
-            else if (Keyboard.IsKeyDown(Key.Left))
-            {
-                this.world.ControlledCar.X -= 5;
-            }
-            else if (Keyboard.IsKeyDown(Key.Right))
-            {
-                this.world.ControlledCar.X += 5;
-            }
+            this.tempControl.ExecuteControls(); // Amig nincs HMI, hogy a PowerTrain tudja mozgatni az autot
         }
     }
 }
