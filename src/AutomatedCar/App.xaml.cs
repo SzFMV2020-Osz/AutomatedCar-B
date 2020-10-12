@@ -11,6 +11,7 @@ namespace AutomatedCar
     using Avalonia.Markup.Xaml;
     using Avalonia.Media;
     using Logic;
+    using NetTopologySuite.Geometries;
     using Newtonsoft.Json.Linq;
 
     public class App : Application
@@ -33,16 +34,26 @@ namespace AutomatedCar
                     .GetManifestResourceStream($"AutomatedCar.Assets.worldobject_polygons.json"));
                 string json_text = reader.ReadToEnd();
                 dynamic stuff = JObject.Parse(json_text);
-                List<Point> points = new List<Point>();
+                List<Avalonia.Point> points = new List<Avalonia.Point>();
                 foreach (var i in stuff["objects"][0]["polys"][0]["points"])
                 {
-                    points.Add(new Point(i[0].ToObject<int>(), i[1].ToObject<int>()));
+                    points.Add(new Avalonia.Point(i[0].ToObject<int>(), i[1].ToObject<int>()));
                 }
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
+               
                 AutomatedCar controlledCar2 = new Models.AutomatedCar(50, 50, "car_1_red");
                 controlledCar2.Geometry = geom;
+                controlledCar2.NetPolygon = new List<NetTopologySuite.Geometries.LineString>();
+
+                var pointlist = new List<Coordinate>();
+                pointlist.Add(new Coordinate(10,10));
+                pointlist.Add(new Coordinate(70,10));
+                pointlist.Add(new Coordinate(70,70));
+                pointlist.Add(new Coordinate(70,10));
+                controlledCar2.NetPolygon.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
+                
                 controlledCar2.Width = 108;
                 controlledCar2.Height = 240;
                 World.Instance.AddObject(controlledCar2);
@@ -54,22 +65,25 @@ namespace AutomatedCar
                 controlledCar.Angle = 90;
                 controlledCar.Width = W;
                 controlledCar.Height = H;
-                controlledCar.referenceOffsetX = -(controlledCar.Width/2);
-                controlledCar.referenceOffsetY = -(controlledCar.Height/2);
+                controlledCar.RotationCenterPointX = -(controlledCar.Width/2);
+                controlledCar.RotationCenterPointY = -(controlledCar.Height/2);
+                controlledCar.NetPolygon = new List<NetTopologySuite.Geometries.LineString>();
+                controlledCar.NetPolygon.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
+
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));
                 controlledCar.CameraBrush = new SolidColorBrush(Color.Parse("red"));
 
-                List<Point> sensorPoints = new List<Point>();
-                sensorPoints.Add(new Point(51, 239));
-                sensorPoints.Add(new Point(200, 100));
-                sensorPoints.Add(new Point(100, 300));
+                List<Avalonia.Point> sensorPoints = new List<Avalonia.Point>();
+                sensorPoints.Add(new Avalonia.Point(51, 239));
+                sensorPoints.Add(new Avalonia.Point(200, 100));
+                sensorPoints.Add(new Avalonia.Point(100, 300));
 
-                List<Point> cameraSensorPoints = new List<Point>();
-                cameraSensorPoints.Add(new Point(100, 200));
-                cameraSensorPoints.Add(new Point(300, 200));
-                cameraSensorPoints.Add(new Point(150, 300));
+                List<Avalonia.Point> cameraSensorPoints = new List<Avalonia.Point>();
+                cameraSensorPoints.Add(new Avalonia.Point(100, 200));
+                cameraSensorPoints.Add(new Avalonia.Point(300, 200));
+                cameraSensorPoints.Add(new Avalonia.Point(150, 300));
 
                 controlledCar.RadarGeometry = new PolylineGeometry(sensorPoints, false);
 
