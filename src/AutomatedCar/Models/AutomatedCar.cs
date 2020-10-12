@@ -33,6 +33,8 @@ namespace AutomatedCar.Models
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
 
+        public HumanMachineInterface HumanMachineInterface { get => this.humanMachineInterface; }
+
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
