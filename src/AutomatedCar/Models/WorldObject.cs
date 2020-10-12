@@ -1,27 +1,33 @@
 namespace AutomatedCar.Models
 {
     using System;
-    using Avalonia.Controls.Shapes;
     using ReactiveUI;
     using System.Collections.Generic;
     using System.Numerics;
     using Avalonia;
+    using Avalonia.Media;
+    using NetTopologySuite.Geometries;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     public abstract class WorldObject : ReactiveObject
     {
         private int _x;
         private int _y;
 
+        public SolidColorBrush Brush { get; private set; }
+
         public RotationMatrix RotMatrix { get; set; }
 
         public WorldObject(int x, int y, string filename, bool iscolliding, RotationMatrix rotmatrix)
         {
+            this.Brush = new SolidColorBrush(Color.Parse("blue"));
             this.X = x;
             this.Y = y;
             this.Filename = filename;
             this.IsColliding = iscolliding;
             this.ZIndex = 1;
             this.Polygons = new List<Polygon>();
+            this.NetPolygon = new List<LineString>();
             this.RotMatrix = rotmatrix;
             this.Angle = Math.Atan2(rotmatrix.N12, rotmatrix.N11) * 180 / Math.PI;
         }

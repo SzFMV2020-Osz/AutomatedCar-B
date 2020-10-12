@@ -82,7 +82,7 @@
 						    </Image.RenderTransform>
                         </Image>
                         </Canvas>
-                        <!-- <Canvas>
+                        <Canvas>
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygon[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                         </Canvas>
                         <Canvas>
@@ -90,7 +90,7 @@
                         </Canvas>
                         <Canvas>
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygon[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
-                        </Canvas>  -->
+                        </Canvas>
                 </Canvas>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:WorldObject}">

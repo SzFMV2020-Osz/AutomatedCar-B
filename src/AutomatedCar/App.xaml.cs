@@ -13,6 +13,8 @@ namespace AutomatedCar
     using Logic;
     using NetTopologySuite.Geometries;
     using Newtonsoft.Json.Linq;
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     public class App : Application
     {
@@ -42,21 +44,13 @@ namespace AutomatedCar
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
-               
-                AutomatedCar controlledCar2 = new Models.AutomatedCar(50, 50, "car_1_red");
-                controlledCar2.Geometry = geom;
-                controlledCar2.NetPolygon = new List<NetTopologySuite.Geometries.LineString>();
-
                 var pointlist = new List<Coordinate>();
-                pointlist.Add(new Coordinate(10,10));
-                pointlist.Add(new Coordinate(70,10));
-                pointlist.Add(new Coordinate(70,70));
-                pointlist.Add(new Coordinate(70,10));
-                controlledCar2.NetPolygon.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
-                
-                controlledCar2.Width = 108;
-                controlledCar2.Height = 240;
-                World.Instance.AddObject(controlledCar2);
+                pointlist.Add(new Coordinate(0,0));
+                pointlist.Add(new Coordinate(70,0));
+
+                var pointlist2 = new List<Coordinate>();
+                pointlist2.Add(new Coordinate(70,70));
+                pointlist2.Add(new Coordinate(100,100));
 
                 int W = 108;
                 int H = 240;
@@ -69,6 +63,13 @@ namespace AutomatedCar
                 controlledCar.referenceOffsetY = -(controlledCar.Height/2);
                 controlledCar.NetPolygon = new List<NetTopologySuite.Geometries.LineString>();
                 controlledCar.NetPolygon.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
+
+                World.Instance.AddObject(new Road(500, 500, "crosswalk", false, new RotationMatrix(1, 0, 0, 1), new List<Polygon>()
+                {
+                    new Polygon() { Points = new List<Point>(){new Point(10,10), new Point(50, 10)}},
+                    new Polygon() { Points = new List<Point>(){new Point(20,20), new Point(50, 20)}},
+                    new Polygon() { Points = new List<Point>(){new Point(30,30), new Point(50, 30)}},
+                }));
 
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));

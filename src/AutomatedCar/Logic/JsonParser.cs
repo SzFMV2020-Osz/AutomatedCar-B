@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using System.Linq;
-using Avalonia;
-using Avalonia.Controls.Shapes;
 using AutomatedCar.Models;
 using System.Reflection;
 using Avalonia.Media.Imaging;
@@ -11,6 +9,9 @@ using Avalonia.Media.Imaging;
 namespace AutomatedCar.Logic
 {
     using System;
+    using NetTopologySuite.Geometries;
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     /// <summary>
     /// Json Parser class.
@@ -107,6 +108,17 @@ namespace AutomatedCar.Logic
                 {
                     currentObject.referenceOffsetX = - int.Parse(refPoint["x"].ToString());
                     currentObject.referenceOffsetY = - int.Parse(refPoint["y"].ToString());
+
+                    // if (currentObject is Road)
+                    // {
+                    //     foreach (var place in currentObject.Polygons)
+                    //     {
+                    //
+                    //         var cords = new List<Coordinate>();
+                    //         cords.AddRange( place.Points.Select(p => new Coordinate(currentObject.RotMatrix.Rotate(p).X - currentObject.referenceOffsetX + currentObject.X, currentObject.RotMatrix.Rotate(p).Y-currentObject.referenceOffsetY+currentObject.Y)));
+                    //         currentObject.NetPolygon.Add(new LineString(cords.ToArray()));
+                    //     }
+                    // }
                 }
 
                 this.world.AddObject(currentObject);
@@ -210,7 +222,7 @@ namespace AutomatedCar.Logic
                     {
                         string[] xystrings = item.ToString().Split(',');
                         double x = double.Parse(xystrings[0].Where(char.IsDigit).ToArray());
-                        double y = double.Parse(xystrings[0].Where(char.IsDigit).ToArray());
+                        double y = double.Parse(xystrings[1].Where(char.IsDigit).ToArray());
 
                         polyg.Points.Add(new Point(x, y));
                     }
