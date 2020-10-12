@@ -11,6 +11,7 @@ namespace AutomatedCar.Models
     {
         private VirtualFunctionBus virtualFunctionBus;
         private DummySensor dummySensor;
+        private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
@@ -21,6 +22,7 @@ namespace AutomatedCar.Models
             this.IsCollidable = true;
             this.IsHighlighted = false;
             this.virtualFunctionBus = new VirtualFunctionBus();
+            this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
 
             // this.powerTrain = new PowerTrain(this.virtualFunctionBus);
@@ -81,6 +83,11 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
+        }
+
+        public void InputHandler()
+        {
+            humanMachineInterface.InputHandler();
         }
 
         private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)
