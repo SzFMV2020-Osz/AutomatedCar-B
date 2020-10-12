@@ -96,8 +96,8 @@ namespace AutomatedCar.Logic
 
                 if (refPoint != null)
                 {
-                    currentObject.RotationCenterPointX = int.Parse(refPoint["x"].ToString());
-                    currentObject.RotationCenterPointY = int.Parse(refPoint["y"].ToString());
+                    currentObject.referenceOffsetX = - int.Parse(refPoint["x"].ToString());
+                    currentObject.referenceOffsetY = - int.Parse(refPoint["y"].ToString());
                 }
 
                 currentObject.Height = height;

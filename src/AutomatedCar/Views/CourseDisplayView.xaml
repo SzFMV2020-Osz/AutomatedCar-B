@@ -59,16 +59,16 @@
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                         <Image.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Image.RenderTransform>
                         </Image>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Geometry.Points, Mode=OneWay}">
                         <Polyline.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Polyline.RenderTransform>
                         </Polyline>
@@ -86,32 +86,32 @@
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                             <Image.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform  X="{Binding RotationCenterPointX}" />
-                                    <TranslateTransform  Y="{Binding RotationCenterPointY}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
                                 </TransformGroup>
 						    </Image.RenderTransform>
                         </Image>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[0].Points, Mode=OneWay}" >
                         <Polyline.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Polyline.RenderTransform>
                         </Polyline>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[1].Points, Mode=OneWay}" >
                         <Polyline.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Polyline.RenderTransform>
                         </Polyline>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[2].Points, Mode=OneWay}" >
                         <Polyline.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Polyline.RenderTransform>
                         </Polyline>
@@ -128,16 +128,16 @@
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                             <Image.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform  X="{Binding RotationCenterPointX}" />
-                                    <TranslateTransform  Y="{Binding RotationCenterPointY}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
                                 </TransformGroup>
 						    </Image.RenderTransform>
                         </Image>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Polygons[0].Points, Mode=OneWay}" >
                         <Polyline.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Polyline.RenderTransform>
                         </Polyline>

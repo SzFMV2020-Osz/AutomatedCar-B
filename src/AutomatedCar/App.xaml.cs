@@ -54,8 +54,8 @@ namespace AutomatedCar
                 controlledCar.Angle = 90;
                 controlledCar.Width = W;
                 controlledCar.Height = H;
-                controlledCar.RotationCenterPointX = -(controlledCar.Width/2);
-                controlledCar.RotationCenterPointY = -(controlledCar.Height/2);
+                controlledCar.referenceOffsetX = -(controlledCar.Width/2);
+                controlledCar.referenceOffsetY = -(controlledCar.Height/2);
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));
