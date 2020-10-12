@@ -20,7 +20,6 @@ namespace AutomatedCar.Logic
         private IList<JToken> polygonList;
         private List<List<Polygon>> parsedPolygonLists;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonParser"/> class.
         /// </summary>
@@ -49,7 +48,6 @@ namespace AutomatedCar.Logic
             this.polygonList = unparsedPolygonList["objects"].Children().ToList();
 
             this.world = world;
-
         }
 
         /// <summary>
@@ -73,56 +71,12 @@ namespace AutomatedCar.Logic
                 int x = int.Parse(obj["x"].ToString());
                 int y = int.Parse(obj["y"].ToString());
                 RotationMatrix rm = new RotationMatrix(double.Parse(obj["m11"].ToString()), double.Parse(obj["m12"].ToString()), double.Parse(obj["m21"].ToString()), double.Parse(obj["m22"].ToString()));
-
-                List<Polygon> polygonsForType = this.CollectPolygonsByType(type);
-
                 Bitmap image = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{type}.png"));
                 int width = (int)image.Size.Width;
                 int height = (int)image.Size.Height;
+                WorldObject currentObject = CreateWorldObject(type, x, y, rm);
 
-                WorldObject currentObject;
-
-                if (type == "road_2lane_90right" ||
-                    type == "road_2lane_45right" ||
-                    type == "road_2lane_45left" ||
-                    type == "road_2lane_6right" ||
-                    type == "road_2lane_6left" ||
-                    type == "road_2lane_straight" ||
-                    type == "road_2lane_90left" ||
-                    type == "2_crossroad_1" ||
-                    type == "2_crossroad_2" ||
-                    type == "road_2lane_rotary" ||
-                    type == "road_2lane_tjunctionleft" ||
-                    type == "road_2lane_tjunctionright")
-                {
-                    currentObject = new Road(x, y, type, false, rm, polygonsForType);
-                }
-                else if (type == "parking_90" ||
-                         type == "parking_space_parallel")
-                {
-                    currentObject = new Parking(x, y, type, false, rm, polygonsForType);
-                }
-                else if (type == "roadsign_parking_right" ||
-                         type == "roadsign_priority_stop" ||
-                         type == "roadsign_speed_40" ||
-                         type == "roadsign_speed_50" ||
-                         type == "roadsign_speed_60")
-                {
-                    currentObject = new Parking(x, y, type, false, rm, polygonsForType);
-                }
-                else if (type == "garage")
-                {
-                    currentObject = new Garage(x, y, type, true, rm, polygonsForType[0]);
-                }
-                else if (type == "tree")
-                {
-                    currentObject = new Tree(x, y, type, true, rm, polygonsForType[0]);
-                }
-                else if (type == "bollard")
-                {
-                    currentObject = new Circle(x, y, type, 1000, true, rm, polygonsForType[0]);
-                }
-                else
+                if (currentObject == null)
                 {
                     continue;
                 }
@@ -131,6 +85,58 @@ namespace AutomatedCar.Logic
                 currentObject.Width = width;
                 this.world.AddObject(currentObject);
             }
+        }
+
+        private WorldObject CreateWorldObject(string type, int x, int y, RotationMatrix rm)
+        {
+            var polygonsForType = this.CollectPolygonsByType(type);
+            WorldObject currentObject;
+            if (type == "road_2lane_90right" ||
+                type == "road_2lane_45right" ||
+                type == "road_2lane_45left" ||
+                type == "road_2lane_6right" ||
+                type == "road_2lane_6left" ||
+                type == "road_2lane_straight" ||
+                type == "road_2lane_90left" ||
+                type == "2_crossroad_1" ||
+                type == "2_crossroad_2" ||
+                type == "road_2lane_rotary" ||
+                type == "road_2lane_tjunctionleft" ||
+                type == "road_2lane_tjunctionright")
+            {
+                currentObject = new Road(x, y, type, false, rm, polygonsForType);
+            }
+            else if (type == "parking_90" ||
+                     type == "parking_space_parallel")
+            {
+                currentObject = new Parking(x, y, type, false, rm, polygonsForType);
+            }
+            else if (type == "roadsign_parking_right" ||
+                     type == "roadsign_priority_stop" ||
+                     type == "roadsign_speed_40" ||
+                     type == "roadsign_speed_50" ||
+                     type == "roadsign_speed_60")
+            {
+                currentObject = new Parking(x, y, type, false, rm, polygonsForType);
+            }
+            else if (type == "garage")
+            {
+                currentObject = new Garage(x, y, type, true, rm, polygonsForType[0]);
+            }
+            else if (type == "tree")
+            {
+                currentObject = new Tree(x, y, type, true, rm, polygonsForType[0]);
+            }
+            else if (type == "bollard")
+            {
+                currentObject = new Circle(x, y, type, 1000, true, rm, polygonsForType[0]);
+            }
+            else
+            {
+                currentObject = null;
+            }
+
+            return currentObject;
         }
 
         private List<Polygon> CollectPolygonsByType(string type)
