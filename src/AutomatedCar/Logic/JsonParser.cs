@@ -18,7 +18,7 @@ namespace AutomatedCar.Logic
         private World world;
         private IList<JToken> objectList;
         private IList<JToken> polygonList;
-        private List<List<Polygon>> parsedPolygonList;
+        private List<List<Polygon>> parsedPolygonLists;
 
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace AutomatedCar.Logic
         public void CreateWorld()
         {
             // Feltöltjük a polygonokkal a polygon listát
-            this.parsedPolygonList = this.PolygonLoader();
+            this.parsedPolygonLists = this.PolygonLoader();
 
             // Feltöltjük a worldobjectekkel a world-t
             this.WorldObjectLoader();
@@ -74,18 +74,7 @@ namespace AutomatedCar.Logic
                 int y = int.Parse(obj["y"].ToString());
                 RotationMatrix rm = new RotationMatrix(double.Parse(obj["m11"].ToString()), double.Parse(obj["m12"].ToString()), double.Parse(obj["m21"].ToString()), double.Parse(obj["m22"].ToString()));
 
-                List<Polygon> temp = new List<Polygon>();
-                foreach (List<Polygon> polygonList in this.parsedPolygonList)
-                {
-                    foreach (Polygon polygon in polygonList)
-                    {
-                        if (polygon.Name == type)
-                        {
-                            temp = polygonList;
-                            break;
-                        }
-                    }
-                }
+                List<Polygon> polygonsForType = this.CollectPolygonsByType(type);
 
                 Bitmap image = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{type}.png"));
                 int width = (int)image.Size.Width;
@@ -106,12 +95,12 @@ namespace AutomatedCar.Logic
                     type == "road_2lane_tjunctionleft" ||
                     type == "road_2lane_tjunctionright")
                 {
-                    currentObject = new Road(x, y, type, false, rm, temp);
+                    currentObject = new Road(x, y, type, false, rm, polygonsForType);
                 }
                 else if (type == "parking_90" ||
                          type == "parking_space_parallel")
                 {
-                    currentObject = new Parking(x, y, type, false, rm, temp);
+                    currentObject = new Parking(x, y, type, false, rm, polygonsForType);
                 }
                 else if (type == "roadsign_parking_right" ||
                          type == "roadsign_priority_stop" ||
@@ -119,19 +108,19 @@ namespace AutomatedCar.Logic
                          type == "roadsign_speed_50" ||
                          type == "roadsign_speed_60")
                 {
-                    currentObject = new Parking(x, y, type, false, rm, temp);
+                    currentObject = new Parking(x, y, type, false, rm, polygonsForType);
                 }
                 else if (type == "garage")
                 {
-                    currentObject = new Garage(x, y, type, true, rm, temp[0]);
+                    currentObject = new Garage(x, y, type, true, rm, polygonsForType[0]);
                 }
                 else if (type == "tree")
                 {
-                    currentObject = new Tree(x, y, type, true, rm, temp[0]);
+                    currentObject = new Tree(x, y, type, true, rm, polygonsForType[0]);
                 }
                 else if (type == "bollard")
                 {
-                    currentObject = new Circle(x, y, type, 1000, true, rm, temp[0]);
+                    currentObject = new Circle(x, y, type, 1000, true, rm, polygonsForType[0]);
                 }
                 else
                 {
@@ -142,6 +131,24 @@ namespace AutomatedCar.Logic
                 currentObject.Width = width;
                 this.world.AddObject(currentObject);
             }
+        }
+
+        private List<Polygon> CollectPolygonsByType(string type)
+        {
+            List<Polygon> polygons = new List<Polygon>();
+            foreach (List<Polygon> polygonList in this.parsedPolygonLists)
+            {
+                foreach (Polygon polygon in polygonList)
+                {
+                    if (polygon.Name == type)
+                    {
+                        polygons.AddRange(polygonList);
+                        break;
+                    }
+                }
+            }
+
+            return polygons;
         }
 
         private List<List<Polygon>> PolygonLoader()
