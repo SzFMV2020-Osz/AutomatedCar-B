@@ -133,7 +133,7 @@ namespace AutomatedCar.Logic
                      type == "roadsign_speed_50" ||
                      type == "roadsign_speed_60")
             {
-                currentObject = new Sign(x, y, type, false, rm, polygonsForType);
+                currentObject = new Sign(x, y, type, false, rm, polygonsForType[0]);
             }
             else if (type == "garage")
             {
