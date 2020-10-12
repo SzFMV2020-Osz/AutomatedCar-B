@@ -35,6 +35,7 @@ namespace AutomatedCar.Models
         public bool IsColliding { get; set; }
 
         public List<Polygon> Polygons { get; set; }
+        public List<NetTopologySuite.Geometries.LineString> NetPolygon { get; set; }
 
         public int ZIndex { get; set; }
 

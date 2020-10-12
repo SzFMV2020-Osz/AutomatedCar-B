@@ -64,7 +64,8 @@
 							</TransformGroup>
 						</Image.RenderTransform>
                         </Image>
-                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding Geometry.Points, Mode=OneWay}">
+                        
+                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygon[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}">
                         <Polyline.RenderTransform>
 							<TransformGroup>
 								<TranslateTransform  X="{Binding RotationCenterPointX}" />
