@@ -414,8 +414,7 @@ namespace Tests.SystemComponents.Packets
                 Assert.Equal(tsright, hmiPacket.TurnSignalRight);
                 hmiPacket.TurnSignalRightSet(true);
                 tsright = !tsright;
-            }
-            
+            }            
         }
 
         [Fact]
