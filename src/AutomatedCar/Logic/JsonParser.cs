@@ -18,6 +18,7 @@ namespace AutomatedCar.Logic
         private World world;
         private IList<JToken> objectList;
         private IList<JToken> polygonList;
+        private IList<JToken> refPointList;
         private List<List<Polygon>> parsedPolygonLists;
 
         /// <summary>
@@ -32,8 +33,14 @@ namespace AutomatedCar.Logic
             StreamReader polygonReader = new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(polygonJson));
 
+            StreamReader refPointReader = new StreamReader(Assembly.GetExecutingAssembly()
+                .GetManifestResourceStream($"AutomatedCar.Assets.reference_points.json"));
+
             JObject unparsedObjectList = JObject.Parse(worldReader.ReadToEnd());
             JObject unparsedPolygonList = JObject.Parse(polygonReader.ReadToEnd());
+            var unparsedRefPointsList = JArray.Parse(refPointReader.ReadToEnd());
+            // var res = JArray.Parse(new StreamReader(Assembly.GetExecutingAssembly()
+                // .GetManifestResourceStream($"AutomatedCar.Assets.reference_points.json")).ReadToEnd());
 
             // world szélessség, magasság beállítása
             world.Height = int.Parse(unparsedObjectList["height"].ToString());
@@ -46,6 +53,8 @@ namespace AutomatedCar.Logic
 
             // Polygon Objectek átadása a listának
             this.polygonList = unparsedPolygonList["objects"].Children().ToList();
+
+            this.refPointList = unparsedRefPointsList.Children().ToList();
 
             this.world = world;
         }
@@ -83,8 +92,17 @@ namespace AutomatedCar.Logic
                     continue;
                 }
 
+                var refPoint = refPointList.FirstOrDefault(r => r["name"].ToString().Substring(0, r["name"].ToString().LastIndexOf(".")) == type);
+
+                if (refPoint != null)
+                {
+                    currentObject.RotationCenterPointX = int.Parse(refPoint["x"].ToString());
+                    currentObject.RotationCenterPointY = int.Parse(refPoint["y"].ToString());
+                }
+
                 currentObject.Height = height;
                 currentObject.Width = width;
+
                 this.world.AddObject(currentObject);
             }
         }
