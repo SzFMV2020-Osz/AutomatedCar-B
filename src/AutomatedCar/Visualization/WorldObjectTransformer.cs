@@ -20,7 +20,7 @@ namespace AutomatedCar.Visualization
             {
                 cache.Add(filename,
                     new Bitmap(Assembly.GetExecutingAssembly()
-                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}")));
+                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}.png")));
             }
 
             return cache[filename];
