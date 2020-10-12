@@ -58,8 +58,8 @@
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                         <Image.RenderTransform>
 							<TransformGroup>
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
 							</TransformGroup>
 						</Image.RenderTransform>
                         </Image>
@@ -81,8 +81,8 @@
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                             <Image.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform  X="{Binding RotationCenterPointX}" />
-                                    <TranslateTransform  Y="{Binding RotationCenterPointY}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
                                 </TransformGroup>
 						    </Image.RenderTransform>
                         </Image>
@@ -110,8 +110,8 @@
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                             <Image.RenderTransform>
                                 <TransformGroup>
-                                    <TranslateTransform  X="{Binding RotationCenterPointX}" />
-                                    <TranslateTransform  Y="{Binding RotationCenterPointY}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
                                 </TransformGroup>
 						    </Image.RenderTransform>
                         </Image>

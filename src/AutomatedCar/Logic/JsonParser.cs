@@ -124,6 +124,7 @@ namespace AutomatedCar.Logic
             else if (type == "parking_90" ||
                      type == "parking_space_parallel")
             {
+                // Parking place, Parking bollard ...
                 currentObject = new Parking(x, y, type, false, rm, polygonsForType);
             }
             else if (type == "roadsign_parking_right" ||
@@ -132,7 +133,7 @@ namespace AutomatedCar.Logic
                      type == "roadsign_speed_50" ||
                      type == "roadsign_speed_60")
             {
-                currentObject = new Parking(x, y, type, false, rm, polygonsForType);
+                currentObject = new Sign(x, y, type, false, rm, polygonsForType);
             }
             else if (type == "garage")
             {
@@ -141,10 +142,6 @@ namespace AutomatedCar.Logic
             else if (type == "tree")
             {
                 currentObject = new Tree(x, y, type, true, rm, polygonsForType[0]);
-            }
-            else if (type == "bollard")
-            {
-                currentObject = new Circle(x, y, type, 1000, true, rm, polygonsForType[0]);
             }
             else
             {
