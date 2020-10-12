@@ -12,11 +12,11 @@ namespace AutomatedCar.Views
         {
             this.InitializeComponent();
 
-            var cw = this.Get<ScrollViewer>("MyScrollViewer");
+            var scrollViewer = this.Get<ScrollViewer>("MyScrollViewer");
 
             World.Instance.OnTick += (x,y) =>
             {
-                cw.Offset = ScreenPositioner.CalcCameraPosition();
+                scrollViewer.Offset = ScreenPositioner.CalcCameraPosition();
             };
         }
 
