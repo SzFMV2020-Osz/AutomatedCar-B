@@ -24,12 +24,10 @@ namespace AutomatedCar
         {
             if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-
                 JsonParser parser = new JsonParser($"AutomatedCar.Assets.test_world.json", $"AutomatedCar.Assets.worldobject_polygons.json", World.Instance);
                 parser.CreateWorld();
 
                 var world = World.Instance;
-
 
                 StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream($"AutomatedCar.Assets.worldobject_polygons.json"));
@@ -49,11 +47,10 @@ namespace AutomatedCar
                 controlledCar2.Height = 240;
                 World.Instance.AddObject(controlledCar2);
 
-
                 int W = 108;
                 int H = 240;
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(50+W/2, 50+H/2, "car_1_white");
+                AutomatedCar controlledCar = new Models.AutomatedCar(50+(W/2), 50+(H/2), "car_1_white");
                 controlledCar.Angle = 90;
                 controlledCar.Width = W;
                 controlledCar.Height = H;
