@@ -90,150 +90,57 @@ namespace AutomatedCar.Logic
                 Bitmap image = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{type}.png"));
                 int width = (int)image.Size.Width;
                 int height = (int)image.Size.Height;
-                switch (type)
+
+                WorldObject currentObject;
+
+                if (type == "road_2lane_90right" ||
+                    type == "road_2lane_45right" ||
+                    type == "road_2lane_45left" ||
+                    type == "road_2lane_6right" ||
+                    type == "road_2lane_6left" ||
+                    type == "road_2lane_straight" ||
+                    type == "road_2lane_90left" ||
+                    type == "2_crossroad_1" ||
+                    type == "2_crossroad_2" ||
+                    type == "road_2lane_rotary" ||
+                    type == "road_2lane_tjunctionleft" ||
+                    type == "road_2lane_tjunctionright")
                 {
-                    // ROADS
-                    case "road_2lane_90right":
-                        Road road = new Road(x, y, type, false, rm, temp);
-                        road.Height = height;
-                        road.Width = width;
-                        this.world.AddObject(road);
-                        break;
-                    case "road_2lane_45right":
-                        Road road2 = new Road(x, y, type, false, rm, temp);
-                        road2.Height = height;
-                        road2.Width = width;
-                        this.world.AddObject(road2);
-                        break;
-                    case "road_2lane_45left":
-                        Road road3 = new Road(x, y, type, false, rm, temp);
-                        road3.Height = height;
-                        road3.Width = width;
-                        this.world.AddObject(road3);
-                        break;
-                    case "road_2lane_6right":
-                        Road road4 = new Road(x, y, type, false, rm, temp);
-                        road4.Height = height;
-                        road4.Width = width;
-                        this.world.AddObject(road4);
-                        break;
-                    case "road_2lane_6left":
-                        Road road5 = new Road(x, y, type, false, rm, temp);
-                        road5.Height = height;
-                        road5.Width = width;
-                        this.world.AddObject(road5);
-                        break;
-                    case "road_2lane_straight":
-                        Road road6 = new Road(x, y, type, false, rm, temp);
-                        road6.Height = height;
-                        road6.Width = width;
-                        this.world.AddObject(road6);
-                        break;
-                    case "road_2lane_90left":
-                        Road road7 = new Road(x, y, type, false, rm, temp);
-                        road7.Height = height;
-                        road7.Width = width;
-                        this.world.AddObject(road7);
-                        break;
-                    case "2_crossroad_1":
-                        Road road8 = new Road(x, y, type, false, rm, temp);
-                        road8.Height = height;
-                        road8.Width = width;
-                        this.world.AddObject(road8);
-                        break;
-                    case "2_crossroad_2":
-                        Road road9 = new Road(x, y, type, false, rm, temp);
-                        this.world.AddObject(road9);
-                        road9.Height = height;
-                        road9.Width = width;
-                        break;
-                    case "road_2lane_rotary":
-                        Road road10 = new Road(x, y, type, false, rm, temp);
-                        road10.Height = height;
-                        road10.Width = width;
-                        this.world.AddObject(road10);
-                        break;
-                    case "road_2lane_tjunctionleft":
-                        Road road11 = new Road(x, y, type, false, rm, temp);
-                        road11.Height = height;
-                        road11.Width = width;
-                        this.world.AddObject(road11);
-                        break;
-                    case "road_2lane_tjunctionright":
-                        Road road12 = new Road(x, y, type, false, rm, temp);
-                        road12.Height = height;
-                        road12.Width = width;
-                        this.world.AddObject(road12);
-                        break;
-
-                    // PARKING
-                    case "parking_90":
-                        Parking parking = new Parking(x, y, type, false, rm, temp);
-                        parking.Height = height;
-                        parking.Width = width;
-                        this.world.AddObject(parking);
-                        break;
-                    case "parking_space_parallel":
-                        Parking parking2 = new Parking(x, y, type, false, rm, temp);
-                        parking2.Height = height;
-                        parking2.Width = width;
-                        this.world.AddObject(parking2);
-                        break;
-
-                    // SIGNS
-                    case "roadsign_parking_right":
-                        Sign sign = new Sign(x, y, type, true, rm, temp.First());
-                        sign.Height = height;
-                        sign.Width = width;
-                        this.world.AddObject(sign);
-                        break;
-                    case "roadsign_priority_stop":
-                        Sign sign1 = new Sign(x, y, type, true, rm, temp.First());
-                        sign1.Height = height;
-                        sign1.Width = width;
-                        this.world.AddObject(sign1);
-                        break;
-                    case "roadsign_speed_40":
-                        Sign sign2 = new Sign(x, y, type, true, rm, temp.First());
-                        sign2.Height = height;
-                        sign2.Width = width;
-                        this.world.AddObject(sign2);
-                        break;
-                    case "roadsign_speed_50":
-                        Sign sign3 = new Sign(x, y, type, true, rm, temp.First());
-                        sign3.Height = height;
-                        sign3.Width = width;
-                        this.world.AddObject(sign3);
-                        break;
-                    case "roadsign_speed_60":
-                        Sign sign4 = new Sign(x, y, type, true, rm, temp.First());
-                        sign4.Height = height;
-                        sign4.Width = width;
-                        this.world.AddObject(sign4);
-                        break;
-
-                    // EGYÉB
-                    case "garage":
-                        Garage garage = new Garage(x, y, type, true, rm, temp.First());
-                        garage.Width = width;
-                        garage.Height = height;
-                        this.world.AddObject(garage);
-                        break;
-                    case "tree":
-                        Tree tree = new Tree(x, y, type, true, rm, temp.First());
-                        tree.Width = width;
-                        tree.Height = height;
-                        this.world.AddObject(tree);
-                        break;
-                    case "bollard":
-                        Circle bollard = new Circle(x, y, type, 100, true, new RotationMatrix(1,0,0,1), temp.First());   // circle radiusa mennyi?
-                        bollard.Width = width;
-                        bollard.Height = height;
-                        this.world.AddObject(bollard);
-                        break;
-
-                    // van még egy boundary nevű cucc is, azt kikéne deríteni hogy micsoda?
+                    currentObject = new Road(x, y, type, false, rm, temp);
                 }
+                else if (type == "parking_90" ||
+                         type == "parking_space_parallel")
+                {
+                    currentObject = new Parking(x, y, type, false, rm, temp);
+                }
+                else if (type == "roadsign_parking_right" ||
+                         type == "roadsign_priority_stop" ||
+                         type == "roadsign_speed_40" ||
+                         type == "roadsign_speed_50" ||
+                         type == "roadsign_speed_60")
+                {
+                    currentObject = new Parking(x, y, type, false, rm, temp);
+                }
+                else if (type == "garage")
+                {
+                    currentObject = new Garage(x, y, type, true, rm, temp[0]);
+                }
+                else if (type == "tree")
+                {
+                    currentObject = new Tree(x, y, type, true, rm, temp[0]);
+                }
+                else if (type == "bollard")
+                {
+                    currentObject = new Circle(x, y, type, 1000, true, rm, temp[0]);
+                }
+                else
+                {
+                    continue;
+                }
+
+                currentObject.Height = height;
+                currentObject.Width = width;
+                this.world.AddObject(currentObject);
             }
         }
 
