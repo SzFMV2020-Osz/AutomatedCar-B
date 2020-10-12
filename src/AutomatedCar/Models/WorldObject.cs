@@ -4,6 +4,8 @@ namespace AutomatedCar.Models
     using Avalonia.Controls.Shapes;
     using ReactiveUI;
     using System.Collections.Generic;
+    using System.Numerics;
+    using Avalonia;
 
     public abstract class WorldObject : ReactiveObject
     {
@@ -21,7 +23,7 @@ namespace AutomatedCar.Models
             this.ZIndex = 1;
             this.Polygons = new List<Polygon>();
             this.RotMatrix = rotmatrix;
-            this.Angle = Math.Acos(rotmatrix.N11);
+            this.Angle = Math.Atan2(rotmatrix.N12, rotmatrix.N11) * 180 / Math.PI;
         }
 
         private double _angle;
