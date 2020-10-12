@@ -11,6 +11,10 @@ namespace AutomatedCar.SystemComponents
 
         public IPowerTrainPacket PowerTrainPacket { get; set; }
 
+        public IReadOnlyHMIPacket HMIPacket { get; set; }
+
+        public IReadOnlyDebugPacket DebugPacket { get; set; }
+
         public void RegisterComponent(SystemComponent component)
         {
             this.components.Add(component);

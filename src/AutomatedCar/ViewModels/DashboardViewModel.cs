@@ -18,7 +18,11 @@ namespace AutomatedCar.ViewModels
         public Models.AutomatedCar ControlledCar
         {
             get => this.controlledCar;
-            private set => this.RaiseAndSetIfChanged(ref this.controlledCar, value);
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref this.controlledCar, value);
+                this.hmi = this.controlledCar.HumanMachineInterface;
+            }
         }
 
         public SystemComponents.HumanMachineInterface HMI
