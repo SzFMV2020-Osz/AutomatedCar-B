@@ -10,6 +10,8 @@ using Avalonia.Media.Imaging;
 
 namespace AutomatedCar.Logic
 {
+    using System;
+
     /// <summary>
     /// Json Parser class.
     /// </summary>
@@ -39,8 +41,6 @@ namespace AutomatedCar.Logic
             JObject unparsedObjectList = JObject.Parse(worldReader.ReadToEnd());
             JObject unparsedPolygonList = JObject.Parse(polygonReader.ReadToEnd());
             var unparsedRefPointsList = JArray.Parse(refPointReader.ReadToEnd());
-            // var res = JArray.Parse(new StreamReader(Assembly.GetExecutingAssembly()
-                // .GetManifestResourceStream($"AutomatedCar.Assets.reference_points.json")).ReadToEnd());
 
             // world szélessség, magasság beállítása
             world.Height = int.Parse(unparsedObjectList["height"].ToString());
@@ -80,10 +80,19 @@ namespace AutomatedCar.Logic
                 int x = int.Parse(obj["x"].ToString());
                 int y = int.Parse(obj["y"].ToString());
                 RotationMatrix rm = new RotationMatrix(double.Parse(obj["m11"].ToString()), double.Parse(obj["m12"].ToString()), double.Parse(obj["m21"].ToString()), double.Parse(obj["m22"].ToString()));
-                Bitmap image = new Bitmap(Assembly.GetExecutingAssembly().GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{type}.png"));
-                int width = (int)image.Size.Width;
-                int height = (int)image.Size.Height;
                 WorldObject currentObject = CreateWorldObject(type, x, y, rm);
+                try
+                {
+                    Bitmap image = new Bitmap(Assembly.GetExecutingAssembly()
+                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{type}.png"));
+                    int width = (int)image.Size.Width;
+                    int height = (int)image.Size.Height;
+                    currentObject.Height = height;
+                    currentObject.Width = width;
+                }
+                catch (NullReferenceException e)
+                {
+                }
 
                 Dictionary<string, WorldObject> worldObjects = new Dictionary<string, WorldObject>();
 
@@ -99,9 +108,6 @@ namespace AutomatedCar.Logic
                     currentObject.referenceOffsetX = - int.Parse(refPoint["x"].ToString());
                     currentObject.referenceOffsetY = - int.Parse(refPoint["y"].ToString());
                 }
-
-                currentObject.Height = height;
-                currentObject.Width = width;
 
                 this.world.AddObject(currentObject);
             }
