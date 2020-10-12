@@ -62,9 +62,9 @@
 
         private static double GetArea(Point a, Point b, Point c)
         {
-            return Math.Abs((a.X * (b.Y - c.Y) +
-                             b.X * (c.Y - a.Y) +
-                             c.X * (a.Y - b.Y)) / 2.0);
+            return Math.Abs(((a.X * (b.Y - c.Y)) +
+                             (b.X * (c.Y - a.Y)) +
+                             (c.X * (a.Y - b.Y))) / 2.0);
         }
 
         /* A function to check whether point P(x, y) lies
