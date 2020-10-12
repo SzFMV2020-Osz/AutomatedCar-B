@@ -1,4 +1,4 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl  xmlns:customcontrols="clr-namespace:AutomatedCar.Views.CustomControls" xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -50,6 +50,7 @@
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:AutomatedCar}">
                     <Canvas>
+                        <customcontrols:SensorCustomControl Height="200" FOV="60" Rotation="0" Brush="Blue" Offset="120,0" Opacity="60"></customcontrols:SensorCustomControl>
                         <Canvas.RenderTransform>
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />
