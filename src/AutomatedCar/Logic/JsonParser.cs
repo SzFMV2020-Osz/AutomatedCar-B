@@ -182,6 +182,5 @@ namespace AutomatedCar.Logic
 
             return polygonList;
         }
-
     }
 }
