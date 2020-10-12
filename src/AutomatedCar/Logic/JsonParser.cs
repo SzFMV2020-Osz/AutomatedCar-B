@@ -76,6 +76,8 @@ namespace AutomatedCar.Logic
                 int height = (int)image.Size.Height;
                 WorldObject currentObject = CreateWorldObject(type, x, y, rm);
 
+                Dictionary<string, WorldObject> worldObjects = new Dictionary<string, WorldObject>();
+
                 if (currentObject == null)
                 {
                     continue;
@@ -91,18 +93,7 @@ namespace AutomatedCar.Logic
         {
             var polygonsForType = this.CollectPolygonsByType(type);
             WorldObject currentObject;
-            if (type == "road_2lane_90right" ||
-                type == "road_2lane_45right" ||
-                type == "road_2lane_45left" ||
-                type == "road_2lane_6right" ||
-                type == "road_2lane_6left" ||
-                type == "road_2lane_straight" ||
-                type == "road_2lane_90left" ||
-                type == "2_crossroad_1" ||
-                type == "2_crossroad_2" ||
-                type == "road_2lane_rotary" ||
-                type == "road_2lane_tjunctionleft" ||
-                type == "road_2lane_tjunctionright")
+            if (isRoad(type))
             {
                 currentObject = new Road(x, y, type, false, rm, polygonsForType);
             }
@@ -137,6 +128,22 @@ namespace AutomatedCar.Logic
             }
 
             return currentObject;
+        }
+
+        private static bool isRoad(string type)
+        {
+            return type == "road_2lane_90right" ||
+                   type == "road_2lane_45right" ||
+                   type == "road_2lane_45left" ||
+                   type == "road_2lane_6right" ||
+                   type == "road_2lane_6left" ||
+                   type == "road_2lane_straight" ||
+                   type == "road_2lane_90left" ||
+                   type == "2_crossroad_1" ||
+                   type == "2_crossroad_2" ||
+                   type == "road_2lane_rotary" ||
+                   type == "road_2lane_tjunctionleft" ||
+                   type == "road_2lane_tjunctionright";
         }
 
         private List<Polygon> CollectPolygonsByType(string type)
