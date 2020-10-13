@@ -9,6 +9,10 @@ namespace AutomatedCar.SystemComponents
 
         public IReadOnlyDummyPacket DummyPacket { get; set; }
 
+        public IReadOnlyHMIPacket HMIPacket { get; set; }
+
+        public IReadOnlyDebugPacket DebugPacket { get; set; }
+
         public IPowerTrainPacket PowerTrainPacket { get; set; }
 
         public IReadOnlyHMIPacket HMIPacket { get; set; }

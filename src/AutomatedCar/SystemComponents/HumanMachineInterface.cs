@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.SystemComponents
+namespace AutomatedCar.SystemComponents
 {
     using System.Net.Http.Headers;
     using AutomatedCar.SystemComponents.Packets;
@@ -34,6 +34,7 @@
         {
             this.virtualFunctionBus = virtualFunctionBus;
             virtualFunctionBus.RegisterComponent(this);
+
             this.hmiPacket = new HMIPacket();
             this.debugPacket = new DebugPacket();
             virtualFunctionBus.HMIPacket = this.hmiPacket;
@@ -69,7 +70,7 @@
 
         public bool TurnSignalLeft { get => this.turnSignalLeft; set => this.turnSignalLeft = value; }
 
-        public bool UtrasoundDebug { get => this.ultrasoundDebug; set => this.ultrasoundDebug = value; }
+        public bool UltrasoundDebug { get => this.ultrasoundDebug; set => this.ultrasoundDebug = value; }
 
         public bool RadarDebug { get => this.radarDebug; set => this.radarDebug = value; }
 

@@ -10,6 +10,7 @@ namespace AutomatedCar
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Markup.Xaml;
     using Avalonia.Media;
+    using Logic;
     using Newtonsoft.Json.Linq;
 
     public class App : Application
@@ -23,6 +24,11 @@ namespace AutomatedCar
         {
             if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                JsonParser parser = new JsonParser($"AutomatedCar.Assets.test_world.json", $"AutomatedCar.Assets.worldobject_polygons.json", World.Instance);
+                parser.CreateWorld();
+
+                var world = World.Instance;
+
                 StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream($"AutomatedCar.Assets.worldobject_polygons.json"));
                 string json_text = reader.ReadToEnd();
@@ -35,21 +41,21 @@ namespace AutomatedCar
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
-                World world = World.Instance;
-                world.PopulateInstance("config.json");
+                AutomatedCar controlledCar2 = new Models.AutomatedCar(50, 50, "car_1_red");
+                controlledCar2.Geometry = geom;
+                controlledCar2.Width = 108;
+                controlledCar2.Height = 240;
+                World.Instance.AddObject(controlledCar2);
 
-                world.Width = 2000;
-                world.Height = 1000;
+                int W = 108;
+                int H = 240;
 
-                Circle circle = new Circle(400, 200, "circle.png", 20);
-                circle.Width = 40;
-                circle.Height = 40;
-                circle.ZIndex = 2;
-                world.AddObject(circle);
-
-                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
-                controlledCar.Width = 108;
-                controlledCar.Height = 240;
+                AutomatedCar controlledCar = new Models.AutomatedCar(50+(W/2), 50+(H/2), "car_1_white");
+                controlledCar.Angle = 90;
+                controlledCar.Width = W;
+                controlledCar.Height = H;
+                controlledCar.RotationCenterPointX = -(controlledCar.Width/2);
+                controlledCar.RotationCenterPointY = -(controlledCar.Height/2);
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));

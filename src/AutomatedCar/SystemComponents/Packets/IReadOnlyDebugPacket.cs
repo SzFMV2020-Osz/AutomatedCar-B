@@ -1,4 +1,4 @@
-﻿public interface IReadOnlyDebugPacket
+public interface IReadOnlyDebugPacket
 {
     bool UtrasoundSensor { get; }
 

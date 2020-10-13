@@ -13,29 +13,44 @@ namespace AutomatedCar
             this.world = world;
         }
 
-        public World World { get => this.world; }
-
         private Random Random { get; } = new Random();
+
+        const int speed = 5;
 
         protected override void Tick()
         {
             world.ControlledCar.InputHandler();
             if (Keyboard.IsKeyDown(Key.Up))
             {
-                this.world.ControlledCar.Y -= 5;
+                this.world.ControlledCar.MoveY(-speed);
             }
-            else if (Keyboard.IsKeyDown(Key.Down))
+
+            if (Keyboard.IsKeyDown(Key.Down))
             {
-                this.world.ControlledCar.Y += 5;
+                this.world.ControlledCar.MoveY(speed);
             }
-            else if (Keyboard.IsKeyDown(Key.Left))
+
+            if (Keyboard.IsKeyDown(Key.Left))
             {
-                this.world.ControlledCar.X -= 5;
+                this.world.ControlledCar.MoveX(-speed);
             }
-            else if (Keyboard.IsKeyDown(Key.Right))
+
+            if (Keyboard.IsKeyDown(Key.Right))
             {
-                this.world.ControlledCar.X += 5;
+                this.world.ControlledCar.MoveX(speed);
             }
+
+            if (Keyboard.IsKeyDown(Key.A))
+            {
+                this.world.ControlledCar.Angle += 5;
+            }
+
+            if (Keyboard.IsKeyDown(Key.D))
+            {
+                this.world.ControlledCar.Angle -= 5;
+            }
+
+            World.Instance.Tick();
         }
     }
 }

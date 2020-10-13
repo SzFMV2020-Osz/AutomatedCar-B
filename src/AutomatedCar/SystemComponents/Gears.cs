@@ -1,4 +1,4 @@
-﻿public enum Gears
+public enum Gears
 {
     P, R, N, D
 }

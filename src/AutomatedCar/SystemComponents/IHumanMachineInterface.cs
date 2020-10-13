@@ -1,4 +1,4 @@
-﻿using AutomatedCar.SystemComponents.Packets;
+using AutomatedCar.SystemComponents.Packets;
 
 interface IHumanMachineInterface
 {

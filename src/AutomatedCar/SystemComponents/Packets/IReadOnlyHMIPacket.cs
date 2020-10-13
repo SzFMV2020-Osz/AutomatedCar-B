@@ -1,4 +1,4 @@
-﻿public interface IReadOnlyHMIPacket
+public interface IReadOnlyHMIPacket
 {
     double Gaspedal { get; }
 

@@ -1,6 +1,5 @@
-﻿using Avalonia.OpenGL;
+using Avalonia.OpenGL;
 using System;
-
 namespace AutomatedCar.SystemComponents.Packets
 {
     public class HMIPacket : IReadOnlyHMIPacket
