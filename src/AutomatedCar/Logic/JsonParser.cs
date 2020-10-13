@@ -70,7 +70,7 @@ namespace AutomatedCar.Logic
                     Filename = filename,
                     Width = (int)image.Size.Width,
                     Height = (int)image.Size.Height,
-                    Rotmatrix = new Avalonia.Matrix(float.Parse(obj["m11"].ToString()), float.Parse(obj["m12"].ToString()), float.Parse(obj["m21"].ToString()), float.Parse(obj["m22"].ToString()), 1, 1),
+                    Rotmatrix = new Avalonia.Matrix(float.Parse(obj["m11"].ToString()), float.Parse(obj["m12"].ToString()), float.Parse(obj["m21"].ToString()), float.Parse(obj["m22"].ToString()), 0, 0),
                 });
             }
         }
