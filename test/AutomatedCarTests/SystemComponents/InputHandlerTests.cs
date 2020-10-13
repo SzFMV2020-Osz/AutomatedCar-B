@@ -16,6 +16,7 @@ namespace Tests.SystemComponents
             hmi = new HumanMachineInterface(new VirtualFunctionBus());
         }
 
+        [Fact(Skip = "This is just a method to fill up the keboard class's HashSet")]
         public void KeyboardFill()
         {
             for (int i = 0; i < 173; i++)
@@ -56,7 +57,7 @@ namespace Tests.SystemComponents
             Assert.False(hmi.SteeringRight);
             Assert.False(hmi.TurnSignalLeft);
             Assert.False(hmi.TurnSignalRight);
-            Assert.False(hmi.UtrasoundDebug);
+            Assert.False(hmi.UltrasoundDebug);
         }
 
         [Fact]
@@ -115,7 +116,7 @@ namespace Tests.SystemComponents
             Assert.False(hmi.Acc);
             Assert.False(hmi.LaneKeeping);
             Assert.False(hmi.ParkingPilot);
-            Assert.False(hmi.UtrasoundDebug);
+            Assert.False(hmi.UltrasoundDebug);
             Assert.False(hmi.RadarDebug);
             Assert.False(hmi.CameraDebug);
         }
@@ -267,7 +268,7 @@ namespace Tests.SystemComponents
 
             hmi.InputHandler();
 
-            Assert.True(hmi.UtrasoundDebug);
+            Assert.True(hmi.UltrasoundDebug);
         }
 
         [Fact]
@@ -295,6 +296,7 @@ namespace Tests.SystemComponents
         {
             Keyboard.Keys.Clear();
             Keyboard.ToggleableKeys.Clear();
+            Keyboard.PressableKeys.Clear();
         }
     }
 }

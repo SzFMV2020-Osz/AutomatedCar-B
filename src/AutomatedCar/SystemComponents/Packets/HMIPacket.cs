@@ -178,21 +178,25 @@ namespace AutomatedCar.SystemComponents.Packets
         {
             if (right && !left)
             {
-                this.Increase(ref this.steering, 1000);
+                this.SteeringIncrease(ref this.steering, 1000);
             }
             else if (!right && left)
             {
-                this.Decrease(ref this.steering, 1000);
+                this.SteeringDecrease(ref this.steering, 1000);
             }
             else
             {
                 if (this.steering > 0)
                 {
-                    this.Decrease(ref this.steering, 1000);
+                    this.SteeringDecrease(ref this.steering, 1000);
+                    if (this.steering < 0)
+                    {
+                        this.steering = 0;
+                    }
                 }
                 else if (this.steering < 0)
                 {
-                    this.Increase(ref this.steering, 1000);
+                    this.SteeringIncrease(ref this.steering, 1000);
                     if (this.steering > 0)
                     {
                         this.steering = 0;
@@ -224,6 +228,32 @@ namespace AutomatedCar.SystemComponents.Packets
             if (pedal < 0)
             {
                 pedal = 0;
+            }
+        }
+
+        void SteeringIncrease(ref double steer, double millisecondsToReachMaxValue)
+        {
+            if (steer < 100)
+            {
+                steer += 10 / (millisecondsToReachMaxValue / 1000 * 6);
+            }
+
+            if (steer > 100)
+            {
+                steer = 100;
+            }
+        }
+
+        void SteeringDecrease(ref double steer, double millisecondsToReachMaxValue)
+        {
+            if (steer > -100)
+            {
+                steer -= 10 / (millisecondsToReachMaxValue / 1000 * 6);
+            }
+
+            if (steer < -100)
+            {
+                steer = -100;
             }
         }
 

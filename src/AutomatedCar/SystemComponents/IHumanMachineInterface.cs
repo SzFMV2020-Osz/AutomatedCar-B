@@ -34,7 +34,7 @@ interface IHumanMachineInterface
 
     bool TurnSignalLeft { get; set; }
 
-    bool UtrasoundDebug { get; set; }
+    bool UltrasoundDebug { get; set; }
 
     bool RadarDebug { get; set; }
 

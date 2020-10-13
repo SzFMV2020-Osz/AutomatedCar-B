@@ -339,13 +339,14 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(0, hmiPacket.Breakpedal);
         }
 
+        [Fact]
         public void WithNoumerousTrueFalseInputHandleSteeringGouesUpTo100ThenWithGoesDownTo0()
         {
             for (int i = 0; i < 100; i++)
             {
                 hmiPacket.HandleSteering(true, false);
             }
-            Assert.Equal(100, hmiPacket.Breakpedal);
+            Assert.Equal(100, hmiPacket.Steering);
             for (int i = 0; i < 100; i++)
             {
                 hmiPacket.HandleSteering(false, false);
@@ -353,13 +354,14 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(0, hmiPacket.Breakpedal);
         }
 
+        [Fact]
         public void WithNoumerousFalseTrueInputHandleSteeringGouesDownToMinus100ThenWithGoesUpTo0()
         {
             for (int i = 0; i < 100; i++)
             {
                 hmiPacket.HandleSteering(false, true);
             }
-            Assert.Equal(-100, hmiPacket.Breakpedal);
+            Assert.Equal(-100, hmiPacket.Steering);
             for (int i = 0; i < 100; i++)
             {
                 hmiPacket.HandleSteering(false, false);
