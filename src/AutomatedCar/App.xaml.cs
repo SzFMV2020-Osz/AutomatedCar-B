@@ -27,8 +27,8 @@ namespace AutomatedCar
         {
             if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                JsonParser parser = new JsonParser($"AutomatedCar.Assets.test_world.json", $"AutomatedCar.Assets.worldobject_polygons.json", World.Instance);
-                parser.CreateWorld();
+                JsonParser parser = new JsonParser();
+                parser.populateWorldObjects(World.Instance, $"AutomatedCar.Assets.test_world.json");
 
                 var world = World.Instance;
 
@@ -61,16 +61,8 @@ namespace AutomatedCar
                 controlledCar.Height = H;
                 controlledCar.referenceOffsetX = -(controlledCar.Width/2);
                 controlledCar.referenceOffsetY = -(controlledCar.Height/2);
-                controlledCar.NetPolygon = new List<NetTopologySuite.Geometries.LineString>();
-                controlledCar.NetPolygon.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
-
-                World.Instance.AddObject(new Road(500, 500, "crosswalk", false, new RotationMatrix(1, 0, 0, 1), new List<Polygon>()
-                {
-                    new Polygon() { Points = new List<Point>(){new Point(10,10), new Point(50, 10)}},
-                    new Polygon() { Points = new List<Point>(){new Point(20,20), new Point(50, 20)}},
-                    new Polygon() { Points = new List<Point>(){new Point(30,30), new Point(50, 30)}},
-                }));
-
+                controlledCar.NetPolygons = new List<NetTopologySuite.Geometries.LineString>();
+                controlledCar.NetPolygons.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));

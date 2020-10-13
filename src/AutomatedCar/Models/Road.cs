@@ -8,17 +8,10 @@ namespace AutomatedCar.Models
 
     public class Road : WorldObject
     {
-        public Road(int x, int y, string filename, bool iscolliding, RotationMatrix rotmatrix, List<Polygon> roadplace)
-            : base(x, y, filename, iscolliding, rotmatrix)
+        public Road(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Avalonia.Point>> polyPoints)
+            : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
-            foreach (var place in roadplace)
-            {
-                var cords = new List<Coordinate>();
-                cords.AddRange( place.Points.Select(p => new Coordinate(rotmatrix.Rotate(p).X - this.referenceOffsetX + this.X, rotmatrix.Rotate(p).Y-this.referenceOffsetY+this.Y)));
-                this.NetPolygon.Add(new LineString(cords.ToArray()));
-            }
-
-            this.Polygons.AddRange(roadplace);
+            this.IsColliding = false;
             this.ZIndex = 0;
         }
     }
