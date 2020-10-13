@@ -164,7 +164,7 @@ namespace AutomatedCar.Logic
                      type == "parking_space_parallel")
             {
                 // Parking place, Parking bollard ...
-                currentObject = new Parking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints); ;
+                currentObject = new Parking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
             else if (type == "roadsign_parking_right" ||
                      type == "roadsign_priority_stop" ||
@@ -172,15 +172,15 @@ namespace AutomatedCar.Logic
                      type == "roadsign_speed_50" ||
                      type == "roadsign_speed_60")
             {
-                currentObject = new Sign(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints); ;
+                currentObject = new Sign(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
             else if (type == "garage")
             {
-                currentObject = new Garage(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints); ;
+                currentObject = new Garage(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
             else if (type == "tree")
             {
-                currentObject = new Tree(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints); ;
+                currentObject = new Tree(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
             else
             {
@@ -205,128 +205,5 @@ namespace AutomatedCar.Logic
                    type == "road_2lane_tjunctionleft" ||
                    type == "road_2lane_tjunctionright";
         }
-
-
-        ///// <summary>
-        ///// Creates the world.
-        ///// </summary>
-        ///// <returns>Retun world object.</returns>
-        //public void CreateWorld()
-        //{
-        //    // Feltöltjük a polygonokkal a polygon listát
-        //    this.parsedPolygonLists = this.PolygonLoader();
-
-        //    // Feltöltjük a worldobjectekkel a world-t
-        //    this.WorldObjectLoader();
-        //}
-
-        //private void WorldObjectLoader()
-        //{
-        //    foreach (JToken obj in this.objectList)
-        //    {
-        //        string type = obj["type"].ToString();
-        //        int x = int.Parse(obj["x"].ToString());
-        //        int y = int.Parse(obj["y"].ToString());
-        //        RotationMatrix rm = new RotationMatrix(double.Parse(obj["m11"].ToString()), double.Parse(obj["m12"].ToString()), double.Parse(obj["m21"].ToString()), double.Parse(obj["m22"].ToString()));
-        //        WorldObject currentObject = CreateWorldObject(type, x, y, rm);
-        //        try
-        //        {
-        //            Bitmap image = new Bitmap(Assembly.GetExecutingAssembly()
-        //                .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{type}.png"));
-        //            int width = (int)image.Size.Width;
-        //            int height = (int)image.Size.Height;
-        //            currentObject.Height = height;
-        //            currentObject.Width = width;
-        //        }
-        //        catch (NullReferenceException e)
-        //        {
-        //        }
-
-        //        Dictionary<string, WorldObject> worldObjects = new Dictionary<string, WorldObject>();
-
-        //        if (currentObject == null)
-        //        {
-        //            continue;
-        //        }
-
-        //        var refPoint = refPointList.FirstOrDefault(r => r["name"].ToString().Substring(0, r["name"].ToString().LastIndexOf(".")) == type);
-
-        //        if (refPoint != null)
-        //        {
-        //            currentObject.referenceOffsetX = - int.Parse(refPoint["x"].ToString());
-        //            currentObject.referenceOffsetY = - int.Parse(refPoint["y"].ToString());
-
-        //            // if (currentObject is Road)
-        //            // {
-        //            //     foreach (var place in currentObject.Polygons)
-        //            //     {
-        //            //
-        //            //         var cords = new List<Coordinate>();
-        //            //         cords.AddRange( place.Points.Select(p => new Coordinate(currentObject.RotMatrix.Rotate(p).X - currentObject.referenceOffsetX + currentObject.X, currentObject.RotMatrix.Rotate(p).Y-currentObject.referenceOffsetY+currentObject.Y)));
-        //            //         currentObject.NetPolygon.Add(new LineString(cords.ToArray()));
-        //            //     }
-        //            // }
-        //        }
-
-        //        this.world.AddObject(currentObject);
-        //    }
-        //}
-
-        //private List<Polygon> CollectPolygonsByType(string type)
-        //{
-        //    List<Polygon> polygons = new List<Polygon>();
-        //    foreach (List<Polygon> polygonList in this.parsedPolygonLists)
-        //    {
-        //        foreach (Polygon polygon in polygonList)
-        //        {
-        //            if (polygon.Name == type)
-        //            {
-        //                polygons.AddRange(polygonList);
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //    return polygons;
-        //}
-
-        //private List<List<Polygon>> PolygonLoader()
-        //{
-        //    List<List<Polygon>> polygonList = new List<List<Polygon>>();
-
-        //    // minden object feldolgozása
-        //    foreach (JToken obj in this.polygonList)
-        //    {
-        //        List<Polygon> subList = new List<Polygon>();
-        //        string typename = obj["typename"].ToString();
-
-        //        // egy object polyjai
-        //        var polys = obj["polys"].Children();
-
-        //        foreach (var polyObject in polys)
-        //        {
-        //            // a poly ponjtai
-        //            IList<JToken> points2 = polyObject["points"].Children().ToList();
-        //            Polygon polyg = new Polygon();
-        //            polyg.Name = typename;              // mivel egy konkrét polygonnál lehet csak tárolni nevet, ezért minden polygonnál ott lesz
-        //            polyg.Points = new List<Point>();
-
-        //            foreach (JToken item in points2)
-        //            {
-        //                string[] xystrings = item.ToString().Split(',');
-        //                double x = double.Parse(xystrings[0].Where(char.IsDigit).ToArray());
-        //                double y = double.Parse(xystrings[1].Where(char.IsDigit).ToArray());
-
-        //                polyg.Points.Add(new Point(x, y));
-        //            }
-
-        //            subList.Add(polyg);
-        //        }
-
-        //        polygonList.Add(subList);
-        //    }
-
-        //    return polygonList;
-        //}
     }
 }

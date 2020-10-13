@@ -15,8 +15,6 @@ namespace AutomatedCar
 
         private Random Random { get; } = new Random();
 
-
-
         protected override void Tick()
         {
             int speed = 10;
