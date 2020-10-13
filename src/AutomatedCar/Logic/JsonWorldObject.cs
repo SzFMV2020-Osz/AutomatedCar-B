@@ -1,6 +1,4 @@
-﻿
-using Avalonia;
-using System.Collections.Generic;
+﻿using Avalonia;
 
 namespace AutomatedCar.Logic
 {

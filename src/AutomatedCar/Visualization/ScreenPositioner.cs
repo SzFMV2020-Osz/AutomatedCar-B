@@ -10,7 +10,7 @@ namespace AutomatedCar
     {
         public static Vector CalcCameraPosition()
         {
-            return new Vector( World.Instance.ControlledCar.X - (World.Instance.VisibleWidth / 2), World.Instance.ControlledCar.Y - (World.Instance.VisibleHeight / 2) );
+            return new Vector(World.Instance.ControlledCar.X - (World.Instance.VisibleWidth / 2), World.Instance.ControlledCar.Y - (World.Instance.VisibleHeight / 2));
         }
     }
 }
