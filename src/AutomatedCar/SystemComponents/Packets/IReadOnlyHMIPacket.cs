@@ -8,11 +8,11 @@ public interface IReadOnlyHMIPacket
 
     Gears Gear { get; }
 
-    bool ACC { get; }
+    bool Acc { get; }
 
-    double ACCDistance { get; }
+    double AccDistance { get; }
 
-    int ACCSpeed { get; }
+    int AccSpeed { get; }
 
     bool LaneKeeping { get; }
 

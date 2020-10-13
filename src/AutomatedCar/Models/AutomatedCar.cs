@@ -28,6 +28,8 @@ namespace AutomatedCar.Models
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
 
+        public HumanMachineInterface HumanMachineInterface { get => this.humanMachineInterface; }
+
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
@@ -92,6 +94,11 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
+        }
+
+        public void InputHandler()
+        {
+            humanMachineInterface.InputHandler();
         }
 
         private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)
