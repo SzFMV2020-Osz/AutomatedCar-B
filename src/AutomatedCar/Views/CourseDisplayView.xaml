@@ -83,12 +83,36 @@
                             </Image>
                         </Canvas>
                         <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                         </Canvas>
                         <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                         </Canvas>
                         <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                         </Canvas>
                     </Canvas>
@@ -111,9 +135,17 @@
 						    </Image.RenderTransform>
                         </Image>
                         </Canvas>
-                        <!-- <Canvas>
-                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygon[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
-                        </Canvas>  -->
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
                     </Canvas>
                 </DataTemplate>
             </ItemsControl.DataTemplates>
