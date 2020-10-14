@@ -50,11 +50,12 @@ namespace AutomatedCar.Views.CustomControls
             base.Render(context);
 
             var transformGroup = new TransformGroup();
-            transformGroup.Children.Add(new RotateTransform(-90 + this.Rotation));
+            transformGroup.Children.Add(new RotateTransform(this.Rotation));
             transformGroup.Children.Add(new TranslateTransform(this.Offset.X, this.Offset.Y));
 
-            this.RenderTransform = transformGroup;
-            context.DrawGeometry(new SolidColorBrush(new Color(this.Opacity, this.Brush.Color.R, this.Brush.Color.G, this.Brush.Color.B)), new Pen(), this.GetRectangleGeometry(this.FOV, this.Distance * SCALER));
+            var geometry = this.GetRectangleGeometry(this.FOV, this.Distance * SCALER);
+            geometry.Transform = transformGroup;
+            context.DrawGeometry(new SolidColorBrush(new Color(this.Opacity, this.Brush.Color.R, this.Brush.Color.G, this.Brush.Color.B)), new Pen(), geometry);
         }
 
         private PolylineGeometry GetRectangleGeometry(double degrees, double height)
