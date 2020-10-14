@@ -2,7 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:AutomatedCar.Models"
+             xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
+             xmlns:view="clr-namespace:AutomatedCar.ViewModels;assembly=AutomatedCar"
              Width="320" Height="720"
              x:Class="AutomatedCar.Views.DashboardView"
              DataContext="{Binding Dashboard}"
@@ -19,29 +20,47 @@
         </Style>
     </UserControl.Styles>
 
+    
     <DockPanel>
         <Border Padding="2 0 0 0" >
-            <ContentControl Name="Dashboard" Content="{Binding ControlledCar, Mode=OneWay}" >
+            <ContentControl Name="Dashboard" Content="{Binding Mode=OneWay}" >
                 <ContentControl.ContentTemplate>
-                    <DataTemplate DataType="{x:Type models:AutomatedCar}">
+                    <DataTemplate DataType="{x:Type view:DashboardViewModel}">
                         <StackPanel>
                             <TextBlock Text="Dashboard"/>
-                            <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-                                <TextBlock Grid.Row="0" Grid.Column="0">X:</TextBlock>
-                                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding X}"/>
-                                <TextBlock Grid.Row="1" Grid.Column="0">Y:</TextBlock>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Y}"/>
-                                <TextBlock Grid.Row="2" Grid.Column="0">Filename:</TextBlock>
-                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Filename}"/>
-                                <TextBlock Grid.Row="3" Grid.Column="0">Distance X:</TextBlock>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding VirtualFunctionBus.DummyPacket.DistanceX}"/>
-                                <TextBlock Grid.Row="4" Grid.Column="0">Distance Y:</TextBlock>
-                                <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding VirtualFunctionBus.DummyPacket.DistanceY}"/>
-                            </Grid>
+                            <TextBlock>X:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.X}"/>
+                            <TextBlock>Y:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.Y}"/>
+                            <TextBlock> -----°----- </TextBlock>
+                            <TextBlock>Gaspedal:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gaspedal}"/>
+                            <TextBlock>Breakpedal:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal}"/>
+                            <TextBlock>Steering:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering}"/>
+                            <TextBlock>Gear:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gear}"/>
+                            <TextBlock>Acc:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Acc}"/>
+                            <TextBlock>AccDistance:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.AccDistance}"/>
+                            <TextBlock>AccSpeed:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.AccSpeed}"/>
+                            <TextBlock>LaneKeeping:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.LaneKeeping}"/>
+                            <TextBlock>ParkingPilot:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.ParkingPilot}"/>
+                            <TextBlock>TurnSignalRight:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.TurnSignalRight}"/>
+                            <TextBlock>TurnSignalLeft:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.TurnSignalLeft}"/>
+                            <TextBlock>Sign:</TextBlock>
+                            <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Sign}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ContentControl.ContentTemplate>
             </ContentControl>
         </Border>
-    </DockPanel>
+    </DockPanel>            
 </UserControl>

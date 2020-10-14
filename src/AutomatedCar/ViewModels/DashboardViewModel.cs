@@ -2,33 +2,37 @@ namespace AutomatedCar.ViewModels
 {
     using AutomatedCar.Models;
     using AutomatedCar.SystemComponents;
+    using Avalonia;
     using ReactiveUI;
 
     public class DashboardViewModel : ViewModelBase
     {
-        private AutomatedCar controlledCar;
-        private HumanMachineInterface hmi;
+        public static AutomatedCar controlledCar;
+        public static VirtualFunctionBus vfb;
 
-        public DashboardViewModel(Models.AutomatedCar controlledCar)
+        public DashboardViewModel(Models.AutomatedCar car)
         {
-            this.ControlledCar = controlledCar;
-            this.hmi = this.controlledCar.HumanMachineInterface;
+            controlledCar = car;
+            vfb = controlledCar.VirtualFunctionBus;
         }
 
         public Models.AutomatedCar ControlledCar
         {
-            get => this.controlledCar;
+            get => controlledCar;
             private set
             {
-                this.RaiseAndSetIfChanged(ref this.controlledCar, value);
-                this.hmi = this.controlledCar.HumanMachineInterface;
+                this.RaiseAndSetIfChanged(ref controlledCar, value);
+                vfb = controlledCar.VirtualFunctionBus;
             }
         }
 
-        public SystemComponents.HumanMachineInterface HMI
+        public SystemComponents.VirtualFunctionBus Vfb
         {
-            get => this.hmi;
-            private set => this.RaiseAndSetIfChanged(ref this.hmi, value);
+            get => vfb;
+            private set
+            {
+                this.RaiseAndSetIfChanged(ref vfb, value);
+            }
         }
     }
 }
