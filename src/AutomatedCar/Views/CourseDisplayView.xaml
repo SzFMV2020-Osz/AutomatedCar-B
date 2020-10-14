@@ -45,22 +45,22 @@
                   <Canvas>
                     <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
 						<!-- Camera -->
-                        <customcontrols:SensorCustomControl Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="0,-20" Opacity="60"></customcontrols:SensorCustomControl>
+                        <customcontrols:SensorCustomControl IsVisible="{Binding CameraVisible}" Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="0,-20" Opacity="60"></customcontrols:SensorCustomControl>
 
 						<!-- Radar -->
-						<customcontrols:SensorCustomControl Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="0,-120" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding RadarVisible}" Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="0,-120" Opacity="60"></customcontrols:SensorCustomControl>
 
 						<!-- Front ultrasound sensors -->
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="-30,-110" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-45,-105" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="30,-110" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="45,-105" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="-30,-110" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-45,-105" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="30,-110" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="45,-105" Opacity="60"></customcontrols:SensorCustomControl>
 
 						<!-- Rear ultrasound sensors -->
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-25,120" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-45,105" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="25,120" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="45,105" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-25,120" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-45,105" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="25,120" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="45,105" Opacity="60"></customcontrols:SensorCustomControl>
 
 
 						<Canvas.RenderTransform>
