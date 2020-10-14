@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using System.Linq;
 using AutomatedCar.Models;
 using System.Reflection;
 using Avalonia.Media.Imaging;
