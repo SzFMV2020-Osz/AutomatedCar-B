@@ -68,7 +68,7 @@
 								<RotateTransform  Angle="{Binding Angle}" />
 							</TransformGroup>
 						</Canvas.RenderTransform>
-                        <Image Opacity=".4" Width="{Binding Width}" Height="{Binding Height}"
+                        <Image Width="{Binding Width}" Height="{Binding Height}"
                             Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                         <Image.RenderTransform>
 							<TransformGroup>
