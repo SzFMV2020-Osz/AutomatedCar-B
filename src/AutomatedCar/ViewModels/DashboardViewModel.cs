@@ -11,7 +11,6 @@ namespace AutomatedCar.ViewModels
     {
         public static AutomatedCar controlledCar;
 
-
         public DashboardViewModel(Models.AutomatedCar car)
         {
             controlledCar = car;
