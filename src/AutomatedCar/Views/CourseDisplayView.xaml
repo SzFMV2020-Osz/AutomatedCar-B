@@ -91,6 +91,18 @@
                                     <TranslateTransform  Y="{Binding referenceOffsetY}" />
                                 </TransformGroup>
                             </Canvas.RenderTransform>
+                            <!-- <ItemsControl
+                            Items="{Binding NetPolygons}"
+                            Tag="{Binding Coordinates}"
+                            >
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas>
+                                            <Polyline Stroke="Red" Points="{Binding $parent[ItemsControl].Tag, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                                        </Canvas>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl> -->
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                         </Canvas>
                     </Canvas>
