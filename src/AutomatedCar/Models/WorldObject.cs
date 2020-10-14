@@ -1,75 +1,119 @@
 namespace AutomatedCar.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Avalonia;
-    using Avalonia.Controls.Shapes;
+    using Avalonia.Media;
+    using NetTopologySuite.Geometries;
     using ReactiveUI;
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
-    public class WorldObject : ReactiveObject
+    public abstract class WorldObject : ReactiveObject
     {
         private int _x;
         private int _y;
-        private double _angle;
-        public int _rotationCenterPointX = 90; // = width/2
-        public int _rotationCenterPointY = 120; // = height/2
 
-        public WorldObject()
-        {
-            this.ZIndex = 0;
-            this.Angle = 0;
-            this.IsHighlighted = false;
-        }
+        public SolidColorBrush Brush { get; private set; }
 
-        public WorldObject(int x, int y, string filename): this()
+        public Matrix RotMatrix { get; set; }
+
+        public WorldObject(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints)
         {
             this.X = x;
             this.Y = y;
-            this.FileName = filename;
+            this.Filename = filename;
+            this.Width = width;
+            this.Height = height;
+            this.referenceOffsetX = referenceOffsetX;
+            this.referenceOffsetY = referenceOffsetY;
+            this.RotMatrix = rotmatrix;
+            this.Polygons = this.GeneratePolygons(polyPoints);
+            polyPoints = this.RotatePoints(polyPoints);
+            this.NetPolygons = this.GenerateNetPolygons(polyPoints);
+            this.Angle = Math.Atan2(rotmatrix.M12, rotmatrix.M11) * 180 / Math.PI;
+            this.ZIndex = 1;
+            this.Brush = new SolidColorBrush(Color.Parse("blue"));
         }
 
-        public int ZIndex { get; set; }
-        
+        private double _angle;
+
         public double Angle
         {
-             get => this._angle;
-             set => this.RaiseAndSetIfChanged(ref this._angle, value);
+            get { return _angle; }
+            set => this.RaiseAndSetIfChanged(ref this._angle, value);
         }
 
-        public int RotationCenterPointX 
-        {
-             get => this._rotationCenterPointX;
-             set => this._rotationCenterPointX = value;
-        }
+        public bool IsColliding { get; set; }
 
-        public int RotationCenterPointY
-        {
-             get => this._rotationCenterPointY;
-             set => this._rotationCenterPointY = value;
-        }
+        public List<Polygon> Polygons { get; set; }
+
+        public List<LineString> NetPolygons { get; set; }
+
+        public int ZIndex { get; set; }
 
         public int Width { get; set; }
 
         public int Height { get; set; }
 
-        public string FileName { get; set; }
-
-        public Polygon[] Polygon { get; set; }
-        
-        public bool IsCollidable { get; protected set; }
-
-        public bool IsHighlighted { get; set; }
-
         public int X
         {
             get => this._x;
-            set => this.RaiseAndSetIfChanged(ref this._x, value);
+            protected set => this.RaiseAndSetIfChanged(ref this._x, value);
         }
 
         public int Y
         {
             get => this._y;
-            set => this.RaiseAndSetIfChanged(ref this._y, value);
+            protected set => this.RaiseAndSetIfChanged(ref this._y, value);
         }
 
-       
+        public int referenceOffsetX { get; set; }
+
+        public int referenceOffsetY { get; set; }
+
+        public string Filename { get; set; }
+
+        private List<List<Point>> RotatePoints(List<List<Point>> polyPoints)
+        {
+            List<List<Point>> rotatedPointsList = new List<List<Point>>();
+            foreach (List<Point> points in polyPoints)
+            {
+                List<Point> rotatedPoints = new List<Point>();
+                foreach (Point point in points)
+                {
+                    Point tempPoint = new Point(point.X + this.referenceOffsetX, point.Y + this.referenceOffsetY);
+                    rotatedPoints.Add(new Point(tempPoint.Transform(this.RotMatrix).X - this.referenceOffsetX, tempPoint.Transform(this.RotMatrix).Y - this.referenceOffsetY));
+                }
+
+                rotatedPointsList.Add(rotatedPoints);
+            }
+
+            return rotatedPointsList;
+        }
+
+        private List<Polygon> GeneratePolygons(List<List<Point>> polyPoints)
+        {
+            List<Polygon> objectPolygons = new List<Polygon>();
+            foreach (List<Point> points in polyPoints)
+            {
+                objectPolygons.Add(new Polygon() { Points = points });
+            }
+
+            return objectPolygons;
+        }
+
+        private List<LineString> GenerateNetPolygons(List<List<Point>> polyPoints)
+        {
+            List<LineString> objectLineStrings = new List<LineString>();
+            foreach (List<Point> points in polyPoints)
+            {
+                var coordinates = points.Select(point => new Coordinate(point.X, point.Y)).ToArray();
+                objectLineStrings.Add(new LineString(coordinates));
+            }
+
+            return objectLineStrings;
+        }
     }
 }

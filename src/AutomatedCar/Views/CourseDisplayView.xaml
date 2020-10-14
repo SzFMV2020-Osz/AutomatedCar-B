@@ -1,4 +1,4 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl  xmlns:customcontrols="clr-namespace:AutomatedCar.Views.CustomControls" xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -7,28 +7,33 @@
              xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
              xmlns:local="clr-namespace:AutomatedCar;assembly=AutomatedCar"
              xmlns:visualization="clr-namespace:AutomatedCar.Visualization;assembly=AutomatedCar"
-             >
+             DataContext="{Binding World}"
+>
 
     <UserControl.Styles>
         <Style Selector="ItemsControl#CourseDisplay">
             <Setter Property="Background" Value="#97D1A2"/>
         </Style>
-        <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
+        <!-- <Style Selector="ItemsControl#CourseDisplay > ContentPresenter">
             <Setter Property="Canvas.Left" Value="{Binding X, Mode=OneWay}"/>
             <Setter Property="Canvas.Top" Value="{Binding Y, Mode=OneWay}"/>
             <Setter Property="ZIndex" Value="{Binding ZIndex, Mode=OneWay}"/>
-        </Style>
+        </Style> -->
     </UserControl.Styles>
 
-    <ScrollViewer Width="960" Height="720" HorizontalAlignment="Left" VerticalAlignment="Top">
+    <ScrollViewer Name="MyScrollViewer"
+                  Width="{Binding VisibleWidth, Mode=OneWay}"
+                  Height="{Binding VisibleHeight, Mode=OneWay}"
+                  VerticalScrollBarVisibility="Hidden"
+                  HorizontalScrollBarVisibility="Hidden"
+                  HorizontalAlignment="Left" VerticalAlignment="Top">
+
         <ItemsControl Name="CourseDisplay"
-			DataContext="{Binding World}"
-            Items="{Binding WorldObjects, Mode=OneWay}"
-            Width="{Binding Width, Mode=OneWay}"
-            Height="{Binding Height, Mode=OneWay}"
-            HorizontalAlignment="Left" VerticalAlignment="Top"
-            >
-            
+                      Items="{Binding WorldObjects, Mode=OneWay}"
+                      Width="{Binding Width, Mode=OneWay}"
+                      Height="{Binding Height, Mode=OneWay}"
+                      HorizontalAlignment="Left" VerticalAlignment="Top">
+
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
@@ -36,120 +41,132 @@
             </ItemsControl.ItemsPanel>
 
             <ItemsControl.DataTemplates>
-                <DataTemplate DataType="{x:Type models:Circle}">
+                <DataTemplate DataType="{x:Type models:AutomatedCar}">
+                  <Canvas>
+                    <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+						<!-- Camera -->
+                        <customcontrols:SensorCustomControl IsVisible="{Binding CameraVisible}" Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="0,-20" Opacity="60"></customcontrols:SensorCustomControl>
+
+						<!-- Radar -->
+						<customcontrols:SensorCustomControl IsVisible="{Binding RadarVisible}" Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="0,-120" Opacity="60"></customcontrols:SensorCustomControl>
+
+						<!-- Front ultrasound sensors -->
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="-30,-110" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-45,-105" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="30,-110" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="45,-105" Opacity="60"></customcontrols:SensorCustomControl>
+
+						<!-- Rear ultrasound sensors -->
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-25,120" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-45,105" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="25,120" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl IsVisible="{Binding UltraSoundVisible}" Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="45,105" Opacity="60"></customcontrols:SensorCustomControl>
+
+
+						<Canvas.RenderTransform>
+							<TransformGroup>
+								<RotateTransform  Angle="{Binding Angle}" />
+							</TransformGroup>
+						</Canvas.RenderTransform>
+                        <Image Width="{Binding Width}" Height="{Binding Height}"
+                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                        <Image.RenderTransform>
+							<TransformGroup>
+								<TranslateTransform  X="{Binding referenceOffsetX}" />
+								<TranslateTransform  Y="{Binding referenceOffsetY}" />
+							</TransformGroup>
+						</Image.RenderTransform>
+                        </Image>
+                    </Canvas>
                     <Canvas>
-                        <Ellipse Fill="black" Width="{Binding Width}" Height="{Binding Height}" ZIndex="10"/>
+                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                    </Canvas>
+                </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:Road}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
                     </Canvas>
                 </DataTemplate>
-				<DataTemplate DataType="{x:Type models:AutomatedCar}">
-					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
-						
-						<Canvas.RenderTransform>
+                <DataTemplate DataType="{x:Type models:WorldObject}">
+                <Canvas>
+                    <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                        <Canvas.RenderTransform>
 							<TransformGroup>
 								<RotateTransform  Angle="{Binding Angle}" />
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
 							</TransformGroup>
-							
 						</Canvas.RenderTransform>
-
-						<Image
-							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-						<Polyline IsVisible="{Binding $parent[ItemsControl].DataContext.DebugOn}" Stroke="{Binding Brush, Mode=OneWay}"
-									Points="{Binding Geometry.Points, Mode=OneWay}" />
-
-						<Polyline IsVisible="{Binding IsHighlighted, Mode=OneWay}"
-									Stroke="yellow"
-									StrokeThickness="4"
-									Opacity=".7"
-									Points="{Binding Geometry.Points, Mode=OneWay}" />
-
-						<Polyline
-							IsVisible="{Binding RadarVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding RadarBrush, Mode=OneWay}"
-							Points="{Binding RadarGeometry.Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[0].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[1].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[2].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[3].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[4].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[5].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[6].Points, Mode=OneWay}" />
-
-                        <Polyline
-							IsVisible="{Binding UltraSoundVisible, Mode=OneWay}"
-							Opacity=".4"
-							Fill="{Binding UltraSoundBrush, Mode=OneWay}"
-							Points="{Binding UltraSoundGeometries[7].Points, Mode=OneWay}" />
-
-						<Polyline
-							IsVisible="{Binding CameraVisible, Mode=OneWay}"
-							Opacity=".6"
-							Fill="{Binding CameraBrush, Mode=OneWay}"
-							Points="{Binding CameraGeometry.Points, Mode=OneWay}" />
-
-					</Canvas>
-				</DataTemplate>
-				<DataTemplate DataType="{x:Type models:WorldObject}">
-					<Canvas  Width="{Binding Width}" Height="{Binding Height}" >
-
-						<Canvas.RenderTransform>
-							<TransformGroup>
-								<RotateTransform  Angle="{Binding Angle}" />
-								<TranslateTransform  X="{Binding RotationCenterPointX}" />
-								<TranslateTransform  Y="{Binding RotationCenterPointY}" />
-							</TransformGroup>
-
-						</Canvas.RenderTransform>
-
-						<Image
-							Source="{Binding FileName, Converter={x:Static visualization:WorldObjectTransformer.Instance}}"/>
-						<Polyline Stroke="{Binding Brush, Mode=OneWay}"
-									Points="{Binding Geometry.Points, Mode=OneWay}" />
-
-						<Polyline IsVisible="{Binding IsHighlighted, Mode=OneWay}"
-									Stroke="yellow"
-									StrokeThickness="4"
-									Opacity=".6"
-									Points="{Binding Geometry.Points, Mode=OneWay}" />						
-					</Canvas>
-				</DataTemplate>
+                        <Image Width="{Binding Width}" Height="{Binding Height}"
+                            Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                            <Image.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+						    </Image.RenderTransform>
+                        </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
             </ItemsControl.DataTemplates>
         </ItemsControl>
     </ScrollViewer>

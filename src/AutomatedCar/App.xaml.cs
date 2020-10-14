@@ -10,7 +10,11 @@ namespace AutomatedCar
     using Avalonia.Controls.ApplicationLifetimes;
     using Avalonia.Markup.Xaml;
     using Avalonia.Media;
+    using Logic;
+    using NetTopologySuite.Geometries;
     using Newtonsoft.Json.Linq;
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     public class App : Application
     {
@@ -23,47 +27,56 @@ namespace AutomatedCar
         {
             if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                JsonParser parser = new JsonParser();
+                parser.populateWorldObjects(World.Instance, $"AutomatedCar.Assets.test_world.json");
+
+                var world = World.Instance;
+
                 StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly()
                     .GetManifestResourceStream($"AutomatedCar.Assets.worldobject_polygons.json"));
                 string json_text = reader.ReadToEnd();
                 dynamic stuff = JObject.Parse(json_text);
-                List<Point> points = new List<Point>();
+                List<Avalonia.Point> points = new List<Avalonia.Point>();
                 foreach (var i in stuff["objects"][0]["polys"][0]["points"])
                 {
-                    points.Add(new Point(i[0].ToObject<int>(), i[1].ToObject<int>()));
+                    points.Add(new Avalonia.Point(i[0].ToObject<int>(), i[1].ToObject<int>()));
                 }
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
-                World world = World.Instance;
-                world.PopulateInstance("config.json");
+                var pointlist = new List<Coordinate>();
+                pointlist.Add(new Coordinate(0,0));
+                pointlist.Add(new Coordinate(70,0));
 
-                world.Width = 2000;
-                world.Height = 1000;
+                var pointlist2 = new List<Coordinate>();
+                pointlist2.Add(new Coordinate(70,70));
+                pointlist2.Add(new Coordinate(100,100));
 
-                Circle circle = new Circle(400, 200, "circle.png", 20);
-                circle.Width = 40;
-                circle.Height = 40;
-                circle.ZIndex = 2;
-                world.AddObject(circle);
+                int W = 108;
+                int H = 240;
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white.png");
-                controlledCar.Width = 108;
-                controlledCar.Height = 240;
+                AutomatedCar controlledCar = new Models.AutomatedCar(50+(W/2), 50+(H/2), "car_1_white");
+                controlledCar.Angle = 90;
+                controlledCar.Width = W;
+                controlledCar.Height = H;
+                controlledCar.referenceOffsetX = -(controlledCar.Width/2);
+                controlledCar.referenceOffsetY = -(controlledCar.Height/2);
+                controlledCar.NetPolygons = new List<NetTopologySuite.Geometries.LineString>();
+                controlledCar.NetPolygons.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));
                 controlledCar.CameraBrush = new SolidColorBrush(Color.Parse("red"));
 
-                List<Point> sensorPoints = new List<Point>();
-                sensorPoints.Add(new Point(51, 239));
-                sensorPoints.Add(new Point(200, 100));
-                sensorPoints.Add(new Point(100, 300));
+                List<Avalonia.Point> sensorPoints = new List<Avalonia.Point>();
+                sensorPoints.Add(new Avalonia.Point(51, 239));
+                sensorPoints.Add(new Avalonia.Point(200, 100));
+                sensorPoints.Add(new Avalonia.Point(100, 300));
 
-                List<Point> cameraSensorPoints = new List<Point>();
-                cameraSensorPoints.Add(new Point(100, 200));
-                cameraSensorPoints.Add(new Point(300, 200));
-                cameraSensorPoints.Add(new Point(150, 300));
+                List<Avalonia.Point> cameraSensorPoints = new List<Avalonia.Point>();
+                cameraSensorPoints.Add(new Avalonia.Point(100, 200));
+                cameraSensorPoints.Add(new Avalonia.Point(300, 200));
+                cameraSensorPoints.Add(new Avalonia.Point(150, 300));
 
                 controlledCar.RadarGeometry = new PolylineGeometry(sensorPoints, false);
 
