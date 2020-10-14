@@ -102,6 +102,7 @@ namespace AutomatedCar.SystemComponents
 
             this.virtualFunctionBus.HMIPacket = this.hmiPacket;
             this.virtualFunctionBus.DebugPacket = this.debugPacket;
+
         }
 
         #region InputHandler

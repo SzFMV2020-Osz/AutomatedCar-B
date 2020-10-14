@@ -1,8 +1,9 @@
 using Avalonia.OpenGL;
 using System;
+    using ReactiveUI;
 namespace AutomatedCar.SystemComponents.Packets
 {
-    public class HMIPacket : IReadOnlyHMIPacket
+    public class HMIPacket : ReactiveObject, IReadOnlyHMIPacket
     {
         private double gaspedal;
         private double breakpedal;
@@ -35,9 +36,12 @@ namespace AutomatedCar.SystemComponents.Packets
 
         public bool ParkingPilot { get => this.parkingPilot; set => this.parkingPilot = value; }
 
-        public bool TurnSignalRight { get => this.turnSignalRight; set => this.turnSignalRight = value; }
+        public bool TurnSignalRight { get => this.turnSignalRight;
+        set => this.RaiseAndSetIfChanged(ref this.turnSignalRight, value); }
 
-        public bool TurnSignalLeft { get => this.turnSignalLeft; set => this.turnSignalLeft = value; }
+        public bool TurnSignalLeft { get => this.turnSignalLeft;
+         set => this.RaiseAndSetIfChanged(ref this.turnSignalLeft, value);
+         }
 
         public string Sign { get => this.sign; set => this.sign = value; }
 
@@ -261,7 +265,8 @@ namespace AutomatedCar.SystemComponents.Packets
         {
             if (right)
             {
-                this.turnSignalRight = !this.turnSignalRight;
+                // this.turnSignalRight = !this.turnSignalRight;
+                TurnSignalRight = !TurnSignalRight;
             }
         }
 
@@ -269,7 +274,8 @@ namespace AutomatedCar.SystemComponents.Packets
         {
             if (left)
             {
-                this.turnSignalLeft = !this.turnSignalLeft;
+                // this.turnSignalLeft = !this.turnSignalLeft;
+                TurnSignalLeft = !TurnSignalLeft;
             }
         }
 
