@@ -16,8 +16,10 @@ namespace AutomatedCar.Models
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
+        /*public AutomatedCar(int x, int y, string filename)
+            : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
         public AutomatedCar(int x, int y, string filename)
-            : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))
+            : base(x, y, filename, 0, 0, 0, 0, new Matrix(1, 0, 0, 1, 1, 1), new List<List<Point>>())
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
