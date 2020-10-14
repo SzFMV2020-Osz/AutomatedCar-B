@@ -1,14 +1,17 @@
 namespace AutomatedCar.Models
 {
     using System.Collections.Generic;
-    using Avalonia.Controls.Shapes;
+    using System.Linq;
+    using Avalonia;
+    using NetTopologySuite.Geometries;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     public class Road : WorldObject
     {
-        public Road(int x, int y, string filename, bool iscolliding, RotationMatrix rotmatrix, List<Polygon> roadplace)
-            : base(x, y, filename, iscolliding, rotmatrix)
+        public Road(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Avalonia.Point>> polyPoints)
+            : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
-            this.Polygons.AddRange(roadplace);
+            this.IsColliding = false;
             this.ZIndex = 0;
         }
     }

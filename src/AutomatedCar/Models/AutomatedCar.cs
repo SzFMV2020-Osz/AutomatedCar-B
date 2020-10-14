@@ -16,8 +16,10 @@ namespace AutomatedCar.Models
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
+        /*public AutomatedCar(int x, int y, string filename)
+            : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
         public AutomatedCar(int x, int y, string filename)
-            : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))
+            : base(x, y, filename, 0, 0, 0, 0, new Matrix(1, 0, 0, 1, 1, 1), new List<List<Point>>())
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
@@ -27,6 +29,8 @@ namespace AutomatedCar.Models
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
+
+        public HumanMachineInterface HumanMachineInterface { get => this.humanMachineInterface; }
 
         public Geometry Geometry { get; set; }
 
@@ -92,6 +96,11 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
+        }
+
+        public void InputHandler()
+        {
+            humanMachineInterface.InputHandler();
         }
 
         private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)

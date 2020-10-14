@@ -19,13 +19,30 @@ namespace AutomatedCar.Views
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            Keyboard.Keys.Add(e.Key);
+            if (Keyboard.IsToggleKeyPressed(e.Key))
+            {
+                Keyboard.ToggleableKeys.Add(e.Key);
+            }
+            else
+            {
+                if (Keyboard.IsPressKeysPressed(e.Key))
+                {
+                    Keyboard.PressableKeys.Add(e.Key);
+                }
+
+                Keyboard.Keys.Add(e.Key);
+            }
+
             base.OnKeyDown(e);
         }
 
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            Keyboard.Keys.Remove(e.Key);
+            if (!Keyboard.IsToggleKeyPressed(e.Key))
+            {
+                Keyboard.Keys.Remove(e.Key);
+            }
+
             base.OnKeyUp(e);
         }
     }
