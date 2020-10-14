@@ -6,11 +6,11 @@ namespace AutomatedCar.Models
 
     public class CrossWalk : WorldObject
     {
-        public CrossWalk(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints)
-            : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
+        public CrossWalk(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix)
+            : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, new List<List<Point>>())
         {
             this.IsColliding = false;
-            this.ZIndex = 0;
+            this.ZIndex = 1;
         }
     }
 }
