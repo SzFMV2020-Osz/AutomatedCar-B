@@ -25,6 +25,9 @@ namespace AutomatedCar
             {
                 speed = 300;
             }
+            
+            world.ControlledCar.InputHandler();
+
             if (Keyboard.IsKeyDown(Key.Up))
             {
                 this.world.ControlledCar.MoveY(-speed);
