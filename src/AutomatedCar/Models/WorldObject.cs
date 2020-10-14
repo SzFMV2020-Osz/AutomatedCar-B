@@ -109,7 +109,7 @@ namespace AutomatedCar.Models
             List<LineString> objectLineStrings = new List<LineString>();
             foreach (List<Point> points in polyPoints)
             {
-                var coordinates = points.Select(point => new Coordinate(point.X, point.Y)).ToArray();
+                var coordinates = points.Select(point => new Coordinate(point.X + this.referenceOffsetX + this.X, point.Y + this.referenceOffsetY + this.Y)).ToArray();
                 objectLineStrings.Add(new LineString(coordinates));
             }
 
