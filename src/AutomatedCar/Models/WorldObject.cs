@@ -29,8 +29,8 @@ namespace AutomatedCar.Models
             this.referenceOffsetX = referenceOffsetX;
             this.referenceOffsetY = referenceOffsetY;
             this.RotMatrix = rotmatrix;
-            polyPoints = this.RotatePoints(polyPoints);
             this.Polygons = this.GeneratePolygons(polyPoints);
+            polyPoints = this.RotatePoints(polyPoints);
             this.NetPolygons = this.GenerateNetPolygons(polyPoints);
             this.Angle = Math.Atan2(rotmatrix.M12, rotmatrix.M11) * 180 / Math.PI;
             this.ZIndex = 1;
@@ -80,7 +80,13 @@ namespace AutomatedCar.Models
             List<List<Point>> rotatedPointsList = new List<List<Point>>();
             foreach (List<Point> points in polyPoints)
             {
-                var rotatedPoints = points.Select(point => new Point(point.Transform(this.RotMatrix).X, point.Transform(this.RotMatrix).Y)).ToList();
+                List<Point> rotatedPoints = new List<Point>();
+                foreach (Point point in points)
+                {
+                    Point tempPoint = new Point(point.X + this.referenceOffsetX, point.Y + this.referenceOffsetY);
+                    rotatedPoints.Add(new Point(tempPoint.Transform(this.RotMatrix).X - this.referenceOffsetX, tempPoint.Transform(this.RotMatrix).Y - this.referenceOffsetY));
+                }
+
                 rotatedPointsList.Add(rotatedPoints);
             }
 
@@ -103,7 +109,7 @@ namespace AutomatedCar.Models
             List<LineString> objectLineStrings = new List<LineString>();
             foreach (List<Point> points in polyPoints)
             {
-                var coordinates = points.Select(point => new Coordinate(point.X + this.referenceOffsetX + this.X, point.Y + this.referenceOffsetY + this.Y)).ToArray();
+                var coordinates = points.Select(point => new Coordinate(point.X, point.Y)).ToArray();
                 objectLineStrings.Add(new LineString(coordinates));
             }
 
