@@ -83,6 +83,321 @@
                     </Canvas>
                 </Canvas>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type models:CrossRoad18}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[3], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[4], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[5], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[6], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[7], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[8], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[9], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[10], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[11], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[12], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[13], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[14], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[15], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[16], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[17], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:RotaryRoad}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[3], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[4], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[5], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[6], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[7], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[8], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[9], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[10], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[11], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[12], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[13], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[14], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[15], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[16], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[17], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:CrossRoad16}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[3], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[4], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[5], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[6], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[7], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[8], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[9], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[10], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[11], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[12], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[13], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[14], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[15], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:TjunctionRoad}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[3], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[4], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[5], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[6], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[7], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:CrossParking}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:ParallelParking}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                        <Canvas>
+                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[1], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
                 <DataTemplate DataType="{x:Type models:Road}">
                     <Canvas>
                         <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
@@ -109,6 +424,26 @@
                         </Canvas>
                         <Canvas>
                             <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[2], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                        </Canvas>
+                    </Canvas>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type models:CrossWalk}">
+                    <Canvas>
+                        <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <RotateTransform  Angle="{Binding Angle}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <Image Width="{Binding Width}" Height="{Binding Height}"
+                                Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                        <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
                         </Canvas>
                     </Canvas>
                 </DataTemplate>

@@ -203,8 +203,7 @@ namespace AutomatedCar.Logic
             }
             else if (type == "crosswalk")
             {
-                currentObject = null;
-                //currentObject = new CrossWalk(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix);
+                currentObject = new CrossWalk(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix);
             }
             else
             {
