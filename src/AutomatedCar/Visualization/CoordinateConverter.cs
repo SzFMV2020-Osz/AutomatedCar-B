@@ -15,12 +15,9 @@ namespace AutomatedCar.Visualization
             System.Console.WriteLine(value.GetType());
             List<Avalonia.Point> list = new List<Avalonia.Point>();
 
-            foreach (var ntg in (List<LineString>)value)
+            foreach (var coordinate in (NetTopologySuite.Geometries.Coordinate[])value)
             {
-                foreach (var coordinate in ntg.Coordinates)
-                {
-                    list.Add(new Avalonia.Point(coordinate.X, coordinate.Y));
-                }
+                list.Add(new Avalonia.Point(coordinate.X, coordinate.Y));
             }
 
             return list.ToArray();

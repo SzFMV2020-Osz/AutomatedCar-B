@@ -60,8 +60,22 @@
                         </Image>
                     </Canvas>
                     <Canvas>
-                        <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
-                    </Canvas>
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform  X="{Binding X}" />
+                                    <TranslateTransform  Y="{Binding Y}" />
+                                    <TranslateTransform  X="{Binding referenceOffsetX}" />
+                                    <TranslateTransform  Y="{Binding referenceOffsetY}" />
+                                </TransformGroup>
+                            </Canvas.RenderTransform>
+                            <ItemsControl Items="{Binding NetPolygons}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Polyline Stroke="Red" Points="{Binding Coordinates, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Canvas>
                 </Canvas>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type models:Road}">
@@ -98,7 +112,6 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                         </Canvas>
                     </Canvas>
                 </DataTemplate>
@@ -129,7 +142,13 @@
                                     <TranslateTransform  Y="{Binding referenceOffsetY}" />
                                 </TransformGroup>
                             </Canvas.RenderTransform>
-                            <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                            <ItemsControl Items="{Binding NetPolygons}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Polyline Stroke="Red" Points="{Binding Coordinates, Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Canvas>
                     </Canvas>
                 </DataTemplate>
