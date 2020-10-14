@@ -164,7 +164,7 @@ namespace AutomatedCar.Logic
                      type == "parking_space_parallel")
             {
                 // Parking place, Parking bollard ...
-                currentObject = new PrallelParking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+                currentObject = new ParallelParking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
             else if (type == "roadsign_parking_right" ||
                      type == "roadsign_priority_stop" ||

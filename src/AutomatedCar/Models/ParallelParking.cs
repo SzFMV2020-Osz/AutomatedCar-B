@@ -4,9 +4,9 @@ namespace AutomatedCar.Models
     using Avalonia;
     using Avalonia.Controls.Shapes;
 
-    public class PrallelParking : WorldObject
+    public class ParallelParking : WorldObject
     {
-        public PrallelParking(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints)
+        public ParallelParking(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints)
             : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
             this.IsColliding = false;
