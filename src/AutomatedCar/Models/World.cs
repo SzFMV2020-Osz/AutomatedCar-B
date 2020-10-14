@@ -6,10 +6,6 @@
     using System.Drawing.Printing;
     using System.IO;
     using System.Linq;
-    using Avalonia;
-    using Avalonia.Controls.Shapes;
-    using Avalonia.Media;
-    using System.IO;
     using System.Reactive;
     using Avalonia;
     using Avalonia.Controls;
