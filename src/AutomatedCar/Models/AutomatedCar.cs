@@ -80,7 +80,7 @@ namespace AutomatedCar.Models
         public bool RadarVisible
         {
             get => radarVisible;
-            set => this.RaiseAndSetIfChanged(ref radarVisible, value);// virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
         }
 
         public SolidColorBrush UltraSoundBrush { get; set; }
@@ -91,7 +91,7 @@ namespace AutomatedCar.Models
         public bool UltraSoundVisible
         {
             get => ultraSoundVisible;
-            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value);//virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
         }
         public SolidColorBrush CameraBrush { get; set; }
 
@@ -101,7 +101,7 @@ namespace AutomatedCar.Models
         public bool CameraVisible
         {
             get => cameraVisible;
-            set => this.RaiseAndSetIfChanged(ref cameraVisible, value);//virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
         }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
