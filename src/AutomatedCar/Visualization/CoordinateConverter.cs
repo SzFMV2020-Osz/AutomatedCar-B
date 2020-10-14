@@ -12,13 +12,14 @@ namespace AutomatedCar.Visualization
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
             List<NetTopologySuite.Geometries.LineString> NTGeometry = (value as List<NetTopologySuite.Geometries.LineString>);
             List<Avalonia.Point> list = new List<Avalonia.Point>();
 
-            foreach(var coordinate in NTGeometry[0].Coordinates)
-            {
-                list.Add(new Avalonia.Point(coordinate.X, coordinate.Y));
+            foreach(var ntg in NTGeometry) {
+                foreach(var coordinate in ntg.Coordinates)
+                {
+                    list.Add(new Avalonia.Point(coordinate.X, coordinate.Y));
+                }
             }
             
             return list.ToArray();
