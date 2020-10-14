@@ -18,14 +18,14 @@ namespace AutomatedCar
         protected override void Tick()
         {
             world.ControlledCar.InputHandler();
-            
+
             int speed = 10;
 
             if (Keyboard.IsKeyDown(Key.Space))
             {
                 speed = 300;
             }
-            
+
             world.ControlledCar.InputHandler();
 
             if (Keyboard.IsKeyDown(Key.Up))
@@ -48,12 +48,12 @@ namespace AutomatedCar
                 this.world.ControlledCar.MoveX(speed);
             }
 
-            if (Keyboard.IsKeyDown(Key.A))
+            if (Keyboard.IsKeyDown(Key.B))
             {
                 this.world.ControlledCar.Angle += 5;
             }
 
-            if (Keyboard.IsKeyDown(Key.D))
+            if (Keyboard.IsKeyDown(Key.N))
             {
                 this.world.ControlledCar.Angle -= 5;
             }
