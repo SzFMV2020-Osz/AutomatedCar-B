@@ -37,7 +37,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputPolygonSetDoesentChangeTheStateOfPolygon()
+        public void PolygonSetDoesNotChangeTheStateOfPolygonWithNoInput()
         {
             var polygon = debugPacket.Polygon;
             debugPacket.PolygonSet(false);
@@ -46,7 +46,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusInputPolygonSetSwitchBetweenOnAndOff()
+        public void PolygonSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             var polygon = debugPacket.Polygon;
             for (int i = 0; i < 10; i++)
@@ -58,7 +58,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputUtrasoundSensorSetDoesentChangeTheStateOfUtrasoundSensor()
+        public void UtrasoundSensorSetDoesNotChangeTheStateOfUtrasoundSensorWithNoInput()
         {
             var ultrasound = debugPacket.UtrasoundSensor;
             debugPacket.UtrasoundSensorSet(false);
@@ -67,7 +67,7 @@ namespace Tests.SystemComponents.Packets
         }
         
         [Fact]
-        public void WithNoumerusInputUtrasoundSensorSetSwitchBetweenOnAndOff()
+        public void UtrasoundSensorSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             var ultrasound = debugPacket.UtrasoundSensor;
             for (int i = 0; i < 10; i++)
@@ -79,7 +79,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputRadarSensorSetDoesentChangeTheStateOfRadarSensor()
+        public void RadarSensorSetDoesNotChangeTheStateOfRadarSensorWithNoInput()
         {
             var radar = debugPacket.RadarSensor;
             debugPacket.RadarSensorSet(false);
@@ -88,7 +88,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusInputRadarSensorSetSwitchBetweenOnAndOff()
+        public void RadarSensorSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             var radar = debugPacket.RadarSensor;
             for (int i = 0; i < 10; i++)
@@ -100,7 +100,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputBoardCameraSetDoesentChangeTheStateOfBoardCamera()
+        public void BoardCameraSetDoesNotChangeTheStateOfBoardCameraWithNoInput()
         {
             var camera = debugPacket.BoardCamera;
             debugPacket.BoardCameraSet(false);
@@ -109,7 +109,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusInputBoardCameraSetSwitchBetweenOnAndOff()
+        public void BoardCameraSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             var camera = debugPacket.BoardCamera;
             for (int i = 0; i < 10; i++)

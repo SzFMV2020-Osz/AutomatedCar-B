@@ -98,7 +98,7 @@ namespace Tests.SystemComponents.Packets
         [InlineData(3, Gears.D)]
         [InlineData(4, Gears.D)]
         [InlineData(500, Gears.D)]
-        public void WithNumerousGearshiftsUpwardGearIncreasesTillDrivemode(int gearshiftsUp, Gears gear)
+        public void GearIncreasesTillDrivemodeWithNumerousGearshiftsUpwardInput(int gearshiftsUp, Gears gear)
         {
             for (int i = 0; i < gearshiftsUp; i++)
             {
@@ -114,7 +114,7 @@ namespace Tests.SystemComponents.Packets
         [InlineData(0, Gears.D)]
         [InlineData(4, Gears.P)]
         [InlineData(500, Gears.P)]
-        public void WithNumerousGearshiftsDownwardGearDecreasesTillParkingmode(int gearshiftsDown, Gears gear)
+        public void GearDecreasesTillParkingmodeWithNumerousGearshiftsDownwardInput(int gearshiftsDown, Gears gear)
         {
             hmiPacket.Gear = Gears.D;
             for (int i = 0; i < gearshiftsDown; i++)
@@ -129,7 +129,7 @@ namespace Tests.SystemComponents.Packets
         [InlineData(10, Gears.R)]
         [InlineData(10, Gears.N)]
         [InlineData(10, Gears.D)]
-        public void WithBothGearUpAndGearDownBeingTrueGearDoesentChangeItsValue(int indx, Gears gear)
+        public void GearDoesNotChangeItsValueWithBothGearUpAndGearDownBeingTrue(int indx, Gears gear)
         {
             hmiPacket.Gear = gear;
             for (int i = 0; i < indx; i++)
@@ -144,7 +144,7 @@ namespace Tests.SystemComponents.Packets
         [InlineData(10, Gears.R)]
         [InlineData(10, Gears.N)]
         [InlineData(10, Gears.D)]
-        public void WithBothGearUpAndGearDownBeingFalseGearDoesentChangeItsValue(int indx, Gears gear)
+        public void GearDoesNotChangeItsValueWithBothGearUpAndGearDownBeingFalse(int indx, Gears gear)
         {
             hmiPacket.Gear = gear;
             for (int i = 0; i < indx; i++)
@@ -159,7 +159,7 @@ namespace Tests.SystemComponents.Packets
         #region AccTests
 
         [Fact]
-        public void WithNoInputAccSetDoesentChangeTheStateOfAcc()
+        public void AccSetDoesNotChangeTheStateOfAccWithNoInput()
         {
             var acc = hmiPacket.Acc;            
             hmiPacket.AccSet(false);
@@ -168,7 +168,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputAccSpeedSetDoesentChangeTheDesiredSpeed()
+        public void AccSpeedSetDoesNotChangeTheDesiredSpeedWithNoInput()
         {
             var speed = hmiPacket.AccSpeed;           
             hmiPacket.AccSpeedSet(false, false);
@@ -177,7 +177,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputAccDistenceSetDoesentChangeTheDesiredDistance()
+        public void AccDistenceSetDoesNotChangeTheDesiredDistanceWithNoInput()
         {
             var distance = hmiPacket.AccDistance;
             hmiPacket.AccDistanceSet(false);
@@ -190,7 +190,7 @@ namespace Tests.SystemComponents.Packets
         [InlineData(true, true)]
         [InlineData(false, false)]
         [InlineData(false, true)]
-        public void WithVariousInputAccTurnsOnAndOff(bool acc, bool packet) 
+        public void AccTurnsOnAndOffWithVariousInput(bool acc, bool packet) 
         {
             hmi.Acc = acc;
             hmiPacket.Acc = packet;
@@ -216,7 +216,7 @@ namespace Tests.SystemComponents.Packets
         [InlineData(6, 1.2)]
         [InlineData(7, 1.4)]
         [InlineData(8, 0.8)]
-        public void WithNumerousTrueInputAccDistanceGoesToMaxValueThenBackToMin(int indx, double value)
+        public void AccDistanceGoesToMaxValueThenBackToMinWithNumerousTrueInput(int indx, double value)
         {
             for (int i = 0; i < indx; i++)
             {
@@ -226,7 +226,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusAccSpeedPlusInputItsValueGoesUpToMaxValue()
+        public void AccSpeedPlusGoesUpToItsMaxValueWithNumerousAccSpeedPlusInput()
         {
             var value = hmiPacket.AccSpeed;
             for (int i = 0; i < 30; i++)
@@ -242,7 +242,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusAccSpeedMinusInputItsValueGoesDownToMinValue()
+        public void AccSpeedValueGoesDownToItsMinValueWithNumerousAccSpeedMinusInput()
         {
             var value = hmiPacket.AccSpeed = 160;
             for (int i = 0; i < 30; i++)
@@ -258,7 +258,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithBothAccSpeedMinusAndAccSpeedPlusBeingTrueItsValueDoesentChange()
+        public void AccSpeedValueDoesNotChangeWithBothAccSpeedMinusAndAccSpeedPlusBeingTrue()
         {
             var value = hmiPacket.AccSpeed = 70;
             for (int i = 0; i < 10; i++)
@@ -269,7 +269,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithBothAccSpeedMinusAndAccSpeedPlusBeingFalseItsValueDoesentChange()
+        public void AccSpeedValueDoesNotChangeWithBothAccSpeedMinusAndAccSpeedPlusBeingFalse()
         {
             var value = hmiPacket.AccSpeed = 70;
             for (int i = 0; i < 10; i++)
@@ -372,7 +372,7 @@ namespace Tests.SystemComponents.Packets
 
         #region ToogleInputTests
         [Fact]
-        public void WithNoInputTurnSignalRightSetDoesentChangeTheStateOfTurnSignalRight()
+        public void SignalRightSetDoesNotChangeTheStateOfTurnSignalRightWithNoInputTurn()
         {
             var tsright = hmiPacket.TurnSignalRight;
             hmiPacket.TurnSignalRightSet(false);
@@ -381,7 +381,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputTurnSignalLeftSetDoesentChangeTheStateOfTurnSignalLeftt()
+        public void TurnSignalLeftSetDoesNotChangeTheStateOfTurnSignalLeftWithNoInput()
         {
             var tsleft = hmiPacket.TurnSignalLeft;
             hmiPacket.TurnSignalLeftSet(false);
@@ -390,7 +390,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputLaneKeepingSetDoesentChangeTheStateOfLaneKeeping()
+        public void LaneKeepingSetDoesNotChangeTheStateOfLaneKeepingWithNoInput()
         {
             var lanekeep = hmiPacket.LaneKeeping;
             hmiPacket.LaneKeepingSet(false);
@@ -399,7 +399,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoInputParkingPilotSetDoesentChangeTheStateOfParkingPilot()
+        public void ParkingPilotSetDoesNotChangeTheStateOfParkingPilotWithNoInput()
         {
             var parkingPilot = hmiPacket.ParkingPilot;
             hmiPacket.ParkingPilotSet(false);
@@ -408,7 +408,7 @@ namespace Tests.SystemComponents.Packets
         }
         
         [Fact]
-        public void WithNoumerusInputTurnSignalRightSwitchBetweenOnAndOff()
+        public void TurnSignalRightSwitchBetweenOnAndOffWithNumerousInput()
         {
             var tsright = hmiPacket.TurnSignalRight;
             for (int i = 0; i < 10; i++)
@@ -420,7 +420,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusInputTurnSignalLeftSwitchBetweenOnAndOff()
+        public void TurnSignalLeftSwitchBetweenOnAndOffWithNumerousInput()
         {
             var tsleft = hmiPacket.TurnSignalLeft;
             for (int i = 0; i < 10; i++)
@@ -432,7 +432,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusInputLaneKeepingSwitchBetweenOnAndOff()
+        public void LaneKeepingSwitchBetweenOnAndOffWithNumerousInput()
         {
             var lanekeep = hmiPacket.LaneKeeping;
             for (int i = 0; i < 10; i++)
@@ -444,7 +444,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void WithNoumerusInputParkingPilotSwitchBetweenOnAndOff()
+        public void ParkingPilotSwitchBetweenOnAndOffWithNumerousInput()
         {
             var parkingPilot = hmiPacket.ParkingPilot;
             for (int i = 0; i < 10; i++)
