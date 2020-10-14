@@ -27,7 +27,7 @@ namespace AutomatedCar.Views.CustomControls
         public Vector Offset { get { return this.GetValue(this.OffsetProperty); } set { this.SetValue(this.OffsetProperty, value); } }
 
         public byte Opacity { get { return this.GetValue(this.OpacityProperty); } set { this.SetValue(this.OpacityProperty, value); } }
-:Wq
+
         public DirectProperty<SensorCustomControl, double> RotationProperty = AvaloniaProperty.RegisterDirect<SensorCustomControl, double>(nameof(Rotation), s => s.Rotation, (s, v) => s.Rotation = v);
 
         public DirectProperty<SensorCustomControl, double> DistanceProperty = AvaloniaProperty.RegisterDirect<SensorCustomControl, double>(nameof(Distance), s => s.Distance, (s, v) => s.Distance = v);
