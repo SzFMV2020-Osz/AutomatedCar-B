@@ -60,8 +60,19 @@ namespace AutomatedCar.Logic
             {
                 string filename = obj["type"].ToString();
 
-                Bitmap image = new Bitmap(Assembly.GetExecutingAssembly()
-                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}.png"));
+                Bitmap image = null;
+
+                try
+                {
+
+                    image = new Bitmap(Assembly.GetExecutingAssembly()
+                                .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}.png"));
+                }
+                catch (ArgumentNullException e)
+                {
+                    image = new Bitmap(Assembly.GetExecutingAssembly()
+                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.ImageNotFound.png"));
+                }
 
                 this.worldObjectParameters.Add(new JsonWorldObject()
                 {
@@ -72,6 +83,7 @@ namespace AutomatedCar.Logic
                     Height = (int)image.Size.Height,
                     Rotmatrix = new Avalonia.Matrix(float.Parse(obj["m11"].ToString()), float.Parse(obj["m12"].ToString()), float.Parse(obj["m21"].ToString()), float.Parse(obj["m22"].ToString()), 0, 0),
                 });
+
             }
         }
 
@@ -154,7 +166,7 @@ namespace AutomatedCar.Logic
 
         private WorldObject CreateWorldObject(JsonWorldObject jsonWorldObject, JsonPolygon jsonPolygon, JsonReferences jsonReferences)
         {
-            WorldObject currentObject;
+            WorldObject currentObject = null;
             string type = jsonWorldObject.Filename;
             if (isRoadWith3Polygons(type))
             {
@@ -205,11 +217,6 @@ namespace AutomatedCar.Logic
             {
                 currentObject = new CrossWalk(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix);
             }
-            else
-            {
-                currentObject = null;
-            }
-            //type == "parking_90" ||
 
             return currentObject;
         }
