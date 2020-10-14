@@ -17,7 +17,6 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
-
             this.world.ControlledCar.InputHandler();
             
             int speed = 10;
