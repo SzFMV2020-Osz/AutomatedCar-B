@@ -64,7 +64,6 @@ namespace AutomatedCar.Logic
 
                 try
                 {
-
                     image = new Bitmap(Assembly.GetExecutingAssembly()
                                 .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}.png"));
                 }
@@ -83,7 +82,6 @@ namespace AutomatedCar.Logic
                     Height = (int)image.Size.Height,
                     Rotmatrix = new Avalonia.Matrix(float.Parse(obj["m11"].ToString()), float.Parse(obj["m12"].ToString()), float.Parse(obj["m21"].ToString()), float.Parse(obj["m22"].ToString()), 0, 0),
                 });
-
             }
         }
 
@@ -172,11 +170,7 @@ namespace AutomatedCar.Logic
             {
                 currentObject = new Road(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
-            else if (type == "roadsign_parking_right" ||
-                     type == "roadsign_priority_stop" ||
-                     type == "roadsign_speed_40" ||
-                     type == "roadsign_speed_50" ||
-                     type == "roadsign_speed_60")
+            else if (isSign(type))
             {
                 currentObject = new Sign(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
@@ -219,6 +213,15 @@ namespace AutomatedCar.Logic
             }
 
             return currentObject;
+        }
+
+        private static bool isSign(string type)
+        {
+            return type == "roadsign_parking_right" ||
+                   type == "roadsign_priority_stop" ||
+                   type == "roadsign_speed_40" ||
+                   type == "roadsign_speed_50" ||
+                   type == "roadsign_speed_60";
         }
 
         private static bool isRoadWith3Polygons(string type)
