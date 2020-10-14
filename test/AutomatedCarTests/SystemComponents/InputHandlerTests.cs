@@ -81,8 +81,8 @@ namespace Tests.SystemComponents
         public void WithBadInputsPressInputsVariableStaysFalse()
         {
             KeyboardFill();
-            Keyboard.Keys.Remove(Key.OemPlus);
-            Keyboard.Keys.Remove(Key.OemMinus);
+            Keyboard.Keys.Remove(Key.Add);
+            Keyboard.Keys.Remove(Key.Subtract);
             Keyboard.Keys.Remove(Key.T);
             Keyboard.Keys.Remove(Key.W);
             Keyboard.Keys.Remove(Key.S);
@@ -180,8 +180,8 @@ namespace Tests.SystemComponents
         [Fact]
         public void WithTheRightKeyPressedTrueAccSpeedPlus()
         {
-            Keyboard.Keys.Add(Key.OemPlus);
-            Keyboard.PressableKeys.Add(Key.OemPlus);
+            Keyboard.Keys.Add(Key.Add);
+            Keyboard.PressableKeys.Add(Key.Add);
 
             hmi.InputHandler();
 
@@ -191,8 +191,8 @@ namespace Tests.SystemComponents
         [Fact]
         public void WithTheRightKeyPressedTrueAccSpeedMinus()
         {
-            Keyboard.Keys.Add(Key.OemMinus);
-            Keyboard.PressableKeys.Add(Key.OemMinus);
+            Keyboard.Keys.Add(Key.Subtract);
+            Keyboard.PressableKeys.Add(Key.Subtract);
 
             hmi.InputHandler();
 
@@ -272,7 +272,6 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-
         public void WithTheRightKeyPressedTrueRadarDebug()
         {
             Keyboard.ToggleableKeys.Add(Key.I);

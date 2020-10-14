@@ -1,42 +1,44 @@
 using AutomatedCar.SystemComponents.Packets;
 
-interface IHumanMachineInterface
+public interface IHumanMachineInterface
 {
-    HMIPacket hmiPacket { get; }
+    HMIPacket HmiPacket { get; }
 
-    DebugPacket debugPacket { get; }
+    DebugPacket DebugPacket { get; }
 
-    bool GaspedalDown { get; set; }
+    bool GaspedalDown { get; }
 
-    bool BreakpedalDown { get; set; }
+    bool BreakpedalDown { get; }
 
-    bool SteeringRight { get; set; }
+    bool SteeringRight { get; }
 
-    bool SteeringLeft { get; set; }
+    bool SteeringLeft { get; }
 
-    bool GearUp { get; set; }
+    bool GearUp { get; }
 
-    bool GearDown { get; set; }
+    bool GearDown { get; }
 
-    bool Acc { get; set; }
+    bool Acc { get; }
 
-    bool AccDistance { get; set; }
+    bool AccDistance { get; }
 
-    bool AccSpeedPlus { get; set; }
+    bool AccSpeedPlus { get; }
 
-    bool AccSpeedMinus { get; set; }
+    bool AccSpeedMinus { get; }
 
-    bool LaneKeeping { get; set; }
+    bool LaneKeeping { get; }
 
-    bool ParkingPilot { get; set; }
+    bool ParkingPilot { get; }
 
-    bool TurnSignalRight { get; set; }
+    bool TurnSignalRight { get; }
 
-    bool TurnSignalLeft { get; set; }
+    bool TurnSignalLeft { get; }
 
-    bool UltrasoundDebug { get; set; }
+    bool UltrasoundDebug { get; }
 
-    bool RadarDebug { get; set; }
+    bool RadarDebug { get; }
 
-    bool CameraDebug { get; set; }
+    bool CameraDebug { get; }
+
+    bool PolygonDebug { get; }
 }
