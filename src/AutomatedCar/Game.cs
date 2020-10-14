@@ -15,11 +15,17 @@ namespace AutomatedCar
 
         private Random Random { get; } = new Random();
 
-        const int speed = 5;
-
         protected override void Tick()
         {
+            int speed = 10;
+
+            if (Keyboard.IsKeyDown(Key.Space))
+            {
+                speed = 300;
+            }
+            
             world.ControlledCar.InputHandler();
+
             if (Keyboard.IsKeyDown(Key.Up))
             {
                 this.world.ControlledCar.MoveY(-speed);
