@@ -28,9 +28,9 @@ namespace AutomatedCar.Models
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
 
-            ultraSoundVisible = true;
-            radarVisible = true;
-            cameraVisible = true;
+            this.ultraSoundVisible = true;
+            this.radarVisible = true;
+            this.cameraVisible = true;
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -40,7 +40,6 @@ namespace AutomatedCar.Models
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
-
 
         public int Speed { get; set; }
 
