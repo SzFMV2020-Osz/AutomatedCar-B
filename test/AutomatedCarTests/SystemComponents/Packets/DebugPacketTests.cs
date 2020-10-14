@@ -13,6 +13,12 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
+        public void PolygonExsits()
+        {
+            Assert.IsType<bool>(debugPacket.Polygon);
+        }
+
+        [Fact]
         public void UltrasoundSensorExsits()
         {            
             Assert.IsType<bool>(debugPacket.UtrasoundSensor);
@@ -28,6 +34,27 @@ namespace Tests.SystemComponents.Packets
         public void RadarSensorExsits()
         {
             Assert.IsType<bool>(debugPacket.RadarSensor);
+        }
+
+        [Fact]
+        public void WithNoInputPolygonSetDoesentChangeTheStateOfPolygon()
+        {
+            var polygon = debugPacket.Polygon;
+            debugPacket.PolygonSet(false);
+
+            Assert.Equal(polygon, debugPacket.Polygon);
+        }
+
+        [Fact]
+        public void WithNoumerusInputPolygonSetSwitchBetweenOnAndOff()
+        {
+            var polygon = debugPacket.Polygon;
+            for (int i = 0; i < 10; i++)
+            {
+                Assert.Equal(polygon, debugPacket.Polygon);
+                debugPacket.PolygonSet(true);
+                polygon = !polygon;
+            }
         }
 
         [Fact]

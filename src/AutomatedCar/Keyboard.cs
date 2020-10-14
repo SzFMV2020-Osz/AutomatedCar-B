@@ -16,6 +16,7 @@ namespace AutomatedCar
             Key.U,
             Key.Z,
             Key.I,
+            Key.F,
         };
 
         public static IReadOnlyCollection<Key> PressKeys = new List<Key>

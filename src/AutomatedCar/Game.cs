@@ -19,7 +19,7 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
-            world.ControlledCar.InputHandler();
+            this.world.ControlledCar.InputHandler();
             if (Keyboard.IsKeyDown(Key.Up))
             {
                 this.world.ControlledCar.MoveY(-speed);

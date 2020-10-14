@@ -24,6 +24,7 @@ namespace AutomatedCar.SystemComponents
         private bool parkingPilot;
         private bool turnSignalRight;
         private bool turnSignalLeft;
+        private bool polygonDebug;
         private bool ultrasoundDebug;
         private bool radarDebug;
         private bool cameraDebug;
@@ -32,9 +33,6 @@ namespace AutomatedCar.SystemComponents
         public HumanMachineInterface(VirtualFunctionBus virtualFunctionBus)
             : base(virtualFunctionBus)
         {
-            this.virtualFunctionBus = virtualFunctionBus;
-            virtualFunctionBus.RegisterComponent(this);
-
             this.hmiPacket = new HMIPacket();
             this.debugPacket = new DebugPacket();
             virtualFunctionBus.HMIPacket = this.hmiPacket;
@@ -70,6 +68,8 @@ namespace AutomatedCar.SystemComponents
 
         public bool TurnSignalLeft { get => this.turnSignalLeft; set => this.turnSignalLeft = value; }
 
+        public bool PolygonDebug { get => this.polygonDebug; set => this.polygonDebug = value; }
+
         public bool UltrasoundDebug { get => this.ultrasoundDebug; set => this.ultrasoundDebug = value; }
 
         public bool RadarDebug { get => this.radarDebug; set => this.radarDebug = value; }
@@ -98,6 +98,10 @@ namespace AutomatedCar.SystemComponents
             this.debugPacket.BoardCameraSet(this.cameraDebug);
             this.debugPacket.RadarSensorSet(this.radarDebug);
             this.debugPacket.UtrasoundSensorSet(this.ultrasoundDebug);
+            this.debugPacket.PolygonSet(this.ultrasoundDebug);
+
+            this.virtualFunctionBus.HMIPacket = this.hmiPacket;
+            this.virtualFunctionBus.DebugPacket = this.debugPacket;
         }
 
         #region InputHandler
@@ -117,6 +121,7 @@ namespace AutomatedCar.SystemComponents
             this.ToggleInput(ref this.acc, Key.A);
             this.ToggleInput(ref this.laneKeeping, Key.D);
             this.ToggleInput(ref this.parkingPilot, Key.R);
+            this.ToggleInput(ref this.polygonDebug, Key.F);
             this.ToggleInput(ref this.ultrasoundDebug, Key.U);
             this.ToggleInput(ref this.cameraDebug, Key.Z);
             this.ToggleInput(ref this.radarDebug, Key.I);
@@ -146,10 +151,7 @@ namespace AutomatedCar.SystemComponents
             }
             else
             {
-                if (!Keyboard.IsPressableKeysDown(key) && Keyboard.IsKeyDown(key))
-                {
-                    variable = false;
-                }
+                variable = false;
             }
         }
 

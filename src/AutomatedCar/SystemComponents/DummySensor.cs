@@ -15,9 +15,6 @@ namespace AutomatedCar.SystemComponents
         public DummySensor(VirtualFunctionBus virtualFunctionBus)
             : base(virtualFunctionBus)
         {
-            this.virtualFunctionBus = virtualFunctionBus;
-            virtualFunctionBus.RegisterComponent(this);
-
             this.dummyPacket = new DummyPacket();
             virtualFunctionBus.DummyPacket = this.dummyPacket;
         }
