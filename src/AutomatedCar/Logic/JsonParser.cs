@@ -59,8 +59,18 @@ namespace AutomatedCar.Logic
             {
                 string filename = obj["type"].ToString();
 
-                Bitmap image = new Bitmap(Assembly.GetExecutingAssembly()
-                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}.png"));
+                Bitmap image = null;
+
+                try
+                {
+                    image = new Bitmap(Assembly.GetExecutingAssembly()
+                                .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.{filename}.png"));
+                }
+                catch (ArgumentNullException e)
+                {
+                    image = new Bitmap(Assembly.GetExecutingAssembly()
+                        .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects.ImageNotFound.png"));
+                }
 
                 this.worldObjectParameters.Add(new JsonWorldObject()
                 {
@@ -153,25 +163,40 @@ namespace AutomatedCar.Logic
 
         private WorldObject CreateWorldObject(JsonWorldObject jsonWorldObject, JsonPolygon jsonPolygon, JsonReferences jsonReferences)
         {
-            WorldObject currentObject;
+            WorldObject currentObject = null;
             string type = jsonWorldObject.Filename;
-            if (isRoad(type))
+            if (isRoadWith3Polygons(type))
             {
                 currentObject = new Road(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
-            else if (type == "parking_90" ||
-                     type == "parking_space_parallel")
-            {
-                // Parking place, Parking bollard ...
-                currentObject = new Parking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
-            }
-            else if (type == "roadsign_parking_right" ||
-                     type == "roadsign_priority_stop" ||
-                     type == "roadsign_speed_40" ||
-                     type == "roadsign_speed_50" ||
-                     type == "roadsign_speed_60")
+            else if (isSign(type))
             {
                 currentObject = new Sign(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+            }
+            else if (type == "road_2lane_tjunctionleft" ||
+                     type == "road_2lane_tjunctionright")
+            {
+                currentObject = new TjunctionRoad(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+            }
+            else if (type == "2_crossroad_1")
+            {
+                currentObject = new CrossRoad18(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+            }
+            else if (type == "2_crossroad_2")
+            {
+                currentObject = new CrossRoad16(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+            }
+            else if (type == "road_2lane_rotary")
+            {
+                currentObject = new RotaryRoad(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+            }
+            else if (type == "parking_space_parallel")
+            {
+                currentObject = new ParallelParking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
+            }
+            else if (type == "parking_90")
+            {
+                currentObject = new CrossParking(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
             else if (type == "garage")
             {
@@ -181,15 +206,24 @@ namespace AutomatedCar.Logic
             {
                 currentObject = new Tree(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix, jsonPolygon.PolyPoints);
             }
-            else
+            else if (type == "crosswalk")
             {
-                currentObject = null;
+                currentObject = new CrossWalk(jsonWorldObject.X, jsonWorldObject.Y, type, jsonWorldObject.Width, jsonWorldObject.Height, jsonReferences.ReferenceOffsetX, jsonReferences.ReferenceOffsetY, jsonWorldObject.Rotmatrix);
             }
 
             return currentObject;
         }
 
-        private static bool isRoad(string type)
+        private static bool isSign(string type)
+        {
+            return type == "roadsign_parking_right" ||
+                   type == "roadsign_priority_stop" ||
+                   type == "roadsign_speed_40" ||
+                   type == "roadsign_speed_50" ||
+                   type == "roadsign_speed_60";
+        }
+
+        private static bool isRoadWith3Polygons(string type)
         {
             return type == "road_2lane_90right" ||
                    type == "road_2lane_45right" ||
@@ -197,12 +231,7 @@ namespace AutomatedCar.Logic
                    type == "road_2lane_6right" ||
                    type == "road_2lane_6left" ||
                    type == "road_2lane_straight" ||
-                   type == "road_2lane_90left" ||
-                   type == "2_crossroad_1" ||
-                   type == "2_crossroad_2" ||
-                   type == "road_2lane_rotary" ||
-                   type == "road_2lane_tjunctionleft" ||
-                   type == "road_2lane_tjunctionright";
+                   type == "road_2lane_90left";
         }
     }
 }

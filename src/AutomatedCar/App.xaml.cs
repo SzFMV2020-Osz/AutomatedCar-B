@@ -44,25 +44,12 @@ namespace AutomatedCar
 
                 PolylineGeometry geom = new PolylineGeometry(points, false);
 
-                var pointlist = new List<Coordinate>();
-                pointlist.Add(new Coordinate(0,0));
-                pointlist.Add(new Coordinate(70,0));
-
-                var pointlist2 = new List<Coordinate>();
-                pointlist2.Add(new Coordinate(70,70));
-                pointlist2.Add(new Coordinate(100,100));
-
                 int W = 108;
                 int H = 240;
 
-                AutomatedCar controlledCar = new Models.AutomatedCar(50+(W/2), 50+(H/2), "car_1_white");
-                controlledCar.Angle = 90;
-                controlledCar.Width = W;
-                controlledCar.Height = H;
-                controlledCar.referenceOffsetX = -(controlledCar.Width/2);
-                controlledCar.referenceOffsetY = -(controlledCar.Height/2);
-                controlledCar.NetPolygons = new List<NetTopologySuite.Geometries.LineString>();
-                controlledCar.NetPolygons.Add(new NetTopologySuite.Geometries.LineString(pointlist.ToArray()));
+                List<List<Point>> polyList = new List<List<Point>>();
+                polyList.Add(points);
+                AutomatedCar controlledCar = new Models.AutomatedCar(50, 50, "car_1_white", W, H, polyList);
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.UltraSoundBrush = new SolidColorBrush(Color.Parse("green"));

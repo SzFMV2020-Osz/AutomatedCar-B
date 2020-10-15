@@ -19,8 +19,8 @@ namespace AutomatedCar.Models
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
-        public AutomatedCar(int x, int y, string filename)
-            : base(x, y, filename, 0, 0, 0, 0, new Matrix(1, 0, 0, 1, 1, 1), new List<List<Point>>())
+        public AutomatedCar(int x, int y, string filename, int width, int height, List<List<Point>> polylist)
+            : base(x, y, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polylist)
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
