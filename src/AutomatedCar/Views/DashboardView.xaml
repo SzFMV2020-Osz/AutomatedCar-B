@@ -4,10 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
              xmlns:view="clr-namespace:AutomatedCar.ViewModels;assembly=AutomatedCar"
+             xmlns:converters="clr-namespace:AutomatedCar.Views.Converters"
              Width="320" Height="720"
              x:Class="AutomatedCar.Views.DashboardView"
              DataContext="{Binding Dashboard}"
              >
+    <UserControl.Resources>
+            <converters:BoolToColorConverter x:Key="ColorConverter" />
+    </UserControl.Resources>
 
     <UserControl.Styles>
         <Style Selector="ContentControl#Dashboard">
@@ -77,61 +81,52 @@
                                 </WrapPanel>
                                 <WrapPanel Grid.Row="1" Grid.Column="0"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
+                                    <Border Background="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Acc, Converter={StaticResource ColorConverter}}"
                                             BorderBrush="Black" 
                                             BorderThickness="2" 
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
                                         <WrapPanel HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">
+                                                   VerticalAlignment="Center"
+                                                   Background="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Acc, Converter={StaticResource ColorConverter}}">
                                             <TextBlock  Foreground="#000000"
-                                                FontSize="10"
-                                                FontWeight="Bold"
-                                                Text="Acc:"/>
-                                            <TextBlock Foreground="#000000"                                              
-                                               FontSize="10"
-                                               FontWeight="Bold"
-                                               Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Acc}"/>
+                                                        FontSize="15"
+                                                        FontWeight="Bold"
+                                                        Text="ACC"/>
                                         </WrapPanel>
                                     </Border>
-                                    <Border Background="White" 
+                                    <Border Background="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.ParkingPilot, Converter={StaticResource ColorConverter}}"
                                             BorderBrush="Black" 
                                             BorderThickness="2" 
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
                                         <WrapPanel HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">                                            
+                                           VerticalAlignment="Center"
+                                           Background="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.ParkingPilot, Converter={StaticResource ColorConverter}}">                                            
                                             <TextBlock  Foreground="#000000"
-                                                FontSize="10"
+                                                FontSize="15"
                                                 FontWeight="Bold"
-                                                Text="PP:"/>
-                                            <TextBlock Foreground="#000000"                                              
-                                               FontSize="10"
-                                               FontWeight="Bold"
-                                               Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.ParkingPilot}"/>
+                                                Text="PP"/>
                                         </WrapPanel>
                                     </Border>
                                 </WrapPanel>
                                 <WrapPanel Grid.Row="2" Grid.Column="0"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
+                                    <Border Background="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.LaneKeeping, Converter={StaticResource ColorConverter}}"
                                             BorderBrush="Black" 
                                             BorderThickness="2" 
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
                                         <WrapPanel HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">
+                                           VerticalAlignment="Center"
+                                           Background="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.LaneKeeping, Converter={StaticResource ColorConverter}}">
                                             <TextBlock  Foreground="#000000"
-                                                FontSize="10"
+                                                FontSize="15"
                                                 FontWeight="Bold"
-                                                Text="LKA:"/>
-                                            <TextBlock Foreground="#000000"                                              
-                                               FontSize="10"
-                                               FontWeight="Bold"
-                                               Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.LaneKeeping}"/>
+                                                Text="LKA"/>
                                         </WrapPanel>
                                     </Border>
                                     <Border Background="#424242" 
@@ -234,7 +229,7 @@
                                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
                                     Text="Steering"/>
                                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                                    Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering}"/>
+                                    Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering, StringFormat={}{0:0}}"/>
                                 <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                                     <WrapPanel Grid.Row="0" Grid.Column="0" >
                                         <TextBlock Text="X: "/>
@@ -259,6 +254,64 @@
                                     <WrapPanel Grid.Row="2" Grid.Column="1" >
                                         <TextBlock Text="Camera: "/>
                                         <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.DebugPacket.BoardCamera}"/>
+                                    </WrapPanel>
+                                </Grid>
+
+                                <TextBlock Text="Controls:" Margin="0 20 0 5"/>
+                                <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                                    <WrapPanel Grid.Column="0" Grid.Row="0" >
+                                        <TextBlock Text="Gas: Up Arrow"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="1" >
+                                        <TextBlock Text="Break: Down Arrow"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="2" >
+                                        <TextBlock Text="Steering left: Left Arrow"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="3" >
+                                        <TextBlock Text="Steering right: Right Arrow"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="4" >
+                                        <TextBlock Text="ACC Speed Plus: +"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="5" >
+                                        <TextBlock Text="ACC Speed Minus: -"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="6" >
+                                        <TextBlock Text="ACC Distance: T"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="7" >
+                                        <TextBlock Text="Up Shift: W"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="0" Grid.Row="8" >
+                                        <TextBlock Text="Down Shift: S"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="0" >
+                                        <TextBlock Text="Turn Signal Right: E"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="1" >
+                                        <TextBlock Text="Turn Signal Left: Q"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="2" >
+                                        <TextBlock Text="ACC: A"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="3" >
+                                        <TextBlock Text="Lane Keeping: D"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="4" >
+                                        <TextBlock Text="Parking Pilot: R"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="5" >
+                                        <TextBlock Text="Ultrasound: U"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="6" >
+                                        <TextBlock Text="Camera: Z"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="7" >
+                                        <TextBlock Text="Radar: I"/>
+                                    </WrapPanel>
+                                    <WrapPanel Grid.Column="1" Grid.Row="8" >
+                                        <TextBlock Text="Polygon: F"/>
                                     </WrapPanel>
                                 </Grid>
                             </StackPanel>
