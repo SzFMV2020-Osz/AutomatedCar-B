@@ -6,6 +6,7 @@ namespace AutomatedCar.Models
     using System.Collections.Generic;
     using SystemComponents;
     using Avalonia;
+    using ReactiveUI;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -18,14 +19,18 @@ namespace AutomatedCar.Models
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
-        public AutomatedCar(int x, int y, string filename)
-            : base(x, y, filename, 0, 0, 0, 0, new Matrix(1, 0, 0, 1, 1, 1), new List<List<Point>>())
+        public AutomatedCar(int x, int y, string filename, int width, int height, List<List<Point>> polylist)
+            : base(x, y, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polylist)
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
+
+            this.ultraSoundVisible = true;
+            this.radarVisible = true;
+            this.cameraVisible = true;
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -35,7 +40,6 @@ namespace AutomatedCar.Models
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
-
 
         public int Speed { get; set; }
 
@@ -72,18 +76,33 @@ namespace AutomatedCar.Models
 
         public Geometry RadarGeometry { get; set; }
 
-        public bool RadarVisible { get; set; }
+        private bool radarVisible;
+        public bool RadarVisible
+        {
+            get => radarVisible;
+            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+        }
 
         public SolidColorBrush UltraSoundBrush { get; set; }
 
         public List<Geometry> UltraSoundGeometries { get; set; }
 
-        public bool UltraSoundVisible { get; set; }
+        private bool ultraSoundVisible;
+        public bool UltraSoundVisible
+        {
+            get => ultraSoundVisible;
+            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+        }
         public SolidColorBrush CameraBrush { get; set; }
 
         public Geometry CameraGeometry { get; set; }
 
-        public bool CameraVisible { get; set; }
+        private bool cameraVisible;
+        public bool CameraVisible
+        {
+            get => cameraVisible;
+            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+        }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
 
