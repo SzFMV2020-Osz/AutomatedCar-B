@@ -94,50 +94,15 @@ namespace AutomatedCar.SystemComponents
             this.AccDistance = this.PressInput(this.AccDistance, Key.T);
             this.GearUp = this.PressInput(this.GearUp, Key.W);
             this.GearDown = this.PressInput(this.GearDown, Key.S);
-            if (this.ToggleInput(Key.E))
-            {
-                this.TurnSignalRight = !this.TurnSignalRight;
-            }
-
-            if (this.ToggleInput(Key.Q))
-            {
-                this.TurnSignalLeft = !this.TurnSignalLeft;
-            }
-
-            if (this.ToggleInput(Key.A))
-            {
-                this.Acc = !this.Acc;
-            }
-
-            if (this.ToggleInput(Key.D))
-            {
-                this.LaneKeeping = !this.LaneKeeping;
-            }
-
-            if (this.ToggleInput(Key.R))
-            {
-                this.ParkingPilot = !this.ParkingPilot;
-            }
-
-            if (this.ToggleInput(Key.U))
-            {
-                this.UltrasoundDebug = !this.UltrasoundDebug;
-            }
-
-            if (this.ToggleInput(Key.Z))
-            {
-                this.CameraDebug = !this.CameraDebug;
-            }
-
-            if (this.ToggleInput(Key.I))
-            {
-                this.RadarDebug = !this.RadarDebug;
-            }
-
-            if (this.ToggleInput(Key.F))
-            {
-                this.PolygonDebug = !this.PolygonDebug;
-            }
+            this.TurnSignalRight = this.ToggleInput(this.TurnSignalRight, Key.E);
+            this.TurnSignalLeft = this.ToggleInput(this.TurnSignalLeft, Key.Q);
+            this.Acc = this.ToggleInput(this.Acc, Key.A);
+            this.LaneKeeping = this.ToggleInput(this.LaneKeeping, Key.D);
+            this.ParkingPilot = this.ToggleInput(this.ParkingPilot, Key.R);
+            this.UltrasoundDebug = this.ToggleInput(this.UltrasoundDebug, Key.U);
+            this.CameraDebug = this.ToggleInput(this.CameraDebug, Key.Z);
+            this.RadarDebug = this.ToggleInput(this.RadarDebug, Key.I);
+            this.PolygonDebug = this.ToggleInput(this.PolygonDebug, Key.F);
         }
 
         private bool NormalInput(Key key) => Keyboard.IsKeyDown(key);
@@ -156,209 +121,15 @@ namespace AutomatedCar.SystemComponents
             return false;
         }
 
-        private bool ToggleInput(Key key) => Keyboard.IsToggleableKeyDown(key) && Keyboard.DeleteToggleableKey(key);
+        private bool ToggleInput(bool previousValue, Key key)
+        {
+            if (Keyboard.IsToggleableKeyDown(key) && Keyboard.DeleteToggleableKey(key))
+            {
+                previousValue = !previousValue;
+            }
 
-        #region replacesMethods
-        //public void GaspedalKey()
-        //{
-        //    if (Keyboard.IsKeyDown(Key.Up))
-        //    {
-        //        this.gaspedalDown = true;
-        //    }
-        //    else
-        //    {
-        //        this.gaspedalDown = false;
-        //    }
-        //}
-        //public void BreakpedalKey()
-        //{
-        //    if (Keyboard.IsKeyDown(Key.Down))
-        //    {
-        //        this.breakpedalDown = true;
-        //    }
-        //    else
-        //    {
-        //        this.breakpedalDown = false;
-        //    }
-        //}
-        //public void SteerRightKey()
-        //{
-        //    if (Keyboard.IsKeyDown(Key.Right))
-        //    {
-        //        this.steeringRight = true;
-        //    }
-        //    else
-        //    {
-        //        this.steeringRight = false;
-        //    }
-        //}
-        //public void SteerLeftKey()
-        //{
-        //    if (Keyboard.IsKeyDown(Key.Left))
-        //    {
-        //        this.steeringLeft = true;
-        //    }
-        //    else
-        //    {
-        //        this.steeringLeft = false;
-        //    }
-        //}
-        //public void AccSpeedPlusKey()
-        //{
-        //    if (!this.accSpeedPlus)
-        //    {
-        //        if (Keyboard.IsPressableKeysDown(Key.Add) && Keyboard.IsKeyDown(Key.Add))
-        //        {
-        //            this.accSpeedPlus = true;
-        //            Keyboard.PressableKeys.Remove(Key.Add);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!Keyboard.IsPressableKeysDown(Key.Add) && Keyboard.IsKeyDown(Key.Add))
-        //        {
-        //            this.accSpeedPlus = false;
-        //        }
-        //    }
-        //}
-        //public void AccSpeedMinusKey()
-        //{
-        //    if (!this.accSpeedMinus)
-        //    {
-        //        if (Keyboard.IsPressableKeysDown(Key.Subtract) && Keyboard.IsKeyDown(Key.Subtract))
-        //        {
-        //            this.accSpeedMinus = true;
-        //            Keyboard.PressableKeys.Remove(Key.Subtract);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!Keyboard.IsPressableKeysDown(Key.Subtract) && Keyboard.IsKeyDown(Key.Subtract))
-        //        {
-        //            this.accSpeedMinus = false;
-        //        }
-        //    }
-        //}
-        //public void AccDistanceKey()
-        //{
-        //    if (!this.accDistance)
-        //    {
-        //        if (Keyboard.IsPressableKeysDown(Key.T) && Keyboard.IsKeyDown(Key.T))
-        //        {
-        //            this.accDistance = true;
-        //            Keyboard.PressableKeys.Remove(Key.T);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!Keyboard.IsPressableKeysDown(Key.T) && Keyboard.IsKeyDown(Key.T))
-        //        {
-        //            this.accDistance = false;
-        //        }
-        //    }
-        //}
-        //public void TurnSignalRightKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.E))
-        //    {
-        //        this.turnSignalRight = !this.turnSignalRight;
-        //        Keyboard.DeleteToggleableKey(Key.E);
-        //    }
-        //}
-        //public void TurnSignalLeftKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.Q))
-        //    {
-        //        this.turnSignalLeft = !this.turnSignalLeft;
-        //        Keyboard.DeleteToggleableKey(Key.Q);
-        //    }
-        //}
-        //public void GearUpKey()
-        //{
-        //    if (!this.gearUp)
-        //    {
-        //        if (Keyboard.IsPressableKeysDown(Key.W) && Keyboard.IsKeyDown(Key.W))
-        //        {
-        //            this.gearUp = true;
-        //            Keyboard.PressableKeys.Remove(Key.W);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!Keyboard.IsPressableKeysDown(Key.W) && Keyboard.IsKeyDown(Key.W))
-        //        {
-        //            this.gearUp = false;
-        //        }
-        //    }
-        //}
-        //public void GearDownKey()
-        //{
-        //    if (!this.gearDown)
-        //    {
-        //        if (Keyboard.IsPressableKeysDown(Key.S) && Keyboard.IsKeyDown(Key.S))
-        //        {
-        //            this.gearDown = true;
-        //            Keyboard.PressableKeys.Remove(Key.W);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (!Keyboard.IsPressableKeysDown(Key.S) && Keyboard.IsKeyDown(Key.S))
-        //        {
-        //            this.gearDown = false;
-        //        }
-        //    }
-        //}
-        //public void AccKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.A))
-        //    {
-        //        this.acc = !this.acc;
-        //        Keyboard.DeleteToggleableKey(Key.A);
-        //    }
-        //}
-        //public void LaneKeepingKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.D))
-        //    {
-        //        this.laneKeeping = !this.laneKeeping;
-        //        Keyboard.DeleteToggleableKey(Key.D);
-        //    }
-        //}
-        //public void ParkingPilotKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.R))
-        //    {
-        //        this.parkingPilot = !this.parkingPilot;
-        //        Keyboard.DeleteToggleableKey(Key.R);
-        //    }
-        //}
-        //public void UltrasoundDebugKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.U))
-        //    {
-        //        this.ultrasoundDebug = !this.ultrasoundDebug;
-        //        Keyboard.DeleteToggleableKey(Key.U);
-        //    }
-        //}
-        //public void BoardCameraDebugKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.Z))
-        //    {
-        //        this.cameraDebug = !this.cameraDebug;
-        //        Keyboard.DeleteToggleableKey(Key.Z);
-        //    }
-        //}
-        //public void RadarDebugKey()
-        //{
-        //    if (Keyboard.IsToggleableKeyDown(Key.I))
-        //    {
-        //        this.radarDebug = !this.radarDebug;
-        //        Keyboard.DeleteToggleableKey(Key.I);
-        //    }
-        //} 
-        #endregion
-        #endregion
+            return previousValue;
+        }       
 
         #region InputProcess
         public void GearCalculate(bool up, bool down)
