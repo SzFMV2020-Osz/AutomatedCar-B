@@ -16,7 +16,7 @@ namespace Tests.SystemComponents
         {
             hmi = new HumanMachineInterface(new VirtualFunctionBus());
         }
-        
+
         #region GearShiftTests
         [Theory]
         [InlineData(0, Gears.P)]
@@ -25,7 +25,7 @@ namespace Tests.SystemComponents
         [InlineData(3, Gears.D)]
         [InlineData(4, Gears.D)]
         [InlineData(500, Gears.D)]
-        public void WithNumerousGearshiftsUpwardGearIncreasesTillDrivemode(int gearshiftsUp, Gears gear)
+        public void GearIncreasesTillDrivemodeWithNumerousGearshiftsUpward(int gearshiftsUp, Gears gear)
         {
             for (int i = 0; i < gearshiftsUp; i++)
             {
@@ -41,7 +41,7 @@ namespace Tests.SystemComponents
         [InlineData(0, Gears.D)]
         [InlineData(4, Gears.P)]
         [InlineData(500, Gears.P)]
-        public void WithNumerousGearshiftsDownwardGearDecreasesTillParkingmode(int gearshiftsDown, Gears gear)
+        public void GearDecreasesTillParkingmodeWithNumerousGearshiftsDownward(int gearshiftsDown, Gears gear)
         {
             ((HMIPacket)hmi.HmiPacket).Gear = Gears.D;
             for (int i = 0; i < gearshiftsDown; i++)
@@ -56,7 +56,7 @@ namespace Tests.SystemComponents
         [InlineData(10, Gears.R)]
         [InlineData(10, Gears.N)]
         [InlineData(10, Gears.D)]
-        public void WithBothGearUpAndGearDownBeingTrueGearDoesentChangeItsValue(int indx, Gears gear)
+        public void GearDoesNotChangeItsValueWithBothGearUpAndGearDownBeingTrue(int indx, Gears gear)
         {
             ((HMIPacket)hmi.HmiPacket).Gear = gear;
             for (int i = 0; i < indx; i++)
@@ -71,7 +71,7 @@ namespace Tests.SystemComponents
         [InlineData(10, Gears.R)]
         [InlineData(10, Gears.N)]
         [InlineData(10, Gears.D)]
-        public void WithBothGearUpAndGearDownBeingFalseGearDoesentChangeItsValue(int indx, Gears gear)
+        public void GearDoesNotChangeItsValueWithBothGearUpAndGearDownBeingFalse(int indx, Gears gear)
         {
             ((HMIPacket)hmi.HmiPacket).Gear = gear;
             for (int i = 0; i < indx; i++)
@@ -86,7 +86,7 @@ namespace Tests.SystemComponents
         #region AccTests
 
         [Fact]
-        public void WithNoInputAccSetDoesentChangeTheStateOfAcc()
+        public void AccSetDoesNotChangeTheStateOfAccWithNoInput()
         {
             var acc = ((HMIPacket)hmi.HmiPacket).Acc;
             hmi.AccSet(false);
@@ -95,7 +95,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputAccSpeedSetDoesentChangeTheDesiredSpeed()
+        public void AccSpeedSetDoesNotChangeTheDesiredSpeedWithNoInput()
         {
             var speed = ((HMIPacket)hmi.HmiPacket).AccSpeed;
             hmi.AccSpeedSet(false, false);
@@ -104,7 +104,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputAccDistenceSetDoesentChangeTheDesiredDistance()
+        public void AccDistenceSetDoesNotChangeTheDesiredDistanceWithNoInput()
         {
             var distance = ((HMIPacket)hmi.HmiPacket).AccDistance;
             hmi.AccDistanceSet(false);
@@ -113,7 +113,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithVariousInputAccTurnsOnAndOff()
+        public void AccTurnsOnAndOffWithVariousInput()
         {
             hmi.AccSet(true);
             Assert.True(((HMIPacket)hmi.HmiPacket).Acc);
@@ -131,7 +131,7 @@ namespace Tests.SystemComponents
         [InlineData(6, 1.2)]
         [InlineData(7, 1.4)]
         [InlineData(8, 0.8)]
-        public void WithNumerousTrueInputAccDistanceGoesToMaxValueThenBackToMin(int indx, double value)
+        public void AccDistanceGoesToMaxValueThenBackToMinWithNumerousTrueInput(int indx, double value)
         {
             for (int i = 0; i < indx; i++)
             {
@@ -141,7 +141,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusAccSpeedPlusInputItsValueGoesUpToMaxValue()
+        public void AccSpeedsValueGoesUpToMaxValueWithNoumerusAccSpeedPlusInput()
         {
             var value = ((HMIPacket)hmi.HmiPacket).AccSpeed;
             for (int i = 0; i < 30; i++)
@@ -157,7 +157,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusAccSpeedMinusInputItsValueGoesDownToMinValue()
+        public void AccSpeedsValueGoesDownToMinValueWithNoumerusAccSpeedMinusInput()
         {
             var value = ((HMIPacket)hmi.HmiPacket).AccSpeed = 160;
             for (int i = 0; i < 30; i++)
@@ -173,7 +173,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithBothAccSpeedMinusAndAccSpeedPlusBeingTrueItsValueDoesentChange()
+        public void AccSpeedsValueDoesNotChangeWithBothAccSpeedMinusAndAccSpeedPlusBeingTrue()
         {
             var value = ((HMIPacket)hmi.HmiPacket).AccSpeed = 70;
             for (int i = 0; i < 10; i++)
@@ -184,7 +184,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithBothAccSpeedMinusAndAccSpeedPlusBeingFalseItsValueDoesentChange()
+        public void AccSpeedsValueDoesNotChangeWithBothAccSpeedMinusAndAccSpeedPlusBeingFalse()
         {
             var value = ((HMIPacket)hmi.HmiPacket).AccSpeed = 70;
             for (int i = 0; i < 10; i++)
@@ -197,35 +197,35 @@ namespace Tests.SystemComponents
 
         #region GasBreakStearTests
         [Fact]
-        public void WithNoInputHandleGasPedalReturns0()
+        public void HandleGasPedalReturns0WithNoInput()
         {
             hmi.HandleGasPedal(false);
             Assert.Equal(0, ((HMIPacket)hmi.HmiPacket).Gaspedal);
         }
 
         [Fact]
-        public void WithNoInputHandleBrakePedalReturns0()
+        public void HandleBrakePedalReturns0WithNoInput()
         {
             hmi.HandleBrakePedal(false);
             Assert.Equal(0, ((HMIPacket)hmi.HmiPacket).Breakpedal);
         }
 
         [Fact]
-        public void WithNoInputHandleSteeringReturns0()
+        public void HandleSteeringReturns0WithNoInput()
         {
             hmi.HandleSteering(false, false);
             Assert.Equal(0, ((HMIPacket)hmi.HmiPacket).Steering);
         }
 
         [Fact]
-        public void WithWrongInputHandleSteeringActsAsNoInputWasGiven()
+        public void HandleSteeringActsAsNoInputWasGivenWithWrongInput()
         {
             hmi.HandleSteering(true, true);
             Assert.Equal(0, ((HMIPacket)hmi.HmiPacket).Steering);
         }
 
         [Fact]
-        public void WithNoumerousTrueInputHandleGasPedalGouesUpTo100ThenWithGoesDownTo0()
+        public void HandleGasPedalGouesUpTo100ThenWithGoesDownTo0WithNoumerousTrueInput()
         {
             for (int i = 0; i < 100; i++)
             {
@@ -240,7 +240,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerousTrueInputHandleBrakePedalGouesUpTo100ThenWithGoesDownTo0()
+        public void HandleBrakePedalGouesUpTo100ThenWithGoesDownTo0WithNoumerousTrueInput()
         {
             for (int i = 0; i < 100; i++)
             {
@@ -255,7 +255,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerousTrueFalseInputHandleSteeringGouesUpTo100ThenWithGoesDownTo0()
+        public void HandleSteeringGouesUpTo100ThenWithGoesDownTo0WithNoumerousTrueFalseInput()
         {
             for (int i = 0; i < 100; i++)
             {
@@ -270,7 +270,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerousFalseTrueInputHandleSteeringGouesDownToMinus100ThenWithGoesUpTo0()
+        public void HandleSteeringGouesDownToMinus100ThenWithGoesUpTo0WithNoumerousFalseTrueInput()
         {
             for (int i = 0; i < 100; i++)
             {
@@ -287,7 +287,7 @@ namespace Tests.SystemComponents
 
         #region ToogleInputTests
         [Fact]
-        public void WithNoInputTurnSignalRightSetDoesentChangeTheStateOfTurnSignalRight()
+        public void TurnSignalRightSetDoesNotChangeTheStateOfTurnSignalRightWithNoInputTurn()
         {
             var tsright = ((HMIPacket)hmi.HmiPacket).TurnSignalRight;
             hmi.TurnSignalRightSet(false);
@@ -296,7 +296,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputTurnSignalLeftSetDoesentChangeTheStateOfTurnSignalLeftt()
+        public void TurnSignalLeftSetDoesNotChangeTheStateOfTurnSignalLeftWithNoInput()
         {
             var tsleft = ((HMIPacket)hmi.HmiPacket).TurnSignalLeft;
             hmi.TurnSignalLeftSet(false);
@@ -305,7 +305,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputLaneKeepingSetDoesentChangeTheStateOfLaneKeeping()
+        public void LaneKeepingSetDoesNotChangeTheStateOfLaneKeepingWithNoInput()
         {
             var lanekeep = ((HMIPacket)hmi.HmiPacket).LaneKeeping;
             hmi.LaneKeepingSet(false);
@@ -314,7 +314,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputParkingPilotSetDoesentChangeTheStateOfParkingPilot()
+        public void ParkingPilotSetDoesNotChangeTheStateOfParkingPilotWithNoInput()
         {
             var parkingPilot = ((HMIPacket)hmi.HmiPacket).ParkingPilot;
             hmi.ParkingPilotSet(false);
@@ -323,7 +323,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputTurnSignalRightSwitchBetweenOnAndOff()
+        public void TurnSignalRightSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.TurnSignalRightSet(true);
             Assert.True(((HMIPacket)hmi.HmiPacket).TurnSignalRight);
@@ -332,7 +332,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputTurnSignalLeftSwitchBetweenOnAndOff()
+        public void TurnSignalLeftSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.TurnSignalLeftSet(true);
             Assert.True(((HMIPacket)hmi.HmiPacket).TurnSignalLeft);
@@ -341,16 +341,16 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputLaneKeepingSwitchBetweenOnAndOff()
+        public void LaneKeepingSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.LaneKeepingSet(true);
             Assert.True(((HMIPacket)hmi.HmiPacket).LaneKeeping);
             hmi.LaneKeepingSet(false);
-            Assert.False(((HMIPacket)hmi.HmiPacket).LaneKeeping);            
+            Assert.False(((HMIPacket)hmi.HmiPacket).LaneKeeping);
         }
 
         [Fact]
-        public void WithNoumerusInputParkingPilotSwitchBetweenOnAndOff()
+        public void ParkingPilotSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.ParkingPilotSet(true);
             Assert.True(((HMIPacket)hmi.HmiPacket).ParkingPilot);
@@ -359,7 +359,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputPolygonSetDoesentChangeTheStateOfPolygon()
+        public void PolygonSetDoesNotChangeTheStateOfPolygonWithNoInput()
         {
             var polygon = ((DebugPacket)hmi.DebugPacket).Polygon;
             hmi.PolygonSet(false);
@@ -368,16 +368,16 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputPolygonSetSwitchBetweenOnAndOff()
+        public void PolygonSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.PolygonSet(true);
             Assert.True(((DebugPacket)hmi.DebugPacket).Polygon);
             hmi.PolygonSet(false);
-            Assert.False(((DebugPacket)hmi.DebugPacket).Polygon);            
+            Assert.False(((DebugPacket)hmi.DebugPacket).Polygon);
         }
 
         [Fact]
-        public void WithNoInputUtrasoundSensorSetDoesentChangeTheStateOfUtrasoundSensor()
+        public void UtrasoundSensorSetDoesNotChangeTheStateOfUtrasoundSensorWithNoInput()
         {
             var ultrasound = ((DebugPacket)hmi.DebugPacket).UtrasoundSensor;
             hmi.UtrasoundSensorSet(false);
@@ -386,7 +386,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputUtrasoundSensorSetSwitchBetweenOnAndOff()
+        public void UtrasoundSensorSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.UtrasoundSensorSet(true);
             Assert.True(((DebugPacket)hmi.DebugPacket).UtrasoundSensor);
@@ -395,7 +395,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputRadarSensorSetDoesentChangeTheStateOfRadarSensor()
+        public void RadarSensorSetDoesNotChangeTheStateOfRadarSensorWithNoInput()
         {
             var radar = ((DebugPacket)hmi.DebugPacket).RadarSensor;
             hmi.RadarSensorSet(false);
@@ -404,7 +404,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputRadarSensorSetSwitchBetweenOnAndOff()
+        public void RadarSensorSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.RadarSensorSet(true);
             Assert.True(((DebugPacket)hmi.DebugPacket).RadarSensor);
@@ -413,7 +413,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoInputBoardCameraSetDoesentChangeTheStateOfBoardCamera()
+        public void BoardCameraSetDoesNotChangeTheStateOfBoardCameraWithNoInput()
         {
             var camera = ((DebugPacket)hmi.DebugPacket).BoardCamera;
             hmi.BoardCameraSet(false);
@@ -422,7 +422,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithNoumerusInputBoardCameraSetSwitchBetweenOnAndOff()
+        public void BoardCameraSetSwitchBetweenOnAndOffWithNumerousInput()
         {
             hmi.BoardCameraSet(true);
             Assert.True(((DebugPacket)hmi.DebugPacket).BoardCamera);
