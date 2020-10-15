@@ -62,6 +62,7 @@ namespace AutomatedCar.SystemComponents
 
         public override void Process()
         {
+            this.InputHandler();
             this.GearCalculate(this.GearUp, this.GearDown);
             this.AccSet(this.Acc);
             this.AccDistanceSet(this.AccDistance);

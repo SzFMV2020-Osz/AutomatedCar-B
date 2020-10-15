@@ -23,13 +23,12 @@ namespace AutomatedCar.Views
             {
                 Keyboard.ToggleableKeys.Add(e.Key);
             }
+            else if (Keyboard.IsPressKeysPressed(e.Key))
+            {
+                Keyboard.PressableKeys.Add(e.Key);
+            }
             else
             {
-                if (Keyboard.IsPressKeysPressed(e.Key))
-                {
-                    Keyboard.PressableKeys.Add(e.Key);
-                }
-
                 Keyboard.Keys.Add(e.Key);
             }
 
