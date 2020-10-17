@@ -114,12 +114,12 @@ namespace AutomatedCar.SystemComponents
             return newCarPosition;                                                 
         }
 
-        public void UpdateSteeringProperties(IPowerTrainPacket packet)
+       public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
             this.SetDistanceFromCarCornerToCenter();
             this.carCurrentAngle = World.Instance.ControlledCar.Angle;
-            this.SteeringAngle = packet.SteeringWheel;
-            this.isInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;
+            this.SteeringAngle = packet.Steering;
+            this.isInReverseGear = packet.Gear == global::Gears.R;
             this.SetVelocityPixelPerTick();
             this.SetCarCenterPoint();
             this.SetWheelPositions();
