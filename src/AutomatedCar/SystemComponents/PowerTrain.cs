@@ -10,7 +10,7 @@
             : base(functionBus)
         {
             this.Engine = new EngineController();
-            this.Steering = new TestSteering();
+            this.Steering = new SteeringController();
             this.Packet = this.virtualFunctionBus.HMIPacket;
         }
 
