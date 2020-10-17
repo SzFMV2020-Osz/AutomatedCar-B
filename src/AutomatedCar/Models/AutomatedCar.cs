@@ -24,6 +24,7 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
+            this.powerTrain = new PowerTrain(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
@@ -80,7 +81,7 @@ namespace AutomatedCar.Models
         public bool RadarVisible
         {
             get => radarVisible;
-            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasï¿½s hiï¿½nyï¿½ban most mockolt adattal jelenï¿½tjï¿½k meg.
         }
 
         public SolidColorBrush UltraSoundBrush { get; set; }
@@ -91,7 +92,7 @@ namespace AutomatedCar.Models
         public bool UltraSoundVisible
         {
             get => ultraSoundVisible;
-            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasï¿½s hiï¿½nyï¿½ban most mockolt adattal jelenï¿½tjï¿½k meg.
         }
         public SolidColorBrush CameraBrush { get; set; }
 
@@ -101,7 +102,7 @@ namespace AutomatedCar.Models
         public bool CameraVisible
         {
             get => cameraVisible;
-            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasï¿½s hiï¿½nyï¿½ban most mockolt adattal jelenï¿½tjï¿½k meg.
         }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
