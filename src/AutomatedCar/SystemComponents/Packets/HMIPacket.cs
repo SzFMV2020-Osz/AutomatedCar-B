@@ -1,52 +1,3 @@
-<<<<<<< HEAD
-﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AutomatedCar.SystemComponents.Packets
-{
-    class HMIPacket : ReactiveObject, IHMIPacket
-    {
-        private double velocityPixelsPerSecond;
-        private int rpm;
-        private GearShifterPosition gearShifterPosition;
-        private DriveGear driveGear;
-
-        public void UpdateHMIPacket(double speed, int rpm, GearShifterPosition position, DriveGear driveGear)
-        {
-            this.VelocityPixelsPerSecond = speed;
-            this.RPM = rpm;
-            this.GearShifterPostion = position;
-            this.DriveGear = driveGear;
-        }
-
-        public double VelocityPixelsPerSecond
-        {
-            get => this.velocityPixelsPerSecond;
-            private set => this.RaiseAndSetIfChanged(ref this.velocityPixelsPerSecond, value);
-        }
-
-        public int RPM
-        {
-            get => this.rpm;
-            private set => this.RaiseAndSetIfChanged(ref this.rpm, value);
-        }
-
-        public GearShifterPosition GearShifterPostion
-        {
-            get => this.gearShifterPosition;
-            private set => this.RaiseAndSetIfChanged(ref this.gearShifterPosition, value);
-        }
-
-        public DriveGear DriveGear
-        {
-            get => this.driveGear;
-            private set => this.RaiseAndSetIfChanged(ref this.driveGear, value);
-        }
-    }
-}
-=======
 using Avalonia.OpenGL;
 using System;
 namespace AutomatedCar.SystemComponents.Packets
@@ -56,7 +7,7 @@ namespace AutomatedCar.SystemComponents.Packets
         private double gaspedal;
         private double breakpedal;
         private double steering;
-        private Gears gear;
+        private global::Gears gear;
         private bool acc;
         private double accDistance = 0.8;
         private int accSpeed = 30;
@@ -72,7 +23,7 @@ namespace AutomatedCar.SystemComponents.Packets
 
         public double Steering { get => this.steering; set => this.steering = value; }
 
-        public Gears Gear { get => this.gear; set => this.gear = value; }
+        public global::Gears Gear { get => this.gear; set => this.gear = value; }
 
         public bool Acc { get => this.acc; set => this.acc = value; }
 
@@ -106,14 +57,14 @@ namespace AutomatedCar.SystemComponents.Packets
         {
             switch (this.gear)
             {
-                case Gears.P:
-                    this.gear = Gears.R;
+                case global::Gears.P:
+                    this.gear = global::Gears.R;
                     break;
-                case Gears.N:
-                    this.gear = Gears.D;
+                case global::Gears.N:
+                    this.gear = global::Gears.D;
                     break;
-                case Gears.R:
-                    this.gear = Gears.N;
+                case global::Gears.R:
+                    this.gear = global::Gears.N;
                     break;
                 default:
                     break;
@@ -124,14 +75,14 @@ namespace AutomatedCar.SystemComponents.Packets
         {
             switch (this.gear)
             {
-                case Gears.D:
-                    this.gear = Gears.N;
+                case global::Gears.D:
+                    this.gear = global::Gears.N;
                     break;
-                case Gears.N:
-                    this.gear = Gears.R;
+                case global::Gears.N:
+                    this.gear = global::Gears.R;
                     break;
-                case Gears.R:
-                    this.gear = Gears.P;
+                case global::Gears.R:
+                    this.gear = global::Gears.P;
                     break;
                 default:
                     break;
@@ -339,4 +290,3 @@ namespace AutomatedCar.SystemComponents.Packets
         }
     }
 }
->>>>>>> master

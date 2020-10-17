@@ -8,9 +8,9 @@ namespace AutomatedCar.SystemComponents.Packets
     {
         public double VelocityPixelsPerSecond { get; }
         public int RPM { get; }
-        public GearShifterPosition GearShifterPostion { get; }
+        public Gears GearShifterPostion { get; }
         public DriveGear DriveGear { get;}
 
-        public void UpdateHMIPacket(double speed, int rpm, GearShifterPosition position, DriveGear driveGear);
+        public void UpdateHMIPacket(double speed, int rpm, Gears position, DriveGear driveGear);
     }
 }
