@@ -25,7 +25,7 @@
             this.Engine.UpdateEngineProperties(this.Packet);
             this.Steering.UpdateSteeringProperties(this.Packet);
             this.UpdateCarPosition();
-            //this.UpdateHMIPacket();
+            //this.UpdatePowerTrainPacket();
         }
 
         private void UpdateCarPosition()
@@ -35,9 +35,9 @@
             World.Instance.ControlledCar.Speed = (int)this.Engine.VelocityPixelsPerSecond;
         }
 
-        //private void UpdateHMIPacket()
+        //private void UpdatePowerTrainPacket()
         //{
-        //    this.virtualFunctionBus.HMIPacket.UpdateHMIPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
+        //    this.virtualFunctionBus.HMIPacket.UpdatePowerTrainPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
         //}
     }
 }

@@ -1,29 +1,21 @@
 ﻿namespace AutomatedCar.SystemComponents.Packets
 {
-    class PowerTrainPacket : IPowerTrainPacket
+    public class PowerTrainPacket : IReadOnlyPowerTrainPacket
     {
-        public int GasPedal { get; private set; }
-
-        public int BrakePedal { get; private set; }
-
-        public int SteeringWheel { get; private set; }
-
-        public GearShifterPosition GearShifterPosition { get; private set; }
-
-        public PowerTrainPacket()
+        public void UpdatePowerTrainPacket(double speed, int rpm, Gears position, DriveGear driveGear)
         {
-            this.GasPedal = 0;
-            this.BrakePedal = 0;
-            this.GearShifterPosition = GearShifterPosition.N;
-            this.SteeringWheel = 0;
+            this.Velocity = speed;
+            this.RPM = rpm;
+            this.GearShifterPostion = position;
+            this.DriveGear = driveGear;
         }
 
-        public void UpdatePowerTrainPacket(int gasPedal, int brakePedal, int steeringWheel, GearShifterPosition position)
-        {
-            this.GasPedal = gasPedal;
-            this.BrakePedal = brakePedal;
-            this.SteeringWheel = steeringWheel;
-            this.GearShifterPosition = position;
-        }
+        public double Velocity { get; private set; }
+
+        public int RPM { get; private set; }
+
+        public Gears GearShifterPostion { get; private set; }
+
+        public DriveGear DriveGear { get; private set; }
     }
 }

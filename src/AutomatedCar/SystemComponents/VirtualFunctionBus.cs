@@ -13,9 +13,7 @@ namespace AutomatedCar.SystemComponents
 
         public IReadOnlyDebugPacket DebugPacket { get; set; }
 
-        public IPowerTrainPacket PowerTrainPacket { get; set; }
-
-        //public IHMIPacket HMIPacket { get; set; }
+        public IReadOnlyPowerTrainPacket PowerTrainPacket { get; set; }
 
         public VirtualFunctionBus()
         {
