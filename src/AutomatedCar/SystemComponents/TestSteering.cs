@@ -23,15 +23,15 @@
 
         public double NewCarAngle { get; set; }
 
-        public void UpdateSteeringProperties(IPowerTrainPacket packet)
+        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
             this.SetVelocityPixelPerTick();
             if (this.velocityPixelPerTick != 0)
             {
                 this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
                 this.carCurrentAngle = World.Instance.ControlledCar.Angle;
-                this.steeringAngle = packet.SteeringWheel * SteeringWheelConversionConstant;
-                this.isInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;                
+                this.steeringAngle = packet.Steering * SteeringWheelConversionConstant;
+                this.isInReverseGear = packet.Gear == Gears.R;
                 this.SetCarDirectionUnitVector();
                 this.SetNewDirectionUnitVector();
                 this.SetNewCarPosition();
@@ -53,11 +53,11 @@
         {
             if (this.isInReverseGear)
             {
-                this.NewCarPosition = this.carPoint + (-1 * ((float)this.velocityPixelPerTick * this.newDirectionUnitVector));
+                this.NewCarPosition = this.carPoint + (-1 * ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
             }
             else
             {
-                this.NewCarPosition = this.carPoint + ((float)this.velocityPixelPerTick * this.newDirectionUnitVector);
+                this.NewCarPosition = this.carPoint + ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
             }
         }
 
@@ -72,6 +72,11 @@
             {
                 this.NewCarAngle = Math.Atan2(this.newDirectionUnitVector.Y, this.newDirectionUnitVector.X) * (180 / Math.PI);
             }
+        }
+
+        private Vector2 ConvertToVisualizationCoordinates(Vector2 vector)
+        {
+            return Vector2.Transform(this.newDirectionUnitVector, Matrix3x2.CreateRotation((float)(-90 * (Math.PI / 180))));
         }
     }
 }

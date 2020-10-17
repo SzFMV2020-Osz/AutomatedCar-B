@@ -12,6 +12,6 @@ namespace AutomatedCar.SystemComponents
 
         public double NewCarAngle { get; set; }
 
-        public void UpdateSteeringProperties(IPowerTrainPacket packet);
+        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet);
     }
 }

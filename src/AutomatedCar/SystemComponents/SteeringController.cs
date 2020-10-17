@@ -58,12 +58,12 @@
             get => new Vector2((float)Math.Cos(this.carCurrentAngle + this.SteeringAngle), (float)Math.Sin(this.carCurrentAngle + this.SteeringAngle));
         }
 
-        public void UpdateSteeringProperties(IPowerTrainPacket packet)
+        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
             this.SetDistanceFromCarCornerToCenter();
             this.carCurrentAngle = World.Instance.ControlledCar.Angle;
-            this.SteeringAngle = packet.SteeringWheel;
-            this.isInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;
+            this.SteeringAngle = packet.Steering;
+            this.isInReverseGear = packet.Gear == Gears.R;
             this.SetVelocityPixelPerTick();
             this.SetCarCenterPoint();
             this.SetWheelPositions();

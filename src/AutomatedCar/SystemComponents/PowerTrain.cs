@@ -11,21 +11,21 @@
         {
             this.Engine = new EngineController();
             this.Steering = new TestSteering();
-            this.Packet = this.virtualFunctionBus.PowerTrainPacket;
+            this.Packet = this.virtualFunctionBus.HMIPacket;
         }
 
         private EngineController Engine { get; set; }
 
         private ISteeringController Steering { get; set; }
 
-        private IPowerTrainPacket Packet { get; set; }
+        private IReadOnlyHMIPacket Packet { get; set; }
 
         public override void Process()
         {
             this.Engine.UpdateEngineProperties(this.Packet);
             this.Steering.UpdateSteeringProperties(this.Packet);
             this.UpdateCarPosition();
-            this.UpdateHMIPacket();
+            //this.UpdateHMIPacket();
         }
 
         private void UpdateCarPosition()
@@ -35,9 +35,9 @@
             World.Instance.ControlledCar.Speed = (int)this.Engine.VelocityPixelsPerSecond;
         }
 
-        private void UpdateHMIPacket()
-        {
-            this.virtualFunctionBus.HMIPacket.UpdateHMIPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
-        }
+        //private void UpdateHMIPacket()
+        //{
+        //    this.virtualFunctionBus.HMIPacket.UpdateHMIPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
+        //}
     }
 }

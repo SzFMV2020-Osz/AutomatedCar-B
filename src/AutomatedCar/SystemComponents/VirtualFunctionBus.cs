@@ -15,12 +15,11 @@ namespace AutomatedCar.SystemComponents
 
         public IPowerTrainPacket PowerTrainPacket { get; set; }
 
-        public IHMIPacket HMIPacket { get; set; }
+        //public IHMIPacket HMIPacket { get; set; }
 
         public VirtualFunctionBus()
         {
             this.PowerTrainPacket = new PowerTrainPacket();
-            this.HMIPacket = new HMIPacket();
         }
 
         public void RegisterComponent(SystemComponent component)

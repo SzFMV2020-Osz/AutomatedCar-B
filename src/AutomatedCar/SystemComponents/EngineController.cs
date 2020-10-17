@@ -19,7 +19,7 @@
 
         public double VelocityPixelsPerSecond { get; private set; }
 
-        private IPowerTrainPacket PowerTrainPacket { get; set; }
+        private IReadOnlyHMIPacket HMIPacket { get; set; }
 
         public EngineController()
         {
@@ -28,10 +28,10 @@
             this.VelocityPixelsPerSecond = 0;
         }
 
-        public void UpdateEngineProperties(IPowerTrainPacket packet)
+        public void UpdateEngineProperties(IReadOnlyHMIPacket packet)
         {
-            this.PowerTrainPacket = packet;
-            this.GearShifter.Position = this.PowerTrainPacket.GearShifterPosition;
+            this.HMIPacket = packet;
+            this.GearShifter.Position = this.HMIPacket.Gear;
             this.GearShifter.SetDriveGear(this.RPM, this.CalculateRPMChange());
             this.SetRPM();
             this.SetVelocityInPixels();
@@ -42,18 +42,18 @@
             double tempRPM = this.RPM + this.CalculateRPMChange();
             switch (this.GearShifter.Position)
             {
-                case GearShifterPosition.D:
+                case Gears.D:
                     tempRPM *= this.AdjustRPMOnGearChange();
                     break;
-                case GearShifterPosition.N:
-                    if (this.PowerTrainPacket.GasPedal != 0)
+                case Gears.N:
+                    if (this.HMIPacket.Gaspedal != 0)
                     {
                         tempRPM += NeutralRPMIncrease;
                     }
                     break;
-                case GearShifterPosition.R:
+                case Gears.R:
                     break;
-                case GearShifterPosition.P:
+                case Gears.P:
                     tempRPM = 0;
                     break;
             }
@@ -82,7 +82,7 @@
         }
 
         private int CalculateRPMChange() =>
-            this.PowerTrainPacket.GasPedal != 0 ? this.PowerTrainPacket.GasPedal * GasPedalScaling : RPMDecayPerTick;
+            this.HMIPacket.Gaspedal != 0 ? (int)this.HMIPacket.Gaspedal * GasPedalScaling : RPMDecayPerTick;
 
         private void SetVelocityInPixels() =>
             this.VelocityPixelsPerSecond = this.CalculateResultantForce() / ForceToPixelVelocityConversionConstant;
@@ -91,15 +91,15 @@
             (this.CalculateDriveForce() - this.CalculateBrakeForce() > 0) ? this.CalculateDriveForce() - this.CalculateBrakeForce() : 0;
 
         private double CalculateBrakeForce() =>
-            MinimumBrakeForce + (this.PowerTrainPacket.BrakePedal * BrakePedalScaling);
+            MinimumBrakeForce + (this.HMIPacket.Breakpedal * BrakePedalScaling);
 
         private double CalculateDriveForce()
         {
             switch (this.GearShifter.Position)
             {
-                case GearShifterPosition.D:
+                case Gears.D:
                     return this.RPM / this.GearShifter.CurrentDriveGear.GearRatio;
-                case GearShifterPosition.R:
+                case Gears.R:
                     return this.RPM / GearRatioReverse;
                 default:
                     return 0;
