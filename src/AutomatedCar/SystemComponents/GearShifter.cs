@@ -1,14 +1,5 @@
 ﻿namespace AutomatedCar.SystemComponents
 {
-    // A 4 alap valtoallas, amit inputkent kapunk a HMI-tol
-    public enum GearShifterPosition
-    {
-        D,
-        N,
-        R,
-        P
-    }
-
     // A 6 Drive-on beluli belso valtoallas
     public enum DriveGear
     {
