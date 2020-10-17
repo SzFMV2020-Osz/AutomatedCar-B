@@ -9,7 +9,7 @@
         private int gasPedal = 0;
         private int brakePedal = 0;
         private int steeringWheel = 0;
-        private GearShifterPosition gearShifterPosition = GearShifterPosition.D;
+        private Gears gearShifterPosition = Gears.D;
 
         public void ExecuteControls()
         {
@@ -31,19 +31,19 @@
             }
             else if (Keyboard.IsKeyDown(Key.R))
             {
-                this.gearShifterPosition = GearShifterPosition.R;
+                this.gearShifterPosition = Gears.R;
             }
             else if (Keyboard.IsKeyDown(Key.D))
             {
-                this.gearShifterPosition = GearShifterPosition.D;
+                this.gearShifterPosition = Gears.D;
             }
             else if (Keyboard.IsKeyDown(Key.P))
             {
-                this.gearShifterPosition = GearShifterPosition.P;
+                this.gearShifterPosition = Gears.P;
             }
             else if (Keyboard.IsKeyDown(Key.N))
             {
-                this.gearShifterPosition = GearShifterPosition.N;
+                this.gearShifterPosition = Gears.N;
             }
             else
             {
@@ -52,7 +52,7 @@
                 this.steeringWheel = 0;
             }
 
-            World.Instance.ControlledCar.VirtualFunctionBus.PowerTrainPacket.UpdatePowerTrainPacket(this.gasPedal, this.brakePedal, this.steeringWheel, this.gearShifterPosition);
+            //World.Instance.ControlledCar.VirtualFunctionBus.PowerTrainPacket.UpdatePowerTrainPacket(this.gasPedal, this.brakePedal, this.steeringWheel, this.gearShifterPosition);
         }
     }
 }
