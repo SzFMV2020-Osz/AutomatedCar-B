@@ -8,8 +8,8 @@ namespace AutomatedCar.SystemComponents.Packets
     {
         public double Velocity { get; }
         public int RPM { get; }
-        public GearShifterPosition GearShifterPostion { get; }
-        public Gears DriveGear { get; }
+        public Gears GearShifterPostion { get; }
+        public DriveGear DriveGear { get; }
 
         public void UpdatePowerTrainPacket(double speed, int rpm, Gears position, DriveGear driveGear);
     }
