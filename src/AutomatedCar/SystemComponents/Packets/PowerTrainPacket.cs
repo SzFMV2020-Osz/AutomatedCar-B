@@ -2,28 +2,49 @@
 {
     class PowerTrainPacket : IPowerTrainPacket
     {
-        public int GasPedal { get; private set; }
+        private double velocityPixelsPerSecond;
+        private int rpm;
+        private Gears gearShifterPosition;
+        private DriveGear driveGear;
 
-        public int BrakePedal { get; private set; }
-
-        public int SteeringWheel { get; private set; }
-
-        public GearShifterPosition GearShifterPosition { get; private set; }
-
-        public PowerTrainPacket()
+        public void UpdateHMIPacket(double speed, int rpm, Gears position, DriveGear driveGear)
         {
-            this.GasPedal = 0;
-            this.BrakePedal = 0;
-            this.GearShifterPosition = GearShifterPosition.N;
-            this.SteeringWheel = 0;
-        }
-
-        public void UpdatePowerTrainPacket(int gasPedal, int brakePedal, int steeringWheel, GearShifterPosition position)
-        {
-            this.GasPedal = gasPedal;
-            this.BrakePedal = brakePedal;
-            this.SteeringWheel = steeringWheel;
+            this.VelocityPixelsPerSecond = speed;
+            this.Rpm = rpm;
             this.GearShifterPosition = position;
+            this.DriveGear = driveGear;
         }
+
+
+        public double VelocityPixelsPerSecond { get => this.velocityPixelsPerSecond; set => this.velocityPixelsPerSecond = value; }
+         public int Rpm { get => this.rpm; set => this.rpm = value; }
+         public Gears GearShifterPosition  { get => this.gearShifterPosition; set => this.gearShifterPosition = value; }
+         public DriveGear DriveGear { get => this.driveGear; set => this.driveGear = value; }
+
+
+
+        /*public double VelocityPixelsPerSecond
+        {
+            get => this.velocityPixelsPerSecond;
+            private set => this.RaiseAndSetIfChanged(ref this.velocityPixelsPerSecond, value);
+        }
+
+        public int RPM
+        {
+            get => this.rpm;
+            private set => this.RaiseAndSetIfChanged(ref this.rpm, value);
+        }
+
+        public GearShifterPosition GearShifterPostion
+        {
+            get => this.gearShifterPosition;
+            private set => this.RaiseAndSetIfChanged(ref this.gearShifterPosition, value);
+        }
+
+        public DriveGear DriveGear
+        {
+            get => this.driveGear;
+            private set => this.RaiseAndSetIfChanged(ref this.driveGear, value);
+        }*/
     }
 }
