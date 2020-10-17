@@ -38,7 +38,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WhitoutKeyPressedAllVarialbeRemainsFalse()
+        public void AllVarialbeRemainsFalseWhitoutKeyPressed()
         {           
             hmi.InputHandler();
             Assert.False(hmi.Acc);
@@ -61,7 +61,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithBadInputsNormalInputsVariableStaysFalse()
+        public void NormalInputsVariableStaysFalseWithBadInputs()
         {
             KeyboardFill();
             Keyboard.Keys.Remove(Key.Up);
@@ -78,11 +78,11 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithBadInputsPressInputsVariableStaysFalse()
+        public void PressInputsVariableStaysFalseWithBadInputs()
         {
             KeyboardFill();
-            Keyboard.Keys.Remove(Key.OemPlus);
-            Keyboard.Keys.Remove(Key.OemMinus);
+            Keyboard.Keys.Remove(Key.Add);
+            Keyboard.Keys.Remove(Key.Subtract);
             Keyboard.Keys.Remove(Key.T);
             Keyboard.Keys.Remove(Key.W);
             Keyboard.Keys.Remove(Key.S);
@@ -97,7 +97,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithBadInputsToggleInputsVariableStaysFalse()
+        public void ToggleInputsVariableStaysFalseWithBadInputs()
         {
             KeyboardFill();
             Keyboard.ToggleableKeys.Remove(Key.E);
@@ -122,7 +122,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueGaspedal()
+        public void GaspedalReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.Up);
             hmi.InputHandler();
@@ -131,7 +131,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueBreakpedal()
+        public void BreakpedalReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.Down);
             hmi.InputHandler();
@@ -140,7 +140,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueSteeringRight()
+        public void SteeringRightReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.Right);
             hmi.InputHandler();
@@ -149,7 +149,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueSteeringLeft()
+        public void SteeringLeftReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.Left);
             hmi.InputHandler();
@@ -158,7 +158,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueAcc()
+        public void AccReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.A);
             hmi.InputHandler();
@@ -167,7 +167,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueAccDistance()
+        public void AccDistanceReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.T);
             Keyboard.PressableKeys.Add(Key.T);
@@ -178,10 +178,10 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueAccSpeedPlus()
+        public void AccSpeedPlusReturnsTrueWithTheRightKeyPressed()
         {
-            Keyboard.Keys.Add(Key.OemPlus);
-            Keyboard.PressableKeys.Add(Key.OemPlus);
+            Keyboard.Keys.Add(Key.Add);
+            Keyboard.PressableKeys.Add(Key.Add);
 
             hmi.InputHandler();
 
@@ -189,10 +189,10 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueAccSpeedMinus()
+        public void AccSpeedMinusReturnsTrueWithTheRightKeyPressed()
         {
-            Keyboard.Keys.Add(Key.OemMinus);
-            Keyboard.PressableKeys.Add(Key.OemMinus);
+            Keyboard.Keys.Add(Key.Subtract);
+            Keyboard.PressableKeys.Add(Key.Subtract);
 
             hmi.InputHandler();
 
@@ -200,7 +200,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueTurnSignalRight()
+        public void TurnSignalRightReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.E);
 
@@ -210,7 +210,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueTurnSignalLeft()
+        public void TurnSignalLeftReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.Q);
 
@@ -220,7 +220,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueGeerUp()
+        public void GearUpReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.W);
             Keyboard.PressableKeys.Add(Key.W);
@@ -231,7 +231,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueGeerDown()
+        public void GearDownReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.Keys.Add(Key.S);
             Keyboard.PressableKeys.Add(Key.S);
@@ -242,7 +242,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueLaneKeeping()
+        public void LaneKeepingReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.D);
 
@@ -252,7 +252,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueParkingPilot()
+        public void ParkingPilotReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.R);
 
@@ -262,7 +262,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueUtrasoundDebug()
+        public void UtrasoundDebugReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.U);
 
@@ -272,8 +272,7 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-
-        public void WithTheRightKeyPressedTrueRadarDebug()
+        public void RadarDebugReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.I);
 
@@ -283,13 +282,23 @@ namespace Tests.SystemComponents
         }
 
         [Fact]
-        public void WithTheRightKeyPressedTrueCameraDebug()
+        public void CameraDebugGaspedalReturnsTrueWithTheRightKeyPressed()
         {
             Keyboard.ToggleableKeys.Add(Key.Z);
 
             hmi.InputHandler();
 
             Assert.True(hmi.CameraDebug);
+        }
+
+        [Fact]
+        public void PolygonDebugGaspedalReturnsTrueWithTheRightKeyPressed()
+        {
+            Keyboard.ToggleableKeys.Add(Key.F);
+
+            hmi.InputHandler();
+
+            Assert.True(hmi.PolygonDebug);
         }
 
         public void Dispose()

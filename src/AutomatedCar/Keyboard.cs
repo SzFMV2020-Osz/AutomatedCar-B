@@ -16,6 +16,7 @@ namespace AutomatedCar
             Key.U,
             Key.Z,
             Key.I,
+            Key.F,
         };
 
         public static IReadOnlyCollection<Key> PressKeys = new List<Key>
@@ -23,8 +24,8 @@ namespace AutomatedCar
             Key.W,
             Key.S,
             Key.T,
-            Key.OemPlus,
-            Key.OemMinus,
+            Key.Add,
+            Key.Subtract,
         };
 
         public static readonly HashSet<Key> Keys = new HashSet<Key>();
