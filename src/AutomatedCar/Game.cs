@@ -19,7 +19,7 @@ namespace AutomatedCar
         {
             world.ControlledCar.InputHandler();
 
-            int speed = 10;
+            /*int speed = 10;
 
             if (Keyboard.IsKeyDown(Key.Space))
             {
@@ -56,7 +56,7 @@ namespace AutomatedCar
             if (Keyboard.IsKeyDown(Key.N))
             {
                 this.world.ControlledCar.Angle -= 5;
-            }
+            }*/
 
             World.Instance.Tick();
         }
