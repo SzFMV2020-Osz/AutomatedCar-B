@@ -11,7 +11,7 @@
              >
   <UserControl.Resources>
     <converters:BoolToColorConverter x:Key="ColorConverter" />
-    <converters:DoubleToAngleRpmConverter x:Key="RpmAngleConverter" />
+    <converters:IntegerToAngleRpmConverter x:Key="RpmAngleConverter" />
     <converters:DoubleToAngleKmHConverter x:Key="KmHAngleConverter" />
   </UserControl.Resources>
 
@@ -45,11 +45,11 @@
                   <Line StartPoint="70,70" EndPoint="15,70" Stroke="Black" StrokeThickness="2"
                         RenderTransformOrigin="70,70">
                     <Line.RenderTransform>
-                      <RotateTransform Angle="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gaspedal, Converter={StaticResource RpmAngleConverter}}" />
+                      <RotateTransform Angle="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.RPM, Converter={StaticResource RpmAngleConverter}}" />
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="45 110 45 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gaspedal, StringFormat={}{0:0}}}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.RPM, StringFormat={}{0:0}}}"/>
                     <TextBlock Foreground="Black" Text=" rpm"/>
                   </WrapPanel>
                 </Canvas>
@@ -63,11 +63,11 @@
                   <Line StartPoint="60,60" EndPoint="15,60" Stroke="Black" StrokeThickness="2"
                         RenderTransformOrigin="60,60">
                     <Line.RenderTransform>
-                      <RotateTransform Angle="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal, Converter={StaticResource KmHAngleConverter}}" />
+                      <RotateTransform Angle="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, Converter={StaticResource KmHAngleConverter}}" />
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="35 90 35 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal, StringFormat={}{0:0}}}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, StringFormat={}{0:0}}}"/>
                     <TextBlock Foreground="Black" Text=" km/h"/>
                   </WrapPanel>
                 </Canvas>
