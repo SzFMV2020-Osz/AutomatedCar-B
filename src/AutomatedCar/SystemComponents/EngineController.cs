@@ -5,21 +5,22 @@
     public class EngineController
     {
         private const double GearRatioReverse = 2.9; // Az egyik linkelt pelda atteteibol nezve, konzisztens a tobbi attettel
-        private const int RPMDecayPerTick = -500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
-        private const double MinimumBrakeForce = 500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
-        private const int ForceToPixelVelocityConversionConstant = 5; // Nagyjabol 10 autohossz/sec-re akartam maximalizalni a sebesseget (~162 km/h 4,5m hosszu autonal), ez a szam azt kozeliti (230px az auto, MaxRPM miatt max ResultantForce 11500)
+        private const int RPMDecayPerTick = -10; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
+        private const double MinimumBrakeForce = 0.9; 
+        private const double MaximumBrakeForce = 0.1;
+        private const int ForceToPixelVelocityConversionConstant = 10; // Nagyjabol 10 autohossz/sec-re akartam maximalizalni a sebesseget (~162 km/h 4,5m hosszu autonal), ez a szam azt kozeliti (230px az auto, MaxRPM miatt max ResultantForce 11500)
         private const int MaxRPM = 6000; // Nagyjabol realisztikus maximum, de ez is valtozhat, ha szukseges
         private const int NeutralRPMIncrease = 500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
-        private const int BrakePedalScaling = 100; // Ugy valasztottam, hogy a max fekezesi ero kozelitse a max eloremeneti erot (jelenleg eloremenetMax: 11500, fekMax: 10500). Valtozhat meg
+        private const int BrakePedalScaling = 10; // Ugy valasztottam, hogy a max fekezesi ero kozelitse a max eloremeneti erot (jelenleg eloremenetMax: 11500, fekMax: 10500). Valtozhat meg
         private const int GasPedalScaling = 1; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
 
         public int RPM { get; private set; }
-
+        
         public GearShifter GearShifter { get; private set; }
 
         public double VelocityPixelsPerSecond { get; private set; }
 
-        private IPowerTrainPacket PowerTrainPacket { get; set; }
+        private IReadOnlyHMIPacket HMIPacket { get; set; }
 
         public EngineController()
         {
@@ -28,10 +29,10 @@
             this.VelocityPixelsPerSecond = 0;
         }
 
-        public void UpdateEngineProperties(IPowerTrainPacket packet)
+        public void UpdateEngineProperties(IReadOnlyHMIPacket packet)
         {
-            this.PowerTrainPacket = packet;
-            this.GearShifter.Position = this.PowerTrainPacket.GearShifterPosition;
+            this.HMIPacket = packet;
+            this.GearShifter.Position = this.HMIPacket.Gear;
             this.GearShifter.SetDriveGear(this.RPM, this.CalculateRPMChange());
             this.SetRPM();
             this.SetVelocityInPixels();
@@ -42,20 +43,30 @@
             double tempRPM = this.RPM + this.CalculateRPMChange();
             switch (this.GearShifter.Position)
             {
-                case GearShifterPosition.D:
+                case Gears.D:
                     tempRPM *= this.AdjustRPMOnGearChange();
                     break;
-                case GearShifterPosition.N:
-                    tempRPM += NeutralRPMIncrease;
+                case Gears.N:
+                    if (this.HMIPacket.Gaspedal != 0)
+                    {
+                        tempRPM += NeutralRPMIncrease;
+                    }
                     break;
-                case GearShifterPosition.R:
+                case Gears.R:
                     break;
-                case GearShifterPosition.P:
+                case Gears.P:
                     tempRPM = 0;
                     break;
             }
-
-            this.RPM = ((int)tempRPM < MaxRPM) ? (int)tempRPM : MaxRPM;
+            if ((int)tempRPM < MaxRPM)
+            {
+                if ((int)tempRPM <= 0) { this.RPM = 0; }
+                else { this.RPM = (int)tempRPM; }
+            }
+            else
+            {
+                this.RPM = MaxRPM;
+            }
         }
 
         private double AdjustRPMOnGearChange()
@@ -72,24 +83,25 @@
         }
 
         private int CalculateRPMChange() =>
-            this.PowerTrainPacket.GasPedal != 0 ? this.PowerTrainPacket.GasPedal * GasPedalScaling : RPMDecayPerTick;
+            this.HMIPacket.Gaspedal != 0 ? (int)this.HMIPacket.Gaspedal * GasPedalScaling : RPMDecayPerTick - ((int)this.HMIPacket.Breakpedal * BrakePedalScaling);
 
         private void SetVelocityInPixels() =>
             this.VelocityPixelsPerSecond = this.CalculateResultantForce() / ForceToPixelVelocityConversionConstant;
 
         private double CalculateResultantForce() =>
-            (this.CalculateDriveForce() - this.CalculateBrakeForce() > 0) ? this.CalculateDriveForce() - this.CalculateBrakeForce() : 0;
+            this.CalculateDriveForce() * this.CalculateBrakeForce();
+            //(this.CalculateDriveForce() - this.CalculateBrakeForce() > 0) ? this.CalculateDriveForce() - this.CalculateBrakeForce() : 0;
 
         private double CalculateBrakeForce() =>
-            MinimumBrakeForce + (this.PowerTrainPacket.BrakePedal * BrakePedalScaling);
+            MinimumBrakeForce - (this.HMIPacket.Breakpedal / (100 / MinimumBrakeForce)) > 0 ? MinimumBrakeForce - (this.HMIPacket.Breakpedal / (100 / MinimumBrakeForce)) : MaximumBrakeForce;
 
         private double CalculateDriveForce()
         {
             switch (this.GearShifter.Position)
             {
-                case GearShifterPosition.D:
+                case Gears.D:
                     return this.RPM / this.GearShifter.CurrentDriveGear.GearRatio;
-                case GearShifterPosition.R:
+                case Gears.R:
                     return this.RPM / GearRatioReverse;
                 default:
                     return 0;
