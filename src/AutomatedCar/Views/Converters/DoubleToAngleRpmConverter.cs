@@ -8,14 +8,18 @@ namespace AutomatedCar.Views.Converters
     using Avalonia.Data.Converters;
     using Avalonia.Media;
 
-    public class BoolToColorConverter : IValueConverter
+    public class DoubleToAngleRpmConverter : IValueConverter
     {
-        public BoolToColorConverter()
+        private static readonly double MaxAngle = 260;
+        private static readonly double MaxRpm = 100;
+        private static readonly double Shifting = 40;
+
+        public DoubleToAngleRpmConverter()
         {
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => System.Convert.ToBoolean(value) ? Brush.Parse("#FFFF00") : Brush.Parse("#FFFFFF");
+            => ((double)value * MaxAngle / MaxRpm) - Shifting;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

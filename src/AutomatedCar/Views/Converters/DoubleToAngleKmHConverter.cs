@@ -1,21 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace AutomatedCar.Views.Converters
 {
     using System.Globalization;
     using Avalonia.Data.Converters;
     using Avalonia.Media;
+    using System;
 
-    public class BoolToColorConverter : IValueConverter
+    public class DoubleToAngleKmHConverter : IValueConverter
     {
-        public BoolToColorConverter()
+        private static readonly double MaxAngle = 260;
+        private static readonly double MaxRpm = 100;
+        private static readonly double Shifting = 40;
+
+        public DoubleToAngleKmHConverter()
         {
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => System.Convert.ToBoolean(value) ? Brush.Parse("#FFFF00") : Brush.Parse("#FFFFFF");
+            => ((double)value * MaxAngle / MaxRpm) - Shifting;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
