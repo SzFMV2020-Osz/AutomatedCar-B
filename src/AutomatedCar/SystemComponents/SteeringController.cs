@@ -4,103 +4,79 @@
     using System.Numerics;
     using AutomatedCar.Models;
     using AutomatedCar.SystemComponents.Packets;
-    using Avalonia.Markup.Xaml.Templates;
 
-    public class SteeringController
+    public class SteeringController : ISteeringController
     {
         private const float WheelBaseInPixels = 156;
-        private const double SteeringWheelConversionConstant = 0.6; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
+        private const double SteeringWheelConversionConstant = 0.1; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
         private bool isInReverseGear;
-        private float deltaTime = 1 / Game.TicksPerSecond;
-        private Vector2 carCenterPoint;
-        private Vector2 displacementFromCarCornerToCenter;
+        private double deltaTime = 0.016;
+        private Vector2 carPoint;
         private double steeringAngle;
+        private double velocityPixelPerTick;
+        private double carCurrentAngle;
+        private Vector2 carDirectionUnitVector;
+        private Vector2 newDirectionUnitVector;
 
-        public Vector2 NewCarPosition
-        {
-            get => ((this.FrontWheel + this.BackWheel) / 2) + (-1 * this.displacementFromCarCornerToCenter);
-        }
 
-        public double NewCarAngle
-        {
-            get => Math.Atan2(this.FrontWheel.Y - this.BackWheel.Y, this.FrontWheel.X - this.BackWheel.X);
-        }
+        public Vector2 NewCarPosition { get; set; }
 
-        private Vector2 CarCenterPoint
+        public double NewCarAngle { get; set; }
+
+        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
-            get => this.carCenterPoint;
-            set
+            this.SetVelocityPixelPerTick();
+            if (this.velocityPixelPerTick != 0)
             {
-                this.carCenterPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y) + this.displacementFromCarCornerToCenter;
+                this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
+                this.carCurrentAngle = World.Instance.ControlledCar.Angle;
+                this.steeringAngle = packet.Steering * SteeringWheelConversionConstant;
+                this.isInReverseGear = packet.Gear == Gears.R;
+                this.SetCarDirectionUnitVector();
+                this.SetNewDirectionUnitVector();
+                this.SetNewCarPosition();
+                this.SetNewCarAngle();
             }
         }
 
-        private double CarCurrentAngle
+        private void SetVelocityPixelPerTick()
         {
-            get => World.Instance.ControlledCar.Angle;
+            this.velocityPixelPerTick = World.Instance.ControlledCar.Speed * this.deltaTime;
         }
 
-        private double SteeringAngle
+        private void SetCarDirectionUnitVector()
         {
-            get => this.steeringAngle;
-            set => this.steeringAngle = value * SteeringWheelConversionConstant;
+            this.carDirectionUnitVector = new Vector2((float)Math.Cos(this.carCurrentAngle * (Math.PI / 180)), (float)Math.Sin(this.carCurrentAngle * (Math.PI / 180)));
         }
 
-        private float VelocityPixelPerTick
+        private void SetNewCarPosition()
         {
-            get
+            if (this.isInReverseGear)
             {
-                if (this.isInReverseGear)
-                {
-                    return (World.Instance.ControlledCar.Speed / this.deltaTime) * -1;
-                }
-                else
-                {
-                    return World.Instance.ControlledCar.Speed / this.deltaTime;
-                }
+                this.NewCarPosition = this.carPoint + (-1 * ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
+            }
+            else
+            {
+                this.NewCarPosition = this.carPoint + ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
             }
         }
 
-        private Vector2 FrontWheel { get; set; }
-
-        private Vector2 BackWheel { get; set; }
-
-        private Vector2 CarDirectionUnitVector
+        private void SetNewDirectionUnitVector()
         {
-            get => new Vector2((float)Math.Cos(this.CarCurrentAngle), (float)Math.Sin(this.CarCurrentAngle));
+            this.newDirectionUnitVector = Vector2.Transform(this.carDirectionUnitVector, Matrix3x2.CreateRotation((float)(this.steeringAngle * (Math.PI / 180))));
         }
 
-        private Vector2 FrontWheelDirectionUnitVector
+        private void SetNewCarAngle()
         {
-            get => new Vector2((float)Math.Cos(this.CarCurrentAngle+this.SteeringAngle), (float)Math.Sin(this.CarCurrentAngle + this.SteeringAngle));
+            if (this.newDirectionUnitVector != this.carDirectionUnitVector)
+            {
+                this.NewCarAngle = Math.Atan2(this.newDirectionUnitVector.Y, this.newDirectionUnitVector.X) * (180 / Math.PI);
+            }
         }
 
-        public void UpdateSteeringProperties(IPowerTrainPacket packet)
+        private Vector2 ConvertToVisualizationCoordinates(Vector2 vector)
         {
-            this.SteeringAngle = packet.SteeringWheel;
-            this.isInReverseGear = packet.GearShifterPosition == GearShifterPosition.R;
-            this.SetDistanceFromCarCornerToCenter();
-            this.SetWheelPositions();
-            this.MoveWheelPositions();
-        }
-
-        private void SetWheelPositions()
-        {
-            this.FrontWheel = this.carCenterPoint + ((WheelBaseInPixels / 2) * this.CarDirectionUnitVector);
-            this.BackWheel = this.carCenterPoint - ((WheelBaseInPixels / 2) * this.CarDirectionUnitVector);
-        }
-
-        private void MoveWheelPositions()
-        {
-            this.FrontWheel += this.VelocityPixelPerTick * this.FrontWheelDirectionUnitVector;
-            this.BackWheel += this.VelocityPixelPerTick * this.CarDirectionUnitVector;
-        }
-
-        private void SetDistanceFromCarCornerToCenter()
-        {
-            float distanceToCarCenterFromCorner = (float)Math.Sqrt(Math.Pow(World.Instance.ControlledCar.Width / 2, 2) + Math.Pow(World.Instance.ControlledCar.Height / 2, 2));
-            double angleDifferentialToCarAngle = 180 - Math.Asin((World.Instance.ControlledCar.Width / 2) / distanceToCarCenterFromCorner);
-            this.displacementFromCarCornerToCenter = distanceToCarCenterFromCorner * new Vector2((float)Math.Cos(this.CarCurrentAngle + angleDifferentialToCarAngle), (float)Math.Sin(this.CarCurrentAngle + angleDifferentialToCarAngle));
+            return Vector2.Transform(this.newDirectionUnitVector, Matrix3x2.CreateRotation((float)(-90 * (Math.PI / 180))));
         }
     }
 }

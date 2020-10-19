@@ -24,6 +24,7 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
+            this.powerTrain = new PowerTrain(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
