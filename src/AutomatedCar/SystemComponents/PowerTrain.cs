@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.SystemComponents
+namespace AutomatedCar.SystemComponents
 {
     using System;
     using AutomatedCar.Models;
@@ -11,19 +11,21 @@
         {
             this.Engine = new EngineController();
             this.Steering = new SteeringController();
-            this.Packet = this.virtualFunctionBus.HMIPacket;
+            this.HMIPacket = this.virtualFunctionBus.HMIPacket;
         }
 
         private EngineController Engine { get; set; }
 
         private ISteeringController Steering { get; set; }
 
-        private IReadOnlyHMIPacket Packet { get; set; }
+        private IReadOnlyHMIPacket HMIPacket { get; set; }
+
+        private PowerTrainPacket PowerTrainPacket { get; set; }
 
         public override void Process()
         {
-            this.Engine.UpdateEngineProperties(this.Packet);
-            this.Steering.UpdateSteeringProperties(this.Packet);
+            this.Engine.UpdateEngineProperties(this.HMIPacket);
+            this.Steering.UpdateSteeringProperties(this.HMIPacket);
             this.UpdateCarPosition();
             this.UpdatePowerTrainPacket();
         }
@@ -37,7 +39,8 @@
 
         private void UpdatePowerTrainPacket()
         {
-            this.virtualFunctionBus.PowerTrainPacket.UpdatePowerTrainPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
+            this.PowerTrainPacket.UpdatePowerTrainPacket(this.Engine.VelocityPixelsPerSecond, this.Engine.RPM, this.Engine.GearShifter.Position, this.Engine.GearShifter.CurrentDriveGear.Label);
+            this.virtualFunctionBus.PowerTrainPacket = this.PowerTrainPacket;
         }
     }
 }
