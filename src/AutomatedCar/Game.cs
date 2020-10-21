@@ -17,16 +17,12 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
-            //this.world.ControlledCar.InputHandler();
-
             int speed = 10;
 
             if (Keyboard.IsKeyDown(Key.Space))
             {
                 speed = 300;
             }
-
-            world.ControlledCar.InputHandler();
 
             if (Keyboard.IsKeyDown(Key.Up))
             {

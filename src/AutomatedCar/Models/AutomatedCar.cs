@@ -78,10 +78,11 @@ namespace AutomatedCar.Models
         public Geometry RadarGeometry { get; set; }
 
         private bool radarVisible;
+
         public bool RadarVisible
         {
             get => radarVisible;
-            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvas·s hi·ny·ban most mockolt adattal jelenÌtj¸k meg.
+            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvas√°s hi√°ny√°ban most mockolt adattal jelen√≠tj√ºk meg.
         }
 
         public SolidColorBrush UltraSoundBrush { get; set; }
@@ -89,11 +90,13 @@ namespace AutomatedCar.Models
         public List<Geometry> UltraSoundGeometries { get; set; }
 
         private bool ultraSoundVisible;
+
         public bool UltraSoundVisible
         {
             get => ultraSoundVisible;
-            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvas·s hi·ny·ban most mockolt adattal jelenÌtj¸k meg.
+            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvas√°s hi√°ny√°ban most mockolt adattal jelen√≠tj√ºk meg.
         }
+
         public SolidColorBrush CameraBrush { get; set; }
 
         public Geometry CameraGeometry { get; set; }
@@ -102,7 +105,7 @@ namespace AutomatedCar.Models
         public bool CameraVisible
         {
             get => cameraVisible;
-            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvas·s hi·ny·ban most mockolt adattal jelenÌtj¸k meg.
+            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvas√°s hi√°ny√°ban most mockolt adattal jelen√≠tj√ºk meg.
         }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
