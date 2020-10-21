@@ -78,9 +78,6 @@ namespace AutomatedCar.SystemComponents
             this.RadarSensorSet(this.RadarDebug);
             this.UtrasoundSensorSet(this.UltrasoundDebug);
             this.PolygonDebugSet(this.PolygonDebug);
-
-            this.virtualFunctionBus.HMIPacket = this.hmiPacket;
-            this.virtualFunctionBus.DebugPacket = this.debugPacket;
         }
 
         #region InputHandler
