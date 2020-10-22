@@ -29,8 +29,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\reference_points.json" />
+    <AvaloniaResource Include="Assets\test_world.json" />
+    <AvaloniaResource Include="Assets\worldobject_polygons.json" />
   </ItemGroup>
 
 </Project>
