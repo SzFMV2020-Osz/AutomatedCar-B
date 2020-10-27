@@ -1,6 +1,7 @@
 using Avalonia;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace AutomatedCar.Models
@@ -15,6 +16,26 @@ namespace AutomatedCar.Models
         public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Move()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Move(Vector2 with)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveX(int x)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MoveY(int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetNextPosition(int x, int y)
         {
             throw new NotImplementedException();
         }
