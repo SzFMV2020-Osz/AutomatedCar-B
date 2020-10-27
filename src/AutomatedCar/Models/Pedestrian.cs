@@ -6,9 +6,9 @@ using System.Text;
 
 namespace AutomatedCar.Models
 {
-    public class Pedestrian : WorldObject, INPC
+    public class NpcPedestrian : WorldObject, INPC
     {
-        public Pedestrian(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints) : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
+        public NpcPedestrian(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints) : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
         }
 
