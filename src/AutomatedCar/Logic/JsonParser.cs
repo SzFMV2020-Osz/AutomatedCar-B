@@ -33,9 +33,9 @@ namespace AutomatedCar.Logic
             StreamReader worldReader = new StreamReader(Assembly.GetExecutingAssembly()
                 .GetManifestResourceStream(woJson));
             StreamReader polygonReader = new StreamReader(Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream($"AutomatedCarTests.Assets.worldobject_polygons.json"));
+                .GetManifestResourceStream($"AutomatedCar.Assets.worldobject_polygons.json"));
             StreamReader refPointReader = new StreamReader(Assembly.GetExecutingAssembly()
-                .GetManifestResourceStream($"AutomatedCarTests.Assets.reference_points.json"));
+                .GetManifestResourceStream($"AutomatedCar.Assets.reference_points.json"));
 
             this.worldObjectParameters = new List<JsonWorldObject>();
             this.polygonParameters = new List<JsonPolygon>();
