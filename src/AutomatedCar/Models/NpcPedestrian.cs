@@ -22,7 +22,8 @@ namespace AutomatedCar.Models
 
         public void Move(Vector2 with)
         {
-            throw new NotImplementedException();
+            this.X = (int)with.X;
+            this.Y = (int)with.Y;
         }
 
         public void MoveX(int x)

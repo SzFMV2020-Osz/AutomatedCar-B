@@ -10,6 +10,7 @@ namespace AutomatedCar.Models
     {
         public NpcCar(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints) : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
+            
         }
 
         public int Rotation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -22,7 +23,8 @@ namespace AutomatedCar.Models
 
         public void Move(Vector2 with)
         {
-            throw new NotImplementedException();
+            this.X = (int)with.X;
+            this.Y = (int)with.Y;
         }
 
         public void MoveX(int x)
