@@ -7,11 +7,14 @@
     using System.IO;
     using System.Linq;
     using System.Reactive;
-    using Avalonia;
     using Avalonia.Controls;
-    using Avalonia.Controls.Shapes;
     using Avalonia.Media;
+    using NetTopologySuite.Geometries;
+    using NetTopologySuite.Geometries.Implementation;
     using ReactiveUI;
+    using Geometry = Avalonia.Media.Geometry;
+    using Point = Avalonia.Point;
+    using Polygon = Avalonia.Controls.Shapes.Polygon;
 
     public class World : ReactiveObject
     {
@@ -92,26 +95,19 @@
 
         public List<WorldObject> GetWorldObjectsInsideTriangle(List<Point> pointsOfTriangle)
         {
+            var coordinatePoints = pointsOfTriangle.Select(x => new Coordinate(x.X, x.Y)).ToArray();
+            var lr1 = new LinearRing(new CoordinateArraySequence(coordinatePoints), GeometryFactory.Default);
+            NetTopologySuite.Geometries.Polygon triangle = new NetTopologySuite.Geometries.Polygon(lr1);
+
             List<WorldObject> objectsInside = new List<WorldObject>();
-            bool hasBeenAdded = false;
 
             foreach (WorldObject item in this.WorldObjects)
             {
-                foreach (Polygon polygon in item.Polygons)
+                foreach (LineString polygon in item.NetPolygons)
                 {
-                    foreach (Point point in polygon.Points)
+                    if (triangle.Intersects(polygon))
                     {
-                        if (IsInside(pointsOfTriangle, point))
-                        {
-                            objectsInside.Add(item);
-                            hasBeenAdded = true;
-                            break;
-                        }
-                    }
-
-                    if (hasBeenAdded)
-                    {
-                        hasBeenAdded = false;
+                        objectsInside.Add(item);
                         break;
                     }
                 }
