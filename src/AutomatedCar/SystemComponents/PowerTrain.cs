@@ -1,4 +1,4 @@
-namespace AutomatedCar.SystemComponents
+﻿namespace AutomatedCar.SystemComponents
 {
     using System;
     using AutomatedCar.Models;
@@ -11,6 +11,7 @@ namespace AutomatedCar.SystemComponents
         {
             this.Engine = new EngineController();
             this.Steering = new SteeringController();
+            this.PowerTrainPacket = new PowerTrainPacket();
             this.HMIPacket = this.virtualFunctionBus.HMIPacket;
         }
 
