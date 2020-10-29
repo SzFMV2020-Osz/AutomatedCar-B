@@ -45,26 +45,26 @@
                             <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
                                 <WrapPanel Grid.Row="0" Grid.Column="0"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
-                                        <TextBlock Foreground="#000000"                                              
+                                        <TextBlock Foreground="#000000"
                                                FontSize="14"
                                                FontWeight="Bold"
                                                Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.AccSpeed}"/>
                                     </Border>
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
                                         <WrapPanel HorizontalAlignment="Center"
                                            VerticalAlignment="Center">
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="14"
                                                FontWeight="Bold"
                                                Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.AccDistance}"/>
@@ -77,9 +77,9 @@
                                 </WrapPanel>
                                 <WrapPanel Grid.Row="1" Grid.Column="0"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
@@ -89,25 +89,25 @@
                                                 FontSize="10"
                                                 FontWeight="Bold"
                                                 Text="Acc:"/>
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Acc}"/>
                                         </WrapPanel>
                                     </Border>
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
                                         <WrapPanel HorizontalAlignment="Center"
-                                           VerticalAlignment="Center">                                            
+                                           VerticalAlignment="Center">
                                             <TextBlock  Foreground="#000000"
                                                 FontSize="10"
                                                 FontWeight="Bold"
                                                 Text="PP:"/>
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.ParkingPilot}"/>
@@ -116,9 +116,9 @@
                                 </WrapPanel>
                                 <WrapPanel Grid.Row="2" Grid.Column="0"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="60"
                                             Height="30">
@@ -128,15 +128,15 @@
                                                 FontSize="10"
                                                 FontWeight="Bold"
                                                 Text="LKA:"/>
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.LaneKeeping}"/>
                                         </WrapPanel>
                                     </Border>
-                                    <Border Background="#424242" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="0" 
+                                    <Border Background="#424242"
+                                            BorderBrush="Black"
+                                            BorderThickness="0"
                                             Padding="0"
                                             Width="60"
                                             Height="0">
@@ -144,9 +144,9 @@
                                 </WrapPanel>
                                 <WrapPanel Grid.Row="3" Grid.Column="0"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="120"
                                             Height="30">
@@ -156,32 +156,32 @@
                                                 FontSize="10"
                                                 FontWeight="Bold"
                                                 Text="LKA Warn:"/>
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="***"/>
                                         </WrapPanel>
                                     </Border>
                                 </WrapPanel>
-                                <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="120"
                                             Height="100"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
-                                    <TextBlock Foreground="#000000"                                              
+                                    <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="Last seen sign"/>
                                 </Border>
                                 <WrapPanel Grid.Row="3" Grid.Column="1"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="120"
                                             Height="30">
@@ -191,7 +191,7 @@
                                                 FontSize="10"
                                                 FontWeight="Bold"
                                                 Text="AEB Warn:"/>
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="***"/>
@@ -200,9 +200,9 @@
                                 </WrapPanel>
                                 <WrapPanel Grid.Row="4" Grid.Column="1"
                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Border Background="White" 
-                                            BorderBrush="Black" 
-                                            BorderThickness="2" 
+                                    <Border Background="White"
+                                            BorderBrush="Black"
+                                            BorderThickness="2"
                                             Padding="1 1 1 1"
                                             Width="120"
                                             Height="30">
@@ -212,7 +212,7 @@
                                                 FontSize="10"
                                                 FontWeight="Bold"
                                                 Text="RR Warn:"/>
-                                            <TextBlock Foreground="#000000"                                              
+                                            <TextBlock Foreground="#000000"
                                                FontSize="10"
                                                FontWeight="Bold"
                                                Text="***"/>
@@ -231,6 +231,12 @@
                                     Text="Break pedal"/>
                                 <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
                                     Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal}"/>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                                           Text="Health Points"/>
+
+                                <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
+                                             Value="{Binding ControlledCar.HealthPoints}"/>
+                                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10" Foreground="White" Background="Black" Command="{Binding OnClickCommand}">Reset Hp</Button>
                                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
                                     Text="Steering"/>
                                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
@@ -262,12 +268,12 @@
                                     </WrapPanel>
                                 </Grid>
                             </StackPanel>
-                            
+
                         </StackPanel>
                     </Border>
                 </DockPanel>
             </DataTemplate>
         </ContentControl.ContentTemplate>
     </ContentControl>
-    
+
 </UserControl>

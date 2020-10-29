@@ -80,7 +80,7 @@ namespace AutomatedCar.Models
         public bool RadarVisible
         {
             get => radarVisible;
-            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasÃ¡s hiÃ¡nyÃ¡ban most mockolt adattal jelenÃ­tjÃ¼k meg.
         }
 
         public SolidColorBrush UltraSoundBrush { get; set; }
@@ -91,7 +91,7 @@ namespace AutomatedCar.Models
         public bool UltraSoundVisible
         {
             get => ultraSoundVisible;
-            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasÃ¡s hiÃ¡nyÃ¡ban most mockolt adattal jelenÃ­tjÃ¼k meg.
         }
         public SolidColorBrush CameraBrush { get; set; }
 
@@ -101,10 +101,17 @@ namespace AutomatedCar.Models
         public bool CameraVisible
         {
             get => cameraVisible;
-            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasÃ¡s hiÃ¡nyÃ¡ban most mockolt adattal jelenÃ­tjÃ¼k meg.
         }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
+        
+        private int healthPoints = 1;
+        public int HealthPoints
+        {
+            get => healthPoints;
+            set => this.RaiseAndSetIfChanged(ref healthPoints, value); 
+        }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()
