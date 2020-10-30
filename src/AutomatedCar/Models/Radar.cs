@@ -7,7 +7,7 @@ using System.Text;
 namespace AutomatedCar.Models
 {
     public class Radar
-    {
+    {        
         List<NoticedObject> noticedObjects;
         Position carPreviousPosition;
         Point[] points;
@@ -16,7 +16,7 @@ namespace AutomatedCar.Models
         public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
         public Point[] Points { get => points; set => points = value; }
 
-        public List<NoticedObject> filterCollidables(List<NoticedObject> paramNoticedObjects)
+        public List<NoticedObject> filterCollidables(List<WorldObject> paramNoticedObjects)
         {
             return null;
         }
