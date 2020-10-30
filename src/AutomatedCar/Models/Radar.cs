@@ -16,7 +16,7 @@ namespace AutomatedCar.Models
         public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
         public Point[] Points { get => points; set => points = value; }
 
-        public List<NoticedObject> filterCollidables(List<WorldObject> paramNoticedObjects)
+        public List<NoticedObject> filterCollidables(List<WorldObject> paramWorldObjects)
         {
             return null;
         }
