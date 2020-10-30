@@ -10,7 +10,7 @@ namespace AutomatedCar.Models
     {
         List<NoticedObject> noticedObjects;
         Position carPreviousPosition;
-        Point[3] points;
+        Point[] points;
 
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
         public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
@@ -56,7 +56,7 @@ namespace AutomatedCar.Models
 
         public Point[] computeTriangleInWorld()
         {
-
+            return null;
         }
 
         public void updateBus()
