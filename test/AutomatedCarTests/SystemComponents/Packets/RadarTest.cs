@@ -36,7 +36,7 @@ namespace Tests.SystemComponents.Packets
         int CarY = 1;
 
         [Fact]
-        public void Radar_FromOrigo_rotate180_distance0()
+        public void Radar_FromOrigo_rotate180_distance0_offset0()
         {
 
             Radar radar = new Radar();
@@ -45,6 +45,7 @@ namespace Tests.SystemComponents.Packets
             this.CarX = 0;
             this.CarY = 0;
             this.Distance = 0;
+            this.Offset = 0;
 
             var points = radar.computeTriangleInWorld();
 
@@ -55,5 +56,7 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(points[2].X,0);
             Assert.Equal(points[2].Y,0);
         }
+
+        
     }
 }
