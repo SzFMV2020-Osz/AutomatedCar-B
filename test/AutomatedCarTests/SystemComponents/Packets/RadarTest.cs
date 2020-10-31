@@ -37,10 +37,8 @@ namespace Tests.SystemComponents.Packets
         int CarY = 1;
 
         [Fact]
-        public void Radar_FromOrigo_rotate180_distance0_offset0()
+        public void Radar_FromOrigo_rotate0_distance0_offset0()
         {
-
-            this.CarRotation = 180;
             this.CarX = 0;
             this.CarY = 0;
             this.Distance = 0;
@@ -57,9 +55,28 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate180_distance0_offset120()
+        public void Radar_FromOrigo_rotate90_distance0_offset0()
         {
-            this.CarRotation = 180;
+            this.CarX = 0;
+            this.CarY = 0;
+            this.Distance = 0;
+            this.Offset = 0;
+
+            radar.rotate = 90;
+
+            var points = this.radar.computeTriangleInWorld();
+
+            Assert.Equal(0,points[0].X);
+            Assert.Equal(0,points[0].Y);
+            Assert.Equal(0,points[1].X);
+            Assert.Equal(0,points[1].Y);
+            Assert.Equal(0,points[2].X);
+            Assert.Equal(0,points[2].Y);
+        }
+
+        [Fact]
+        public void Radar_FromOrigo_rotate0_distance0_offset120()
+        {
             this.CarX = 0;
             this.CarY = 0;
             this.Distance = 0;
@@ -70,19 +87,41 @@ namespace Tests.SystemComponents.Packets
 
             var points = this.radar.computeTriangleInWorld(); 
 
-            Assert.Equal(0, points[0].X);
-            Assert.Equal(120, points[0].Y);
-            Assert.Equal(0, points[1].X);
-            Assert.Equal(120, points[1].Y);
-            Assert.Equal(0, points[2].X);
-            Assert.Equal(120, points[2].Y);
+            Assert.Equal(120, points[0].X);
+            Assert.Equal(0, points[0].Y);
+            Assert.Equal(120, points[1].X);
+            Assert.Equal(0, points[1].Y);
+            Assert.Equal(120, points[2].X);
+            Assert.Equal(0, points[2].Y);
         }
 
-        [Fact]
-        public void Radar_FromOrigo_rotate180_distance100_offset0()
-        {
+        // [Fact]
+        // public void Radar_FromOrigo_rotate90_distance0_offset120()
+        // {
+        //     this.CarX = 0;
+        //     this.CarY = 0;
+        //     this.Distance = 0;
+        //     this.Offset = 120;
 
-            this.CarRotation = 180;
+
+        //     this.radar.offset = this.Offset;
+        //     this.radar.rotate = 90;
+            
+
+        //     var points = this.radar.computeTriangleInWorld(); 
+
+        //     Assert.Equal(0, points[0].X);
+        //     Assert.Equal(120, points[0].Y);
+        //     Assert.Equal(0, points[1].X);
+        //     Assert.Equal(120, points[1].Y);
+        //     Assert.Equal(0, points[2].X);
+        //     Assert.Equal(120, points[2].Y);
+        // }
+
+
+        [Fact]
+        public void Radar_FromOrigo_rotate0_distance100_offset0()
+        {
             this.CarX = 0;
             this.CarY = 0;
             this.Distance = 100;
@@ -92,19 +131,17 @@ namespace Tests.SystemComponents.Packets
 
             var points = this.radar.computeTriangleInWorld();
 
-            Assert.Equal(0,points[0].X);
             Assert.Equal(0,points[0].Y);
-            Assert.Equal(58,points[1].X);
-            Assert.Equal(100,points[1].Y);
-            Assert.Equal(-58,points[2].X);
-            Assert.Equal(100,points[2].Y);
+            Assert.Equal(0,points[0].X);
+            Assert.Equal(58,points[1].Y);
+            Assert.Equal(100,points[1].X);
+            Assert.Equal(-58,points[2].Y);
+            Assert.Equal(100,points[2].X);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate180_distance100_offset10()
+        public void Radar_FromOrigo_rotate0_distance100_offset10()
         {
-
-            this.CarRotation = 180;
             this.CarX = 0;
             this.CarY = 0;
             this.Distance = 100;
@@ -116,12 +153,12 @@ namespace Tests.SystemComponents.Packets
 
             var points = this.radar.computeTriangleInWorld();
 
-            Assert.Equal(0,points[0].X);
-            Assert.Equal(10,points[0].Y);
-            Assert.Equal(58,points[1].X);
-            Assert.Equal(110,points[1].Y);
-            Assert.Equal(-58,points[2].X);
-            Assert.Equal(110,points[2].Y);
+            Assert.Equal(0,points[0].Y);
+            Assert.Equal(10,points[0].X);
+            Assert.Equal(58,points[1].Y);
+            Assert.Equal(110,points[1].X);
+            Assert.Equal(-58,points[2].Y);
+            Assert.Equal(110,points[2].X);
         }
 
         

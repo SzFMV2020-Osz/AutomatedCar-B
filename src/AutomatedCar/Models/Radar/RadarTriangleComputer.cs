@@ -10,17 +10,23 @@ namespace AutomatedCar.Models.RadarUtil
     { 
         public int offset = 0;
         public int distance = 0;
+        public int rotate = 0;
+        public int angle = 30;
         public Point[] computeTriangleInWorld()
         {
             Point[] points = new Point[3];
 
 
-            int xWidth = getXfromAngleAndDistance(this.distance, 30);
+            int y = getXfromAngleAndDistance(this.distance, this.angle);
 
 
-            points[0] = new Point(0,this.offset);
-            points[1] = new Point(xWidth,this.offset + this.distance);
-            points[2] = new Point(-xWidth,this.offset + this.distance);
+            var ca = Math.Round(Math.Cos((Math.PI / 180) * 90)); // 0
+            var sa = Math.Round(Math.Sin((Math.PI / 180) * rotate)); //1
+
+
+            points[0] = new Point(this.offset, 0);
+            points[1] = new Point((this.offset + this.distance),y);
+            points[2] = new Point((this.offset + this.distance), (-y));
 
             return points;
         }
