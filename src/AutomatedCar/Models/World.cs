@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.Models
+namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -119,5 +119,20 @@
 
             return objectsInside;
         }
+
+        //public WorldObject IsColisonWhitWorldObject() {
+
+        //    foreach (WorldObject item in this.WorldObjects)
+        //    {
+        //        foreach (LineString polygon in item.NetPolygons)
+        //        {
+        //            if (_controlledCar.NetPolygons.Intersects())
+        //            {
+        //                objectsInside.Add(item);
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
