@@ -12,6 +12,8 @@ namespace AutomatedCar.Models
         Position carPreviousPosition;
         Point[] points;
 
+        public int offset = 0;
+
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
         public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
         public Point[] Points { get => points; set => points = value; }
@@ -58,9 +60,9 @@ namespace AutomatedCar.Models
         {
             Point[] points = new Point[3];
 
-            points[0] = new Point(0,0);
-            points[1] = new Point(0,0);
-            points[2] = new Point(0,0);
+            points[0] = new Point(0,this.offset);
+            points[1] = new Point(0,this.offset);
+            points[2] = new Point(0,this.offset);
 
             return points;
         }
