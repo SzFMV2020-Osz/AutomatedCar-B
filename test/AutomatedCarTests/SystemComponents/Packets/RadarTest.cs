@@ -13,6 +13,7 @@ namespace Tests.SystemComponents.Packets
 {
     public class RadarTest
     {
+        Radar radar = new Radar();
 
     // Radar
         // szög
@@ -39,15 +40,13 @@ namespace Tests.SystemComponents.Packets
         public void Radar_FromOrigo_rotate180_distance0_offset0()
         {
 
-            Radar radar = new Radar();
-
             this.CarRotation = 180;
             this.CarX = 0;
             this.CarY = 0;
             this.Distance = 0;
             this.Offset = 0;
 
-            var points = radar.computeTriangleInWorld();
+            var points = this.radar.computeTriangleInWorld();
 
             Assert.Equal(0,points[0].X);
             Assert.Equal(0,points[0].Y);
@@ -66,11 +65,10 @@ namespace Tests.SystemComponents.Packets
             this.Distance = 0;
             this.Offset = 120;
 
-            Radar radar = new Radar();
 
-            radar.offset = this.Offset;
+            this.radar.offset = this.Offset;
 
-            var points = radar.computeTriangleInWorld(); 
+            var points = this.radar.computeTriangleInWorld(); 
 
             Assert.Equal(0, points[0].X);
             Assert.Equal(120, points[0].Y);
