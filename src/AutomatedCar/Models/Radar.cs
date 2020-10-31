@@ -3,6 +3,7 @@ using NetTopologySuite.GeometriesGraph;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutomatedCar.Models.RadarUtil;
 
 namespace AutomatedCar.Models
 {
@@ -58,13 +59,11 @@ namespace AutomatedCar.Models
 
         public Point[] computeTriangleInWorld()
         {
-            Point[] points = new Point[3];
+            RadarTriangleComputer RTC = new RadarTriangleComputer();
 
-            points[0] = new Point(0,this.offset);
-            points[1] = new Point(0,this.offset);
-            points[2] = new Point(0,this.offset);
+            //RTC.offset = 0;
 
-            return points;
+            return RTC.computeTriangleInWorld();
         }
 
         public void updateBus()

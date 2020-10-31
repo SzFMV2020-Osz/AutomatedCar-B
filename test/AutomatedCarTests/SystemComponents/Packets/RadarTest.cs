@@ -4,7 +4,7 @@ using Avalonia.Layout;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
 using System.ComponentModel;
 using Xunit;
-using AutomatedCar.Models;
+using AutomatedCar.Models.RadarUtil;
 using System.Collections.Generic;
 using Avalonia.Media;
 
@@ -13,7 +13,7 @@ namespace Tests.SystemComponents.Packets
 {
     public class RadarTest
     {
-        Radar radar = new Radar();
+        RadarTriangleComputer radar = new RadarTriangleComputer();
 
     // Radar
         // szög
