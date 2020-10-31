@@ -78,6 +78,30 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(120, points[2].Y);
         }
 
+        [Fact]
+        public void Radar_FromOrigo_rotate180_distance100_offset0()
+        {
+
+            this.CarRotation = 180;
+            this.CarX = 0;
+            this.CarY = 0;
+            this.Distance = 100;
+            this.Offset = 0;
+
+            this.radar.distance = 100;
+
+            var points = this.radar.computeTriangleInWorld();
+
+            
+
+            Assert.Equal(0,points[0].X);
+            Assert.Equal(0,points[0].Y);
+            Assert.Equal(58,points[1].X);
+            Assert.Equal(100,points[1].Y);
+            Assert.Equal(-58,points[2].X);
+            Assert.Equal(100,points[2].Y);
+        }
+
         
     }
 }
