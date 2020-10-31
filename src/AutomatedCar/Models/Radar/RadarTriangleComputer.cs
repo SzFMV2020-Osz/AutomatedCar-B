@@ -20,11 +20,11 @@ namespace AutomatedCar.Models.RadarUtil
             int y = getXfromAngleAndDistance(this.distance, this.angle);
 
 
-            var ca = Math.Round(Math.Cos((Math.PI / 180) * 90)); // 0
-            var sa = Math.Round(Math.Sin((Math.PI / 180) * rotate)); //1
+            var ca = Math.Round(Math.Cos((Math.PI / 180) * rotate)); //0 1 // 90 0 //180 -1 // 270 -0
+            var sa = Math.Round(Math.Sin((Math.PI / 180) * rotate)); // 0 0 //90 1 //180 -0 // 270 -1
 
 
-            points[0] = new Point(this.offset, 0);
+            points[0] = new Point(this.offset*ca, this.offset*sa);
             points[1] = new Point((this.offset + this.distance),y);
             points[2] = new Point((this.offset + this.distance), (-y));
 

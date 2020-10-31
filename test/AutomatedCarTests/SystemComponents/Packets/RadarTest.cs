@@ -95,28 +95,62 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(0, points[2].Y);
         }
 
-        // [Fact]
-        // public void Radar_FromOrigo_rotate90_distance0_offset120()
-        // {
-        //     this.CarX = 0;
-        //     this.CarY = 0;
-        //     this.Distance = 0;
-        //     this.Offset = 120;
+        [Fact]
+        public void Radar_FromOrigo_rotate90_distance0_offset120()
+        {
+            this.CarX = 0;
+            this.CarY = 0;
+            this.Distance = 0;
+            this.Offset = 120;
 
 
-        //     this.radar.offset = this.Offset;
-        //     this.radar.rotate = 90;
+            this.radar.offset = this.Offset;
+            this.radar.rotate = 90;
             
 
-        //     var points = this.radar.computeTriangleInWorld(); 
+            var points = this.radar.computeTriangleInWorld(); 
 
-        //     Assert.Equal(0, points[0].X);
-        //     Assert.Equal(120, points[0].Y);
-        //     Assert.Equal(0, points[1].X);
-        //     Assert.Equal(120, points[1].Y);
-        //     Assert.Equal(0, points[2].X);
-        //     Assert.Equal(120, points[2].Y);
-        // }
+            Assert.Equal(0, points[0].X);
+            Assert.Equal(120, points[0].Y);
+        }
+
+        [Fact]
+        public void Radar_FromOrigo_rotate180_distance0_offset120()
+        {
+            this.CarX = 0;
+            this.CarY = 0;
+            this.Distance = 0;
+            this.Offset = 120;
+
+
+            this.radar.offset = this.Offset;
+            this.radar.rotate = 180;
+            
+
+            var points = this.radar.computeTriangleInWorld(); 
+
+            Assert.Equal(-120, points[0].X);
+            Assert.Equal(0, points[0].Y);
+        }
+
+        [Fact]
+        public void Radar_FromOrigo_rotate270_distance0_offset120()
+        {
+            this.CarX = 0;
+            this.CarY = 0;
+            this.Distance = 0;
+            this.Offset = 120;
+
+
+            this.radar.offset = this.Offset;
+            this.radar.rotate = 270;
+            
+
+            var points = this.radar.computeTriangleInWorld(); 
+
+            Assert.Equal(0, points[0].X);
+            Assert.Equal(-120, points[0].Y);
+        }
 
 
         [Fact]
