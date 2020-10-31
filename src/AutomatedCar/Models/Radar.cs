@@ -56,7 +56,13 @@ namespace AutomatedCar.Models
 
         public Point[] computeTriangleInWorld()
         {
-            return null;
+            Point[] points = new Point[3];
+
+            points[0] = new Point(0,0);
+            points[1] = new Point(0,0);
+            points[2] = new Point(0,0);
+
+            return points;
         }
 
         public void updateBus()
