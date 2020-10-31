@@ -12,6 +12,8 @@ namespace AutomatedCar.Models.RadarUtil
         public int distance = 0;
         public int rotate = 0;
         public int angle = 30;
+        public int carX = 0;
+        public int carY = 0;
         public Point[] computeTriangleInWorld()
         {
             Point[] points = new Point[3];
@@ -21,9 +23,9 @@ namespace AutomatedCar.Models.RadarUtil
 
             int y = getXfromAngleAndDistance((int)(this.distance*ca), this.angle);
 
-            points[0] = new Point(this.offset * ca, this.offset * sa);
-            points[1] = new Point(this.offset * ca + distance * ca, this.offset * sa + y);
-            points[2] = new Point(this.offset * ca + distance * ca, this.offset * sa - y);
+            points[0] = new Point(this.offset * ca + carX, this.offset * sa + carY);
+            points[1] = new Point(this.offset * ca + distance * ca + carX, this.offset * sa + y + carY);
+            points[2] = new Point(this.offset * ca + distance * ca + carX, this.offset * sa - y + carY);
 
             return points;
         }

@@ -50,6 +50,34 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
+        public void Radar_FromOrigo_rotate0_distance0_offset0__AutomatedCar_x20()
+        {
+            this.radar.carX = 20;
+            var points = this.radar.computeTriangleInWorld();
+
+            Assert.Equal(20,points[0].X);
+            Assert.Equal(0,points[0].Y);
+            Assert.Equal(20,points[1].X);
+            Assert.Equal(0,points[1].Y);
+            Assert.Equal(20,points[2].X);
+            Assert.Equal(0,points[2].Y);
+        }
+
+        [Fact]
+        public void Radar_FromOrigo_rotate0_distance0_offset0__AutomatedCar_y20()
+        {
+            this.radar.carY = 20;
+            var points = this.radar.computeTriangleInWorld();
+
+            Assert.Equal(0,points[0].X);
+            Assert.Equal(20,points[0].Y);
+            Assert.Equal(0,points[1].X);
+            Assert.Equal(20,points[1].Y);
+            Assert.Equal(0,points[2].X);
+            Assert.Equal(20,points[2].Y);
+        }
+
+        [Fact]
         public void Radar_FromOrigo_rotate90_distance0_offset0()
         {
             radar.rotate = 90;
