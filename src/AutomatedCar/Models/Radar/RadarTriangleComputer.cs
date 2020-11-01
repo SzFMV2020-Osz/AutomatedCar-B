@@ -24,16 +24,16 @@ namespace AutomatedCar.Models.RadarUtil
             int triangleBottomHalf = getTriangleBottomHalf((int)(this.distance), this.angle);
 
             points[0] = new Point(
-                this.offset * ca + carX,
-                this.offset * sa + carY
+                (this.offset * ca) + carX,
+                (this.offset * sa) + carY
                 );
             points[1] = new Point(
-                (this.offset + distance) * ca - triangleBottomHalf * sa + carX,
-                (this.offset + distance) * sa + triangleBottomHalf * ca + carY
+                ((this.offset + distance) * ca) - (triangleBottomHalf * sa) + carX,
+                ((this.offset + distance) * sa) + (triangleBottomHalf * ca) + carY
                 );
             points[2] = new Point(
-                (this.offset + distance) * ca + triangleBottomHalf * sa + carX,
-                (this.offset + distance) * sa - triangleBottomHalf * ca + carY
+                ((this.offset + distance) * ca) + (triangleBottomHalf * sa) + carX,
+                ((this.offset + distance) * sa) - (triangleBottomHalf * ca) + carY
                 );
 
             return points;
