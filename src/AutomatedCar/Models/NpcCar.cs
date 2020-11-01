@@ -9,14 +9,24 @@ namespace AutomatedCar.Models
 {
     public class NpcCar : WorldObject, INPC
     {
-        public NpcCar(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints) 
+        public NpcCar(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints, string jsonRoute) 
         : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
-            
+            this.JsonRoute = jsonRoute;
         }
 
+        private string JsonRoute;
+
+        private NpcRoute CarRoute;
+
         public int Rotation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void ReadCarRoute()
+        {
+            this.CarRoute.LoadJson(this.JsonRoute);
+        }
 
         public void Move()
         {
