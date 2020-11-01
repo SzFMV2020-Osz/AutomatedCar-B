@@ -8,33 +8,11 @@ using AutomatedCar.Models.RadarUtil;
 using System.Collections.Generic;
 using Avalonia.Media;
 
-
 namespace Tests.SystemComponents.Packets
 {
     public class RadarTest
     {
         RadarTriangleComputer radar = new RadarTriangleComputer();
-
-    // Radar
-        // szög
-        int FOV = 60;
-        //forgás
-
-        int _angle = 0;
-        int Angle {
-            get => this._angle;
-            set => _angle = value;
-        }
-        // Táv (szögtől a túlsó élig)
-        int Distance = 200*50;
-        // Autó középpontjához képesti függőleges eltolás
-        int Offset = 120;
-    //Autó
-        int CarWidth = 20;
-        int CarHeight = 40;
-        int CarRotation = 0;
-        int CarX = 1;
-        int CarY = 1;
 
         [Fact]
         public void Radar_FromOrigo_rotate0_distance0_offset0()
@@ -158,11 +136,6 @@ namespace Tests.SystemComponents.Packets
         [Fact]
         public void Radar_FromOrigo_rotate0_distance100_offset0()
         {
-            this.CarX = 0;
-            this.CarY = 0;
-            this.Distance = 100;
-            this.Offset = 0;
-
             this.radar.distance = 100;
 
             var points = this.radar.computeTriangleInWorld();

@@ -12,9 +12,7 @@ namespace AutomatedCar.Models
         List<NoticedObject> noticedObjects;
         Position carPreviousPosition;
         Point[] points;
-
         public int offset = 0;
-
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
         public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
         public Point[] Points { get => points; set => points = value; }
@@ -26,12 +24,10 @@ namespace AutomatedCar.Models
 
         public void computeVector(NoticedObject paramNoticedObject)
         {
-
         }
 
         public void setAllSeen()
         {
-
         }
 
         public bool isInNoticedObjects(WorldObject paramWorldObject)
@@ -39,17 +35,14 @@ namespace AutomatedCar.Models
             return true;
         }
         public void setHighlighted(WorldObject paramWorldObject)
-        {
-            
+        {    
         }
 
         public void updatePreviewXY()
         {
-
         }
         public void deleteLeftObjects()
         {
-
         }
 
         public NoticedObject newObjectIsDetected()
@@ -73,13 +66,11 @@ namespace AutomatedCar.Models
 
         public void updateBus()
         {
-
         }
 
         public List<WorldObject> getDangeriousWorldObjects()
         {
             return null;
         }
-
     }
 }
