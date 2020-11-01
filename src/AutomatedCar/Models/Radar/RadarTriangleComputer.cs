@@ -28,12 +28,12 @@ namespace AutomatedCar.Models.RadarUtil
                 this.offset * sa + carY
                 );
             points[1] = new Point(
-                this.offset * ca + distance * ca - triangleBottomHalf * sa + carX,
-                this.offset * sa + distance * sa + triangleBottomHalf * ca + carY
+                (this.offset + distance) * ca - triangleBottomHalf * sa + carX,
+                (this.offset + distance) * sa + triangleBottomHalf * ca + carY
                 );
             points[2] = new Point(
-                this.offset * ca + distance * ca + triangleBottomHalf * sa + carX,
-                this.offset * sa + distance * sa - triangleBottomHalf * ca + carY
+                (this.offset + distance) * ca + triangleBottomHalf * sa + carX,
+                (this.offset + distance) * sa - triangleBottomHalf * ca + carY
                 );
 
             return points;
