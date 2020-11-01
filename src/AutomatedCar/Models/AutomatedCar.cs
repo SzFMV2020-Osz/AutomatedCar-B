@@ -14,6 +14,7 @@ namespace AutomatedCar.Models
         private DummySensor dummySensor;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
+        private int healthPoint; // between 0 and 100
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
@@ -32,6 +33,8 @@ namespace AutomatedCar.Models
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
+
+            this.healthPoint = 100;
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -43,6 +46,12 @@ namespace AutomatedCar.Models
         public SolidColorBrush Brush { get; private set; }
 
         public int Speed { get; set; }
+
+        public int HealthPoint { get => this.healthPoint; }
+
+        public void ResetHealthPoint() {
+            this.healthPoint = 100;
+        }
 
         /// <summary>
         /// Example usage add
