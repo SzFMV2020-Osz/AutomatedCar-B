@@ -8,12 +8,23 @@ namespace AutomatedCar.Models
 {
     public class NpcPedestrian : WorldObject, INPC
     {
-        public NpcPedestrian(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints) : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
+        public NpcPedestrian(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints, string jsonRoute) : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
         {
+            this.JsonRoute = jsonRoute;
         }
 
+        private string JsonRoute;
+
+        private NpcRoute PedestrianRoute;
+
         public int Rotation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void ReadPedestrianRoute()
+        {
+            this.PedestrianRoute.LoadJson(this.JsonRoute);
+        }
 
         public void Move()
         {
