@@ -230,5 +230,26 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(200+115,points[2].X);
             Assert.Equal(500,points[2].Y);
         }
+
+        [Fact]
+        public void Radar_other_values_180()
+        {
+            radar.carX = 400;
+            radar.carY = 300;
+
+            this.radar.distance = 100;
+            this.radar.offset = 100;
+            this.radar.rotate = 180;
+            this.radar.angle = 20;
+
+            var points = this.radar.computeTriangleInWorld();
+
+            Assert.Equal(300,points[0].X);
+            Assert.Equal(300,points[0].Y);
+            Assert.Equal(200,points[1].X);
+            Assert.Equal(300-36,points[1].Y);
+            Assert.Equal(200,points[2].X);
+            Assert.Equal(336,points[2].Y);
+        }
     }
 }
