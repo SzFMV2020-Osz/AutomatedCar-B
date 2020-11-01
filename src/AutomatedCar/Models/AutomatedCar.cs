@@ -14,6 +14,7 @@ namespace AutomatedCar.Models
         private DummySensor dummySensor;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
+        public List<Ultrasound> Ultrasounds;
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
@@ -27,7 +28,17 @@ namespace AutomatedCar.Models
             this.powerTrain = new PowerTrain(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
-            this.UltraSoundGeometries = createUltraSoundGeometries(generateUltraSoundPoints());
+            this.Ultrasounds = new List<Ultrasound>()
+            {
+                new Ultrasound(this.virtualFunctionBus, 110, 30, 0),
+                new Ultrasound(this.virtualFunctionBus, 105, 45, 90),
+                new Ultrasound(this.virtualFunctionBus, 110, -30, 0),
+                new Ultrasound(this.virtualFunctionBus, 105, -45, -90),
+                new Ultrasound(this.virtualFunctionBus, -120, 25, 180),
+                new Ultrasound(this.virtualFunctionBus, -105, 45, 90),
+                new Ultrasound(this.virtualFunctionBus, -120, -25, 180),
+                new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
+            };
 
             this.ultraSoundVisible = true;
             this.radarVisible = true;
@@ -82,19 +93,15 @@ namespace AutomatedCar.Models
         public bool RadarVisible
         {
             get => radarVisible;
-            set => this.RaiseAndSetIfChanged(ref radarVisible, value); // virtualFunctionBus.DebugPacket.RadarSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref radarVisible, value);
         }
-
-        public SolidColorBrush UltraSoundBrush { get; set; }
-
-        public List<Geometry> UltraSoundGeometries { get; set; }
 
         private bool ultraSoundVisible;
 
         public bool UltraSoundVisible
         {
             get => ultraSoundVisible;
-            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value); //virtualFunctionBus.DebugPacket.UtrasoundSensor); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value);
         }
 
         public SolidColorBrush CameraBrush { get; set; }
@@ -102,12 +109,15 @@ namespace AutomatedCar.Models
         public Geometry CameraGeometry { get; set; }
 
         private bool cameraVisible;
+
         public bool CameraVisible
         {
             get => cameraVisible;
-            set => this.RaiseAndSetIfChanged(ref cameraVisible, value); //virtualFunctionBus.DebugPacket.BoardCamera); A HMI olvasás hiányában most mockolt adattal jelenítjük meg.
+            set => this.RaiseAndSetIfChanged(ref cameraVisible, value);
         }
+
         public int VisibleX { get; set; }
+
         public int VisibleY { get; set; }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
@@ -119,62 +129,6 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
-        }
-
-        public void InputHandler()
-        {
-            humanMachineInterface.InputHandler();
-        }
-
-        private List<Geometry> createUltraSoundGeometries(List<Point> ultraSoundPoints)
-        {
-            // List<Geometry> ultraSoundGeometries = new List<Geometry>().;
-            // for (int i = 0; i < 8; i++)
-            // {
-            //     ultraSoundGeometries.Add(new PolylineGeometry(ultraSoundPoints.GetRange(i * 3, 3), false));
-            // }
-
-            return new List<Geometry>
-            {
-                new PolylineGeometry(ultraSoundPoints.GetRange(0 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(1 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(2 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(3 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(4 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(5 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(6 * 3, 3), false),
-                new PolylineGeometry(ultraSoundPoints.GetRange(7 * 3, 3), false)
-            };
-        }
-        private List<Point> generateUltraSoundPoints()
-        {
-            return new List<Point>()
-            {
-                new Point(51, 239),
-                new Point(10, 10),
-                new Point(200, 300),
-                new Point(18, 231),
-                new Point(200, 100),
-                new Point(100, 300),
-                new Point(0, 92),
-                new Point(200, 100),
-                new Point(100, 300),
-                new Point(7, 27),
-                new Point(200, 100),
-                new Point(100, 300),
-                new Point(17, 10),
-                new Point(200, 100),
-                new Point(100, 300),
-                new Point(40, 2),
-                new Point(200, 100),
-                new Point(100, 300),
-                new Point(79, 5),
-                new Point(200, 100),
-                new Point(100, 300),
-                new Point(99, 91),
-                new Point(200, 100),
-                new Point(100, 300)
-            };
         }
     }
 }
