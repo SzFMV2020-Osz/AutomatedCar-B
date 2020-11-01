@@ -49,7 +49,7 @@
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="45 110 45 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.RPM, StringFormat={}{0:0}}}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.RPM}"/>
                     <TextBlock Foreground="Black" Text=" rpm"/>
                   </WrapPanel>
                 </Canvas>
@@ -67,7 +67,7 @@
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="35 90 35 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, StringFormat={}{0:0}}}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity}"/>
                     <TextBlock Foreground="Black" Text=" km/h"/>
                   </WrapPanel>
                 </Canvas>
@@ -272,19 +272,29 @@
               </Grid>
 
 
-              <StackPanel>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+              <StackPanel Width="310">
+                <Grid ColumnDefinitions="212,108" RowDefinitions="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                  <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="0 10"
                     Text="Gas pedal"/>
-                <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
-                    Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gaspedal}"/>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Text="Break pedal"/>
-                <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
-                    Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal}"/>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Text="Steering"/>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering, StringFormat={}{0:0}}"/>
+                    <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gaspedal}"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="0 10"
+                        Text="Break pedal"/>
+                    <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal}"/>
+                  </StackPanel>
+
+                  <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10" Grid.Row="0" Grid.Column="1">
+                      <Image Source="resm:AutomatedCar.Assets.steering-wheel.png?assembly=AutomatedCar"
+                          HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                        <Image.RenderTransform>
+                          <RotateTransform Angle="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering}" />
+                        </Image.RenderTransform>
+                      </Image>
+                  </WrapPanel>
+                </Grid>
+                
                 <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                   <WrapPanel Grid.Row="0" Grid.Column="0" >
                     <TextBlock Text="X: "/>
@@ -312,7 +322,18 @@
                   </WrapPanel>
                 </Grid>
 
-                <TextBlock Text="Controls:" Margin="0 20 0 5"/>
+                <StackPanel>
+                  <TextBlock Text="ultrahang1: "/>
+                  <TextBlock Text="{Binding ControlledCar.Ultrasounds[0].Points[0].X}"/>
+                  <TextBlock Text="{Binding ControlledCar.Ultrasounds[0].Points[0].Y}"/>
+                  <TextBlock Text="{Binding ControlledCar.Ultrasounds[1].Points[0].X}"/>
+                  <TextBlock Text="{Binding ControlledCar.Ultrasounds[1].Points[0].Y}"/>
+                  <TextBlock Text="{Binding ControlledCar.Ultrasounds[2].Points[0].X}"/>
+                  <TextBlock Text="{Binding ControlledCar.Ultrasounds[2].Points[0].Y}"/>
+                </StackPanel>
+                
+                
+                <!--<TextBlock Text="Controls:" Margin="0 20 0 5"/>
                 <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                   <WrapPanel Grid.Column="0" Grid.Row="0" >
                     <TextBlock Text="Gas: Up Arrow"/>
@@ -368,7 +389,7 @@
                   <WrapPanel Grid.Column="1" Grid.Row="8" >
                     <TextBlock Text="Polygon: F"/>
                   </WrapPanel>
-                </Grid>
+                </Grid>-->
               </StackPanel>
 
             </StackPanel>

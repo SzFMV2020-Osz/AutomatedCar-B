@@ -57,7 +57,7 @@
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="110, -30" Opacity="60"></customcontrols:SensorCustomControl>
             <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="105,-45" Opacity="60"></customcontrols:SensorCustomControl>
 
-                        <!-- Rear ultrasound sensors -->
+            <!-- Rear ultrasound sensors -->
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-120, 25" Opacity="60"></customcontrols:SensorCustomControl>
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="-105, 45" Opacity="60"></customcontrols:SensorCustomControl>
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-120, -25" Opacity="60"></customcontrols:SensorCustomControl>

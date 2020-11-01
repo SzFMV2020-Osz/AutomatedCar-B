@@ -10,9 +10,9 @@ namespace AutomatedCar.Views.Converters
 
     public class IntegerToAngleRpmConverter : IValueConverter
     {
-        private static readonly double MaxAngle = 260;
-        private static readonly double MaxRpm = 100;
-        private static readonly double Shifting = 40;
+        private const double MaxAngle = 260;
+        private const double MaxRpm = 6000;
+        private const double Shifting = 40;
 
         public IntegerToAngleRpmConverter()
         {

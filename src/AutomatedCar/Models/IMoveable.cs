@@ -11,6 +11,7 @@ namespace AutomatedCar.Models
         public void Move(Vector2 with);
 
         public void MoveX(int x);
+
         public void MoveY(int y);
     }
 }
