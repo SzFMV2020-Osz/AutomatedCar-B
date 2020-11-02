@@ -12,7 +12,7 @@ namespace Tests.SystemComponents.Packets
     public class FilterCollidables
     {
         [Fact]
-        public void GaspedalExsits()
+        public void FilterList()
         {
 
             List<WorldObject> wo = new List<WorldObject>();
