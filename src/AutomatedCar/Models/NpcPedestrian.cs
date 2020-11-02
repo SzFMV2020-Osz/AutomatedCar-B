@@ -1,25 +1,44 @@
-using Avalonia;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-
 namespace AutomatedCar.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Numerics;
+    using System.Reflection;
+    using System.Text;
+    using Avalonia;
+    using Newtonsoft.Json;
+
     public class NpcPedestrian : WorldObject, INPC
     {
-        public NpcPedestrian(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints, string jsonRoute) : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
+        public NpcPedestrian(string filename, int width, int height, List<List<Point>> polyPoints, string jsonRoute)
+             : base(0, 0, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polyPoints)
         {
             this.JsonRoute = jsonRoute;
+            this.ReadPedRoute();
         }
 
         private string JsonRoute;
 
-        private NpcRoute PedestrianRoute;
+        private List<NpcRoute> PedRoutes;
 
-        public int Rotation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Rotation { get; set; }
 
-        public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Speed { get; set; }
+
+        public void ReadPedRoute()
+        {
+            this.PedRoutes = LoadJson(this.JsonRoute);
+        }
+
+        public void SetStartPosition()
+        {
+
+            this.X = int.Parse(this.PedRoutes.First().x);
+            this.Y = int.Parse(this.PedRoutes.First().y);
+
+        }
 
         public void ReadPedestrianRoute()
         {
@@ -46,5 +65,17 @@ namespace AutomatedCar.Models
         {
             throw new NotImplementedException();
         }
+
+        public static List<NpcRoute> LoadJson(string path)
+        {
+            using (StreamReader r = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(path)))
+            {
+                var json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<NpcRoute>>(json);
+
+                return items;
+            }
+        }
+
     }
 }

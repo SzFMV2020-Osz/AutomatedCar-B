@@ -1,15 +1,16 @@
-using Avalonia;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-using System.Linq;
-using System.IO;
-using System.Reflection;
-using Newtonsoft.Json;
-
 namespace AutomatedCar.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Numerics;
+    using System.Reflection;
+    using System.Text;
+    using Avalonia;
+    using Avalonia.Media;
+    using Newtonsoft.Json;
+
     public class NpcCar : WorldObject, INPC
     {
         public NpcCar(string filename, int width, int height, List<List<Point>> polyPoints, string jsonRoute)
