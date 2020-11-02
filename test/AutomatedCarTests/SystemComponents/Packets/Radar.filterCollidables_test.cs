@@ -1,8 +1,10 @@
 using AutomatedCar.SystemComponents;
+using AutomatedCar.Models;
 using AutomatedCar.SystemComponents.Packets;
 using Avalonia.Layout;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
 using System.ComponentModel;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Tests.SystemComponents.Packets
@@ -12,7 +14,19 @@ namespace Tests.SystemComponents.Packets
         [Fact]
         public void GaspedalExsits()
         {
-            Assert.Equal("expected", "expected");
+
+            List<WorldObject> wo = new List<WorldObject>();
+            AutomatedCar.Models.AutomatedCar car = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Avalonia.Point>>());
+            car.IsColliding = true;
+            wo.Add(car);
+            wo.Add(new AutomatedCar.Models.Road(0,0,"",0,0,0,0, new Avalonia.Matrix(), new List<List<Avalonia.Point>>()));
+
+            Radar radar = new Radar();
+
+            List<NoticedObject> nwo = radar.filterCollidables(wo);
+
+
+            Assert.Equal(1, nwo.Count);
         }
     }
 }
