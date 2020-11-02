@@ -23,12 +23,7 @@ namespace AutomatedCar.Models
 
         public void ReadPedestrianRoute()
         {
-            this.PedestrianRoute.LoadJson(this.JsonRoute);
-        }
-
-        public void Move()
-        {
-            throw new NotImplementedException();
+            //this.PedestrianRoute.LoadJson(this.JsonRoute);
         }
 
         public void Move(Vector2 with)

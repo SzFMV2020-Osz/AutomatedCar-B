@@ -4,33 +4,39 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using System.Linq;
+using System.IO;
+using System.Reflection;
+using Newtonsoft.Json;
 
 namespace AutomatedCar.Models
 {
     public class NpcCar : WorldObject, INPC
     {
-        public NpcCar(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints, string jsonRoute) 
-        : base(x, y, filename, width, height, referenceOffsetX, referenceOffsetY, rotmatrix, polyPoints)
+        public NpcCar(string filename, int width, int height, List<List<Point>> polyPoints, string jsonRoute)
+        : base(0, 0, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polyPoints)
         {
             this.JsonRoute = jsonRoute;
+            this.ReadCarRoute();
         }
 
         private string JsonRoute;
 
-        private NpcRoute CarRoute;
+        private List<NpcRoute> CarRoutes;
 
-        public int Rotation { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Rotation { get; set; }
 
-        public int Speed { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int Speed { get; set; }
 
         public void ReadCarRoute()
         {
-            this.CarRoute.LoadJson(this.JsonRoute);
+            this.CarRoutes = LoadJson(this.JsonRoute);
         }
 
-        public void Move()
+        public void SetStartPosition()
         {
-            throw new NotImplementedException();
+            this.X = int.Parse(this.CarRoutes.First().x);
+            this.Y = int.Parse(this.CarRoutes.First().y);
+
         }
 
         public void Move(Vector2 with)
@@ -41,12 +47,12 @@ namespace AutomatedCar.Models
 
         public void MoveX(int x)
         {
-            throw new NotImplementedException();
+            this.X = int.Parse(this.CarRoutes[x].x);
         }
 
         public void MoveY(int y)
         {
-            throw new NotImplementedException();
+            this.Y = int.Parse(this.CarRoutes[y].y);
         }
 
         public void SetNextPosition(int x, int y)
@@ -110,6 +116,17 @@ namespace AutomatedCar.Models
             trianglePoints.Add(new Point(trianglePoint2.X,trianglePoint2.Y));
 
             return trianglePoints;
-        } 
+        }
+
+        public static List<NpcRoute> LoadJson(string path)
+        {
+            using (StreamReader r = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(path)))
+            {
+                var json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<NpcRoute>>(json);
+
+                return items;
+            }
+        }
     }
 }

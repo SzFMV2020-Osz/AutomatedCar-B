@@ -78,6 +78,11 @@ namespace AutomatedCar
                 world.ControlledCar = controlledCar;
                 controlledCar.Start();
 
+
+                NpcCar npcCar = new NpcCar("car_1_red", W, H, polyList, $"AutomatedCar.Assets.npcCarRoute.json");
+                npcCar.SetStartPosition();
+                world.AddObject(npcCar);
+
                 Game game = new Game(world);
                 game.Start();
 
