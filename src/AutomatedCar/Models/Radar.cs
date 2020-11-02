@@ -23,6 +23,7 @@ namespace AutomatedCar.Models
             {
                if(item.IsColliding) {
                 NoticedObject nwo = new NoticedObject();
+                nwo.worldObject = item;
 
                 nwos.Add(nwo);
                } 
