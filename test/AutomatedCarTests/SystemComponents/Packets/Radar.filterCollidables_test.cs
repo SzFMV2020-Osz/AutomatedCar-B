@@ -15,7 +15,6 @@ namespace Tests.SystemComponents.Packets
         [Fact]
         public void FilterList()
         {
-
             List<WorldObject> wo = new List<WorldObject>();
             AutomatedCar.Models.AutomatedCar car = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Avalonia.Point>>());
             car.IsColliding = true;
@@ -26,14 +25,12 @@ namespace Tests.SystemComponents.Packets
 
             List<NoticedObject> nwo = radar.filterCollidables(wo);
 
-
             Assert.Equal(1, nwo.Count);
         }
 
         [Fact]
         public void UseGivenWorldObject()
         {
-
             List<WorldObject> wo = new List<WorldObject>();
             AutomatedCar.Models.AutomatedCar car = new AutomatedCar.Models.AutomatedCar(0,0,"car",0,0,new List<List<Avalonia.Point>>());
             car.IsColliding = true;

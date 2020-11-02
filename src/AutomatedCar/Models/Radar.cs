@@ -22,13 +22,17 @@ namespace AutomatedCar.Models
             foreach (var item in paramWorldObjects)
             {
                if(item.IsColliding) {
-                NoticedObject nwo = new NoticedObject();
-                nwo.worldObject = item;
-
-                nwos.Add(nwo);
+                nwos.Add(createNoticedObjectfromWorldObject(item));
                } 
             }
             return nwos;
+        }
+
+        private NoticedObject createNoticedObjectfromWorldObject(WorldObject wo){
+            NoticedObject nwo = new NoticedObject();
+            nwo.worldObject = wo;
+
+            return nwo;
         }
 
         public void computeVector(NoticedObject paramNoticedObject)
