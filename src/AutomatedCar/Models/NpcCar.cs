@@ -22,6 +22,7 @@ namespace AutomatedCar.Models
 
         private string JsonRoute;
 
+        private int index = 0;
         private List<NpcRoute> CarRoutes;
 
         public int Rotation { get; set; }
@@ -37,23 +38,44 @@ namespace AutomatedCar.Models
         {
             this.X = int.Parse(this.CarRoutes.First().x);
             this.Y = int.Parse(this.CarRoutes.First().y);
+        }
 
+        public void Moveeee(object sender, EventArgs args)
+        {
+            if (index == this.CarRoutes.Count())
+                index = 0;
+
+            int deltaX = int.Parse(this.CarRoutes[index].x) - this.X;
+
+            if (deltaX < 0)
+                this.X -= 10;
+            else if (deltaX > 0)
+                this.X += 10;
+
+            int deltaY = int.Parse(this.CarRoutes[index].y) - this.Y;
+
+            if (deltaY < 0)
+                this.Y -= 10;
+            else if (deltaY > 0)
+                this.Y += 10;
+
+            if (deltaX == 0 && deltaY == 0)
+                index++;
         }
 
         public void Move(Vector2 with)
         {
-            this.X = (int)with.X;
-            this.Y = (int)with.Y;
+            throw new NotImplementedException();
         }
 
         public void MoveX(int x)
         {
-            this.X = int.Parse(this.CarRoutes[x].x);
+            throw new NotImplementedException();
         }
 
         public void MoveY(int y)
         {
-            this.Y = int.Parse(this.CarRoutes[y].y);
+            throw new NotImplementedException();
         }
 
         public void SetNextPosition(int x, int y)

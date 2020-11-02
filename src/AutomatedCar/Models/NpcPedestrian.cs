@@ -21,6 +21,7 @@ namespace AutomatedCar.Models
 
         private string JsonRoute;
 
+        private int index = 0;
         private List<NpcRoute> PedRoutes;
 
         public int Rotation { get; set; }
@@ -40,15 +41,33 @@ namespace AutomatedCar.Models
 
         }
 
-        public void ReadPedestrianRoute()
+        public void Moveeee(object sender, EventArgs args)
         {
-            //this.PedestrianRoute.LoadJson(this.JsonRoute);
+            if (index == this.PedRoutes.Count())
+                index = 0;
+
+            int deltaX = int.Parse(this.PedRoutes[index].x) - this.X;
+
+            if (deltaX < 0)
+                this.X -= 5;
+            else if (deltaX > 0)
+                this.X += 5;
+
+            int deltaY = int.Parse(this.PedRoutes[index].y) - this.Y;
+
+            if (deltaY < 0)
+                this.Y -= 5;
+            else if (deltaY > 0)
+                this.Y += 5;
+
+            if (deltaX == 0 && deltaY == 0)
+                index++;
+
         }
 
         public void Move(Vector2 with)
         {
-            this.X = (int)with.X;
-            this.Y = (int)with.Y;
+            throw new NotImplementedException();
         }
 
         public void MoveX(int x)

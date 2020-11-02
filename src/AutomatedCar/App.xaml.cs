@@ -1,5 +1,6 @@
 namespace AutomatedCar
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
@@ -82,9 +83,17 @@ namespace AutomatedCar
                 npcCar.SetStartPosition();
                 world.AddObject(npcCar);
 
-                NpcPedestrian npcPed = new NpcPedestrian("man", W / 3, H / 3, polyList, $"AutomatedCar.Assets.npcPedRoute.json");
-                npcPed.SetStartPosition();
-                world.AddObject(npcPed);
+                NpcPedestrian npcPedMan = new NpcPedestrian("man", W / 3, H / 3, polyList, $"AutomatedCar.Assets.npcPedRoute1.json");
+                npcPedMan.SetStartPosition();
+                world.AddObject(npcPedMan);
+
+                NpcPedestrian npcPedWoman = new NpcPedestrian("woman", W / 3, H / 3, polyList, $"AutomatedCar.Assets.npcPedRoute2.json");
+                npcPedWoman.SetStartPosition();
+                world.AddObject(npcPedWoman);
+
+                world.OnTick += npcCar.Moveeee;
+                world.OnTick += npcPedMan.Moveeee;
+                world.OnTick += npcPedWoman.Moveeee;
 
                 Game game = new Game(world);
                 game.Start();
