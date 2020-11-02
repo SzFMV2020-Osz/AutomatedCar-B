@@ -18,7 +18,21 @@ namespace AutomatedCar.Models
 
         public List<NoticedObject> filterCollidables(List<WorldObject> paramWorldObjects)
         {
-            return null;
+            List<NoticedObject> nwos = new List<NoticedObject>();
+            foreach (var item in paramWorldObjects)
+            {
+               if(item.IsColliding) {
+                nwos.Add(createNoticedObjectfromWorldObject(item));
+               } 
+            }
+            return nwos;
+        }
+
+        private NoticedObject createNoticedObjectfromWorldObject(WorldObject wo){
+            NoticedObject nwo = new NoticedObject();
+            nwo.worldObject = wo;
+
+            return nwo;
         }
 
         public void computeVector(NoticedObject paramNoticedObject)
