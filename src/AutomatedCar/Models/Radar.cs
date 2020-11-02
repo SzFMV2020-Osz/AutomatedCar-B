@@ -7,13 +7,15 @@ using System.Text;
 namespace AutomatedCar.Models
 {
     public class Radar
-    {        
+    {
         List<NoticedObject> noticedObjects;
         Position carPreviousPosition;
         Point[] points;
 
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
+
         public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
+
         public Point[] Points { get => points; set => points = value; }
 
         public List<NoticedObject> filterCollidables(List<WorldObject> paramWorldObjects)
@@ -42,7 +44,10 @@ namespace AutomatedCar.Models
 
         public void setAllSeen()
         {
-
+            foreach (var noticeObj in noticedObjects)
+            {
+                noticeObj.Seen = false;
+            }
         }
 
         public bool isInNoticedObjects(WorldObject paramWorldObject)
@@ -51,7 +56,6 @@ namespace AutomatedCar.Models
         }
         public void setHighlighted(WorldObject paramWorldObject)
         {
-            
         }
 
         public void updatePreviewXY()
