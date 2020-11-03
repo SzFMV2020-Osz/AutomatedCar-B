@@ -90,9 +90,11 @@ namespace AutomatedCar.Models
                 World.Instance.ControlledCar.Y - CarPreviousPosition.Y
             );
 
+
+
             foreach (var item in noticedObjects)
             {
-                if(carVector.Length > ((Vector)item.Vector).Length){
+                if(carVector.Length > ((Vector)item.Vector).Length || ((Vector)item.Vector).Y < 0){
                     dangerousList.Add(item.worldObject);
                 }
                 
