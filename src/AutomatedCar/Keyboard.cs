@@ -26,6 +26,7 @@ namespace AutomatedCar
             Key.T,
             Key.Add,
             Key.Subtract,
+            Key.F1,
         };
 
         public static readonly HashSet<Key> Keys = new HashSet<Key>();
