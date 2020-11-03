@@ -12,7 +12,7 @@ namespace AutomatedCar.SystemComponents
 
     public class Ultrasound : SystemComponent, IUltrasound
     {
-        private const int Height = 150;
+        private const int Height = 100;
         private const int Fov = 100;
         private int offsetX;
         private int offsetY;
@@ -22,9 +22,9 @@ namespace AutomatedCar.SystemComponents
         public Ultrasound(VirtualFunctionBus virtualFunctionBus, int offsetX, int offsetY, int rotate)
            : base(virtualFunctionBus)
         {
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
-            this.rotate = rotate;
+            this.offsetX = -offsetX;
+            this.offsetY = -offsetY;
+            this.rotate = rotate + 180;
 
             this.Brush = new SolidColorBrush(Avalonia.Media.Color.Parse("green"));
         }
@@ -40,17 +40,17 @@ namespace AutomatedCar.SystemComponents
         public override void Process()
         {
             this.Points = this.CalculatePoints();
-            //this.WorldObjects = this.GetWorldObjectsInRange();
+            this.WorldObjects = this.GetWorldObjectsInRange();
             //if (this.WorldObjects.Count > 0)
             //{
             //    this.Distance = this.CalculateDistance();
             //}
         }
 
-        public Point RotetePoint(double centerX, double centerY, double angle, Point p)
+        public Point RotatePoint(double centerX, double centerY, double angle, Point p)
         {
-            double s = Math.Sin(angle);
-            double c = Math.Cos(angle);
+            double s = Math.Sin(Math.PI / 180 * angle);
+            double c = Math.Cos(Math.PI / 180 * angle);
 
             double px = p.X;
             double py = p.Y;
@@ -73,17 +73,22 @@ namespace AutomatedCar.SystemComponents
         {
             var car = World.Instance.ControlledCar;
             this.StartCalculate();
+            var dif = (double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180));
+            Point right = new Point(
+                this.start.X + Height,
+                this.start.Y + dif
+                );
+            Point left = new Point(
+                this.start.X + Height,
+                this.start.Y - dif
+                );
+            right = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, right);
+            left = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, left);
             List<Point> newPoints = new List<Point>()
             {
                 this.start,
-                this.RotetePoint(car.X, car.Y, (car.Angle + this.rotate), new Point(
-                    this.start.X + Height,
-                    this.start.X + ((double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180)))
-                    )),
-                this.RotetePoint(car.X, car.Y, (car.Angle + this.rotate), new Point(
-                    this.start.X + Height,
-                    this.start.X + (-(double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180)))
-                    )),
+                left,
+                right,
             };
             return newPoints;
         }
@@ -91,7 +96,7 @@ namespace AutomatedCar.SystemComponents
         public void StartCalculate()
         {
             var car = World.Instance.ControlledCar;
-            this.start = this.RotetePoint(car.X, car.Y, car.Angle, new Point(car.X + this.offsetX, car.Y + this.offsetY));
+            this.start = this.RotatePoint(car.X, car.Y, car.Angle, new Point(car.X + this.offsetX, car.Y + this.offsetY));
         }
 
         public List<WorldObject> GetWorldObjectsInRange()

@@ -390,6 +390,12 @@
                     <TextBlock Text="Polygon: F"/>
                   </WrapPanel>
                 </Grid>-->
+=======
+                <StackPanel HorizontalAlignment="Center">
+                  <TextBlock Text="Control information: F1" Margin="0 20 0 5"/>
+                </StackPanel>
+                
+>>>>>>> e8255bcb42ce9e5080e6b19106e5bd1b6d3e3470
               </StackPanel>
 
             </StackPanel>

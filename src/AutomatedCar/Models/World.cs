@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.Models
+namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -95,7 +95,13 @@
 
         public List<WorldObject> GetWorldObjectsInsideTriangle(List<Point> pointsOfTriangle)
         {
-            var coordinatePoints = pointsOfTriangle.Select(x => new Coordinate(x.X, x.Y)).ToArray();
+            var coordinatePoints = new Coordinate[pointsOfTriangle.Count + 1];
+            for (int i = 0; i < pointsOfTriangle.Count; i++)
+            {
+                coordinatePoints[i] = new Coordinate(pointsOfTriangle[i].X, pointsOfTriangle[i].Y);
+            }
+
+            coordinatePoints[coordinatePoints.Length - 1] = new Coordinate(pointsOfTriangle[0].X, pointsOfTriangle[0].Y);
             var lr1 = new LinearRing(new CoordinateArraySequence(coordinatePoints), GeometryFactory.Default);
             NetTopologySuite.Geometries.Polygon triangle = new NetTopologySuite.Geometries.Polygon(lr1);
 
