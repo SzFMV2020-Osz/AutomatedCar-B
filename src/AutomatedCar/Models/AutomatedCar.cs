@@ -14,7 +14,8 @@ namespace AutomatedCar.Models
         private DummySensor dummySensor;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
-        public List<Ultrasound> Ultrasounds;
+        private Ultrasound[] ultrasounds;
+        
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
@@ -28,7 +29,7 @@ namespace AutomatedCar.Models
             this.powerTrain = new PowerTrain(this.virtualFunctionBus);
             this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
-            this.Ultrasounds = new List<Ultrasound>()
+            this.Ultrasounds = new Ultrasound[]
             {
                 new Ultrasound(this.virtualFunctionBus, 110, 30, 0),
                 new Ultrasound(this.virtualFunctionBus, 105, 45, 90),
@@ -48,6 +49,8 @@ namespace AutomatedCar.Models
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
 
         public HumanMachineInterface HumanMachineInterface { get => this.humanMachineInterface; }
+
+        public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
         public Geometry Geometry { get; set; }
 
