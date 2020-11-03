@@ -3,6 +3,8 @@ namespace AutomatedCar.SystemComponents
     using System.Net.Http.Headers;
     using AutomatedCar.SystemComponents.Packets;
     using Avalonia.Input;
+    using MsgBox;
+    using Views;
 
     public class HumanMachineInterface : SystemComponent, IHumanMachineInterface
     {
@@ -101,6 +103,7 @@ namespace AutomatedCar.SystemComponents
             this.CameraDebug = this.ToggleInput(this.CameraDebug, Key.Z);
             this.RadarDebug = this.ToggleInput(this.RadarDebug, Key.I);
             this.PolygonDebug = this.ToggleInput(this.PolygonDebug, Key.F);
+            this.PressInputMessageBox(Key.F1);
         }
 
         private bool NormalInput(Key key) => Keyboard.IsKeyDown(key);
@@ -117,6 +120,15 @@ namespace AutomatedCar.SystemComponents
             }
 
             return false;
+        }
+
+        private void PressInputMessageBox(Key key)
+        {
+            if (Keyboard.IsPressableKeysDown(key) && (key == Key.F1))
+            {
+                Keyboard.DeletePressableKeys(key);
+                MessageBox.Show(null, MessageBox.MessageBoxButtons.Ok);
+            }
         }
 
         private bool ToggleInput(bool previousValue, Key key)
