@@ -6,7 +6,6 @@ namespace AutomatedCar.SystemComponents
 
     public interface IUltrasound
     {
-
         public List<Point> Points { get; set; }
 
         public List<WorldObject> WorldObjects { get; set; }
