@@ -10,7 +10,7 @@ using Avalonia.Media;
 
 namespace Tests.SystemComponents.Packets
 {
-    public class RadarTest
+    public class RadarTriangleComputerTest
     {
         RadarTriangleComputer radar = new RadarTriangleComputer();
 
