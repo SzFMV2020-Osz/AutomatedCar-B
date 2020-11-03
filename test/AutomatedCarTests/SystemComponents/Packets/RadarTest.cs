@@ -10,10 +10,8 @@ using System.Linq;
 
 namespace Tests.SystemComponents.Packets
 {
-    public class RadarTest
+    public class RadarTest_filterCollidables
     {
-        #region filterCollidables
-        
         [Fact]
         public void FilterList()
         {
@@ -45,7 +43,17 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(car, nwo[0].worldObject);
         }
+    }
 
-        #endregion
+    public class RadarTest_getDangeriousWorldObjects
+    {
+        Radar radar = new Radar();
+        [Fact]
+        public void getWorldObjects()
+        {
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.IsType<List<WorldObject>>(wos);
+        }
     }
 }

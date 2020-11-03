@@ -82,9 +82,10 @@ namespace AutomatedCar.Models
         {
         }
 
-        public List<WorldObject> getDangeriousWorldObjects()
+        public List<WorldObject> getDangerousWorldObjects()
         {
-            return null;
+            List<WorldObject> dangerousList = new List<WorldObject>();
+            return dangerousList;
         }
     }
 }
