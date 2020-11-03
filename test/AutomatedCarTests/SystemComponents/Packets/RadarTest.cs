@@ -193,5 +193,23 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(1, wos.Count);
         }
+
+        [Fact]
+        public void getWorldObjectItem_opositeDirection315()
+        {
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(500,300);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(300,100,"",0,0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 270;
+
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(100, -100);
+            radar.NoticedObjects.Add(nw);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
+        }
     }
 }
