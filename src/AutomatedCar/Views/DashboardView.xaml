@@ -67,7 +67,7 @@
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="35 90 35 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, StringFormat={}{0:0.0}}}"/>
                     <TextBlock Foreground="Black" Text=" km/h"/>
                   </WrapPanel>
                 </Canvas>

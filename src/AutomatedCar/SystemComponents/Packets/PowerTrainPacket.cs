@@ -17,9 +17,7 @@ namespace AutomatedCar.SystemComponents.Packets
             this.DriveGear = driveGear;
         }
 
-        public double Velocity 
-        { get => this.velocity; 
-            set => this.RaiseAndSetIfChanged(ref this.velocity, value); }
+        public double Velocity { get => this.velocity; set => this.RaiseAndSetIfChanged(ref this.velocity, value); }
 
         public int RPM { get => this.rpm; set => this.RaiseAndSetIfChanged(ref this.rpm, value); }
 
