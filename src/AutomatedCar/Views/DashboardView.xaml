@@ -311,64 +311,10 @@
                     <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.DebugPacket.BoardCamera}"/>
                   </WrapPanel>
                 </Grid>
-
-                <TextBlock Text="Controls:" Margin="0 20 0 5"/>
-                <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
-                  <WrapPanel Grid.Column="0" Grid.Row="0" >
-                    <TextBlock Text="Gas: Up Arrow"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="1" >
-                    <TextBlock Text="Break: Down Arrow"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="2" >
-                    <TextBlock Text="Steering left: Left Arrow"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="3" >
-                    <TextBlock Text="Steering right: Right Arrow"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="4" >
-                    <TextBlock Text="ACC Speed Plus: +"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="5" >
-                    <TextBlock Text="ACC Speed Minus: -"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="6" >
-                    <TextBlock Text="ACC Distance: T"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="7" >
-                    <TextBlock Text="Up Shift: W"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="0" Grid.Row="8" >
-                    <TextBlock Text="Down Shift: S"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="0" >
-                    <TextBlock Text="Turn Signal Right: E"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="1" >
-                    <TextBlock Text="Turn Signal Left: Q"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="2" >
-                    <TextBlock Text="ACC: A"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="3" >
-                    <TextBlock Text="Lane Keeping: D"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="4" >
-                    <TextBlock Text="Parking Pilot: R"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="5" >
-                    <TextBlock Text="Ultrasound: U"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="6" >
-                    <TextBlock Text="Camera: Z"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="7" >
-                    <TextBlock Text="Radar: I"/>
-                  </WrapPanel>
-                  <WrapPanel Grid.Column="1" Grid.Row="8" >
-                    <TextBlock Text="Polygon: F"/>
-                  </WrapPanel>
-                </Grid>
+                <StackPanel HorizontalAlignment="Center">
+                  <TextBlock Text="Control information: F1" Margin="0 20 0 5"/>
+                </StackPanel>
+                
               </StackPanel>
 
             </StackPanel>
