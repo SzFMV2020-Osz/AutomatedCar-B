@@ -56,13 +56,13 @@ namespace AutomatedCar.Views.CustomControls
         {
             base.Render(context);
 
-            var transformGroup = new TransformGroup();
-            transformGroup.Children.Add(new RotateTransform(0));
-            transformGroup.Children.Add(new TranslateTransform(this.Ultrasound.Points[0].X, this.Ultrasound.Points[0].Y));
+            // var transformGroup = new TransformGroup();
+            // transformGroup.Children.Add(new RotateTransform(0));
+            // transformGroup.Children.Add(new TranslateTransform(this.Ultrasound.Points[0].X, this.Ultrasound.Points[0].Y));
 
             // var geometry = this.GetRectangleGeometry(this.FOV, this.Distance * SCALER);
             var geometry = new PolylineGeometry(this.Ultrasound.Points, true);
-            geometry.Transform = transformGroup;
+            // geometry.Transform = transformGroup;
             // this.Brush = this.Ultrasound.Brush;
             this.Brush = new SolidColorBrush(Avalonia.Media.Color.Parse("red"));
             this.Opacity = 60;

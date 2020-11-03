@@ -12,8 +12,8 @@ namespace AutomatedCar.SystemComponents
 
     public class Ultrasound : SystemComponent, IUltrasound
     {
-        private const int Height = 150;
-        private const int Fov = 100;
+        public const int Height = 150;
+        public const int Fov = 100;
         private int offsetX;
         private int offsetY;
         private int rotate;
@@ -29,6 +29,10 @@ namespace AutomatedCar.SystemComponents
 
             this.Brush = new SolidColorBrush(Avalonia.Media.Color.Parse("green"));
         }
+
+        public int CHeight { get => Height; }
+
+        public int CFov { get => Fov; }
 
         public List<Point> Points { get; set; }
 
