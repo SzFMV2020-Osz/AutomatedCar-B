@@ -111,7 +111,7 @@ namespace AutomatedCar.Models
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
         
-        private int healthPoints = 1;
+        private int healthPoints = 100;
         public int HealthPoints
         {
             get => healthPoints;
