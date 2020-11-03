@@ -49,7 +49,7 @@ namespace Tests.SystemComponents.Packets
     {
         Radar radar = new Radar();
         [Fact]
-        public void getWorldObjects()
+        public void getWorldObjectsList()
         {
             List<WorldObject> wos = radar.getDangerousWorldObjects();
 
