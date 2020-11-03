@@ -10,11 +10,11 @@ namespace AutomatedCar.Models
     public class Radar
     {        
         List<NoticedObject> noticedObjects;
-        Position carPreviousPosition;
+        Point carPreviousPosition;
         Point[] points;
         public int offset = 0;
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
-        public Position CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
+        public Point CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
         public Point[] Points { get => points; set => points = value; }
 
         public List<NoticedObject> filterCollidables(List<WorldObject> paramWorldObjects)
@@ -85,6 +85,8 @@ namespace AutomatedCar.Models
         public List<WorldObject> getDangerousWorldObjects()
         {
             List<WorldObject> dangerousList = new List<WorldObject>();
+
+            dangerousList.Add(noticedObjects[0].worldObject);
             return dangerousList;
         }
     }

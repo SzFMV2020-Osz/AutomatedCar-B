@@ -6,7 +6,9 @@ using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Xunit;
+using NetTopologySuite.GeometriesGraph;
 using System.Linq;
+using Avalonia;
 
 namespace Tests.SystemComponents.Packets
 {
@@ -47,13 +49,34 @@ namespace Tests.SystemComponents.Packets
 
     public class RadarTest_getDangeriousWorldObjects
     {
-        Radar radar = new Radar();
         [Fact]
         public void getWorldObjectsList()
         {
+            Radar radar = new Radar();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            radar.NoticedObjects.Add(nw);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            Assert.IsType<List<WorldObject>>(wos);
+        }
+
+        [Fact]
+        public void getWorldObjectItem()
+        {
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400,500);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400,300,"",0,0, new List<List<Point>>());
+
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            radar.NoticedObjects.Add(nw);
+
             List<WorldObject> wos = radar.getDangerousWorldObjects();
 
-            Assert.IsType<List<WorldObject>>(wos);
+            Assert.Equal(1, wos.Count);
         }
     }
 }
