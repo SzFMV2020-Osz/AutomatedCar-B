@@ -95,17 +95,37 @@ namespace AutomatedCar.Models
             foreach (var item in noticedObjects)
             {
                 if(
-                    carVector.Length > ((Vector)item.Vector).Length ||
-                    (angle < 90 && angle >= 0 && ((Vector)item.Vector).Y < 0 || ((Vector)item.Vector).X < 0) ||
-                    (angle < 180 && angle >= 90 && ((Vector)item.Vector).Y > 0 || ((Vector)item.Vector).X < 0) ||
-                    (angle < 270 && angle >= 180 && ((Vector)item.Vector).Y > 0 || ((Vector)item.Vector).X > 0)
-                    ){
+                    objectIsSlover(carVector, item) || approaching(angle, item)){
                     dangerousList.Add(item.worldObject);
                 }
                 
             }
 
             return dangerousList;
+        }
+
+        private Boolean objectIsSlover(Vector carVector, NoticedObject item){
+            return carVector.Length > ((Vector)item.Vector).Length;
+        }
+
+        private Boolean approaching(double angle, NoticedObject item){
+            return approaching0_90(angle, item) || approaching90_180(angle, item) || approaching180_270(angle, item) || approaching270_360(angle, item);
+        }
+
+        private Boolean approaching0_90(double angle, NoticedObject item){
+            return (angle < 90 && angle >= 0 && ((Vector)item.Vector).Y < 0 || ((Vector)item.Vector).X < 0);
+        }
+
+        private Boolean approaching90_180(double angle, NoticedObject item){
+            return (angle < 180 && angle >= 90 && ((Vector)item.Vector).Y > 0 || ((Vector)item.Vector).X < 0);
+        }
+
+        private Boolean approaching180_270(double angle, NoticedObject item){
+            return (angle < 270 && angle >= 180 && ((Vector)item.Vector).Y > 0 || ((Vector)item.Vector).X > 0);
+        }
+
+        private Boolean approaching270_360(double angle, NoticedObject item){
+            return (angle < 360 && angle >= 270 && ((Vector)item.Vector).Y < 0 || ((Vector)item.Vector).X > 0);
         }
     }
 }
