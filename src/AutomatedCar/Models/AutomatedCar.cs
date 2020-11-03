@@ -118,7 +118,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref healthPoints, value); 
         }
         
-
         /// <summary>
         /// Damages the car. The amount of damage is dependant on the momentary velocity vector of the car and the other object that was hit.
         /// </summary>
