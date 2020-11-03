@@ -78,5 +78,25 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(1, wos.Count);
         }
+
+        [Fact]
+        public void getWorldObjectItem_twoSlow()
+        {
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400,500);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400,300,"",0,0, new List<List<Point>>());
+
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            NoticedObject nw2 = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            nw2.Vector = new Vector(0, 100);
+            radar.NoticedObjects.Add(nw);
+            radar.NoticedObjects.Add(nw2);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(2, wos.Count);
+        }
     }
 }

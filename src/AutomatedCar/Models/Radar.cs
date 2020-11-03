@@ -86,7 +86,11 @@ namespace AutomatedCar.Models
         {
             List<WorldObject> dangerousList = new List<WorldObject>();
 
-            dangerousList.Add(noticedObjects[0].worldObject);
+            foreach (var item in noticedObjects)
+            {
+                dangerousList.Add(item.worldObject);
+            }
+
             return dangerousList;
         }
     }
