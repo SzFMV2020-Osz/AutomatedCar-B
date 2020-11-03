@@ -85,10 +85,17 @@ namespace AutomatedCar.Models
         public List<WorldObject> getDangerousWorldObjects()
         {
             List<WorldObject> dangerousList = new List<WorldObject>();
+            Vector carVector = new Vector(
+                World.Instance.ControlledCar.X - CarPreviousPosition.X,
+                World.Instance.ControlledCar.Y - CarPreviousPosition.Y
+            );
 
             foreach (var item in noticedObjects)
             {
-                dangerousList.Add(item.worldObject);
+                if(carVector.Length > ((Vector)item.Vector).Length){
+                    dangerousList.Add(item.worldObject);
+                }
+                
             }
 
             return dangerousList;
