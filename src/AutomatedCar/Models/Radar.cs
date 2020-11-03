@@ -37,7 +37,9 @@ namespace AutomatedCar.Models
 
         public void computeVector(NoticedObject paramNoticedObject)
         {
-
+            double x = (int)(paramNoticedObject.worldObject.X - paramNoticedObject.PrevX);
+            double y = (int)(paramNoticedObject.worldObject.Y - paramNoticedObject.PrevY);
+            paramNoticedObject.Vector = new Vector(x, y);
         }
 
         public void setAllSeen()
