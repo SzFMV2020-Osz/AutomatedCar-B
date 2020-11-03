@@ -91,10 +91,15 @@ namespace AutomatedCar.Models
             );
 
 
-
+            double angle = World.Instance.ControlledCar.Angle;
             foreach (var item in noticedObjects)
             {
-                if(carVector.Length > ((Vector)item.Vector).Length || ((Vector)item.Vector).Y < 0){
+                if(
+                    carVector.Length > ((Vector)item.Vector).Length ||
+                    (angle < 90 && angle >= 0 && ((Vector)item.Vector).Y < 0 || ((Vector)item.Vector).X < 0) ||
+                    (angle < 180 && angle >= 90 && ((Vector)item.Vector).Y > 0 || ((Vector)item.Vector).X < 0) ||
+                    (angle < 270 && angle >= 180 && ((Vector)item.Vector).Y > 0 || ((Vector)item.Vector).X > 0)
+                    ){
                     dangerousList.Add(item.worldObject);
                 }
                 
