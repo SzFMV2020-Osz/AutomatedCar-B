@@ -60,15 +60,12 @@ namespace AutomatedCar.SystemComponents
             double px = p.X;
             double py = p.Y;
 
-            // translate point back to origin:
             px -= centerX;
             py -= centerY;
 
-            // rotate point
             double xnew = (px * c) - (py * s);
             double ynew = (px * s) + (py * c);
 
-            // translate point back:
             px = xnew + centerX;
             py = ynew + centerY;
             return new Point(px, py);
