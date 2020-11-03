@@ -12,11 +12,12 @@ namespace AutomatedCar.SystemComponents
 
     public class Ultrasound : SystemComponent, IUltrasound
     {
-        private const int Height = 100;
+        private const int Height = 150;
         private const int Fov = 100;
         private int offsetX;
         private int offsetY;
         private int rotate;
+        private double dif = (double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180));
         Point start;
 
         public Ultrasound(VirtualFunctionBus virtualFunctionBus, int offsetX, int offsetY, int rotate)
@@ -41,10 +42,10 @@ namespace AutomatedCar.SystemComponents
         {
             this.Points = this.CalculatePoints();
             this.WorldObjects = this.GetWorldObjectsInRange();
-            //if (this.WorldObjects.Count > 0)
-            //{
-            //    this.Distance = this.CalculateDistance();
-            //}
+            if (this.WorldObjects.Count > 0)
+            {
+                this.Distance = this.CalculateDistance();
+            }
         }
 
         public Point RotatePoint(double centerX, double centerY, double angle, Point p)
@@ -73,14 +74,13 @@ namespace AutomatedCar.SystemComponents
         {
             var car = World.Instance.ControlledCar;
             this.StartCalculate();
-            var dif = (double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180));
             Point right = new Point(
                 this.start.X + Height,
-                this.start.Y + dif
+                this.start.Y + this.dif
                 );
             Point left = new Point(
                 this.start.X + Height,
-                this.start.Y - dif
+                this.start.Y - this.dif
                 );
             right = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, right);
             left = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, left);
@@ -104,7 +104,7 @@ namespace AutomatedCar.SystemComponents
 
         public double CalculateDistance()
         {
-            double distance = 100.001;
+            double distance = 155.57;
             double actual;
             WorldObject obj = null;
             foreach (WorldObject item in this.WorldObjects)
