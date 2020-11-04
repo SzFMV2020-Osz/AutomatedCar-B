@@ -44,7 +44,7 @@ namespace AutomatedCar.Models
 
         public void setAllSeen()
         {
-            foreach (var noticeObj in noticedObjects)
+            foreach (NoticedObject noticeObj in noticedObjects)
             {
                 noticeObj.Seen = false;
             }
