@@ -36,6 +36,6 @@
 
   <ItemGroup>
     <Folder Include="CollisonTests\" />
+    <Folder Include="Models\" />
   </ItemGroup>
-
 </Project>
