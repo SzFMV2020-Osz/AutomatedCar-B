@@ -33,10 +33,9 @@ namespace AutomatedCar.Models
             this.Height = height;
             this.referenceOffsetX = referenceOffsetX;
             this.referenceOffsetY = referenceOffsetY;
-            this.RotMatrix = rotmatrix;
-            this.Polygons = this.GeneratePolygons(polyPoints);
-            this.NetPolygons = this.GenerateNetPolygons(polyPoints);
             this.Angle = Math.Atan2(rotmatrix.M12, rotmatrix.M11) * 180 / Math.PI;
+            this.RotMatrix = rotmatrix;
+            this.NetPolygons = this.GenerateNetPolygons(polyPoints);
             this.ZIndex = 1;
             this.Brush = new SolidColorBrush(Color.Parse("blue"));
         }
@@ -53,8 +52,8 @@ namespace AutomatedCar.Models
             set
             {
                 var radAngle = this._angle * Math.PI / 180;
-                this.UpdatePolygons();
                 this.RotMatrix = new Matrix(Math.Cos(radAngle), -Math.Sin(radAngle), Math.Sin(radAngle),Math.Cos(radAngle),0,0);
+                this.UpdatePolygons();
                 this.RaiseAndSetIfChanged(ref this._angle, value);
             }
         }
@@ -93,7 +92,7 @@ namespace AutomatedCar.Models
 
         private void UpdatePolygons()
         {
-            this.NetPolygons = this.GenerateNetPolygons(this.BasePoints);
+           this.NetPolygons = this.GenerateNetPolygons(this.BasePoints);
         }
 
         public int referenceOffsetX { get; set; }
