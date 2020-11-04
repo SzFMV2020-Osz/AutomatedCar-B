@@ -6,7 +6,7 @@ namespace Tests.Models
     using Avalonia;
     using Xunit;
 
-    public class WorldTest
+    public class CollisonTests
     {
 
 
