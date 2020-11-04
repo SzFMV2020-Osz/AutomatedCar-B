@@ -66,10 +66,10 @@ namespace AutomatedCar.Models
                 {
                     if (col is Tree)
                     {
-                        newPosition.X = this.X-50;
-                        newPosition.Y = this.Y-50;
-                        World.Instance.ControlledCar.Speed = 0;
-                        World.Instance.ControlledCar.DamageOnCollision(new Vector2(100,100), new Vector2(0,0));
+                        var carSpeed = new Vector2((  newPosition.X - this.X), ( newPosition.Y- this.Y) );
+                        World.Instance.ControlledCar.DamageOnCollision(carSpeed, new Vector2(0,0));
+                        newPosition.X = this.X;
+                        newPosition.Y = this.Y;
                     }
 
                     if (col is Sign)
