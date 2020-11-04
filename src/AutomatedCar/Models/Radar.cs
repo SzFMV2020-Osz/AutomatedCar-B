@@ -66,7 +66,6 @@ namespace AutomatedCar.Models
 
         public void newObjectIsDetected()
         {
-
             bool itemInNoticedObj;
             List<WorldObject> worldObjectsInsideTriangle = new List<WorldObject>();
             //A worldObjectsInsideTriangle-re majd a "World.GetWorldObjectsInsideTriangle(computeTriangleInWorld().ToList())"-t meg kell hívni
@@ -94,7 +93,6 @@ namespace AutomatedCar.Models
                         this.noticedObjects.Add(newNoticedObj);
                     }
                 }
-
             }
         }
 
