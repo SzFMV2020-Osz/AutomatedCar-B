@@ -84,11 +84,15 @@ namespace AutomatedCar.Models
                 movementDirection.Y = toReach.y - Y;
                 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
             }
-            
+            Angle = CalculateNpcAngle(movementDirection);
+
             Move(moveWith);
         }
 
-
+        private double CalculateNpcAngle(Vector2 direction)
+        {
+            return (double)Math.PI;
+        }
 
         public void Move(Vector2 with)
         {
