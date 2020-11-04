@@ -57,8 +57,10 @@ namespace AutomatedCar.Models
             n.PrevX = n.worldObject.X;
             n.PrevY = n.worldObject.Y;
         }
+        
         public void deleteLeftObjects()
         {
+            this.noticedObjects.RemoveAll(noticedObj => noticedObj.Seen == false);
         }
 
         public NoticedObject newObjectIsDetected()
