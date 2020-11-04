@@ -20,7 +20,6 @@ namespace AutomatedCar
         protected override void Tick()
         {
             this.world.ControlledCar.InputHandler();
-            this.world.ControlledCar.NetPolygons = this.world.ControlledCar.GenerateNetPolygons(this.world.ControlledCar.BasePoints);
             World.Instance.Tick();
         }
     }

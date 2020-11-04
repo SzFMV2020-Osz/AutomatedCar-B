@@ -13,6 +13,7 @@ namespace AutomatedCar.Models
 
     public abstract class WorldObject : ReactiveObject
     {
+        private int _mass;
         private int _x;
         private int _y;
 
@@ -52,6 +53,7 @@ namespace AutomatedCar.Models
             set
             {
                 var radAngle = this._angle * Math.PI / 180;
+                this.UpdatePolygons();
                 this.RotMatrix = new Matrix(Math.Cos(radAngle), -Math.Sin(radAngle), Math.Sin(radAngle),Math.Cos(radAngle),0,0);
                 this.RaiseAndSetIfChanged(ref this._angle, value);
             }
@@ -72,13 +74,26 @@ namespace AutomatedCar.Models
         public int X
         {
             get => this._x;
-            protected set => this.RaiseAndSetIfChanged(ref this._x, value);
+            protected set
+            {
+                this.UpdatePolygons();
+                this.RaiseAndSetIfChanged(ref this._x, value);
+            }
         }
 
         public int Y
         {
             get => this._y;
-            protected set => this.RaiseAndSetIfChanged(ref this._y, value);
+            protected set
+            {
+                this.UpdatePolygons();
+                this.RaiseAndSetIfChanged(ref this._y, value);
+            }
+        }
+
+        private void UpdatePolygons()
+        {
+            this.NetPolygons = this.GenerateNetPolygons(this.BasePoints);
         }
 
         public int referenceOffsetX { get; set; }

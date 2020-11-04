@@ -8,6 +8,7 @@ namespace AutomatedCar.Models
     using Avalonia;
     using ReactiveUI;
     using System;
+    using System.Linq;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -45,10 +46,8 @@ namespace AutomatedCar.Models
 
         public int Speed { get; set; }
 
-        /// <summary>
-        /// Example usage add
-        /// </summary>
-        /// <param name="point"></param>
+        public int Mass { get; set; } = 1000;
+
         public void SetNextPosition(int x, int y)
         {
             this.X = x;
@@ -57,20 +56,40 @@ namespace AutomatedCar.Models
 
         public void Move(Vector2 newPosition)
         {
+
+            var collisioned = World.Instance.GetWorldObjectsInsideTriangle(World.Instance.ControlledCar.NetPolygons[0].Coordinates
+                .Select(x => new Point(x.X, x.Y)).ToList());
+
+            if (collisioned.Count > 0)
+            {
+                foreach (var col in collisioned)
+                {
+                    if (col is Tree)
+                    {
+                        newPosition.X = this.X-50;
+                        newPosition.Y = this.Y-50;
+                        World.Instance.ControlledCar.Speed = 0;
+                        World.Instance.ControlledCar.DamageOnCollision(new Vector2(100,100), new Vector2(0,0));
+                    }
+
+                    if (col is Sign)
+                    {
+                        Sign sign = (col as Sign);
+
+                        var carSpeed = new Vector2((  newPosition.X - this.X), ( newPosition.Y- this.Y) );
+
+                        var carMomentum = Vector2.Multiply(Mass, carSpeed);
+                        var signVelocity = Vector2.Multiply(, carMomentum);
+
+                        var singPosition = new Vector2(sign.X, sign.Y);
+                        var res = Vector2.Add(signVelocity, singPosition);
+                        sign.SetNextPosition((int)res.X, (int)res.Y);
+                    }
+                }
+            }
+
             this.X = (int)newPosition.X;
             this.Y = (int)newPosition.Y;
-        }
-
-        public void MoveX(int x)
-        {
-            VisibleX = this.X - (World.Instance.VisibleWidth/2);
-            this.X += x;
-        }
-
-        public void MoveY(int y)
-        {
-            VisibleY = this.Y - (World.Instance.VisibleHeight/2);
-            this.Y += y;
         }
 
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
@@ -110,14 +129,14 @@ namespace AutomatedCar.Models
         }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
-        
+
         private int healthPoints = 100;
         public int HealthPoints
         {
             get => healthPoints;
-            set => this.RaiseAndSetIfChanged(ref healthPoints, value); 
+            set => this.RaiseAndSetIfChanged(ref healthPoints, value);
         }
-        
+
         /// <summary>
         /// Damages the car. The amount of damage is dependant on the momentary velocity vector of the car and the other object that was hit.
         /// </summary>
