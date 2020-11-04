@@ -17,7 +17,7 @@ namespace AutomatedCar.Models
         : base(0, 0, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polyPoints)
         {
             this.JsonRoute = jsonRoute;
-            speedLimit = 20; //remove when adaptive speedLimit done!
+            speedLimit = 10; //remove when adaptive speedLimit done!
             this.ReadCarRoute();
             this.toReach = CarRoutes[1];
             index = 1;
@@ -84,14 +84,23 @@ namespace AutomatedCar.Models
                 movementDirection.Y = toReach.y - Y;
                 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
             }
-            Angle = CalculateNpcAngle(movementDirection);
+
+            this.CalculateNpcAngle(movementDirection);
 
             Move(moveWith);
         }
 
-        private double CalculateNpcAngle(Vector2 direction)
+        private void CalculateNpcAngle(Vector2 direction)
         {
-            return (double)Math.PI;
+            double angle = Math.Atan2(direction.X, direction.Y * -1) * 180 / Math.PI;
+            if (angle - this.Angle > 0)
+            {
+                this.Angle += 5;
+            }
+            if (angle - this.Angle < 0)
+            {
+                this.Angle -= 5;
+            }
         }
 
         public void Move(Vector2 with)
