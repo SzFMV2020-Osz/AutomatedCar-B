@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutomatedCar.Models.RadarUtil;
+using System.Linq;
 
 namespace AutomatedCar.Models
 {
@@ -63,9 +64,38 @@ namespace AutomatedCar.Models
             this.noticedObjects.RemoveAll(noticedObj => noticedObj.Seen == false);
         }
 
-        public NoticedObject newObjectIsDetected()
+        public void newObjectIsDetected()
         {
-            return null;
+
+            bool itemInNoticedObj;
+            List<WorldObject> worldObjectsInsideTriangle = new List<WorldObject>();
+            //A worldObjectsInsideTriangle-re majd a "World.GetWorldObjectsInsideTriangle(computeTriangleInWorld().ToList())"-t meg kell hívni
+
+            foreach (WorldObject worldObj in worldObjectsInsideTriangle)
+            {
+                itemInNoticedObj = false;
+                if (worldObj.IsColliding)
+                {
+                    foreach (NoticedObject noticedObj in noticedObjects)
+                    {
+                        if (Object.ReferenceEquals(noticedObj,worldObj))
+                        {
+                            itemInNoticedObj = true;
+                            break;
+                        }
+                    }
+
+                    if(!itemInNoticedObj)
+                    {
+                        NoticedObject newNoticedObj = new NoticedObject();
+                        newNoticedObj.Seen = true;
+                        newNoticedObj.PrevX = null;
+                        newNoticedObj.PrevY = null;
+                        this.noticedObjects.Add(newNoticedObj);
+                    }
+                }
+
+            }
         }
 
         public Point[] computeTriangleInWorld()
