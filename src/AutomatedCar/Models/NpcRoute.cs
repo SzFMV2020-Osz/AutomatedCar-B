@@ -11,8 +11,8 @@ namespace AutomatedCar.Models
     {
         public string tag;
 
-        public string x;
+        public int x;
 
-        public string y;
+        public int y;
     }
 }

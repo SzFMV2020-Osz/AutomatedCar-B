@@ -36,8 +36,8 @@ namespace AutomatedCar.Models
         public void SetStartPosition()
         {
 
-            this.X = int.Parse(this.PedRoutes.First().x);
-            this.Y = int.Parse(this.PedRoutes.First().y);
+            this.X = this.PedRoutes.First().x;
+            this.Y = this.PedRoutes.First().y;
 
         }
 
@@ -46,14 +46,14 @@ namespace AutomatedCar.Models
             if (index == this.PedRoutes.Count())
                 index = 0;
 
-            int deltaX = int.Parse(this.PedRoutes[index].x) - this.X;
+            int deltaX = this.PedRoutes[index].x - this.X;
 
             if (deltaX < 0)
                 this.X -= 5;
             else if (deltaX > 0)
                 this.X += 5;
 
-            int deltaY = int.Parse(this.PedRoutes[index].y) - this.Y;
+            int deltaY = this.PedRoutes[index].y - this.Y;
 
             if (deltaY < 0)
                 this.Y -= 5;

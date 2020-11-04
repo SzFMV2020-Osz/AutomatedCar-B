@@ -36,13 +36,13 @@ namespace AutomatedCar.Models
 
         public void SetStartPosition()
         {
-            this.X = int.Parse(this.CarRoutes.First().x);
-            this.Y = int.Parse(this.CarRoutes.First().y);
+            this.X = (this.CarRoutes.First().x);
+            this.Y = (this.CarRoutes.First().y);
         }
 
-        public void Moveeee(object sender, EventArgs args)
+       public void Moveeee(object sender, EventArgs args)
         {
-            if (index == this.CarRoutes.Count())
+             /*if (index == this.CarRoutes.Count())
                 index = 0;
 
             int deltaX = int.Parse(this.CarRoutes[index].x) - this.X;
@@ -60,7 +60,13 @@ namespace AutomatedCar.Models
                 this.Y += 10;
 
             if (deltaX == 0 && deltaY == 0)
-                index++;
+                index++;*/
+        }
+
+        public void Move(object sender, EventArgs args)
+        {
+            //if(X == this.CarRoutes[index].x && Y == this.CarRoutes[index].y)
+
         }
 
         public void Move(Vector2 with)
