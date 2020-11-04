@@ -46,7 +46,7 @@ namespace AutomatedCar.Models
 
         public int Speed { get; set; }
 
-        public int Mass { get; set; } = 1000;
+        public int Mass { get; set; } = 5;
 
         public void SetNextPosition(int x, int y)
         {
@@ -79,7 +79,7 @@ namespace AutomatedCar.Models
                         var carSpeed = new Vector2((  newPosition.X - this.X), ( newPosition.Y- this.Y) );
 
                         var carMomentum = Vector2.Multiply(Mass, carSpeed);
-                        var signVelocity = Vector2.Multiply(, carMomentum);
+                        var signVelocity = Vector2.Multiply(1, carMomentum);
 
                         var singPosition = new Vector2(sign.X, sign.Y);
                         var res = Vector2.Add(signVelocity, singPosition);
