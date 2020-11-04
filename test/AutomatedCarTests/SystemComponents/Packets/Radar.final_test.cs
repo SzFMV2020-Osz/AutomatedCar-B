@@ -27,9 +27,18 @@ namespace Tests.SystemComponents.Packets
         public void FinalTest1()
         {
 
-            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(200,100,"",0,0,new List<List<Avalonia.Point>>());
+            set1TickCar();
+            prepareRadar();
+            set1TickList();
 
             // ====================================== Tick ================================
+            set2TickCar();
+            changeWorldObjectPosition();
+            set2TickList();
+
+            //R.compute();
+
+            // megnézni hogy a slow, és az oposite lett-e a veszélyes objektum
 
             Assert.Equal(true, true);
         }
