@@ -52,8 +52,10 @@ namespace AutomatedCar.Models
         {    
         }
 
-        public void updatePreviewXY()
+        public void updatePreviewXY(NoticedObject n)
         {
+            n.PrevX = n.worldObject.X;
+            n.PrevY = n.worldObject.Y;
         }
         
         public void deleteLeftObjects()
