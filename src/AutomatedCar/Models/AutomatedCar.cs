@@ -7,6 +7,7 @@ namespace AutomatedCar.Models
     using SystemComponents;
     using Avalonia;
     using ReactiveUI;
+    using System;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -121,6 +122,23 @@ namespace AutomatedCar.Models
         public int VisibleX { get; set; }
 
         public int VisibleY { get; set; }
+        
+        private int healthPoints = 100;
+        public int HealthPoints
+        {
+            get => healthPoints;
+            set => this.RaiseAndSetIfChanged(ref healthPoints, value); 
+        }
+        
+        /// <summary>
+        /// Damages the car. The amount of damage is dependant on the momentary velocity vector of the car and the other object that was hit.
+        /// </summary>
+        /// <param name="carVector">The velocity vector of the car at the time of the impact</param>
+        /// <param name="otherObjectVector">The velocity vector of the other object involved in the collision.</param>
+        public void DamageOnCollision(Vector2 carVector, Vector2 otherObjectVector)
+        {
+            this.healthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+        }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
         public void Stop()
