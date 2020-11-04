@@ -55,8 +55,10 @@ namespace AutomatedCar.Models
         public void updatePreviewXY()
         {
         }
+        
         public void deleteLeftObjects()
         {
+            this.noticedObjects.RemoveAll(noticedObj => noticedObj.Seen == false);
         }
 
         public NoticedObject newObjectIsDetected()
