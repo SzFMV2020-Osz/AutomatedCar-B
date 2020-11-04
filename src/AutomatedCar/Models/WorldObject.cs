@@ -3,6 +3,7 @@ namespace AutomatedCar.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using Avalonia;
     using Avalonia.Media;
     using NetTopologySuite.Geometries;
@@ -43,8 +44,17 @@ namespace AutomatedCar.Models
 
         public double Angle
         {
-            get { return _angle; }
-            set => this.RaiseAndSetIfChanged(ref this._angle, value);
+            get
+            {
+                return this._angle;
+            }
+
+            set
+            {
+                var radAngle = this._angle * Math.PI / 180;
+                this.RotMatrix = new Matrix(Math.Cos(radAngle), -Math.Sin(radAngle), Math.Sin(radAngle),Math.Cos(radAngle),0,0);
+                this.RaiseAndSetIfChanged(ref this._angle, value);
+            }
         }
 
         public bool IsColliding { get; set; }
