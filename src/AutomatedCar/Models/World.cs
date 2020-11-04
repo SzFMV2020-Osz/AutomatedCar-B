@@ -103,12 +103,15 @@
 
             foreach (WorldObject item in this.WorldObjects)
             {
-                foreach (LineString polygon in item.NetPolygons)
+                if (!(item is AutomatedCar))
                 {
-                    if (triangle.Intersects(polygon))
+                    foreach (LineString polygon in item.NetPolygons)
                     {
-                        objectsInside.Add(item);
-                        break;
+                        if (triangle.Intersects(polygon))
+                        {
+                            objectsInside.Add(item);
+                            break;
+                        }
                     }
                 }
             }
