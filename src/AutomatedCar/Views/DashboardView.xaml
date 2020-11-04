@@ -274,28 +274,20 @@
               <StackPanel Width="310">
                 <Grid ColumnDefinitions="212,108" RowDefinitions="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                   <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  Margin="0 10"
-                    Text="Gas pedal"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Gas pedal"/>
                     <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
                     Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gaspedal}"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                        Text="Break pedal"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Break pedal"/>
                     <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
                         Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal}"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                              Text="Health Points"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Text="Health Points"/>
                     <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
                                 Value="{Binding ControlledCar.HealthPoints}"/>
                     <Button HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 10" Foreground="White" Background="Black" Command="{Binding OnClickCommand}">Reset Hp</Button>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                              Text="Steering"/>
-                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                              Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering, StringFormat={}{0:0}}"/>
                   </StackPanel>
 
                   <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10" Grid.Row="0" Grid.Column="1">
-                      <Image Source="resm:AutomatedCar.Assets.steering-wheel.png?assembly=AutomatedCar"
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom" >
+                      <Image Source="resm:AutomatedCar.Assets.steering-wheel.png?assembly=AutomatedCar" HorizontalAlignment="Left" VerticalAlignment="Bottom" >
                         <Image.RenderTransform>
                           <RotateTransform Angle="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering}" />
                         </Image.RenderTransform>
