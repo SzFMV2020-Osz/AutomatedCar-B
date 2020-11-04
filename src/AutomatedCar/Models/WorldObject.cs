@@ -19,8 +19,11 @@ namespace AutomatedCar.Models
 
         public Matrix RotMatrix { get; set; }
 
+        public List<List<Point>> BasePoints { get; private set; }
+
         public WorldObject(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints)
         {
+            BasePoints = polyPoints;
             this.X = x;
             this.Y = y;
             this.Filename = filename;
@@ -30,7 +33,6 @@ namespace AutomatedCar.Models
             this.referenceOffsetY = referenceOffsetY;
             this.RotMatrix = rotmatrix;
             this.Polygons = this.GeneratePolygons(polyPoints);
-            polyPoints = this.RotatePoints(polyPoints);
             this.NetPolygons = this.GenerateNetPolygons(polyPoints);
             this.Angle = Math.Atan2(rotmatrix.M12, rotmatrix.M11) * 180 / Math.PI;
             this.ZIndex = 1;
@@ -104,8 +106,9 @@ namespace AutomatedCar.Models
             return objectPolygons;
         }
 
-        private List<LineString> GenerateNetPolygons(List<List<Point>> polyPoints)
+        public List<LineString> GenerateNetPolygons(List<List<Point>> polyPoints)
         {
+            polyPoints = RotatePoints(polyPoints);
             List<LineString> objectLineStrings = new List<LineString>();
             foreach (List<Point> points in polyPoints)
             {
