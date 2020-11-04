@@ -17,14 +17,18 @@ namespace AutomatedCar.Models
         : base(0, 0, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polyPoints)
         {
             this.JsonRoute = jsonRoute;
+            speedLimit = 20; //remove when adaptive speedLimit done!
             this.ReadCarRoute();
+            this.toReach = CarRoutes[1];
+            index = 1;
         }
 
         private string JsonRoute;
 
-        private int index = 0;
+        private int index;
         private List<NpcRoute> CarRoutes;
-
+        private NpcRoute toReach;
+        private int speedLimit;
         public int Rotation { get; set; }
 
         public int Speed { get; set; }
@@ -40,19 +44,19 @@ namespace AutomatedCar.Models
             this.Y = (this.CarRoutes.First().y);
         }
 
-       public void Moveeee(object sender, EventArgs args)
+       /*public void Moveeee(object sender, EventArgs args)
         {
-             /*if (index == this.CarRoutes.Count())
+             if (index == this.CarRoutes.Count())
                 index = 0;
 
-            int deltaX = int.Parse(this.CarRoutes[index].x) - this.X;
+            int deltaX = this.CarRoutes[index].x - this.X;
 
             if (deltaX < 0)
                 this.X -= 10;
             else if (deltaX > 0)
                 this.X += 10;
 
-            int deltaY = int.Parse(this.CarRoutes[index].y) - this.Y;
+            int deltaY =this.CarRoutes[index].y - this.Y;
 
             if (deltaY < 0)
                 this.Y -= 10;
@@ -60,18 +64,36 @@ namespace AutomatedCar.Models
                 this.Y += 10;
 
             if (deltaX == 0 && deltaY == 0)
-                index++;*/
-        }
+                index++;
+        }*/
 
         public void Move(object sender, EventArgs args)
         {
-            //if(X == this.CarRoutes[index].x && Y == this.CarRoutes[index].y)
+            Vector2 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
+            Vector2 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
+            
+            if(movementDirection.Length() == 0 || movementDirection.Length() < moveWith.Length())
+            {
+                if(toReach.tag == "finish")
+                {
+                    index = -1;
+                }
 
+                toReach = CarRoutes[++index];
+                movementDirection.X = toReach.x - X;
+                movementDirection.Y = toReach.y - Y;
+                moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
+            }
+            
+            Move(moveWith);
         }
+
+
 
         public void Move(Vector2 with)
         {
-            throw new NotImplementedException();
+            this.X = this.X + (int)with.X;
+            this.Y = this.Y + (int)with.Y;
         }
 
         public void MoveX(int x)

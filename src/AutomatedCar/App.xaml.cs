@@ -91,9 +91,9 @@ namespace AutomatedCar
                 npcPedWoman.SetStartPosition();
                 world.AddObject(npcPedWoman);
 
-                world.OnTick += npcCar.Moveeee;
-                world.OnTick += npcPedMan.Moveeee;
-                world.OnTick += npcPedWoman.Moveeee;
+                world.OnTick += npcCar.Move;
+                world.OnTick += npcPedMan.Move;
+                world.OnTick += npcPedWoman.Move;
 
                 Game game = new Game(world);
                 game.Start();

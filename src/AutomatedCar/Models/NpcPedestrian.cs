@@ -41,7 +41,7 @@ namespace AutomatedCar.Models
 
         }
 
-        public void Moveeee(object sender, EventArgs args)
+        public void Move(object sender, EventArgs args)
         {
             if (index == this.PedRoutes.Count())
                 index = 0;
