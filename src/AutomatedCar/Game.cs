@@ -1,7 +1,9 @@
 namespace AutomatedCar
 {
     using System;
+    using System.Linq;
     using AutomatedCar.Models;
+    using Avalonia;
     using Avalonia.Input;
 
     public class Game : GameBase
@@ -17,46 +19,8 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
-            this.world.ControlledCar.NetPolygons = null;
-            world.ControlledCar.InputHandler();
-
-            /*int speed = 10;
-
-            if (Keyboard.IsKeyDown(Key.Space))
-            {
-                speed = 300;
-            }
-
-            if (Keyboard.IsKeyDown(Key.Up))
-            {
-                this.world.ControlledCar.MoveY(-speed);
-            }
-
-            if (Keyboard.IsKeyDown(Key.Down))
-            {
-                this.world.ControlledCar.MoveY(speed);
-            }
-
-            if (Keyboard.IsKeyDown(Key.Left))
-            {
-                this.world.ControlledCar.MoveX(-speed);
-            }
-
-            if (Keyboard.IsKeyDown(Key.Right))
-            {
-                this.world.ControlledCar.MoveX(speed);
-            }
-
-            if (Keyboard.IsKeyDown(Key.B))
-            {
-                this.world.ControlledCar.Angle += 5;
-            }
-
-            if (Keyboard.IsKeyDown(Key.N))
-            {
-                this.world.ControlledCar.Angle -= 5;
-            }*/
-
+            this.world.ControlledCar.InputHandler();
+            this.world.ControlledCar.NetPolygons = this.world.ControlledCar.GenerateNetPolygons(this.world.ControlledCar.BasePoints);
             World.Instance.Tick();
         }
     }
