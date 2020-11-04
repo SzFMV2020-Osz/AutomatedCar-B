@@ -46,8 +46,16 @@ namespace AutomatedCar.Models
 
         public bool isInNoticedObjects(WorldObject paramWorldObject)
         {
-            return true;
+            foreach (NoticedObject noticedObject in this.noticedObjects)
+            {
+                if (ReferenceEquals(noticedObject, paramWorldObject))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
+
         public void setHighlighted(WorldObject paramWorldObject)
         {    
         }
