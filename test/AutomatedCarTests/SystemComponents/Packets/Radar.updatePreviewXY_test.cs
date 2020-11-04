@@ -15,14 +15,11 @@ namespace Tests.SystemComponents.Packets
         [Fact]
         public void UpdatePrewXY_test()
         {
-
             AutomatedCar.Models.AutomatedCar car = new AutomatedCar.Models.AutomatedCar(20,30,"",0,0,new List<List<Avalonia.Point>>());
             car.IsColliding = true;
 
             NoticedObject n = new NoticedObject();
             n.worldObject = car;
-
-
 
             Radar radar = new Radar();
 
