@@ -8,8 +8,6 @@ namespace Tests.Models
 
     public class CollisonTests
     {
-
-
         [Fact]
         public void CollisonNothingTest()
         {

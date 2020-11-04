@@ -126,7 +126,6 @@ namespace AutomatedCar.Models
             return objectsInside;
         }
 
-
         public void IsColisonWhitWorldObject()
         {
             foreach (WorldObject item in this.WorldObjects.Where(x => x.IsColliding))
