@@ -4,18 +4,33 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutomatedCar.Models.RadarUtil;
+using AutomatedCar.SystemComponents;
+using AutomatedCar.SystemComponents.Packets;
 
 namespace AutomatedCar.Models
 {
-    public class Radar
+    public class Radar : SystemComponent
     {        
         List<NoticedObject> noticedObjects;
         Point carPreviousPosition;
         Point[] points;
         public int offset = 0;
+
+        public Radar(VirtualFunctionBus virtualFunctionBus = null)
+            : base(virtualFunctionBus)
+        {
+            if (virtualFunctionBus != null)
+            {
+                virtualFunctionBus.RadarSensorPacket = this.RadarSensorPacket;
+                virtualFunctionBus.RegisterComponent(this);
+            }
+        }
+
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
         public Point CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
         public Point[] Points { get => points; set => points = value; }
+
+        public RadarSensorPacket RadarSensorPacket { get; set; } = new RadarSensorPacket();
 
         public List<NoticedObject> filterCollidables(List<WorldObject> paramWorldObjects)
         {
@@ -80,6 +95,7 @@ namespace AutomatedCar.Models
 
         public void updateBus()
         {
+            this.RadarSensorPacket.Update(this.getDangerousWorldObjects());
         }
 
         public List<WorldObject> getDangerousWorldObjects()
@@ -128,6 +144,11 @@ namespace AutomatedCar.Models
 
         private Boolean between(double angle, int min, int max){
             return angle < max && angle >= min;
+        }
+
+        public override void Process()
+        {
+            this.updateBus();
         }
     }
 }
