@@ -29,7 +29,46 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(true, true);
         }
 
+        private void changeWorldObjectPosition(){
+            w_slow = new AutomatedCar.Models.AutomatedCar(150,375,"",0,0,new List<List<Avalonia.Point>>());
+            w_oposite = new AutomatedCar.Models.AutomatedCar(200,250,"",0,0,new List<List<Avalonia.Point>>());
+            w_fast = new AutomatedCar.Models.AutomatedCar(200,400,"",0,0,new List<List<Avalonia.Point>>());
+            w_leaving = new AutomatedCar.Models.AutomatedCar(250,300,"",0,0,new List<List<Avalonia.Point>>());
+            w_new = new AutomatedCar.Models.AutomatedCar(250,450,"",0,0,new List<List<Avalonia.Point>>());
+        }
 
+        private void set1TickList(){
+            this.list.Add(w_slow);
+            this.list.Add(w_oposite);
+            this.list.Add(w_fast);
+            this.list.Add(w_leaving);
+        }
+
+        private void set2TickList(){
+            this.list.Add(w_slow);
+            this.list.Add(w_oposite);
+            this.list.Add(w_fast);
+            this.list.Add(w_new);
+        }
+
+        private void set1TickCar(){
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(200,100,"",0,0,new List<List<Avalonia.Point>>());
+            World.Instance.ControlledCar.Angle = 180;
+        }
+
+        private void set2TickCar(){
+            World.Instance.ControlledCar.Y = 150;
+        }
+
+        private void prepareRadar(){
+            RadarTriangleComputer RTC = new RadarTriangleComputer();
+            RTC.offset = 120;
+            RTC.distance = 200;
+            RTC.angle = 60 / 2;
+            RTC.rotate = (int)World.Instance.ControlledCar.Angle;
+            RTC.carX = (int)World.Instance.ControlledCar.X;
+            RTC.carY = (int)World.Instance.ControlledCar.Y;
+        }
 
     }
 }

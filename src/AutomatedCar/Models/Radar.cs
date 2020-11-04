@@ -68,16 +68,17 @@ namespace AutomatedCar.Models
             return null;
         }
 
-        public Point[] computeTriangleInWorld()
+        public Point[] computeTriangleInWorld(RadarTriangleComputer RTC = null)
         {
-            RadarTriangleComputer RTC = new RadarTriangleComputer();
-
-            RTC.offset = 120;
-            RTC.distance = 200;
-            RTC.angle = 60 / 2;
-            RTC.rotate = (int)World.Instance.ControlledCar.Angle;
-            RTC.carX = (int)World.Instance.ControlledCar.X;
-            RTC.carY = (int)World.Instance.ControlledCar.Y;
+            if(RTC == null) {
+                RTC = new RadarTriangleComputer();
+                RTC.offset = 120;
+                RTC.distance = 200;
+                RTC.angle = 60 / 2;
+                RTC.rotate = (int)World.Instance.ControlledCar.Angle;
+                RTC.carX = (int)World.Instance.ControlledCar.X;
+                RTC.carY = (int)World.Instance.ControlledCar.Y;
+            }
 
             return RTC.computeTriangleInWorld();
         }
