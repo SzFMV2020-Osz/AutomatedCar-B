@@ -1,7 +1,9 @@
 namespace AutomatedCar
 {
     using System;
+    using System.Linq;
     using AutomatedCar.Models;
+    using Avalonia;
     using Avalonia.Input;
 
     public class Game : GameBase
@@ -17,6 +19,12 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
+            this.world.ControlledCar.InputHandler();
+
+            // Demo-hoz
+            // this.world.ControlledCar.NetPolygons = this.world.ControlledCar.GenerateNetPolygons(this.world.ControlledCar.BasePoints);
+            // Collision.Handler();
+
             World.Instance.Tick();
         }
     }

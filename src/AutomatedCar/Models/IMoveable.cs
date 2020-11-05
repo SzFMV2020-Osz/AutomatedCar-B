@@ -6,12 +6,18 @@ namespace AutomatedCar.Models
 
     public interface IMoveable
     {
+        /// <summary>
+        /// Gets and sets the mass in kg used for collision dynamic calculations.
+        /// </summary>
+        public int Mass { get; set; }
+
         public void SetNextPosition(int x, int y);
 
         public void Move(Vector2 with);
-
+      
         public void MoveX(int x);
 
         public void MoveY(int y);
+
     }
 }
