@@ -3,8 +3,6 @@ namespace AutomatedCar.SystemComponents
     using System;
     using System.Numerics;
     using AutomatedCar.Models;
-    using AutomatedCar.SystemComponents.Packets;
-    using Avalonia.Animation.Animators;
 
     public class SteeringController : ISteeringController
     {
@@ -56,17 +54,18 @@ namespace AutomatedCar.SystemComponents
         {
             if (this.isInReverseGear)
             {
-                this.NewCarPosition = this.carPoint + (-1 * ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
+                this.NewCarPosition = this.carPoint + (-1 * ((float)this.LinearDisplacement() * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
             }
             else
             {
-                this.NewCarPosition = this.carPoint + ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
+                double temp = this.LinearDisplacement();
+                this.NewCarPosition = this.carPoint + ((float)this.LinearDisplacement() * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
             }
         }
 
         private void SetNewDirectionUnitVector()
         {
-            this.newDirectionUnitVector = Vector2.Transform(this.carDirectionUnitVector, Matrix3x2.CreateRotation((float)this.CalculateAnglularDisplacementInRadians()));
+            this.newDirectionUnitVector = Vector2.Transform(this.carDirectionUnitVector, Matrix3x2.CreateRotation((float)this.AnglularDisplacementInRadians()));
         }
 
         private void SetNewCarAngle()
@@ -82,8 +81,19 @@ namespace AutomatedCar.SystemComponents
             return Vector2.Transform(this.newDirectionUnitVector, Matrix3x2.CreateRotation((float)(-90 * (Math.PI / 180))));
         }
 
-        private double CalculateAnglularDisplacementInRadians()
-            => Math.Acos(((2 * Math.Pow(this.turningCircleRadius, 2)) - Math.Pow(this.velocityPixelPerTick, 2)) /
-            (2 * Math.Pow(this.turningCircleRadius, 2))) * (this.steeringAngle / MaximumSteeringAngle);
+        private double AnglularDisplacementInRadians() =>
+            (this.velocityPixelPerTick / this.turningCircleRadius) * (this.steeringAngle / MaximumSteeringAngle);
+
+        private double LinearDisplacement()
+        {
+            if (this.steeringAngle != 0)
+            {
+                return this.velocityPixelPerTick * (2 * Math.Sin(this.AnglularDisplacementInRadians() / 2)) / this.AnglularDisplacementInRadians();
+            }
+            else
+            {
+                return this.velocityPixelPerTick;
+            }
+        }
     }
 }
