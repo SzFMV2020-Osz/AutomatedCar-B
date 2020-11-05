@@ -17,15 +17,16 @@ namespace AutomatedCar.Models
         {
             this.JsonRoute = jsonRoute;
             this.ReadPedRoute();
+            this.toReach = PedRoutes[1];
         }
 
         private string JsonRoute;
 
         private int index = 0;
         private List<NpcRoute> PedRoutes;
-
+        private NpcRoute toReach;
         public int Rotation { get; set; }
-
+        private bool isthreesixty;
         public int Speed { get; set; }
 
         public void ReadPedRoute()
@@ -40,34 +41,75 @@ namespace AutomatedCar.Models
             this.Y = this.PedRoutes.First().y;
 
         }
-
         public void Move(object sender, EventArgs args)
         {
             if (index == this.PedRoutes.Count())
                 index = 0;
 
+
+
             int deltaX = this.PedRoutes[index].x - this.X;
+
+
 
             if (deltaX < 0)
                 this.X -= 5;
             else if (deltaX > 0)
                 this.X += 5;
 
+
+
             int deltaY = this.PedRoutes[index].y - this.Y;
+
+
 
             if (deltaY < 0)
                 this.Y -= 5;
             else if (deltaY > 0)
                 this.Y += 5;
 
+
+
             if (deltaX == 0 && deltaY == 0)
                 index++;
 
+
+            Vector2 movementDirection = new Vector2(deltaX, deltaY);
+            this.CalculateNpcAngle(movementDirection);
+        }
+        private void CalculateNpcAngle(Vector2 direction)
+        {
+            double angle = Math.Atan2(direction.X, direction.Y * -1) * 180 / Math.PI;
+            if (angle < 0)
+            {
+                angle += 360;
+            }
+
+            if (angle < 55)
+            {
+                isthreesixty = false;
+            }
+
+            if (angle > this.Angle && !isthreesixty)
+            {
+                this.Angle += 90;
+            }
+            if (angle < this.Angle && !isthreesixty)
+            {
+                this.Angle -= 180;
+            }
+            if (this.Angle >= 360 && !isthreesixty)
+            {
+
+                isthreesixty = true;
+                this.Angle = 0;
+            }
         }
 
         public void Move(Vector2 with)
         {
-            throw new NotImplementedException();
+            this.X = this.X + (int)with.X;
+            this.Y = this.Y + (int)with.Y;
         }
 
         public void MoveX(int x)
