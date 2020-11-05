@@ -85,7 +85,7 @@
                   </Path>
                 </Canvas>
                 <WrapPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                  <TextBlock >gear:  </TextBlock>
+                  <TextBlock >gear:</TextBlock>
                   <TextBlock Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Gear}"/>
                 </WrapPanel>
                 <Canvas Grid.Row="0" Grid.Column="2" Width="30" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 0">
@@ -282,9 +282,14 @@
                 <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
                     Value="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Breakpedal}"/>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Text="Steering"/>
+                           Text="Health Points"/>
+                <ProgressBar HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10"
+                             Value="{Binding ControlledCar.HealthPoints}"/>
+                <Button HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 0 0 10" Foreground="White" Background="Black" Command="{Binding OnClickCommand}">Reset Hp</Button>
                 <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering, StringFormat={}{0:0}}"/>
+                           Text="Steering"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"
+                           Text="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Steering, StringFormat={}{0:0}}"/>
                 <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                   <WrapPanel Grid.Row="0" Grid.Column="0" >
                     <TextBlock Text="X: "/>
@@ -314,7 +319,7 @@
                 <StackPanel HorizontalAlignment="Center">
                   <TextBlock Text="Control information: F1" Margin="0 20 0 5"/>
                 </StackPanel>
-                
+
               </StackPanel>
 
             </StackPanel>

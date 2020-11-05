@@ -27,7 +27,9 @@ namespace AutomatedCar.Models
         }
 
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
+    
         public Point CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
+
         public Point[] Points { get => points; set => points = value; }
 
         public RadarSensorPacket RadarSensorPacket { get; set; } = new RadarSensorPacket();
@@ -53,10 +55,17 @@ namespace AutomatedCar.Models
 
         public void computeVector(NoticedObject paramNoticedObject)
         {
+            double x = (int)(paramNoticedObject.worldObject.X - paramNoticedObject.PrevX);
+            double y = (int)(paramNoticedObject.worldObject.Y - paramNoticedObject.PrevY);
+            paramNoticedObject.Vector = new Vector(x, y);
         }
 
         public void setAllSeen()
         {
+            foreach (NoticedObject noticeObj in noticedObjects)
+            {
+                noticeObj.Seen = false;
+            }
         }
 
         public bool isInNoticedObjects(WorldObject paramWorldObject)
@@ -67,11 +76,15 @@ namespace AutomatedCar.Models
         {    
         }
 
-        public void updatePreviewXY()
+        public void updatePreviewXY(NoticedObject n)
         {
+            n.PrevX = n.worldObject.X;
+            n.PrevY = n.worldObject.Y;
         }
+        
         public void deleteLeftObjects()
         {
+            this.noticedObjects.RemoveAll(noticedObj => noticedObj.Seen == false);
         }
 
         public NoticedObject newObjectIsDetected()
