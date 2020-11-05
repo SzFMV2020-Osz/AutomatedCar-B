@@ -162,7 +162,6 @@ namespace AutomatedCar.SystemComponents
             obj.Brush = new SolidColorBrush(Avalonia.Media.Color.Parse("red"));
         }
 
-
         public void ResetLastSeenObjectBrush()
         {
             this.LastSeenObject.Brush = this.LastSeenObjectBrush;
