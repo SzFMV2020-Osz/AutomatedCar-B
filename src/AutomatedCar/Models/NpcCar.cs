@@ -44,29 +44,6 @@ namespace AutomatedCar.Models
             this.Y = (this.CarRoutes.First().y);
         }
 
-       /*public void Moveeee(object sender, EventArgs args)
-        {
-             if (index == this.CarRoutes.Count())
-                index = 0;
-
-            int deltaX = this.CarRoutes[index].x - this.X;
-
-            if (deltaX < 0)
-                this.X -= 10;
-            else if (deltaX > 0)
-                this.X += 10;
-
-            int deltaY =this.CarRoutes[index].y - this.Y;
-
-            if (deltaY < 0)
-                this.Y -= 10;
-            else if (deltaY > 0)
-                this.Y += 10;
-
-            if (deltaX == 0 && deltaY == 0)
-                index++;
-        }*/
-
         public void Move(object sender, EventArgs args)
         {
             Vector2 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
@@ -141,17 +118,13 @@ namespace AutomatedCar.Models
         { 
             switch(type)
                 {
-                    case "roadsign_speed_40":
-                        Console.WriteLine("Case 1");
+                    case "roadsign_speed_40": 
                         return 40;
                     case "roadsign_speed_50":
-                        Console.WriteLine("Case 2");
                         return 50;
                     case "roadsign_speed_60":
-                        Console.WriteLine("Case 2");
                         return 60;
                     default:
-                        Console.WriteLine("Default case");
                         return currentLimit;
                 }
         }
