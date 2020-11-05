@@ -24,7 +24,7 @@ namespace AutomatedCar.Models
         }
 
         private string JsonRoute;
-
+        private bool isthreesixty = false;
         private int index;
         private List<NpcRoute> CarRoutes;
         private NpcRoute toReach;
@@ -70,13 +70,26 @@ namespace AutomatedCar.Models
         private void CalculateNpcAngle(Vector2 direction)
         {
             double angle = Math.Atan2(direction.X, direction.Y * -1) * 180 / Math.PI;
-            if (angle - this.Angle > 0)
+            if (angle < 0)
+            {
+                angle += 360;
+            }
+
+            if (angle < 55)
+            {
+                isthreesixty = false;
+            }
+
+            if (angle > this.Angle && !isthreesixty)
             {
                 this.Angle += 5;
             }
-            if (angle - this.Angle < 0)
+
+            if (this.Angle >= 360 && !isthreesixty)
             {
-                this.Angle -= 5;
+
+                isthreesixty = true;
+                this.Angle = 0;
             }
         }
 
