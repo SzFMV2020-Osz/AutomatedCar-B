@@ -52,17 +52,17 @@
 						<!-- Radar -->
 						<customcontrols:SensorCustomControl Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="120, 0" Opacity="60"></customcontrols:SensorCustomControl>
 
-						<!-- Front ultrasound sensors -->
+						<!-- Front ultrasound sensors --><!--
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="110, 30" Opacity="60"></customcontrols:SensorCustomControl>
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="105, 45" Opacity="60"></customcontrols:SensorCustomControl>
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="110, -30" Opacity="60"></customcontrols:SensorCustomControl>
             <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="105,-45" Opacity="60"></customcontrols:SensorCustomControl>
 
-            <!-- Rear ultrasound sensors -->
+            --><!-- Rear ultrasound sensors --><!--
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-120, 25" Opacity="60"></customcontrols:SensorCustomControl>
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="-105, 45" Opacity="60"></customcontrols:SensorCustomControl>
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-120, -25" Opacity="60"></customcontrols:SensorCustomControl>
-						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-105, -45" Opacity="60"></customcontrols:SensorCustomControl>
+						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-105, -45" Opacity="60"></customcontrols:SensorCustomControl>-->
 
             <!-- Ultrasounds from AutomatedCar (red brush)-->
             <customcontrols:UltrasoundCustomControl Indexer="0"></customcontrols:UltrasoundCustomControl>

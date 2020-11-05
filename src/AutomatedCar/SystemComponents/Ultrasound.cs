@@ -64,7 +64,6 @@ namespace AutomatedCar.SystemComponents
 
         public List<Point> CalculatePoints()
         {
-            var car = World.Instance.ControlledCar;
             this.StartCalculate();
 
             Point right = new Point(
@@ -75,8 +74,8 @@ namespace AutomatedCar.SystemComponents
                 this.start.X + Height,
                 this.start.Y - dif
                 );
-            right = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, right);
-            left = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, left);
+            right = this.RotatePoint(this.start.X, this.start.Y, this.rotate, right);
+            left = this.RotatePoint(this.start.X, this.start.Y, this.rotate, left);
             List<Point> newPoints = new List<Point>()
             {
                 this.start,
@@ -90,19 +89,14 @@ namespace AutomatedCar.SystemComponents
         {
             var car = World.Instance.ControlledCar;
             Point p = new Point(car.X + this.offsetX, car.Y + this.offsetY);
-            double angle = car.Angle - 90;
-            double radian = angle * Math.PI / 180;
-            double s = Math.Sin(radian);
-            double c = Math.Cos(radian);
+
             double px = p.X;
             double py = p.Y;
 
             px -= car.X;
             py -= car.Y;
 
-            double xnew = (px * c) - (py * s);
-            double ynew = (px * s) + (py * c);
-            this.start = new Point(xnew, ynew);
+            this.start = new Point(py, -px);
         }
 
         public Point RotatePoint(double centerX, double centerY, double angle, Point p)
