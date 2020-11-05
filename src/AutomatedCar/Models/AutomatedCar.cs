@@ -8,6 +8,7 @@ namespace AutomatedCar.Models
     using Avalonia;
     using ReactiveUI;
     using System;
+    using System.Linq;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -45,10 +46,8 @@ namespace AutomatedCar.Models
 
         public int Speed { get; set; }
 
-        /// <summary>
-        /// Example usage add
-        /// </summary>
-        /// <param name="point"></param>
+        public int Mass { get; set; } = 5;
+
         public void SetNextPosition(int x, int y)
         {
             this.X = x;
@@ -57,20 +56,92 @@ namespace AutomatedCar.Models
 
         public void Move(Vector2 newPosition)
         {
+            var crashedObjects = GetCrashedObjects();
+            newPosition = this.CrashEffects(newPosition, crashedObjects);
             this.X = (int)newPosition.X;
             this.Y = (int)newPosition.Y;
         }
 
-        public void MoveX(int x)
+        private static List<WorldObject> GetCrashedObjects()
         {
-            VisibleX = this.X - (World.Instance.VisibleWidth/2);
-            this.X += x;
+            return World.Instance.GetWorldObjectsInsideTriangle(World.Instance.ControlledCar.NetPolygons[0].Coordinates.Select(x => new Point(x.X, x.Y)).ToList());
         }
 
-        public void MoveY(int y)
+        private Vector2 CrashEffects(Vector2 newPosition, List<WorldObject> crashed)
         {
-            VisibleY = this.Y - (World.Instance.VisibleHeight/2);
-            this.Y += y;
+            foreach (var col in crashed)
+            {
+                if (col is Tree)
+                {
+                    newPosition = this.TreeCrash(newPosition);
+                }
+
+                if (col is Sign)
+                {
+                    newPosition = this.SignCrash(newPosition, col);
+                }
+            }
+
+            return newPosition;
+        }
+
+        private Vector2 SignCrash(Vector2 newPosition, WorldObject col)
+        {
+            var carSpeed = this.CalcCarSpeedVec(newPosition);
+            this.CrashDamage(newPosition, 2f, carSpeed);
+            this.ImpactOnSign(col, carSpeed);
+            newPosition = this.ImpactOnCar(newPosition);
+            return newPosition;
+        }
+
+        private Vector2 ImpactOnCar(Vector2 newPosition)
+        {
+            var carPos = new Vector2(this.X, this.Y);
+            var impact = new Vector2(this.X - newPosition.X, this.Y - newPosition.Y);
+            impact = Vector2.Multiply(2, impact);
+            var effectedPos = Vector2.Add(carPos, impact);
+            newPosition.X = effectedPos.X;
+            newPosition.Y = effectedPos.Y;
+            return newPosition;
+        }
+
+        private void ImpactOnSign(WorldObject col, Vector2 carSpeed)
+        {
+            var carMomentum = Vector2.Multiply(Mass, carSpeed);
+            var signVelocity = Vector2.Multiply(1, carMomentum);
+            Sign sign = (col as Sign);
+            var singPosition = new Vector2(sign.X, sign.Y);
+            var res = Vector2.Add(signVelocity, singPosition);
+            sign.SetNextPosition((int) res.X, (int) res.Y);
+        }
+
+        private Vector2 TreeCrash(Vector2 newPosition)
+        {
+            this.CrashDamage(newPosition, 2f, CalcCarSpeedVec(newPosition));
+
+            // === Backup for demo ===
+            // var impact = new Vector2(( this.X - newPosition.X ), ( this.Y - newPosition.Y) );
+            // impact = Vector2.Multiply(2, impact);
+            // var carPos = new Vector2(this.X, this.Y);
+            // var effectedPos = Vector2.Add(carPos, impact);
+            // newPosition.X = effectedPos.X;
+            // newPosition.Y = effectedPos.Y;
+            // === swap comment on lines below with lines above ===
+            newPosition.X = this.X;
+            newPosition.Y = this.Y;
+
+            // Speed = 0;
+            return newPosition;
+        }
+
+        private Vector2 CalcCarSpeedVec(Vector2 newPosition)
+        {
+            return new Vector2((newPosition.X - this.X), (newPosition.Y - this.Y));
+        }
+
+        private void CrashDamage(Vector2 newPosition, float factor, Vector2 carSpeed)
+        {
+            World.Instance.ControlledCar.DamageOnCollision(Vector2.Multiply(factor, carSpeed), new Vector2(0, 0));
         }
 
         /// <summary>Starts the automated cor by starting the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
@@ -110,14 +181,14 @@ namespace AutomatedCar.Models
         }
         public int VisibleX { get; set; }
         public int VisibleY { get; set; }
-        
+
         private int healthPoints = 100;
         public int HealthPoints
         {
             get => healthPoints;
-            set => this.RaiseAndSetIfChanged(ref healthPoints, value); 
+            set => this.RaiseAndSetIfChanged(ref healthPoints, value);
         }
-        
+
         /// <summary>
         /// Damages the car. The amount of damage is dependant on the momentary velocity vector of the car and the other object that was hit.
         /// </summary>
