@@ -1,13 +1,14 @@
-<UserControl  xmlns:customcontrols="clr-namespace:AutomatedCar.Views.CustomControls" xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="AutomatedCar.Views.CourseDisplayView"
-             Width="960" Height="720"
-             xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
-             xmlns:local="clr-namespace:AutomatedCar;assembly=AutomatedCar"
-             xmlns:visualization="clr-namespace:AutomatedCar.Visualization;assembly=AutomatedCar"
-             DataContext="{Binding World}"
+<UserControl  xmlns="https://github.com/avaloniaui"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              x:Class="AutomatedCar.Views.CourseDisplayView"
+              Width="960" Height="720"
+              xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
+              xmlns:local="clr-namespace:AutomatedCar;assembly=AutomatedCar"
+              xmlns:visualization="clr-namespace:AutomatedCar.Visualization;assembly=AutomatedCar"
+              xmlns:customcontrols="clr-namespace:AutomatedCar.Views.CustomControls"
+              DataContext="{Binding World}"
 >
 
     <UserControl.Styles>
@@ -44,8 +45,8 @@
                 <DataTemplate DataType="{x:Type models:AutomatedCar}">
                   <Canvas>
                     <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
-						<!-- Camera -->
 
+            <!-- Camera -->
             <customcontrols:SensorCustomControl Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="-20, 0" Opacity="60"></customcontrols:SensorCustomControl>
 
 						<!-- Radar -->
@@ -64,18 +65,14 @@
 						<customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-105, -45" Opacity="60"></customcontrols:SensorCustomControl>
 
             <!-- Ultrasounds from AutomatedCar (red brush)-->
-            <!--Valamiért ha nincs kicommentelve akkor :
-                           InvalidProgramException: Common Language Runtime detected an invalid program
-                           hibát dob a program-->
-            <!--<customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[0]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[1]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[2]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[3]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[4]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[5]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[6]}"></customcontrols:UltrasoundRenderer>
-            <customcontrols:UltrasoundRenderer Ultrasound="{Binding Ultrasounds[7]}"></customcontrols:UltrasoundRenderer>-->
-
+            <customcontrols:UltrasoundCustomControl Indexer="0"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="1"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="2"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="3"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="4"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="5"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="6"></customcontrols:UltrasoundCustomControl>
+            <customcontrols:UltrasoundCustomControl Indexer="7"></customcontrols:UltrasoundCustomControl>
 
 						<Canvas.RenderTransform>
 							<TransformGroup>
@@ -91,7 +88,9 @@
 							</TransformGroup>
 						</Image.RenderTransform>
                         </Image>
-                    </Canvas>
+                    
+                    
+                      </Canvas>
                     <Canvas>
                         <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}"/>
                     </Canvas>

@@ -17,16 +17,18 @@ namespace AutomatedCar.SystemComponents
         private int offsetX;
         private int offsetY;
         private int rotate;
-        private double dif = (double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180));
+        private static double dif = (double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180));
+        private static double maxDetect = Math.Sqrt(Math.Pow(dif, 2) + Math.Pow(Height, 2));
         Point start;
 
         public Ultrasound(VirtualFunctionBus virtualFunctionBus, int offsetX, int offsetY, int rotate)
            : base(virtualFunctionBus)
         {
-            this.offsetX = -offsetX;
-            this.offsetY = -offsetY;
-            this.rotate = rotate + 180;
-
+            //this.offsetX = offsetY;
+            //this.offsetY = -offsetX;
+            this.offsetX = offsetX;
+            this.offsetY = offsetY;
+            this.rotate = rotate - 90;
             this.Brush = new SolidColorBrush(Avalonia.Media.Color.Parse("green"));
         }
 
@@ -40,6 +42,10 @@ namespace AutomatedCar.SystemComponents
 
         public SolidColorBrush Brush { get; set; }
 
+        public WorldObject LastSeenObject { get; set; }
+
+        public SolidColorBrush LastSeenObjectBrush { get; set; }
+
         public double Distance { get; set; }
 
         public override void Process()
@@ -50,38 +56,24 @@ namespace AutomatedCar.SystemComponents
             {
                 this.Distance = this.CalculateDistance();
             }
-        }
-
-        public Point RotatePoint(double centerX, double centerY, double angle, Point p)
-        {
-            double s = Math.Sin(Math.PI / 180 * angle);
-            double c = Math.Cos(Math.PI / 180 * angle);
-
-            double px = p.X;
-            double py = p.Y;
-
-            px -= centerX;
-            py -= centerY;
-
-            double xnew = (px * c) - (py * s);
-            double ynew = (px * s) + (py * c);
-
-            px = xnew + centerX;
-            py = ynew + centerY;
-            return new Point(px, py);
+            else if (this.LastSeenObject != null)
+            {
+                this.ResetLastSeenObjectBrush();
+            }
         }
 
         public List<Point> CalculatePoints()
         {
             var car = World.Instance.ControlledCar;
             this.StartCalculate();
+
             Point right = new Point(
                 this.start.X + Height,
-                this.start.Y + this.dif
+                this.start.Y + dif
                 );
             Point left = new Point(
                 this.start.X + Height,
-                this.start.Y - this.dif
+                this.start.Y - dif
                 );
             right = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, right);
             left = this.RotatePoint(this.start.X, this.start.Y, car.Angle + this.rotate, left);
@@ -97,7 +89,40 @@ namespace AutomatedCar.SystemComponents
         public void StartCalculate()
         {
             var car = World.Instance.ControlledCar;
-            this.start = this.RotatePoint(car.X, car.Y, car.Angle, new Point(car.X + this.offsetX, car.Y + this.offsetY));
+            Point p = new Point(car.X + this.offsetX, car.Y + this.offsetY);
+            double angle = car.Angle - 90;
+            double radian = angle * Math.PI / 180;
+            double s = Math.Sin(radian);
+            double c = Math.Cos(radian);
+            double px = p.X;
+            double py = p.Y;
+
+            px -= car.X;
+            py -= car.Y;
+
+            double xnew = (px * c) - (py * s);
+            double ynew = (px * s) + (py * c);
+            this.start = new Point(xnew, ynew);
+        }
+
+        public Point RotatePoint(double centerX, double centerY, double angle, Point p)
+        {
+            double radian = angle * Math.PI / 180;
+            double s = Math.Sin(radian);
+            double c = Math.Cos(radian);
+
+            double px = p.X;
+            double py = p.Y;
+
+            px -= centerX;
+            py -= centerY;
+
+            double xnew = (px * c) - (py * s);
+            double ynew = (px * s) + (py * c);
+
+            px = xnew + centerX;
+            py = ynew + centerY;
+            return new Point(px, py);
         }
 
         public List<WorldObject> GetWorldObjectsInRange()
@@ -105,7 +130,7 @@ namespace AutomatedCar.SystemComponents
 
         public double CalculateDistance()
         {
-            double distance = 155.57;
+            double distance = maxDetect;
             double actual;
             WorldObject obj = null;
             foreach (WorldObject item in this.WorldObjects)
@@ -133,7 +158,20 @@ namespace AutomatedCar.SystemComponents
 
         public void SetClosestWorldObjectBrustToHighlighted(WorldObject obj)
         {
+            if (this.LastSeenObject != obj && this.LastSeenObject != null)
+            {
+                this.ResetLastSeenObjectBrush();
+            }
+
+            this.LastSeenObject = obj;
+            this.LastSeenObjectBrush = obj.Brush; 
             obj.Brush = new SolidColorBrush(Avalonia.Media.Color.Parse("red"));
+        }
+
+
+        public void ResetLastSeenObjectBrush()
+        {
+            this.LastSeenObject.Brush = this.LastSeenObjectBrush;
         }
     }
 }
