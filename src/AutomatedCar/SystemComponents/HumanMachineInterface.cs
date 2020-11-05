@@ -9,15 +9,14 @@ namespace AutomatedCar.SystemComponents
     public class HumanMachineInterface : SystemComponent, IHumanMachineInterface
     {
         private HMIPacket hmiPacket;
-        private DebugPacket debugPacket;
 
         public HumanMachineInterface(VirtualFunctionBus virtualFunctionBus)
             : base(virtualFunctionBus)
         {
             this.hmiPacket = new HMIPacket();
-            this.debugPacket = new DebugPacket();
+            // this.debugPacket = new DebugPacket(); // TODO remove
             virtualFunctionBus.HMIPacket = this.hmiPacket;
-            virtualFunctionBus.DebugPacket = this.debugPacket;
+            // virtualFunctionBus.DebugPacket = this.debugPacket; // TODO remove
         }
 
         #region Properties
@@ -59,7 +58,7 @@ namespace AutomatedCar.SystemComponents
 
         public HMIPacket HmiPacket { get => this.hmiPacket; }
 
-        public DebugPacket DebugPacket { get => this.debugPacket; }
+        // public DebugPacket DebugPacket { get => this.debugPacket; } // TODO remove
         #endregion
 
         public override void Process()
@@ -386,27 +385,27 @@ namespace AutomatedCar.SystemComponents
 
         public void PolygonSet(bool newValue)
         {
-            this.debugPacket.Polygon = newValue;
+            this.debugPacket.Polygon = newValue; // TODO rewrite
         }
 
         public void UtrasoundSensorSet(bool newValue)
         {
-            this.debugPacket.UtrasoundSensor = newValue;
+            this.debugPacket.UtrasoundSensor = newValue; // TODO rewrite
         }
 
         public void RadarSensorSet(bool newValue)
         {
-            this.debugPacket.RadarSensor = newValue;
+            this.debugPacket.RadarSensor = newValue; // TODO rewrite
         }
 
         public void BoardCameraSet(bool newValue)
         {
-            this.debugPacket.BoardCamera = newValue;
+            this.debugPacket.BoardCamera = newValue; // TODO rewrite
         }
 
         public void PolygonDebugSet(bool newValue)
         {
-            this.debugPacket.Polygon = newValue;
+            this.debugPacket.Polygon = newValue; // TODO rewrite
         }
         #endregion
     }

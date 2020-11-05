@@ -4,7 +4,7 @@ public interface IHumanMachineInterface
 {
     HMIPacket HmiPacket { get; }
 
-    DebugPacket DebugPacket { get; }
+    // DebugPacket DebugPacket { get; }
 
     bool GaspedalDown { get; }
 

@@ -15,6 +15,10 @@ namespace AutomatedCar.Models
         private DummySensor dummySensor;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
+        private bool polygon;
+        private bool utrasoundSensor;
+        private bool radarSensor;
+        private bool boardCamera;
 
         public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
@@ -35,6 +39,13 @@ namespace AutomatedCar.Models
             this.cameraVisible = true;
         }
 
+        public bool Polygon { get => this.polygon; set => this.RaiseAndSetIfChanged(ref this.polygon, value); }
+
+        public bool UtrasoundSensor { get => this.utrasoundSensor; set => this.RaiseAndSetIfChanged(ref this.utrasoundSensor, value); }
+
+        public bool RadarSensor { get => this.radarSensor; set => this.RaiseAndSetIfChanged(ref this.radarSensor, value); }
+
+        public bool BoardCamera { get => this.boardCamera; set => this.RaiseAndSetIfChanged(ref this.boardCamera, value); }
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
 
         public HumanMachineInterface HumanMachineInterface { get => this.humanMachineInterface; }

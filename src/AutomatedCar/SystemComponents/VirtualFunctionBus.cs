@@ -11,7 +11,7 @@ namespace AutomatedCar.SystemComponents
 
         public IReadOnlyHMIPacket HMIPacket { get; set; }
 
-        public IReadOnlyDebugPacket DebugPacket { get; set; }
+        // public IReadOnlyDebugPacket DebugPacket { get; set; } // TODO remove
 
         public IReadOnlyPowerTrainPacket PowerTrainPacket { get; set; }
 
