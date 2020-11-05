@@ -1,228 +1,250 @@
 using AutomatedCar.SystemComponents;
+using AutomatedCar.Models;
 using AutomatedCar.SystemComponents.Packets;
 using Avalonia.Layout;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.ObjectModel;
 using System.ComponentModel;
-using Xunit;
-using AutomatedCar.Models.RadarUtil;
 using System.Collections.Generic;
-using Avalonia.Media;
+using Xunit;
+using NetTopologySuite.GeometriesGraph;
+using System.Linq;
+using Avalonia;
 
 namespace Tests.SystemComponents.Packets
 {
-    public class RadarTest
+    public class RadarTest_filterCollidables
     {
-        RadarTriangleComputer radar = new RadarTriangleComputer();
-
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset0()
+        public void FilterList()
         {
-            var points = this.radar.computeTriangleInWorld();
+            List<WorldObject> wo = new List<WorldObject>();
+            AutomatedCar.Models.AutomatedCar car = new AutomatedCar.Models.AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            car.IsColliding = true;
+            wo.Add(car);
+            wo.Add(new AutomatedCar.Models.Road(0, 0, "", 0, 0, 0, 0, new Avalonia.Matrix(), new List<List<Avalonia.Point>>()));
 
-            Assert.Equal(0,points[0].X);
-            Assert.Equal(0,points[0].Y);
-            Assert.Equal(0,points[1].X);
-            Assert.Equal(0,points[1].Y);
-            Assert.Equal(0,points[2].X);
-            Assert.Equal(0,points[2].Y);
+            Radar radar = new Radar();
+
+            List<NoticedObject> nwo = radar.filterCollidables(wo);
+
+            Assert.Equal(1, nwo.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset0__AutomatedCar_x20()
+        public void UseGivenWorldObject()
         {
-            this.radar.carX = 20;
-            var points = this.radar.computeTriangleInWorld();
+            List<WorldObject> wo = new List<WorldObject>();
+            AutomatedCar.Models.AutomatedCar car = new AutomatedCar.Models.AutomatedCar(0, 0, "car", 0, 0, new List<List<Avalonia.Point>>());
+            car.IsColliding = true;
+            wo.Add(new AutomatedCar.Models.Road(0, 0, "", 0, 0, 0, 0, new Avalonia.Matrix(), new List<List<Avalonia.Point>>()));
+            wo.Add(car);
 
-            Assert.Equal(20,points[0].X);
-            Assert.Equal(0,points[0].Y);
-            Assert.Equal(20,points[1].X);
-            Assert.Equal(0,points[1].Y);
-            Assert.Equal(20,points[2].X);
-            Assert.Equal(0,points[2].Y);
+            Radar radar = new Radar();
+
+            List<NoticedObject> nwo = radar.filterCollidables(wo);
+
+            Assert.Equal(car, nwo[0].worldObject);
+        }
+    }
+
+    public class RadarTest_getDangeriousWorldObjects
+    {
+        [Fact]
+        public void getWorldObjectsList()
+        {
+            Radar radar = new Radar();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            radar.NoticedObjects.Add(nw);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            Assert.IsType<List<WorldObject>>(wos);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset0__AutomatedCar_y20()
+        public void getWorldObjectItem()
         {
-            this.radar.carY = 20;
-            var points = this.radar.computeTriangleInWorld();
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400, 500);
 
-            Assert.Equal(0,points[0].X);
-            Assert.Equal(20,points[0].Y);
-            Assert.Equal(0,points[1].X);
-            Assert.Equal(20,points[1].Y);
-            Assert.Equal(0,points[2].X);
-            Assert.Equal(20,points[2].Y);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 0;
+
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            radar.NoticedObjects.Add(nw);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate90_distance0_offset0()
+        public void getWorldObjectItem_twoSlow()
         {
-            radar.rotate = 90;
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400, 500);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 0;
 
-            var points = this.radar.computeTriangleInWorld();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            NoticedObject nw2 = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            nw2.Vector = new Vector(0, 100);
+            radar.NoticedObjects.Add(nw);
+            radar.NoticedObjects.Add(nw2);
 
-            Assert.Equal(0,points[0].X);
-            Assert.Equal(0,points[0].Y);
-            Assert.Equal(0,points[1].X);
-            Assert.Equal(0,points[1].Y);
-            Assert.Equal(0,points[2].X);
-            Assert.Equal(0,points[2].Y);
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(2, wos.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset120()
+        public void getWorldObjectItem_oneSlow_oneFast()
         {
-            this.radar.offset = 120;
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400, 500);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 0;
 
-            var points = this.radar.computeTriangleInWorld(); 
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            NoticedObject nw2 = new NoticedObject();
+            nw.Vector = new Vector(0, 150);
+            nw2.Vector = new Vector(0, 200);
+            radar.NoticedObjects.Add(nw);
+            radar.NoticedObjects.Add(nw2);
 
-            Assert.Equal(120, points[0].X);
-            Assert.Equal(0, points[0].Y);
-            Assert.Equal(120, points[1].X);
-            Assert.Equal(0, points[1].Y);
-            Assert.Equal(120, points[2].X);
-            Assert.Equal(0, points[2].Y);
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate90_distance0_offset120()
+        public void getWorldObjectItem_opositeDirection()
         {
-            this.radar.offset = 120;
-            this.radar.rotate = 90;
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400, 500);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 0;
 
-            var points = this.radar.computeTriangleInWorld(); 
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(0, -200);
+            radar.NoticedObjects.Add(nw);
 
-            Assert.Equal(0, points[0].X);
-            Assert.Equal(120, points[0].Y);
-            Assert.Equal(0, points[1].X);
-            Assert.Equal(120, points[1].Y);
-            Assert.Equal(0, points[2].X);
-            Assert.Equal(120, points[2].Y);
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate180_distance0_offset120()
+        public void getWorldObjectItem_opositeDirection90()
         {
-            this.radar.offset = 120;
-            this.radar.rotate = 180;
-            
-            var points = this.radar.computeTriangleInWorld(); 
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(100, 150);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(200, 150, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 90;
 
-            Assert.Equal(-120, points[0].X);
-            Assert.Equal(0, points[0].Y);
-            Assert.Equal(-120, points[1].X);
-            Assert.Equal(0, points[1].Y);
-            Assert.Equal(-120, points[2].X);
-            Assert.Equal(0, points[2].Y);
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(-100, 0);
+            radar.NoticedObjects.Add(nw);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
+        }
+
+        [Fact (Skip="TODO")]
+        public void getWorldObjectItem_opositeDirection180()
+        {
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(100, 100);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(100, 300, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 180;
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(0, 200);
+            radar.NoticedObjects.Add(nw);
+
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate270_distance0_offset120()
+        public void getWorldObjectItem_opositeDirection270()
         {
-            this.radar.offset = 120;
-            this.radar.rotate = 270;
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(500, 300);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 270;
 
-            var points = this.radar.computeTriangleInWorld(); 
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(100, 0);
+            radar.NoticedObjects.Add(nw);
 
-            Assert.Equal(0, points[0].X);
-            Assert.Equal(-120, points[0].Y);
-            Assert.Equal(0, points[1].X);
-            Assert.Equal(-120, points[1].Y);
-            Assert.Equal(0, points[2].X);
-            Assert.Equal(-120, points[2].Y);
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance100_offset0()
+        public void getWorldObjectItem_opositeDirection315()
         {
-            this.radar.distance = 100;
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(500, 300);
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(300, 100, "", 0, 0, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 270;
 
-            var points = this.radar.computeTriangleInWorld();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.Vector = new Vector(100, -100);
+            radar.NoticedObjects.Add(nw);
 
-            Assert.Equal(0,points[0].Y);
-            Assert.Equal(0,points[0].X);
-            Assert.Equal(58,points[1].Y);
-            Assert.Equal(100,points[1].X);
-            Assert.Equal(-58,points[2].Y);
-            Assert.Equal(100,points[2].X);
+            List<WorldObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(1, wos.Count);
+        }
+    }
+
+    public class RadarTest_UpdateBus {
+        VirtualFunctionBus vfb;
+        Radar radar;
+
+        public RadarTest_UpdateBus()
+        {
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(300, 100, "", 0, 0, new List<List<Point>>());
+            vfb = new VirtualFunctionBus();
+            radar = new Radar(vfb);
+            radar.NoticedObjects = new List<NoticedObject>();
+        }
+
+        private void AddNoticedObject(NoticedObject nw, Vector vector)
+        {
+            nw.Vector = vector;
+            radar.NoticedObjects.Add(nw);
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance100_offset10()
+        public void UpdateBus_RadarShouldProvidePacket()
         {
-            this.radar.distance = 100;
-            this.radar.offset = 10;
-
-            var points = this.radar.computeTriangleInWorld();
-
-            Assert.Equal(0,points[0].Y);
-            Assert.Equal(10,points[0].X);
-            Assert.Equal(58,points[1].Y);
-            Assert.Equal(110,points[1].X);
-            Assert.Equal(-58,points[2].Y);
-            Assert.Equal(110,points[2].X);
+            Assert.Same(vfb.RadarSensorPacket, radar.RadarSensorPacket);
         }
 
         [Fact]
-        public void Radar_other_values()
+        public void UpdateBus_RadarShouldUpdatePacket()
         {
-            radar.carX = 200;
-            radar.carY = 150;
+            AddNoticedObject(new NoticedObject(), new Vector(100, -100));
 
-            this.radar.distance = 200;
-            this.radar.offset = 100;
-            this.radar.rotate = 0;
+            radar.updateBus();
 
-            var points = this.radar.computeTriangleInWorld();
-
-            Assert.Equal(300,points[0].X);
-            Assert.Equal(150,points[0].Y);
-            Assert.Equal(500,points[1].X);
-            Assert.Equal(265,points[1].Y);
-            Assert.Equal(500,points[2].X);
-            Assert.Equal(35,points[2].Y);
-        }
-
-        [Fact]
-        public void Radar_other_values_90()
-        {
-            radar.carX = 200;
-            radar.carY = 200;
-
-            this.radar.distance = 200;
-            this.radar.offset = 100;
-            this.radar.rotate = 90;
-
-            var points = this.radar.computeTriangleInWorld();
-
-            Assert.Equal(200,points[0].X);
-            Assert.Equal(300,points[0].Y);
-            Assert.Equal(200-115,points[1].X);
-            Assert.Equal(500,points[1].Y);
-            Assert.Equal(200+115,points[2].X);
-            Assert.Equal(500,points[2].Y);
-        }
-
-        [Fact]
-        public void Radar_other_values_180()
-        {
-            radar.carX = 400;
-            radar.carY = 300;
-
-            this.radar.distance = 100;
-            this.radar.offset = 100;
-            this.radar.rotate = 180;
-            this.radar.angle = 20;
-
-            var points = this.radar.computeTriangleInWorld();
-
-            Assert.Equal(300,points[0].X);
-            Assert.Equal(300,points[0].Y);
-            Assert.Equal(200,points[1].X);
-            Assert.Equal(300-36,points[1].Y);
-            Assert.Equal(200,points[2].X);
-            Assert.Equal(336,points[2].Y);
+            Assert.Equal(vfb.RadarSensorPacket.DangerousObjects.Count, 1);
         }
     }
 }
