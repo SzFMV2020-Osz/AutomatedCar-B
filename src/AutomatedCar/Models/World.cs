@@ -29,6 +29,12 @@ namespace AutomatedCar.Models
 
         public OnTickHangler OnTick;
 
+        public delegate void CollisonEventHandler(WorldObject worldObject);
+
+        public CollisonEventHandler OnCollideWithLandmark;
+
+        public CollisonEventHandler OnCollideWithNPC;
+
         public bool DebugOn { get => this.debugOn; }
 
         public static World Instance { get; } = new World() { VisibleWidth = 960, VisibleHeight = 720};
@@ -120,6 +126,30 @@ namespace AutomatedCar.Models
             }
 
             return objectsInside;
+        }
+
+        public void IsColisonWhitWorldObject()
+        {
+            foreach (WorldObject item in this.WorldObjects.Where(x => x.IsColliding))
+            {
+                foreach (NetTopologySuite.Geometries.LineString worldObjectpolygon in item.NetPolygons)
+                {
+                    foreach (NetTopologySuite.Geometries.LineString carPolygon in this._controlledCar.NetPolygons)
+                    {
+                        if (worldObjectpolygon.Intersects(carPolygon))
+                        {
+                            if (item is IMoveable)
+                            {
+                                OnCollideWithNPC?.Invoke(item);
+                            }
+                            else
+                            {
+                                OnCollideWithLandmark?.Invoke(item);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
