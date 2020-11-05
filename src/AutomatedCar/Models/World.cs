@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.Models
+namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -28,6 +28,12 @@
         public delegate void OnTickHangler(object sender, EventArgs args);
 
         public OnTickHangler OnTick;
+
+        public delegate void CollisonEventHandler(WorldObject worldObject);
+
+        public CollisonEventHandler OnCollideWithLandmark;
+
+        public CollisonEventHandler OnCollideWithNPC;
 
         public bool DebugOn { get => this.debugOn; }
 
@@ -114,6 +120,30 @@
             }
 
             return objectsInside;
+        }
+
+        public void IsColisonWhitWorldObject()
+        {
+            foreach (WorldObject item in this.WorldObjects.Where(x => x.IsColliding))
+            {
+                foreach (NetTopologySuite.Geometries.LineString worldObjectpolygon in item.NetPolygons)
+                {
+                    foreach (NetTopologySuite.Geometries.LineString carPolygon in this._controlledCar.NetPolygons)
+                    {
+                        if (worldObjectpolygon.Intersects(carPolygon))
+                        {
+                            if (item is IMoveable)
+                            {
+                                OnCollideWithNPC?.Invoke(item);
+                            }
+                            else
+                            {
+                                OnCollideWithLandmark?.Invoke(item);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
