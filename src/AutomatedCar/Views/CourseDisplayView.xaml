@@ -33,6 +33,7 @@
                   Height="{Binding Height, Mode=OneWay}"
                   HorizontalAlignment="Left" VerticalAlignment="Top">
 
+
       <ItemsControl.ItemsPanel>
         <ItemsPanelTemplate>
           <Canvas />
@@ -50,18 +51,27 @@
               <!-- Radar -->
               <customcontrols:SensorCustomControl Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="120, 0" Opacity="60" />
 
-              <!-- Front ultrasound sensors -->
+              <!-- Front ultrasound sensors --><!--
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="110, 30" Opacity="60" />
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="105, 45" Opacity="60" />
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="110, -30" Opacity="60" />
-              <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="105,-45" Opacity="60" />
+              <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="105,-45" Opacity="60" /> -->
 
-              <!-- Rear ultrasound sensors -->
+              <!-- Rear ultrasound sensors --><!--
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-120, 25" Opacity="60" />
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="90" Brush="Green" Offset="-105, 45" Opacity="60" />
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="180" Brush="Green" Offset="-120, -25" Opacity="60" />
-              <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-105, -45" Opacity="60" />
+              <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="-90" Brush="Green" Offset="-105, -45" Opacity="60" /> -->
 
+              <!-- Ultrasounds from AutomatedCar (red brush)-->
+              <customcontrols:UltrasoundCustomControl Indexer="0"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="1"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="2"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="3"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="4"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="5"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="6"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="7"></customcontrols:UltrasoundCustomControl>
 
               <Canvas.RenderTransform>
                 <TransformGroup>

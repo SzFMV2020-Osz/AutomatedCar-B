@@ -17,7 +17,7 @@ namespace AutomatedCar.Models
         private int _x;
         private int _y;
 
-        public SolidColorBrush Brush { get; private set; }
+        public SolidColorBrush Brush { get; set; }
 
         public Matrix RotMatrix { get; set; }
 
