@@ -1,4 +1,4 @@
-﻿using AutomatedCar.Views.CustomControls;
+using AutomatedCar.Views.CustomControls;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;

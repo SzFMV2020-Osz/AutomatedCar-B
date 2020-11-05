@@ -1,4 +1,4 @@
-﻿namespace AutomatedCar.Models
+namespace AutomatedCar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -28,6 +28,12 @@
         public delegate void OnTickHangler(object sender, EventArgs args);
 
         public OnTickHangler OnTick;
+
+        public delegate void CollisonEventHandler(WorldObject worldObject);
+
+        public CollisonEventHandler OnCollideWithLandmark;
+
+        public CollisonEventHandler OnCollideWithNPC;
 
         public bool DebugOn { get => this.debugOn; }
 
@@ -95,7 +101,13 @@
 
         public List<WorldObject> GetWorldObjectsInsideTriangle(List<Point> pointsOfTriangle)
         {
-            var coordinatePoints = pointsOfTriangle.Select(x => new Coordinate(x.X, x.Y)).ToArray();
+            var coordinatePoints = new Coordinate[pointsOfTriangle.Count + 1];
+            for (int i = 0; i < pointsOfTriangle.Count; i++)
+            {
+                coordinatePoints[i] = new Coordinate(pointsOfTriangle[i].X, pointsOfTriangle[i].Y);
+            }
+
+            coordinatePoints[coordinatePoints.Length - 1] = new Coordinate(pointsOfTriangle[0].X, pointsOfTriangle[0].Y);
             var lr1 = new LinearRing(new CoordinateArraySequence(coordinatePoints), GeometryFactory.Default);
             NetTopologySuite.Geometries.Polygon triangle = new NetTopologySuite.Geometries.Polygon(lr1);
 
@@ -103,17 +115,44 @@
 
             foreach (WorldObject item in this.WorldObjects)
             {
-                foreach (LineString polygon in item.NetPolygons)
+                if (!(item is AutomatedCar))
                 {
-                    if (triangle.Intersects(polygon))
+                    foreach (LineString polygon in item.NetPolygons)
                     {
-                        objectsInside.Add(item);
-                        break;
+                        if (triangle.Intersects(polygon))
+                        {
+                            objectsInside.Add(item);
+                            break;
+                        }
                     }
                 }
             }
 
             return objectsInside;
+        }
+
+        public void IsColisonWhitWorldObject()
+        {
+            foreach (WorldObject item in this.WorldObjects.Where(x => x.IsColliding))
+            {
+                foreach (NetTopologySuite.Geometries.LineString worldObjectpolygon in item.NetPolygons)
+                {
+                    foreach (NetTopologySuite.Geometries.LineString carPolygon in this._controlledCar.NetPolygons)
+                    {
+                        if (worldObjectpolygon.Intersects(carPolygon))
+                        {
+                            if (item is IMoveable)
+                            {
+                                OnCollideWithNPC?.Invoke(item);
+                            }
+                            else
+                            {
+                                OnCollideWithLandmark?.Invoke(item);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

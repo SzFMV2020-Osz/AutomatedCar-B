@@ -7,9 +7,9 @@ namespace AutomatedCar.Views.Converters
 
     public class DoubleToAngleKmHConverter : IValueConverter
     {
-        private static readonly double MaxAngle = 260;
-        private static readonly double MaxRpm = 100;
-        private static readonly double Shifting = 40;
+        private const double MaxAngle = 260;
+        private const double MaxRpm = 200;
+        private const double Shifting = 40;
 
         public DoubleToAngleKmHConverter()
         {
