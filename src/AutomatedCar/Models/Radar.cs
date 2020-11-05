@@ -40,6 +40,9 @@ namespace AutomatedCar.Models
 
         public void computeVector(NoticedObject paramNoticedObject)
         {
+            double x = (int)(paramNoticedObject.worldObject.X - paramNoticedObject.PrevX);
+            double y = (int)(paramNoticedObject.worldObject.Y - paramNoticedObject.PrevY);
+            paramNoticedObject.Vector = new Vector(x, y);
         }
 
         public void setAllSeen()
@@ -58,11 +61,15 @@ namespace AutomatedCar.Models
         {    
         }
 
-        public void updatePreviewXY()
+        public void updatePreviewXY(NoticedObject n)
         {
+            n.PrevX = n.worldObject.X;
+            n.PrevY = n.worldObject.Y;
         }
+        
         public void deleteLeftObjects()
         {
+            this.noticedObjects.RemoveAll(noticedObj => noticedObj.Seen == false);
         }
 
         public NoticedObject newObjectIsDetected()
