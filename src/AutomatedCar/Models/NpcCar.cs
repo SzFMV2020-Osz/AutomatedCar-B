@@ -46,6 +46,7 @@ namespace AutomatedCar.Models
 
         public void Move(object sender, EventArgs args)
         {
+            //int testLimit = CheckSpeedLimit(speedLimit);
             Vector2 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
             Vector2 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
             
@@ -152,18 +153,18 @@ namespace AutomatedCar.Models
 
             carDirection = carDirection / carDirection.Length();
             carNormalRight = carNormalRight / carNormalRight.Length();
-            carNormalLeft = carNormalLeft/ carNormalLeft.Length();
+            carNormalLeft = carNormalLeft / carNormalLeft.Length();
 
             float triangleHeight = 200;
             float trinagleBaseHalf = 231 / 2;
 
             List<Point> trianglePoints = new List<Point>();
-            Vector2 trianglePoint1 = carPosition + (Vector2.Multiply(carDirection,triangleHeight)) + (Vector2.Multiply(carNormalRight,trinagleBaseHalf));
-            Vector2 trianglePoint2 = carPosition + (Vector2.Multiply(carDirection,triangleHeight)) + (Vector2.Multiply(carNormalLeft,trinagleBaseHalf));
+            Vector2 trianglePoint1 = carPosition + (Vector2.Multiply(carDirection, triangleHeight)) + (Vector2.Multiply(carNormalRight, trinagleBaseHalf));
+            Vector2 trianglePoint2 = carPosition + (Vector2.Multiply(carDirection, triangleHeight)) + (Vector2.Multiply(carNormalLeft, trinagleBaseHalf));
 
+            trianglePoints.Add(new Point(trianglePoint1.X, trianglePoint1.Y));
             trianglePoints.Add(new Point(this.X,this.Y));
-            trianglePoints.Add(new Point(trianglePoint1.X,trianglePoint1.Y));
-            trianglePoints.Add(new Point(trianglePoint2.X,trianglePoint2.Y));
+            trianglePoints.Add(new Point(trianglePoint2.X, trianglePoint2.Y));
 
             return trianglePoints;
         }
