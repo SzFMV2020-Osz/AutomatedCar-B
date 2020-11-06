@@ -32,7 +32,7 @@ namespace AutomatedCar.Models
         public int Rotation { get; set; }
 
         public int Speed { get; set; }
-
+        public int Mass { get; set; } = 5;
         public void ReadCarRoute()
         {
             this.CarRoutes = LoadJson(this.JsonRoute);
@@ -100,19 +100,10 @@ namespace AutomatedCar.Models
             this.Y = this.Y + (int)with.Y;
         }
 
-        public void MoveX(int x)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveY(int y)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetNextPosition(int x, int y)
         {
-            throw new NotImplementedException();
+            this.X = x;
+            this.Y = y;
         }
 
         private int CheckSpeedLimit(int currentLimit)

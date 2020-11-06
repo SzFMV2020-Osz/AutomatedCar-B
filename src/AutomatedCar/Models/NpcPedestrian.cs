@@ -28,6 +28,7 @@ namespace AutomatedCar.Models
         public int Rotation { get; set; }
         private bool isthreesixty;
         public int Speed { get; set; }
+        public int Mass { get; set; } = 1;
 
         public void ReadPedRoute()
         {
@@ -112,19 +113,10 @@ namespace AutomatedCar.Models
             this.Y = this.Y + (int)with.Y;
         }
 
-        public void MoveX(int x)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MoveY(int y)
-        {
-            throw new NotImplementedException();
-        }
-
         public void SetNextPosition(int x, int y)
         {
-            throw new NotImplementedException();
+            this.X = x;
+            this.Y = y;
         }
 
         public static List<NpcRoute> LoadJson(string path)
