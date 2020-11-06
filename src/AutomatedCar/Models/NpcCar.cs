@@ -30,9 +30,9 @@ namespace AutomatedCar.Models
         private NpcRoute toReach;
         private int speedLimit;
         public int Rotation { get; set; }
-
         public int Speed { get; set; }
         public int Mass { get; set; } = 5;
+
         public void ReadCarRoute()
         {
             this.CarRoutes = LoadJson(this.JsonRoute);
@@ -46,7 +46,8 @@ namespace AutomatedCar.Models
 
         public void Move(object sender, EventArgs args)
         {
-            //int testLimit = CheckSpeedLimit(speedLimit);
+            speedLimit = CheckSpeedLimit(speedLimit);
+
             Vector2 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
             Vector2 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
             
@@ -58,8 +59,7 @@ namespace AutomatedCar.Models
                 }
 
                 toReach = CarRoutes[++index];
-                movementDirection.X = toReach.x - X;
-                movementDirection.Y = toReach.y - Y;
+                movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
                 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
             }
 
@@ -111,11 +111,13 @@ namespace AutomatedCar.Models
             List<Point> viewTrianglePoints = CalculateNpcViewTriangle();
             List<WorldObject> visibleObjects = World.Instance.GetWorldObjectsInsideTriangle(viewTrianglePoints);
 
-            if(visibleObjects.Where(o => o is Sign).Where(o => o.Filename.Contains("roadsign_speed")) != null)
+            if(visibleObjects.Where(o => o is Sign).Where(o => o.Filename.Contains("roadsign_speed")).Count() != 0)
             {
                 string speedLimitSignName = visibleObjects.Where(o => o.Filename.Contains("roadsign_speed")).First().Filename;
                 int speedLimit = SpeedLimitFromSignName(speedLimitSignName, currentLimit);
+                return speedLimit;
             }
+
             return currentLimit;
         }
 
@@ -124,11 +126,11 @@ namespace AutomatedCar.Models
             switch(type)
                 {
                     case "roadsign_speed_40": 
-                        return 40;
+                        return 10;
                     case "roadsign_speed_50":
-                        return 50;
+                        return 15;
                     case "roadsign_speed_60":
-                        return 60;
+                        return 20;
                     default:
                         return currentLimit;
                 }
@@ -153,9 +155,9 @@ namespace AutomatedCar.Models
             Vector2 trianglePoint1 = carPosition + (Vector2.Multiply(carDirection, triangleHeight)) + (Vector2.Multiply(carNormalRight, trinagleBaseHalf));
             Vector2 trianglePoint2 = carPosition + (Vector2.Multiply(carDirection, triangleHeight)) + (Vector2.Multiply(carNormalLeft, trinagleBaseHalf));
 
-            trianglePoints.Add(new Point(trianglePoint1.X, trianglePoint1.Y));
-            trianglePoints.Add(new Point(this.X,this.Y));
-            trianglePoints.Add(new Point(trianglePoint2.X, trianglePoint2.Y));
+            trianglePoints.Add(new Point((double)this.X, (double)this.Y));
+            trianglePoints.Add(new Point((double)trianglePoint2.X, (double)trianglePoint2.Y));
+            trianglePoints.Add(new Point((double)trianglePoint1.X, (double)trianglePoint1.Y));
 
             return trianglePoints;
         }
