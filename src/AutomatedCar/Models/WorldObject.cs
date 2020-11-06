@@ -3,6 +3,7 @@ namespace AutomatedCar.Models
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using Avalonia;
     using Avalonia.Media;
     using NetTopologySuite.Geometries;
@@ -12,15 +13,19 @@ namespace AutomatedCar.Models
 
     public abstract class WorldObject : ReactiveObject
     {
+        private int _mass;
         private int _x;
         private int _y;
 
-        public SolidColorBrush Brush { get; private set; }
+        public SolidColorBrush Brush { get; set; }
 
         public Matrix RotMatrix { get; set; }
 
+        public List<List<Point>> BasePoints { get; private set; }
+
         public WorldObject(int x, int y, string filename, int width, int height, int referenceOffsetX, int referenceOffsetY, Matrix rotmatrix, List<List<Point>> polyPoints)
         {
+            BasePoints = polyPoints;
             this.X = x;
             this.Y = y;
             this.Filename = filename;
@@ -28,11 +33,9 @@ namespace AutomatedCar.Models
             this.Height = height;
             this.referenceOffsetX = referenceOffsetX;
             this.referenceOffsetY = referenceOffsetY;
-            this.RotMatrix = rotmatrix;
-            this.Polygons = this.GeneratePolygons(polyPoints);
-            polyPoints = this.RotatePoints(polyPoints);
-            this.NetPolygons = this.GenerateNetPolygons(polyPoints);
             this.Angle = Math.Atan2(rotmatrix.M12, rotmatrix.M11) * 180 / Math.PI;
+            this.RotMatrix = rotmatrix;
+            this.NetPolygons = this.GenerateNetPolygons(polyPoints);
             this.ZIndex = 1;
             this.Brush = new SolidColorBrush(Color.Parse("blue"));
         }
@@ -41,8 +44,18 @@ namespace AutomatedCar.Models
 
         public double Angle
         {
-            get { return _angle; }
-            set => this.RaiseAndSetIfChanged(ref this._angle, value);
+            get
+            {
+                return this._angle;
+            }
+
+            set
+            {
+                var radAngle = this._angle * Math.PI / 180;
+                this.RotMatrix = new Matrix(Math.Cos(radAngle), -Math.Sin(radAngle), Math.Sin(radAngle),Math.Cos(radAngle),0,0);
+                this.UpdatePolygons();
+                this.RaiseAndSetIfChanged(ref this._angle, value);
+            }
         }
 
         public bool IsColliding { get; set; }
@@ -60,13 +73,26 @@ namespace AutomatedCar.Models
         public int X
         {
             get => this._x;
-            protected set => this.RaiseAndSetIfChanged(ref this._x, value);
+            protected set
+            {
+                this.UpdatePolygons();
+                this.RaiseAndSetIfChanged(ref this._x, value);
+            }
         }
 
         public int Y
         {
             get => this._y;
-            protected set => this.RaiseAndSetIfChanged(ref this._y, value);
+            protected set
+            {
+                this.UpdatePolygons();
+                this.RaiseAndSetIfChanged(ref this._y, value);
+            }
+        }
+
+        private void UpdatePolygons()
+        {
+           this.NetPolygons = this.GenerateNetPolygons(this.BasePoints);
         }
 
         public int referenceOffsetX { get; set; }
@@ -104,8 +130,9 @@ namespace AutomatedCar.Models
             return objectPolygons;
         }
 
-        private List<LineString> GenerateNetPolygons(List<List<Point>> polyPoints)
+        public List<LineString> GenerateNetPolygons(List<List<Point>> polyPoints)
         {
+            polyPoints = RotatePoints(polyPoints);
             List<LineString> objectLineStrings = new List<LineString>();
             foreach (List<Point> points in polyPoints)
             {

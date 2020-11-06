@@ -1,0 +1,699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AutomatedCar.Logic.JsonParser" Collapsed="true">
+    <Position X="50" Y="20.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACgEgAACAQAAAAAAEAAAAAAAAUAAAQAAoEAAAAgAAI=</HashCode>
+      <FileName>Logic\JsonParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Logic.JsonPolygon" Collapsed="true">
+    <Position X="52.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\JsonPolygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Logic.JsonReferences" Collapsed="true">
+    <Position X="54.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\JsonReferences.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Logic.JsonWorldObject" Collapsed="true">
+    <Position X="56.25" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAQAAAAAAAAEBAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Logic\JsonWorldObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.AutomatedCar">
+    <Position X="22.25" Y="7.25" Width="2.25" />
+    <AssociationLine Name="humanMachineInterface" Type="AutomatedCar.SystemComponents.HumanMachineInterface" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.25" Y="9.091" />
+        <Point X="4.719" Y="9.091" />
+        <Point X="4.719" Y="16.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="powerTrain" Type="AutomatedCar.SystemComponents.PowerTrain" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.25" Y="9.808" />
+        <Point X="9.5" Y="9.808" />
+        <Point X="9.5" Y="19.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="dummySensor" Type="AutomatedCar.SystemComponents.DummySensor" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.25" Y="9.442" />
+        <Point X="7.375" Y="9.442" />
+        <Point X="7.375" Y="20.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="virtualFunctionBus" Type="AutomatedCar.SystemComponents.VirtualFunctionBus" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22.25" Y="10.062" />
+        <Point X="20.971" Y="10.062" />
+        <Point X="20.971" Y="16.091" />
+        <Point X="22.688" Y="16.091" />
+        <Point X="22.688" Y="19.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAgIAAKgAEIICAABBACDBUAwATAQBoAAAAAAhgAA=</HashCode>
+      <FileName>Models\AutomatedCar.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="humanMachineInterface" />
+      <Field Name="powerTrain" />
+      <Field Name="dummySensor" />
+      <Field Name="virtualFunctionBus" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Right" Position="1.68" />
+  </Class>
+  <Class Name="AutomatedCar.Models.CrossParking">
+    <Position X="27.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CrossParking.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.CrossRoad16">
+    <Position X="31.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CrossRoad16.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.CrossRoad18">
+    <Position X="36.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CrossRoad18.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.CrossWalk">
+    <Position X="13.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CrossWalk.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.Garage">
+    <Position X="18" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Garage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.ParallelParking">
+    <Position X="20.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ParallelParking.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.Road">
+    <Position X="25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Road.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.RotaryRoad">
+    <Position X="29.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RotaryRoad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.Sign">
+    <Position X="34" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Sign.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.TjunctionRoad">
+    <Position X="38.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\TjunctionRoad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.Tree">
+    <Position X="15.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Tree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Models.World">
+    <Position X="29" Y="20.25" Width="2.5" />
+    <NestedTypes>
+      <Delegate Name="AutomatedCar.Models.World.OnTickHangler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Models\World.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACCAAAgAAAAIMAABAAACAAIQAAAEAAAQgA=</HashCode>
+      <FileName>Models\World.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_controlledCar" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.Models.WorldObject">
+    <Position X="25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAMACAIDAQAQAIAAEAAAEIAAAAAIAABAFAAAAIAYAA=</HashCode>
+      <FileName>Models\WorldObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.Packets.DebugPacket" BaseTypeListCollapsed="true">
+    <Position X="25.25" Y="25.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAEAAAAFAAQABAAAAAAAAAAAAAQAACA=</HashCode>
+      <FileName>SystemComponents\Packets\DebugPacket.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.11" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.Packets.DummyPacket" BaseTypeListCollapsed="true">
+    <Position X="18.5" Y="25.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>SystemComponents\Packets\DummyPacket.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.Packets.HMIPacket" BaseTypeListCollapsed="true">
+    <Position X="20.75" Y="24.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AIAEQIAAAACAEBAAQBAQAACAAAAigAAEIgABAACABUA=</HashCode>
+      <FileName>SystemComponents\Packets\HMIPacket.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.Packets.PowerTrainPacket" BaseTypeListCollapsed="true">
+    <Position X="22.75" Y="25.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAIAAAACAAAABAAAAAAQAgAEECAA=</HashCode>
+      <FileName>SystemComponents\Packets\PowerTrainPacket.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.DummySensor">
+    <Position X="6.25" Y="20.25" Width="1.5" />
+    <InheritanceLine Type="AutomatedCar.SystemComponents.SystemComponent" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.875" Y="23" />
+        <Point X="6.875" Y="21.799" />
+        <Point X="6.875" Y="21.799" />
+        <Point X="6.875" Y="21.675" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="dummyPacket" Type="AutomatedCar.SystemComponents.Packets.DummyPacket" ManuallyRouted="true">
+      <Path>
+        <Point X="7.437" Y="21.675" />
+        <Point X="7.437" Y="22.257" />
+        <Point X="8.722" Y="22.257" />
+        <Point X="8.722" Y="26.592" />
+        <Point X="9.948" Y="26.592" Type="JumpStart" />
+        <Point X="10.115" Y="26.592" Type="JumpEnd" />
+        <Point X="18.5" Y="26.592" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SystemComponents\DummySensor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dummyPacket" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.EngineController">
+    <Position X="11.25" Y="18" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EEABBAgIAAAIFAYAFEAAAgAAAAABAgAAAgAAAAAAAQA=</HashCode>
+      <FileName>SystemComponents\EngineController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GearShifter" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.Gear">
+    <Position X="15.5" Y="11.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SystemComponents\Gear.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.GearShifter">
+    <Position X="14.75" Y="17.75" Width="2" />
+    <AssociationLine Name="driveGearLabels" Type="AutomatedCar.SystemComponents.DriveGear" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="16.5" Y="17.75" />
+        <Point X="16.5" Y="17.226" />
+        <Point X="18.25" Y="17.226" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="CurrentDriveGear" Type="AutomatedCar.SystemComponents.Gear" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="14.875" Y="17.75" />
+        <Point X="14.875" Y="12.438" />
+        <Point X="15.5" Y="12.438" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAABAAgAQAAYAAAAABAAAIAgAAAAAAAIAA=</HashCode>
+      <FileName>SystemComponents\GearShifter.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="driveGearLabels" />
+      <Field Name="position" />
+      <Property Name="CurrentDriveGear" />
+      <Property Name="DriveGearChangeState" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.HumanMachineInterface">
+    <Position X="4" Y="16.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <InheritanceLine Type="AutomatedCar.SystemComponents.SystemComponent" FixedToPoint="true">
+      <Path>
+        <Point X="6.875" Y="23" />
+        <Point X="6.875" Y="22.625" />
+        <Point X="5.312" Y="22.625" />
+        <Point X="5.312" Y="21.396" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="debugPacket" Type="AutomatedCar.SystemComponents.Packets.DebugPacket" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.562" Y="21.396" />
+        <Point X="4.562" Y="29.08" />
+        <Point X="26.375" Y="29.08" />
+        <Point X="26.375" Y="27.569" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="hmiPacket" Type="AutomatedCar.SystemComponents.Packets.HMIPacket" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.938" Y="21.396" />
+        <Point X="4.938" Y="27.812" />
+        <Point X="9.948" Y="27.812" Type="JumpStart" />
+        <Point X="10.115" Y="27.812" Type="JumpEnd" />
+        <Point X="20.75" Y="27.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>wMAAEoI0EkQFAAAExsAAAUKAQAA1ABNAQ0AAAACZRUE=</HashCode>
+      <FileName>SystemComponents\HumanMachineInterface.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="debugPacket" />
+      <Field Name="hmiPacket" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Left" Position="0.153" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.PowerTrain">
+    <Position X="8.5" Y="19.25" Width="2" />
+    <AssociationLine Name="HMIPacket" Type="IReadOnlyHMIPacket" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="20.639" />
+        <Point X="10.875" Y="20.639" />
+        <Point X="10.875" Y="23.375" />
+        <Point X="18.512" Y="23.375" Type="JumpStart" />
+        <Point X="18.678" Y="23.375" Type="JumpEnd" />
+        <Point X="20.167" Y="23.375" Type="JumpStart" />
+        <Point X="20.333" Y="23.375" Type="JumpEnd" />
+        <Point X="22.125" Y="23.375" />
+        <Point X="22.125" Y="23.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="PowerTrainPacket" Type="AutomatedCar.SystemComponents.Packets.PowerTrainPacket" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.031" Y="21.06" />
+        <Point X="10.031" Y="28.646" />
+        <Point X="23.312" Y="28.646" />
+        <Point X="23.312" Y="28.271" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAkAAACCAAAAAIAAABAAAAAAACAA=</HashCode>
+      <FileName>SystemComponents\PowerTrain.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Engine" />
+      <Property Name="HMIPacket" />
+      <Property Name="PowerTrainPacket" />
+      <Property Name="Steering" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.SteeringController" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="10.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIEAgIARBSAAACAAAAAiAAAABAiAIAAgACA=</HashCode>
+      <FileName>SystemComponents\SteeringController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.1" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.SystemComponent">
+    <Position X="6" Y="23" Width="1.75" />
+    <AssociationLine Name="virtualFunctionBus" Type="AutomatedCar.SystemComponents.VirtualFunctionBus" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="23.594" />
+        <Point X="8.639" Y="23.594" Type="JumpStart" />
+        <Point X="8.805" Y="23.594" Type="JumpEnd" />
+        <Point X="9.948" Y="23.594" Type="JumpStart" />
+        <Point X="10.115" Y="23.594" Type="JumpEnd" />
+        <Point X="18.595" Y="23.594" />
+        <Point X="18.595" Y="20.812" />
+        <Point X="22" Y="20.812" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SystemComponents\SystemComponent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="virtualFunctionBus" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.TestSteeringController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="52.25" Y="22.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAQAAAIECgIAABAAEACCAQAAgAAAAhAGAIAAgACA=</HashCode>
+      <FileName>SystemComponents\TestSteeringController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.SystemComponents.VirtualFunctionBus">
+    <Position X="22" Y="19.75" Width="1.75" />
+    <AssociationLine Name="DebugPacket" Type="IReadOnlyDebugPacket" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="22" Y="21.365" />
+        <Point X="20.25" Y="21.365" />
+        <Point X="20.25" Y="23.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="DummyPacket" Type="IReadOnlyDummyPacket" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="23.75" Y="20.785" />
+        <Point X="24.125" Y="20.785" />
+        <Point X="24.125" Y="22.636" />
+        <Point X="25.375" Y="22.636" />
+        <Point X="25.375" Y="23.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.236" Y="0.21" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="HMIPacket" Type="IReadOnlyHMIPacket" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="22.125" Y="21.819" />
+        <Point X="22.125" Y="23.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="PowerTrainPacket" Type="AutomatedCar.SystemComponents.Packets.IReadOnlyPowerTrainPacket" FixedToPoint="true">
+      <Path>
+        <Point X="22.875" Y="21.819" />
+        <Point X="22.875" Y="23.75" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.552" Y="0.071" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABECAICAAAAABAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>SystemComponents\VirtualFunctionBus.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DebugPacket" />
+      <Property Name="DummyPacket" />
+      <Property Name="HMIPacket" />
+      <Property Name="PowerTrainPacket" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.ViewModels.CourseDisplayViewModel">
+    <Position X="41" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CourseDisplayViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="World" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.ViewModels.DashboardViewModel">
+    <Position X="43.25" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\DashboardViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="controlledCar" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.ViewModels.MainWindowViewModel">
+    <Position X="45.5" Y="10" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAQABAAEAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="world" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="43.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Views.Converters.BoolToColorConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="50.25" Y="13.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Converters\BoolToColorConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.Views.Converters.DoubleToAngleKmHConverter" BaseTypeListCollapsed="true">
+    <Position X="55.5" Y="13" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAEAAAAAAAIAAAAAAAQgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Converters\DoubleToAngleKmHConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.Views.Converters.IntegerToAngleRpmConverter" BaseTypeListCollapsed="true">
+    <Position X="52.75" Y="13" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAEAAAAAAAIAAAAAAAQgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Converters\IntegerToAngleRpmConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.Views.CustomControls.SensorCustomControl" Collapsed="true">
+    <Position X="49.75" Y="22.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgEAAAIAAAAIIAAACgAAAAAUAQAABAAhAAAAAIgAE=</HashCode>
+      <FileName>Views\CustomControls\SensorCustomControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Views.CourseDisplayView">
+    <Position X="53.5" Y="17" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\CourseDisplayView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Views.DashboardView">
+    <Position X="55.75" Y="17" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\DashboardView.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Views.MainWindow">
+    <Position X="51" Y="16.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAACAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Visualization.CoordinateConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="59.5" Y="14" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Visualization\CoordinateConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.Visualization.PositionComputeObject" Collapsed="true">
+    <Position X="51" Y="21.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAIAAAAAAAEAAAAIA=</HashCode>
+      <FileName>Visualization\PositionComputeObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Visualization.Scaler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.25" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Visualization\Scaler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.Visualization.WorldObjectTransformer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="57.75" Y="22.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAQAAAAAgAAAA=</HashCode>
+      <FileName>Visualization\WorldObjectTransformer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AutomatedCar.ScreenPositioner">
+    <Position X="62.75" Y="21.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Visualization\ScreenPositioner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.App">
+    <Position X="47.25" Y="16.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Game">
+    <Position X="24.5" Y="19.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="world" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AutomatedCar.GameBase">
+    <Position X="23.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgAAAAAAAAAAAIAABAAAAAIAAgAAAAQAA=</HashCode>
+      <FileName>GameBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Keyboard">
+    <Position X="0.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAgQAAAAEAAACAAQAAACCAABAAAEAAAAQAAAAAA=</HashCode>
+      <FileName>Keyboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.Program" Collapsed="true">
+    <Position X="54.5" Y="21.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutomatedCar.ViewLocator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="55.5" Y="22.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ViewLocator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="AutomatedCar.SystemComponents.Packets.IReadOnlyPowerTrainPacket">
+    <Position X="22.75" Y="23.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAABAAAAAAAAgAAEAAA=</HashCode>
+      <FileName>SystemComponents\Packets\IReadOnlyPowerTrainPacket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IReadOnlyDebugPacket">
+    <Position X="18.5" Y="23.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAAAAAAAQAACA=</HashCode>
+      <FileName>SystemComponents\Packets\IReadOnlyDebugPacket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IReadOnlyDummyPacket">
+    <Position X="25.25" Y="23.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>SystemComponents\Packets\IReadOnlyDummyPacket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IReadOnlyHMIPacket" Collapsed="true">
+    <Position X="20.75" Y="23.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAEBAAQAAAAACAAAAgAAAAAgAAAACABUA=</HashCode>
+      <FileName>SystemComponents\Packets\IReadOnlyHMIPacket.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="IHumanMachineInterface">
+    <Position X="1.75" Y="17" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gEAAAgAQEAAEAAAAxIAAAQIAQAAhAAAAAkAAAACABEA=</HashCode>
+      <FileName>SystemComponents\IHumanMachineInterface.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutomatedCar.SystemComponents.ISteeringController">
+    <Position X="10.75" Y="15.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgIAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>SystemComponents\ISteeringController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AutomatedCar.Models.IMoveable">
+    <Position X="24.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAIAAEAAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\IMoveable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Gears">
+    <Position X="18.25" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBAAQA=</HashCode>
+      <FileName>SystemComponents\Gears.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AutomatedCar.SystemComponents.DriveGear">
+    <Position X="18.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAQAAAAAAAEAAAAAACAAAAAAAQAAAAAAAAAQQA=</HashCode>
+      <FileName>SystemComponents\GearShifter.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AutomatedCar.SystemComponents.ChangeState">
+    <Position X="15.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAAE=</HashCode>
+      <FileName>SystemComponents\GearShifter.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

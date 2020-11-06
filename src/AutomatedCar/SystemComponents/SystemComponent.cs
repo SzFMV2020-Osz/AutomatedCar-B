@@ -4,10 +4,13 @@ namespace AutomatedCar.SystemComponents
     {
         protected VirtualFunctionBus virtualFunctionBus;
 
-        protected SystemComponent(VirtualFunctionBus virtualFunctionBus)
+        protected SystemComponent(VirtualFunctionBus virtualFunctionBus = null)
         {
-            this.virtualFunctionBus = virtualFunctionBus;
-            virtualFunctionBus.RegisterComponent(this);
+            if (virtualFunctionBus != null)
+            {
+                this.virtualFunctionBus = virtualFunctionBus;
+                virtualFunctionBus.RegisterComponent(this);
+            }
         }
 
         public abstract void Process();
