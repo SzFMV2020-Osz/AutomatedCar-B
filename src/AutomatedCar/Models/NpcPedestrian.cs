@@ -15,64 +15,50 @@ namespace AutomatedCar.Models
         public NpcPedestrian(string filename, int width, int height, List<List<Point>> polyPoints, string jsonRoute)
              : base(0, 0, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polyPoints)
         {
-            this.JsonRoute = jsonRoute;
-            this.ReadPedRoute();
-            this.toReach = PedRoutes[1];
+            this.LoadNpcRoute(jsonRoute);
+            this.toReach = Route[1];
+            routeIndex = 1;
         }
 
-        private string JsonRoute;
-
-        private int index = 0;
-        private List<NpcRoute> PedRoutes;
+        private int routeIndex;
+        private List<NpcRoute> Route;
         private NpcRoute toReach;
-        public int Rotation { get; set; }
         private bool isthreesixty;
-        public int Speed { get; set; }
         public int Mass { get; set; } = 1;
 
-        public void ReadPedRoute()
+        public void LoadNpcRoute(string jsonRoute)
         {
-            this.PedRoutes = LoadJson(this.JsonRoute);
+            this.Route = ReadJson(jsonRoute);
         }
 
         public void SetStartPosition()
         {
 
-            this.X = this.PedRoutes.First().x;
-            this.Y = this.PedRoutes.First().y;
+            this.X = this.Route.First().x;
+            this.Y = this.Route.First().y;
 
         }
         public void Move(object sender, EventArgs args)
         {
-            if (index == this.PedRoutes.Count())
-                index = 0;
+            if (routeIndex == this.Route.Count())
+                routeIndex = 0;
 
-
-
-            int deltaX = this.PedRoutes[index].x - this.X;
-
-
+            int deltaX = this.Route[routeIndex].x - this.X;
 
             if (deltaX < 0)
                 this.X -= 5;
             else if (deltaX > 0)
                 this.X += 5;
 
-
-
-            int deltaY = this.PedRoutes[index].y - this.Y;
-
-
+            int deltaY = this.Route[routeIndex].y - this.Y;
 
             if (deltaY < 0)
                 this.Y -= 5;
             else if (deltaY > 0)
                 this.Y += 5;
 
-
-
             if (deltaX == 0 && deltaY == 0)
-                index++;
+                routeIndex++;
 
 
             Vector2 movementDirection = new Vector2(deltaX, deltaY);
@@ -119,7 +105,7 @@ namespace AutomatedCar.Models
             this.Y = y;
         }
 
-        public static List<NpcRoute> LoadJson(string path)
+        public static List<NpcRoute> ReadJson(string path)
         {
             using (StreamReader r = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(path)))
             {

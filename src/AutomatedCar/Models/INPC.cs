@@ -6,8 +6,7 @@ namespace AutomatedCar.Models
 
     public interface INPC : IMoveable
     {
-        public int Rotation { get; set; }
-
-        public int Speed { get; set; }
+        public void LoadNpcRoute(string filePath);
+        public void SetStartPosition();
     }
 }

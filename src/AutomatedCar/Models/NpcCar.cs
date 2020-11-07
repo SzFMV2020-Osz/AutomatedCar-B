@@ -16,32 +16,28 @@ namespace AutomatedCar.Models
         public NpcCar(string filename, int width, int height, List<List<Point>> polyPoints, string jsonRoute)
         : base(0, 0, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polyPoints)
         {
-            this.JsonRoute = jsonRoute;
-            speedLimit = 10; //remove when adaptive speedLimit done!
-            this.ReadCarRoute();
-            this.toReach = CarRoutes[1];
-            index = 1;
+            this.LoadNpcRoute(jsonRoute);
+            this.toReach = Route[1];
+            speedLimit = 10;
+            routeIndex = 1;
         }
 
-        private string JsonRoute;
-        private bool isthreesixty = false;
-        private int index;
-        private List<NpcRoute> CarRoutes;
+        private int routeIndex;
+        private List<NpcRoute> Route;
         private NpcRoute toReach;
-        private int speedLimit;
-        public int Rotation { get; set; }
-        public int Speed { get; set; }
+        private bool isthreesixty = false;
         public int Mass { get; set; } = 5;
+        private int speedLimit;
 
-        public void ReadCarRoute()
+        public void LoadNpcRoute(string jsonRoute)
         {
-            this.CarRoutes = LoadJson(this.JsonRoute);
+            this.Route = ReadJson(jsonRoute);
         }
 
         public void SetStartPosition()
         {
-            this.X = (this.CarRoutes.First().x);
-            this.Y = (this.CarRoutes.First().y);
+            this.X = (this.Route.First().x);
+            this.Y = (this.Route.First().y);
         }
 
         public void Move(object sender, EventArgs args)
@@ -55,10 +51,10 @@ namespace AutomatedCar.Models
             {
                 if(toReach.tag == "finish")
                 {
-                    index = -1;
+                    routeIndex = -1;
                 }
 
-                toReach = CarRoutes[++index];
+                toReach = Route[++routeIndex];
                 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
                 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
             }
@@ -114,8 +110,7 @@ namespace AutomatedCar.Models
             if(visibleObjects.Where(o => o is Sign).Where(o => o.Filename.Contains("roadsign_speed")).Count() != 0)
             {
                 string speedLimitSignName = visibleObjects.Where(o => o.Filename.Contains("roadsign_speed")).First().Filename;
-                int speedLimit = SpeedLimitFromSignName(speedLimitSignName, currentLimit);
-                return speedLimit;
+                return SpeedLimitFromSignName(speedLimitSignName, currentLimit);
             }
 
             return currentLimit;
@@ -162,7 +157,7 @@ namespace AutomatedCar.Models
             return trianglePoints;
         }
 
-        public static List<NpcRoute> LoadJson(string path)
+        public static List<NpcRoute> ReadJson(string path)
         {
             using (StreamReader r = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(path)))
             {
