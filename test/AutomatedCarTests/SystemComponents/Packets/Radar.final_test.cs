@@ -30,6 +30,7 @@ namespace Tests.SystemComponents.Packets
             set1TickCar();
             prepareRadar();
             set1TickList();
+            //R.compute();
 
             // ====================================== Tick ================================
             set2TickCar();
@@ -39,8 +40,18 @@ namespace Tests.SystemComponents.Packets
             //R.compute();
 
             // megnézni hogy a slow, és az oposite lett-e a veszélyes objektum
+            var dangeriousObjects = R.getDangeriousWorldObjects();
 
-            Assert.Equal(true, true);
+
+            // Assert.Equal(2, dangeriousObjects.Count);
+            // Assert.Equal(true, dangeriousObjects.Contains(w_oposite));
+            // Assert.Equal(true, dangeriousObjects.Contains(w_slow));
+            // Assert.Equal(200,R.CarPreviousPosition.X);
+            // Assert.Equal(100,R.CarPreviousPosition.Y);
+
+            // NoticedObject newElement = R.NoticedObjects.Find(e => e.worldObject == w_new);
+            // Assert.Equal(null, newElement.PrevX);
+            // Assert.Equal(null, newElement.PrevY);
         }
 
         private void changeWorldObjectPosition(){
