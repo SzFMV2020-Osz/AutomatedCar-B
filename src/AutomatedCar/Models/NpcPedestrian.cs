@@ -25,6 +25,7 @@ namespace AutomatedCar.Models
         private NpcRoute toReach;
         private bool isthreesixty;
         public int Mass { get; set; } = 1;
+        private int speedLimit = 2;
 
         public void LoadNpcRoute(string jsonRoute)
         {
@@ -46,16 +47,16 @@ namespace AutomatedCar.Models
             int deltaX = this.Route[routeIndex].x - this.X;
 
             if (deltaX < 0)
-                this.X -= 5;
+                this.X -= speedLimit;
             else if (deltaX > 0)
-                this.X += 5;
+                this.X += speedLimit;
 
             int deltaY = this.Route[routeIndex].y - this.Y;
 
             if (deltaY < 0)
-                this.Y -= 5;
+                this.Y -= speedLimit;
             else if (deltaY > 0)
-                this.Y += 5;
+                this.Y += speedLimit;
 
             if (deltaX == 0 && deltaY == 0)
                 routeIndex++;

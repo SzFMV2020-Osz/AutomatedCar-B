@@ -121,11 +121,11 @@ namespace AutomatedCar.Models
             switch(type)
                 {
                     case "roadsign_speed_40": 
-                        return 10;
+                        return 9;
                     case "roadsign_speed_50":
-                        return 15;
+                        return 12;
                     case "roadsign_speed_60":
-                        return 20;
+                        return 14;
                     default:
                         return currentLimit;
                 }
