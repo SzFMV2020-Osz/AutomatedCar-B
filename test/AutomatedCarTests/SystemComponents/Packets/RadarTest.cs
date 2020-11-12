@@ -159,7 +159,7 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(1, wos.Count);
         }
 
-        [Fact (Skip="TODO")]
+        [Fact]
         public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated180()
         {
             Radar radar = new Radar();
