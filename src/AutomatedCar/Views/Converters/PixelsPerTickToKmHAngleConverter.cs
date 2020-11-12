@@ -15,7 +15,7 @@ namespace AutomatedCar.Views.Converters
         }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => ((3.6 * 60 * (double)value) * MaxAngle / MaxKmpH) - Shifting;
+            => ((3.6 * (double)value) / 50 * MaxAngle / MaxKmpH) - Shifting;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -7,7 +7,7 @@ namespace AutomatedCar.Views.Converters
     class PixelsPerTickToKmPHConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => (double)value * 3.6 * 60;
+            => (double)value * 3.6 / 50;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
