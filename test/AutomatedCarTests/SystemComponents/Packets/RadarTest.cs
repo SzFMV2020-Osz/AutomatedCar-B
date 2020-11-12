@@ -63,7 +63,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem()
+        public void getWorldObjectItem_inList()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -82,7 +82,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem_twoSlow()
+        public void getWorldObjectItem_twoSlow_ObjectsAreNoticed()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -103,7 +103,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem_oneSlow_oneFast()
+        public void getWorldObjectItem_oneSlow_oneFast_ObjectsAreNoticed()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -124,7 +124,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -142,7 +142,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection90()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated90()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(100, 150);
@@ -160,7 +160,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact (Skip="TODO")]
-        public void getWorldObjectItem_opositeDirection180()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated180()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(100, 100);
@@ -177,7 +177,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection270()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated270()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(500, 300);
@@ -195,7 +195,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection315()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated315()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(500, 300);
