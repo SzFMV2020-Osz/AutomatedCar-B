@@ -33,13 +33,13 @@ namespace AutomatedCar.Models
             this.Ultrasounds = new Ultrasound[]
             {
                 new Ultrasound(this.virtualFunctionBus, 110, 30, 0),
-                new Ultrasound(this.virtualFunctionBus, 85, 45, 90),
+                new Ultrasound(this.virtualFunctionBus, 105, 45, 90),
                 new Ultrasound(this.virtualFunctionBus, 110, -30, 0),
-                new Ultrasound(this.virtualFunctionBus, 85, -45, -90),
+                new Ultrasound(this.virtualFunctionBus, 105, -45, -90),
                 new Ultrasound(this.virtualFunctionBus, -120, 25, 180),
-                new Ultrasound(this.virtualFunctionBus, -85, 45, 90),
+                new Ultrasound(this.virtualFunctionBus, -105, 45, 90),
                 new Ultrasound(this.virtualFunctionBus, -120, -25, 180),
-                new Ultrasound(this.virtualFunctionBus, -85, -45, -90),
+                new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
 
             this.ultraSoundVisible = true;
