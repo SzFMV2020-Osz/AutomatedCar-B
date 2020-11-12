@@ -12,14 +12,21 @@ namespace AutomatedCar.SystemComponents
 
     public class Ultrasound : SystemComponent, IUltrasound
     {
+        private List<Type> types = new List<Type>() {
+            typeof(Tree),
+            typeof(Sign),
+            typeof(NpcPedestrian),
+            typeof(NpcCar),
+        };
+
         public const int Height = 150;
         public const int Fov = 100;
+        public Point Start;
         private int offsetX;
         private int offsetY;
         private int rotate;
         private static double dif = (double)Height * Math.Tan((double)Fov / 2 * (Math.PI / 180));
         private static double maxDetect = Math.Sqrt(Math.Pow(dif, 2) + Math.Pow(Height, 2));
-        Point start;
 
         public Ultrasound(VirtualFunctionBus virtualFunctionBus, int offsetX, int offsetY, int rotate)
            : base(virtualFunctionBus)
@@ -64,28 +71,28 @@ namespace AutomatedCar.SystemComponents
 
         public List<Point> CalculatePoints()
         {
-            this.StartCalculate();
+            this.CalculateStartPoint();
 
             Point right = new Point(
-                this.start.X + Height,
-                this.start.Y + dif
+                this.Start.X + Height,
+                this.Start.Y + dif
                 );
             Point left = new Point(
-                this.start.X + Height,
-                this.start.Y - dif
+                this.Start.X + Height,
+                this.Start.Y - dif
                 );
-            right = this.RotatePoint(this.start.X, this.start.Y, this.rotate, right);
-            left = this.RotatePoint(this.start.X, this.start.Y, this.rotate, left);
+            right = this.RotatePoint(this.Start.X, this.Start.Y, this.rotate, right);
+            left = this.RotatePoint(this.Start.X, this.Start.Y, this.rotate, left);
             List<Point> newPoints = new List<Point>()
             {
-                this.start,
+                this.Start,
                 left,
                 right,
             };
             return newPoints;
         }
 
-        public void StartCalculate()
+        public void CalculateStartPoint()
         {
             var car = World.Instance.ControlledCar;
             Point p = new Point(car.X + this.offsetX, car.Y + this.offsetY);
@@ -96,7 +103,7 @@ namespace AutomatedCar.SystemComponents
             px -= car.X;
             py -= car.Y;
 
-            this.start = new Point(py, -px);
+            this.Start = new Point(py, -px);
         }
 
         public Point RotatePoint(double centerX, double centerY, double angle, Point p)
@@ -130,7 +137,7 @@ namespace AutomatedCar.SystemComponents
             foreach (WorldObject item in this.WorldObjects)
             {
                 // A későbbiekben hozzáadott npc auto és gyalogos majd bekerül még, eddig ezt a 2-t találtam.
-                if (item.GetType() == typeof(Sign) || item.GetType() == typeof(Tree))
+                if (types.Contains(item.GetType()))
                 {
                     actual = Math.Sqrt(Math.Pow(this.start.X - item.X, 2) + Math.Pow(this.start.Y - item.Y, 2));
                     if (actual < distance)
