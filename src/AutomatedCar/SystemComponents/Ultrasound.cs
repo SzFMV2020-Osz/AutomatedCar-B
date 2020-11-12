@@ -139,7 +139,7 @@ namespace AutomatedCar.SystemComponents
                 // A későbbiekben hozzáadott npc auto és gyalogos majd bekerül még, eddig ezt a 2-t találtam.
                 if (types.Contains(item.GetType()))
                 {
-                    actual = Math.Sqrt(Math.Pow(this.start.X - item.X, 2) + Math.Pow(this.start.Y - item.Y, 2));
+                    actual = Math.Sqrt(Math.Pow(this.Start.X - item.X, 2) + Math.Pow(this.Start.Y - item.Y, 2));
                     if (actual < distance)
                     {
                         distance = actual;
