@@ -36,6 +36,11 @@ namespace AutomatedCar.Views.CustomControls
 
         public override void Render(DrawingContext context)
         {
+            if (!World.Instance.ControlledCar.UltraSoundVisible)
+            {
+                return;
+            }
+
             base.Render(context);
             Ultrasound sensor = World.Instance.ControlledCar.Ultrasounds[this.indexer];
             PolylineGeometry geometry;
