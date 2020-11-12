@@ -58,8 +58,8 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(0, 150);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
-            Assert.IsType<List<WorldObject>>(wos);
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
+            Assert.IsType<List<NoticedObject>>(wos);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(0, 150);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
@@ -97,7 +97,7 @@ namespace Tests.SystemComponents.Packets
             radar.NoticedObjects.Add(nw);
             radar.NoticedObjects.Add(nw2);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(2, wos.Count);
         }
@@ -118,7 +118,7 @@ namespace Tests.SystemComponents.Packets
             radar.NoticedObjects.Add(nw);
             radar.NoticedObjects.Add(nw2);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
@@ -136,7 +136,7 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(0, -200);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
@@ -154,7 +154,7 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(-100, 0);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
@@ -171,7 +171,7 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(0, 200);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
@@ -189,7 +189,7 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(100, 0);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
@@ -207,7 +207,7 @@ namespace Tests.SystemComponents.Packets
             nw.Vector = new Vector(100, -100);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }

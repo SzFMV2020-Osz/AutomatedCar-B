@@ -139,9 +139,9 @@ namespace AutomatedCar.Models
             this.RadarSensorPacket.Update(this.getDangerousWorldObjects());
         }
 
-        public List<WorldObject> getDangerousWorldObjects()
+        public List<NoticedObject> getDangerousWorldObjects()
         {
-            List<WorldObject> dangerousList = new List<WorldObject>();
+            List<NoticedObject> dangerousList = new List<NoticedObject>();
             Vector carVector = new Vector(
                 World.Instance.ControlledCar.X - CarPreviousPosition.X,
                 World.Instance.ControlledCar.Y - CarPreviousPosition.Y
@@ -152,7 +152,7 @@ namespace AutomatedCar.Models
             {
                 if(
                     objectIsSlover(carVector, item) || approaching(angle, item)){
-                    dangerousList.Add(item.worldObject);
+                    dangerousList.Add(item);
                 }
             }
 
