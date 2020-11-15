@@ -73,7 +73,7 @@ namespace AutomatedCar.Models
         {
             foreach (NoticedObject noticedObject in this.noticedObjects)
             {
-                if (ReferenceEquals(noticedObject, paramWorldObject))
+                if (ReferenceEquals(noticedObject.worldObject, paramWorldObject))
                 {
                     return true;
                 }
