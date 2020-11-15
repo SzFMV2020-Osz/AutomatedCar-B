@@ -215,7 +215,6 @@ namespace Tests.SystemComponents.Packets
     public class RadarTest_IsInNoticedObjects {
         [Fact]
         public void isInNoticedObjects() {
-
             WorldObject wo = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
 
             Radar radar = new Radar();
@@ -224,14 +223,12 @@ namespace Tests.SystemComponents.Packets
             nw.worldObject = wo;
             nw.Vector = new Vector(100, -100);
             radar.NoticedObjects.Add(nw);
-
             
             Assert.Equal(true, radar.isInNoticedObjects(wo));
         }
 
         [Fact]
         public void isNotInNoticedObjects() {
-
             WorldObject wo = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
             WorldObject wo2 = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
 
@@ -241,7 +238,6 @@ namespace Tests.SystemComponents.Packets
             nw.worldObject = wo2;
             nw.Vector = new Vector(100, -100);
             radar.NoticedObjects.Add(nw);
-
             
             Assert.Equal(false, radar.isInNoticedObjects(wo));
         }
