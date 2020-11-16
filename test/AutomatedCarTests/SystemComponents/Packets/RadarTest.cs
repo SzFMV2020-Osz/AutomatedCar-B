@@ -242,6 +242,36 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(1, wos.Count);
         }
     }
+    public class RadarTest_IsInNoticedObjects {
+        [Fact]
+        public void isInNoticedObjects() {
+            WorldObject wo = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+
+            Radar radar = new Radar();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.worldObject = wo;
+            nw.Vector = new Vector(100, -100);
+            radar.NoticedObjects.Add(nw);
+            
+            Assert.Equal(true, radar.isInNoticedObjects(wo));
+        }
+
+        [Fact]
+        public void isNotInNoticedObjects() {
+            WorldObject wo = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            WorldObject wo2 = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+
+            Radar radar = new Radar();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.worldObject = wo2;
+            nw.Vector = new Vector(100, -100);
+            radar.NoticedObjects.Add(nw);
+            
+            Assert.Equal(false, radar.isInNoticedObjects(wo));
+        }
+    }
 
     public class RadarTest_UpdateBus {
         VirtualFunctionBus vfb;
