@@ -82,7 +82,7 @@ namespace AutomatedCar.Models
             return false;
         }
 
-        public void setHighlighted(WorldObject paramWorldObject)
+        public void setHighlighted(ref WorldObject paramWorldObject)
         {
             paramWorldObject.Brush = (SolidColorBrush)Brushes.Red;
         }
