@@ -10,12 +10,12 @@ using Avalonia.Media;
 
 namespace Tests.SystemComponents.Packets
 {
-    public class RadarTriangleComputerTest
+    public class RadarTriangleComputerTest_fromCarCoordinates_to_WorldCoordinates
     {
         RadarTriangleComputer radar = new RadarTriangleComputer();
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset0()
+        public void Radar_CarInOrigo_CarRotated0_radarViewDistance0_radarOffsetFromCarCenter0()
         {
             var points = this.radar.computeTriangleInWorld();
 
@@ -28,7 +28,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset0__AutomatedCar_x20()
+        public void Radar_CarInX20Y0_CarRotated0_radarViewDistance0_radarOffsetFromCarCenter0()
         {
             this.radar.carX = 20;
             var points = this.radar.computeTriangleInWorld();
@@ -42,7 +42,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset0__AutomatedCar_y20()
+        public void Radar_CarInX0Y20_CarRotated0_radarViewDistance0_radarOffsetFromCarCenter0()
         {
             this.radar.carY = 20;
             var points = this.radar.computeTriangleInWorld();
@@ -56,7 +56,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate90_distance0_offset0()
+        public void Radar_CarInOrigo_CarRotated90_radarViewDistance0_radarOffsetFromCarCenter0()
         {
             radar.rotate = 90;
 
@@ -71,7 +71,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance0_offset120()
+        public void Radar_CarInOrigo_CarRotated0_radarViewDistance0_radarOffsetFromCarCenter120()
         {
             this.radar.offset = 120;
 
@@ -86,7 +86,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate90_distance0_offset120()
+        public void Radar_CarInOrigo_CarRotated90_radarViewDistance0_radarOffsetFromCarCenter120()
         {
             this.radar.offset = 120;
             this.radar.rotate = 90;
@@ -102,7 +102,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate180_distance0_offset120()
+        public void Radar_CarInOrigo_CarRotated180_radarViewDistance0_radarOffsetFromCarCenter120()
         {
             this.radar.offset = 120;
             this.radar.rotate = 180;
@@ -118,7 +118,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate270_distance0_offset120()
+        public void Radar_CarInOrigo_CarRotated270_radarViewDistance0_radarOffsetFromCarCenter120()
         {
             this.radar.offset = 120;
             this.radar.rotate = 270;
@@ -134,7 +134,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance100_offset0()
+        public void Radar_CarInOrigo_CarRotated0_radarViewDistance100_radarOffsetFromCarCenter0()
         {
             this.radar.distance = 100;
 
@@ -149,7 +149,7 @@ namespace Tests.SystemComponents.Packets
         }
 
         [Fact]
-        public void Radar_FromOrigo_rotate0_distance100_offset10()
+        public void Radar_CarInOrigo_CarRotated0_radarViewDistance100_radarOffsetFromCarCenter10()
         {
             this.radar.distance = 100;
             this.radar.offset = 10;
