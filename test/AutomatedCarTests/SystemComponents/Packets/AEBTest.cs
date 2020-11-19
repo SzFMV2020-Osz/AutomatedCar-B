@@ -7,7 +7,6 @@ namespace Tests.SystemComponents.Packets
     using Xunit;
     
     public class AEBTest {
-
         [Fact]
         public void TestName()
         {

@@ -6,7 +6,6 @@ namespace AutomatedCar.Models
     {
         public AEB()
         {
-            
         }
     }
 }
