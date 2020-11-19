@@ -9,11 +9,19 @@ namespace AutomatedCar.Models
         }
 
         public bool IsUseable(){
-            return isCarFasterThan(70);
+            return !isCarFasterThanKmh(70);
         }
 
-        private bool isCarFasterThan(double speed){
-            return World.Instance.ControlledCar.Speed <= speed;
+        private bool isCarFasterThanKmh(double speed) {
+            return World.Instance.ControlledCar.Speed > kmh_into_pxs(speed);
+        }
+
+        private double kmh_into_pxs(double kmh) {
+            return kmh_into_ms(kmh)*50;
+        }
+
+        private double kmh_into_ms(double kmh) {
+            return (kmh*1000)/(60*60);
         }
     }
 }
