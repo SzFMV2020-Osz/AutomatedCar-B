@@ -7,5 +7,13 @@ namespace AutomatedCar.Models
         public AEB()
         {
         }
+
+        public bool IsUseable(){
+            return isCarFasterThan(70);
+        }
+
+        private bool isCarFasterThan(double speed){
+            return World.Instance.ControlledCar.Speed <= speed;
+        }
     }
 }
