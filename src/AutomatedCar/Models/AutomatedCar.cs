@@ -63,12 +63,6 @@ namespace AutomatedCar.Models
 
         public int Mass { get; set; } = 5;
 
-        public void SetNextPosition(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-
         public void Move(Vector2 newPosition)
         {
             var crashedObjects = GetCrashedObjects();
