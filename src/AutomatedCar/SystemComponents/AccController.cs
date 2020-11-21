@@ -17,7 +17,6 @@ namespace AutomatedCar.SystemComponents
             var powerTrainPacket = (PowerTrainPacket)virtualFunctionBus.PowerTrainPacket;
             var speed = kmh_to_pxs(hmiPacket.AccSpeed);
 
-
             if (hmiPacket.Acc)
             {
                 if (hmiPacket.Sign != null && hmiPacket.Sign != "")
