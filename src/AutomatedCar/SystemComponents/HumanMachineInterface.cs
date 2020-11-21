@@ -254,6 +254,7 @@ namespace AutomatedCar.SystemComponents
             if (isGasPedalDown)
             {
                 this.hmiPacket.Gaspedal = this.Increase(this.hmiPacket.Gaspedal, 1000);
+                Acc = false;
             }
             else
             {
@@ -266,6 +267,7 @@ namespace AutomatedCar.SystemComponents
             if (isBrakePedalDown)
             {
                 this.hmiPacket.Breakpedal = this.Increase(this.hmiPacket.Breakpedal, 500);
+                Acc = false;
             }
             else
             {
