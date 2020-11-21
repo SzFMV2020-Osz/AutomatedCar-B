@@ -18,19 +18,6 @@ namespace AutomatedCar.SystemComponents
             var speed = kmh_to_pxs(hmiPacket.AccSpeed);
             if (hmiPacket.Acc)
             {
-                var a = World.Instance.GetWorldObjectsInsideTriangle(World.Instance.ControlledCar.radar
-                    .computeTriangleInWorld().ToList());
-
-                // hmiPacket.Sign = "40";
-
-                foreach (var i in a)
-                {
-                    if (i is NpcCar)
-                    {
-                        ; // check npc, in range.
-                    }
-                }
-
                 if (hmiPacket.Sign != null && hmiPacket.Sign != "")
                 {
                     var lastSeenSign = int.Parse(hmiPacket.Sign);
