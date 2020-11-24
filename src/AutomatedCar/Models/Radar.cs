@@ -7,11 +7,12 @@ using AutomatedCar.Models.RadarUtil;
 using System.Linq;
 using AutomatedCar.SystemComponents;
 using AutomatedCar.SystemComponents.Packets;
+using Avalonia.Media;
 
 namespace AutomatedCar.Models
 {
     public class Radar : SystemComponent
-    {        
+    {
         List<NoticedObject> noticedObjects;
         Point carPreviousPosition;
         Point[] points;
@@ -28,7 +29,7 @@ namespace AutomatedCar.Models
         }
 
         public List<NoticedObject> NoticedObjects { get => noticedObjects; set => noticedObjects = value; }
-    
+
         public Point CarPreviousPosition { get => carPreviousPosition; set => carPreviousPosition = value; }
 
         public Point[] Points { get => points; set => points = value; }
@@ -71,10 +72,19 @@ namespace AutomatedCar.Models
 
         public bool isInNoticedObjects(WorldObject paramWorldObject)
         {
-            return true;
+            foreach (NoticedObject noticedObject in this.noticedObjects)
+            {
+                if (ReferenceEquals(noticedObject.worldObject, paramWorldObject))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-        public void setHighlighted(WorldObject paramWorldObject)
-        {    
+
+        public void setHighlighted(ref WorldObject paramWorldObject)
+        {
+            paramWorldObject.Brush = (SolidColorBrush)Brushes.Red;
         }
 
         public void updatePreviewXY(NoticedObject n)
@@ -82,7 +92,7 @@ namespace AutomatedCar.Models
             n.PrevX = n.worldObject.X;
             n.PrevY = n.worldObject.Y;
         }
-        
+
         public void deleteLeftObjects()
         {
             this.noticedObjects.RemoveAll(noticedObj => noticedObj.Seen == false);
@@ -139,9 +149,9 @@ namespace AutomatedCar.Models
             this.RadarSensorPacket.Update(this.getDangerousWorldObjects());
         }
 
-        public List<WorldObject> getDangerousWorldObjects()
+        public List<NoticedObject> getDangerousWorldObjects()
         {
-            List<WorldObject> dangerousList = new List<WorldObject>();
+            List<NoticedObject> dangerousList = new List<NoticedObject>();
             Vector carVector = new Vector(
                 World.Instance.ControlledCar.X - CarPreviousPosition.X,
                 World.Instance.ControlledCar.Y - CarPreviousPosition.Y
@@ -150,13 +160,20 @@ namespace AutomatedCar.Models
             double angle = World.Instance.ControlledCar.Angle;
             foreach (var item in noticedObjects)
             {
-                if(
-                    objectIsSlover(carVector, item) || approaching(angle, item)){
-                    dangerousList.Add(item.worldObject);
+                if(objectIsSlover(carVector, item) || approaching(angle, item)){
+                    item.DistanceFromCar_inMeter = computeObjectDistanceFromCar(item);
+                    dangerousList.Add(item);
                 }
             }
 
             return dangerousList;
+        }
+
+        private double computeObjectDistanceFromCar(NoticedObject item){
+            double x = item.worldObject.X-World.Instance.ControlledCar.X;
+            double y = item.worldObject.Y-World.Instance.ControlledCar.Y;
+            Vector V = new Vector(x, y);
+            return (V.Length-(World.Instance.ControlledCar.Height/2))/50;
         }
 
         private Boolean objectIsSlover(Vector carVector, NoticedObject item) {
