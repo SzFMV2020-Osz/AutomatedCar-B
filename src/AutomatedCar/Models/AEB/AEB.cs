@@ -23,5 +23,9 @@ namespace AutomatedCar.Models
         private double kmh_into_ms(double kmh) {
             return (kmh*1000)/(60*60);
         }
+
+        public int getStoppingDistanceTo(WorldObject worldObject){
+            return 0;
+        }
     }
 }

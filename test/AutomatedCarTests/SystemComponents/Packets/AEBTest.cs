@@ -50,5 +50,16 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(false, aeb.IsUseable());
         }
+
+        [Fact]
+        public void getStoppingDistanceTo_carPosition_x0_y0_worldobjectPosition_x0_y0() {
+            World.Instance.ControlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+
+            double distance = aeb.getStoppingDistanceTo(wo);
+
+            Assert.Equal(0, distance);
+        }
     }
 }
