@@ -36,7 +36,7 @@ namespace AutomatedCar.SystemComponents
         {
             World.Instance.ControlledCar.Move(this.Steering.NewCarPosition);
             World.Instance.ControlledCar.Angle = this.Steering.NewCarAngle;
-            World.Instance.ControlledCar.Speed = (int)this.Engine.VelocityPixelsPerSecond;
+            World.Instance.ControlledCar.speed = (int)this.Engine.VelocityPixelsPerSecond;
         }
 
         private void UpdatePowerTrainPacket()

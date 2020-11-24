@@ -42,7 +42,7 @@
 
         private void SetVelocityPixelPerTick()
         {
-            this.velocityPixelPerTick = World.Instance.ControlledCar.Speed * this.deltaTime;
+            this.velocityPixelPerTick = World.Instance.ControlledCar.speed * this.deltaTime;
         }
 
         private void SetCarDirectionUnitVector()

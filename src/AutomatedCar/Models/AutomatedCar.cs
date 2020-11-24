@@ -59,7 +59,9 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
-        public int Speed { get; set; }
+        public int Speed { get{return (int)Math.Round(speed);} set{speed = value;} }
+
+        public double speed;
 
         public int Mass { get; set; } = 5;
 
