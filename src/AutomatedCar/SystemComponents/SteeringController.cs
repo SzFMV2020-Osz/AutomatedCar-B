@@ -1,4 +1,4 @@
-namespace AutomatedCar.SystemComponents
+﻿namespace AutomatedCar.SystemComponents
 {
     using System;
     using System.Numerics;
@@ -27,7 +27,7 @@ namespace AutomatedCar.SystemComponents
         public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
             this.SetVelocityPixelPerTick();
-            if (this.velocityPixelPerTick != 0)
+            if (this.velocityPixelPerTick != 0.0)
             {
                 this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
                 this.carCurrentAngle = World.Instance.ControlledCar.Angle;

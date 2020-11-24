@@ -73,8 +73,8 @@ namespace AutomatedCar.Models
         {
             var crashedObjects = GetCrashedObjects();
             newPosition = this.CrashEffects(newPosition, crashedObjects);
-            this.X = (int)newPosition.X;
-            this.Y = (int)newPosition.Y;
+            this.X = (int)Math.Round(newPosition.X);
+            this.Y = (int)Math.Round(newPosition.Y);
         }
 
         private static List<WorldObject> GetCrashedObjects()
