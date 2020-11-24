@@ -1,4 +1,6 @@
+using System;
 using AutomatedCar.SystemComponents;
+using Avalonia;
 
 namespace AutomatedCar.Models
 {
@@ -24,8 +26,22 @@ namespace AutomatedCar.Models
             return (kmh*1000)/(60*60);
         }
 
-        public int getStoppingDistanceTo(WorldObject worldObject){
-            return 0;
+        public double getStoppingDistanceTo_inPixels(WorldObject worldObject)  {
+            double carSpeed = pxm_into_ms(World.Instance.ControlledCar.Speed);
+            double decceleration =  9;
+
+            return computeObjectDistanceFromCar_inPixel(worldObject) - (Math.Pow(carSpeed, 2)/decceleration)*50; 
+        }
+
+        private double pxm_into_ms(double pxm){
+            return pxm/50;
+        }
+
+        private double computeObjectDistanceFromCar_inPixel(WorldObject item){
+            double x = item.X-World.Instance.ControlledCar.X;
+            double y = item.Y-World.Instance.ControlledCar.Y;
+            Vector V = new Vector(x, y);
+            return (V.Length-(World.Instance.ControlledCar.Height/2));
         }
     }
 }
