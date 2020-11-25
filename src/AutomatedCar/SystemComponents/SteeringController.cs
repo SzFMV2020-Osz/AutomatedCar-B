@@ -24,12 +24,17 @@
 
         public double NewCarAngle { get; set; }
 
+        public void SetStartPosition(int x, int y)
+        {
+            this.carPoint = new Vector2(x, y);
+        }
+
         public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
             this.SetVelocityPixelPerTick();
             if (this.velocityPixelPerTick != 0.0)
             {
-                this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
+                //this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
                 this.carCurrentAngle = World.Instance.ControlledCar.Angle;
                 this.steeringAngle = packet.Steering * SteeringWheelConversionConstant;
                 this.isInReverseGear = packet.Gear == Gears.R;
@@ -55,11 +60,13 @@
             if (this.isInReverseGear)
             {
                 this.NewCarPosition = this.carPoint + (-1 * ((float)this.LinearDisplacement() * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
+                carPoint = NewCarPosition;
             }
             else
             {
                 double temp = this.LinearDisplacement();
                 this.NewCarPosition = this.carPoint + ((float)this.LinearDisplacement() * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
+                carPoint = NewCarPosition;
             }
         }
 

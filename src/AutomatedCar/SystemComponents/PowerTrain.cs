@@ -6,7 +6,7 @@ namespace AutomatedCar.SystemComponents
 
     public class PowerTrain : SystemComponent
     {
-        public PowerTrain(VirtualFunctionBus functionBus)
+        public PowerTrain(VirtualFunctionBus functionBus,int start_x, int start_y)
             : base(functionBus)
         {
             this.Engine = new EngineController();
@@ -14,6 +14,7 @@ namespace AutomatedCar.SystemComponents
             this.PowerTrainPacket = new PowerTrainPacket();
             this.HMIPacket = this.virtualFunctionBus.HMIPacket;
             this.virtualFunctionBus.PowerTrainPacket = this.PowerTrainPacket;
+            this.Steering.SetStartPosition(start_x, start_y);
         }
 
         private EngineController Engine { get; set; }
