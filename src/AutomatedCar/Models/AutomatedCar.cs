@@ -48,6 +48,7 @@ namespace AutomatedCar.Models
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
+        public Radar Radar { get; set; }
 
         public HumanMachineInterface HumanMachineInterface { get => this.humanMachineInterface; }
 

@@ -36,13 +36,13 @@ namespace AutomatedCar.Models
 
         public RadarSensorPacket RadarSensorPacket { get; set; } = new RadarSensorPacket();
 
-        public List<NoticedObject> filterCollidables(List<WorldObject> paramWorldObjects)
+        public List<WorldObject> filterCollidables(List<WorldObject> paramWorldObjects)
         {
-            List<NoticedObject> nwos = new List<NoticedObject>();
+            List<WorldObject> nwos = new List<WorldObject>();
             foreach (var item in paramWorldObjects)
             {
                if(item.IsColliding) {
-                nwos.Add(createNoticedObjectfromWorldObject(item));
+                nwos.Add(item);
                } 
             }
             return nwos;
@@ -137,7 +137,7 @@ namespace AutomatedCar.Models
                 RTC.offset = 120;
                 RTC.distance = 200;
                 RTC.angle = 60 / 2;
-                RTC.rotate = (int)World.Instance.ControlledCar.Angle;
+                RTC.rotate = (int)World.Instance.ControlledCar.Angle-90;
                 RTC.carX = (int)World.Instance.ControlledCar.X;
                 RTC.carY = (int)World.Instance.ControlledCar.Y;
             }

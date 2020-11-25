@@ -51,6 +51,8 @@ namespace AutomatedCar
                 List<List<Point>> polyList = new List<List<Point>>();
                 polyList.Add(points);
                 AutomatedCar controlledCar = new Models.AutomatedCar(0, 0, "car_1_white", W, H, polyList);
+                controlledCar.Radar = new Radar();
+
 
                 controlledCar.RadarBrush = new SolidColorBrush(Color.Parse("blue"));
                 controlledCar.CameraBrush = new SolidColorBrush(Color.Parse("red"));
