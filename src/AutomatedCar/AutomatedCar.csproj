@@ -16,9 +16,13 @@
     <EmbeddedResource Include="Assets\**;Resources\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\WorldObjects\npcParkingCar1.json" />
+    <AvaloniaResource Remove="Assets\WorldObjects\npcParkingCar2.json" />
     <AvaloniaResource Remove="Views\MessageBox.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\WorldObjects\npcParkingCar1.json" />
+    <None Remove="Assets\WorldObjects\npcParkingCar2.json" />
     <None Remove="Views\MessageBox.xaml" />
   </ItemGroup>
   <ItemGroup>

@@ -82,6 +82,14 @@ namespace AutomatedCar
                 npcCar.SetStartPosition();
                 world.AddObject(npcCar);
 
+                NpcCar npcCar2 = new NpcCar("car_2_blue", W, H, polyList, $"AutomatedCar.Assets.npcParkingCar1.json");
+                npcCar2.SetStartPosition();
+                world.AddObject(npcCar2);
+
+                NpcCar npcCar3 = new NpcCar("car_3_black", W, H, polyList, $"AutomatedCar.Assets.npcParkingCar2.json");
+                npcCar3.SetStartPosition();
+                world.AddObject(npcCar3);
+
                 NpcPedestrian npcPedMan = new NpcPedestrian("man", W / 3, H / 3, polyList, $"AutomatedCar.Assets.npcPedRoute1.json");
                 npcPedMan.SetStartPosition();
                 world.AddObject(npcPedMan);
