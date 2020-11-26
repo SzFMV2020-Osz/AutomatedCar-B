@@ -1,4 +1,4 @@
-namespace AutomatedCar.SystemComponents
+﻿namespace AutomatedCar.SystemComponents
 {
     using System;
     using System.Numerics;
@@ -31,9 +31,13 @@ namespace AutomatedCar.SystemComponents
 
         public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
         {
+            CheckCarPosition();
+
             this.SetVelocityPixelPerTick();
             if (this.velocityPixelPerTick != 0.0)
             {
+                
+
                 this.carCurrentAngle = World.Instance.ControlledCar.Angle;
                 this.steeringAngle = packet.Steering * SteeringWheelConversionConstant * Math.Sqrt(World.Instance.ControlledCar.Speed / 1000.0);
                 this.isInReverseGear = packet.Gear == Gears.R;
@@ -41,6 +45,14 @@ namespace AutomatedCar.SystemComponents
                 this.SetNewDirectionUnitVector();
                 this.SetNewCarPosition();
                 this.SetNewCarAngle();
+            }
+        }
+
+        private void CheckCarPosition()
+        {
+            if(Math.Round(carPoint.X) != World.Instance.ControlledCar.X ||  Math.Round(carPoint.Y) != World.Instance.ControlledCar.Y)
+            {
+                    this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
             }
         }
 
