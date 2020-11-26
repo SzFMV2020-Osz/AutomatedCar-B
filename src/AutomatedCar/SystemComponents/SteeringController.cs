@@ -9,7 +9,7 @@ namespace AutomatedCar.SystemComponents
         private const int WheelBaseInPixels = 156;
         private const int CarWidth = 108;
         private const int MaximumSteeringAngle = 60;
-        private const double SteeringWheelConversionConstant = 0.6; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
+        private const double SteeringWheelConversionConstant = 0.1; // 100 es -100 kozotti kormanyallas ertekeket feltetelezve
         private double turningCircleRadius = (WheelBaseInPixels / Math.Tan(MaximumSteeringAngle * Math.PI / 180)) + CarWidth;
         private bool isInReverseGear;
         private double deltaTime = 0.016;
@@ -35,7 +35,7 @@ namespace AutomatedCar.SystemComponents
             if (this.velocityPixelPerTick != 0.0)
             {
                 this.carCurrentAngle = World.Instance.ControlledCar.Angle;
-                this.steeringAngle = packet.Steering * SteeringWheelConversionConstant;
+                this.steeringAngle = packet.Steering * SteeringWheelConversionConstant * Math.Sqrt(World.Instance.ControlledCar.Speed / 1000.0);
                 this.isInReverseGear = packet.Gear == Gears.R;
                 this.SetCarDirectionUnitVector();
                 this.SetNewDirectionUnitVector();
@@ -58,20 +58,19 @@ namespace AutomatedCar.SystemComponents
         {
             if (this.isInReverseGear)
             {
-                this.NewCarPosition = this.carPoint + (-1 * ((float)this.LinearDisplacement() * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
+                this.NewCarPosition = this.carPoint + (-1 * ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector)));
                 carPoint = NewCarPosition;
             }
             else
             {
-                double temp = this.LinearDisplacement();
-                this.NewCarPosition = this.carPoint + ((float)this.LinearDisplacement() * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
+                this.NewCarPosition = this.carPoint + ((float)this.velocityPixelPerTick * this.ConvertToVisualizationCoordinates(this.newDirectionUnitVector));
                 carPoint = NewCarPosition;
             }
         }
 
         private void SetNewDirectionUnitVector()
         {
-            this.newDirectionUnitVector = Vector2.Transform(this.carDirectionUnitVector, Matrix3x2.CreateRotation((float)this.AnglularDisplacementInRadians()));
+            this.newDirectionUnitVector = Vector2.Transform(this.carDirectionUnitVector, Matrix3x2.CreateRotation((float)(this.steeringAngle * (Math.PI / 180))));
         }
 
         private void SetNewCarAngle()
@@ -85,21 +84,6 @@ namespace AutomatedCar.SystemComponents
         private Vector2 ConvertToVisualizationCoordinates(Vector2 vector)
         {
             return Vector2.Transform(this.newDirectionUnitVector, Matrix3x2.CreateRotation((float)(-90 * (Math.PI / 180))));
-        }
-
-        private double AnglularDisplacementInRadians() =>
-            (this.velocityPixelPerTick / this.turningCircleRadius) * (this.steeringAngle / MaximumSteeringAngle);
-
-        private double LinearDisplacement()
-        {
-            if (this.steeringAngle != 0)
-            {
-                return this.velocityPixelPerTick * (2 * Math.Sin(this.AnglularDisplacementInRadians() / 2)) / this.AnglularDisplacementInRadians();
-            }
-            else
-            {
-                return this.velocityPixelPerTick;
-            }
         }
     }
 }
