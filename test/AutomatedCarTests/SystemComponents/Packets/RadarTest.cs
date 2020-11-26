@@ -50,20 +50,40 @@ namespace Tests.SystemComponents.Packets
     public class RadarTest_getDangeriousWorldObjects
     {
         [Fact]
+        public void getDistanceFromCar()
+        {
+            Radar radar = new Radar();
+            radar.CarPreviousPosition = new Point(400, 500);
+
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(400, 300, "", 100, 100, new List<List<Point>>());
+            World.Instance.ControlledCar.Angle = 0;
+
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(400, 400,"",0,0,new List<List<Point>>());
+            nw.Vector = new Vector(0, 150);
+            radar.NoticedObjects.Add(nw);
+
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
+
+            Assert.Equal(50/50, wos[0].DistanceFromCar_inMeter);
+        }
+        [Fact]
         public void getWorldObjectsList()
         {
             Radar radar = new Radar();
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(0, 150);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
-            Assert.IsType<List<WorldObject>>(wos);
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
+            Assert.IsType<List<NoticedObject>>(wos);
         }
 
         [Fact]
-        public void getWorldObjectItem()
+        public void getWorldObjectItem_inList()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -73,16 +93,17 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(0, 150);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void getWorldObjectItem_twoSlow()
+        public void getWorldObjectItem_twoSlow_ObjectsAreNoticed()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -91,19 +112,21 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             NoticedObject nw2 = new NoticedObject();
+            nw2.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(0, 150);
             nw2.Vector = new Vector(0, 100);
             radar.NoticedObjects.Add(nw);
             radar.NoticedObjects.Add(nw2);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(2, wos.Count);
         }
 
         [Fact]
-        public void getWorldObjectItem_oneSlow_oneFast()
+        public void getWorldObjectItem_oneSlow_oneFast_ObjectsAreNoticed()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -112,19 +135,21 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             NoticedObject nw2 = new NoticedObject();
+            nw2.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(0, 150);
             nw2.Vector = new Vector(0, 200);
             radar.NoticedObjects.Add(nw);
             radar.NoticedObjects.Add(nw2);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(400, 500);
@@ -133,16 +158,17 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(0, -200);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection90()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated90()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(100, 150);
@@ -151,16 +177,17 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(-100, 0);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
 
-        [Fact (Skip="TODO")]
-        public void getWorldObjectItem_opositeDirection180()
+        [Fact]
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated180()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(100, 100);
@@ -168,16 +195,17 @@ namespace Tests.SystemComponents.Packets
             World.Instance.ControlledCar.Angle = 180;
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(0, 200);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection270()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated270()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(500, 300);
@@ -186,16 +214,17 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(100, 0);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
         }
 
         [Fact]
-        public void getWorldObjectItem_opositeDirection315()
+        public void getWorldObjectItem_ObjectInOpositeDirection_ObjectIsNoticed_carRotated315()
         {
             Radar radar = new Radar();
             radar.CarPreviousPosition = new Point(500, 300);
@@ -204,12 +233,43 @@ namespace Tests.SystemComponents.Packets
 
             radar.NoticedObjects = new List<NoticedObject>();
             NoticedObject nw = new NoticedObject();
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             nw.Vector = new Vector(100, -100);
             radar.NoticedObjects.Add(nw);
 
-            List<WorldObject> wos = radar.getDangerousWorldObjects();
+            List<NoticedObject> wos = radar.getDangerousWorldObjects();
 
             Assert.Equal(1, wos.Count);
+        }
+    }
+    public class RadarTest_IsInNoticedObjects {
+        [Fact]
+        public void isInNoticedObjects() {
+            WorldObject wo = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+
+            Radar radar = new Radar();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.worldObject = wo;
+            nw.Vector = new Vector(100, -100);
+            radar.NoticedObjects.Add(nw);
+            
+            Assert.Equal(true, radar.isInNoticedObjects(wo));
+        }
+
+        [Fact]
+        public void isNotInNoticedObjects() {
+            WorldObject wo = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+            WorldObject wo2 = new AutomatedCar.Models.AutomatedCar(400, 300, "", 0, 0, new List<List<Point>>());
+
+            Radar radar = new Radar();
+            radar.NoticedObjects = new List<NoticedObject>();
+            NoticedObject nw = new NoticedObject();
+            nw.worldObject = wo2;
+            nw.Vector = new Vector(100, -100);
+            radar.NoticedObjects.Add(nw);
+            
+            Assert.Equal(false, radar.isInNoticedObjects(wo));
         }
     }
 
@@ -228,6 +288,7 @@ namespace Tests.SystemComponents.Packets
         private void AddNoticedObject(NoticedObject nw, Vector vector)
         {
             nw.Vector = vector;
+            nw.worldObject = new AutomatedCar.Models.AutomatedCar(0,0,"",0,0,new List<List<Point>>());
             radar.NoticedObjects.Add(nw);
         }
 
