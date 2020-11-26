@@ -42,26 +42,34 @@ namespace AutomatedCar.Models
 
         public void Move(object sender, EventArgs args)
         {
-            speedLimit = CheckSpeedLimit(speedLimit);
-
-            Vector2 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
-            Vector2 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
-            
-            if(movementDirection.Length() == 0 || movementDirection.Length() < moveWith.Length())
+            if(toReach.tag != "park")
             {
-                if(toReach.tag == "finish")
+                speedLimit = CheckSpeedLimit(speedLimit);
+
+                Vector2 movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
+                Vector2 moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
+                
+                if(movementDirection.Length() == 0 || movementDirection.Length() < moveWith.Length())
                 {
-                    routeIndex = -1;
+                    if(toReach.tag == "finish")
+                    {
+                        routeIndex = -1;
+                    }
+
+                    toReach = Route[++routeIndex];
+                    movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
+                    moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
                 }
 
-                toReach = Route[++routeIndex];
-                movementDirection = new Vector2(toReach.x - X, toReach.y - Y);
-                moveWith = movementDirection / movementDirection.Length() * Convert.ToSingle(speedLimit);
+                this.CalculateNpcAngle(movementDirection);
+                Move(moveWith);
+            }
+            else
+            {
+                Move(new Vector2(0,0));
             }
 
-            this.CalculateNpcAngle(movementDirection);
-
-            Move(moveWith);
+           
         }
 
         private void CalculateNpcAngle(Vector2 direction)

@@ -99,6 +99,8 @@ namespace AutomatedCar
                 world.AddObject(npcPedWoman);
 
                 world.OnTick += npcCar.Move;
+                world.OnTick += npcCar2.Move;
+                world.OnTick += npcCar3.Move;
                 world.OnTick += npcPedMan.Move;
                 world.OnTick += npcPedWoman.Move;
 
