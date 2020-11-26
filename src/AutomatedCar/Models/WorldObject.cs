@@ -16,8 +16,9 @@ namespace AutomatedCar.Models
         private int _mass;
         private int _x;
         private int _y;
+        private SolidColorBrush brush;
 
-        public SolidColorBrush Brush { get; set; }
+        public SolidColorBrush Brush { get => this.brush; set => this.RaiseAndSetIfChanged(ref this.brush, value); }
 
         public Matrix RotMatrix { get; set; }
 
