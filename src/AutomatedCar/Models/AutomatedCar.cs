@@ -38,7 +38,7 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -120, -25, 180),
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
-
+            this.Radar = new Radar(this.virtualFunctionBus);
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
@@ -52,7 +52,7 @@ namespace AutomatedCar.Models
 
         public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
         
-        public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
+        public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
 
         public Geometry Geometry { get; set; }
 

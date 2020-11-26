@@ -46,7 +46,7 @@
             <Canvas Name="ImageTag" Left="{Binding X, Mode=OneWay}" Top="{Binding Y, Mode=OneWay}">
               <!-- Camera -->
 
-              <!-- <customcontrols:SensorCustomControl Name="Camera" Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="-20, 0" Opacity="60" /> -->
+              <customcontrols:SensorCustomControl Name="Camera" Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="-20, 0" Opacity="60" />
 
               <!-- Radar -->
               <!-- <customcontrols:SensorCustomControl Name="Radar" Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="120, 0" Opacity="60" /> -->
@@ -71,7 +71,7 @@
                   <RotateTransform Angle="{Binding Angle}" />
                 </TransformGroup>
               </Canvas.RenderTransform>
-              <Image Width="{Binding Width}" Height="{Binding Height}"
+               <Image Width="{Binding Width}" Height="{Binding Height}"
                      Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                 <Image.RenderTransform>
                   <TransformGroup>
@@ -79,7 +79,7 @@
                     <TranslateTransform Y="{Binding referenceOffsetY}" />
                   </TransformGroup>
                 </Image.RenderTransform>
-              </Image>
+              </Image> 
             </Canvas>
             <Canvas>
               <Canvas.RenderTransform>
@@ -92,14 +92,14 @@
               <Polyline Stroke="{Binding Brush, Mode=OneWay}" Points="{Binding NetPolygons[0], Converter={x:Static visualization:CoordinateConverter.Instance}}}" />
             </Canvas>
             <Canvas>
-              <!-- <customcontrols:UltrasoundCustomControl Indexer="0"></customcontrols:UltrasoundCustomControl>
+              <customcontrols:UltrasoundCustomControl Indexer="0"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="1"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="2"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="3"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="4"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="5"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="6"></customcontrols:UltrasoundCustomControl>
-              <customcontrols:UltrasoundCustomControl Indexer="7"></customcontrols:UltrasoundCustomControl> -->
+              <customcontrols:UltrasoundCustomControl Indexer="7"></customcontrols:UltrasoundCustomControl>
 
               <customcontrols:RadarCustomControl Indexer="0"></customcontrols:RadarCustomControl>
             </Canvas>
