@@ -16,6 +16,7 @@ namespace AutomatedCar.Models
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
+        private Radar radar;
 
 
         /*public AutomatedCar(int x, int y, string filename)
@@ -51,6 +52,8 @@ namespace AutomatedCar.Models
         public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
         public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
+        
+        public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
 
         public Geometry Geometry { get; set; }
 

@@ -11,14 +11,14 @@ using Avalonia.Media;
 
 namespace AutomatedCar.Models
 {
-    public class Radar : SystemComponent
+    public class Radar_old : SystemComponent
     {
         List<NoticedObject> noticedObjects;
         Point carPreviousPosition;
         Point[] points;
         public int offset = 0;
 
-        public Radar(VirtualFunctionBus virtualFunctionBus = null)
+        public Radar_old(VirtualFunctionBus virtualFunctionBus = null)
             : base(virtualFunctionBus)
         {
             if (virtualFunctionBus != null)
