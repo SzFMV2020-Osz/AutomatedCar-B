@@ -46,25 +46,18 @@ namespace AutomatedCar.Views.CustomControls
             PolylineGeometry geometry;
             if (sensor.Points == null)
             {
-                var car = World.Instance.ControlledCar;
-                var radAngle = car.Angle * Math.PI / 180;
-                car.RotMatrix = new Matrix(Math.Cos(radAngle), -Math.Sin(radAngle), Math.Sin(radAngle), Math.Cos(radAngle), 0, 0);
-                var p = sensor.CalculatePoints();
-                var start = p[0];
-                List<Point> p2 = new List<Point>() { new Point(start.X + 10, start.Y + 10), new Point(start.X - 10, start.Y - 10), new Point(start.X + 10, start.Y - 10), new Point(start.X - 10, start.Y + 10) };
-                geometry = new PolylineGeometry(p2, true);
+                geometry = new PolylineGeometry(sensor.CalculatePoints(), true);
             }
             else
             {
-                var start = sensor.Points[0];
-                List<Point> p2 = new List<Point>() { new Point(start.X + 10, start.Y + 10), new Point(start.X - 10, start.Y - 10), new Point(start.X + 10, start.Y - 10), new Point(start.X - 10, start.Y + 10) };
-                geometry = new PolylineGeometry(p2, true);
+                geometry = new PolylineGeometry(sensor.Points, true);
             }
 
             this.Brush = sensor.Brush;
 
             this.Opacity = 60;
-            context.DrawGeometry(new SolidColorBrush(new Color(this.Opacity, this.Brush.Color.R, this.Brush.Color.G, this.Brush.Color.B)), new Pen(), geometry);
+            Random r = new Random();
+            context.DrawGeometry(new SolidColorBrush(new Color(this.Opacity, (byte)r.Next(255), (byte)r.Next(255), (byte)r.Next(255))), new Pen(), geometry);
         }
     }
 }
