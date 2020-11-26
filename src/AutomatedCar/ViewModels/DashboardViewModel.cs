@@ -5,6 +5,7 @@ namespace AutomatedCar.ViewModels
     using AutomatedCar.SystemComponents.Packets;
     using Avalonia;
     using Avalonia.Controls;
+    using Avalonia.Interactivity;
     using ReactiveUI;
 
     public class DashboardViewModel : ViewModelBase
@@ -24,5 +25,10 @@ namespace AutomatedCar.ViewModels
                 this.RaiseAndSetIfChanged(ref controlledCar, value);
             }
         }
+        
+        public void OnClickCommand()
+        {
+            this.ControlledCar.HealthPoints = 100;
+        }   
     }
 }

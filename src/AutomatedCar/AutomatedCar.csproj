@@ -16,6 +16,17 @@
     <EmbeddedResource Include="Assets\**;Resources\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Views\MessageBox.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\MessageBox.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MessageBox.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <!-- Avalonia 0.9.12 is the latest, but 0.10.0 preview solves a bug, so that's in use -->
     <PackageReference Include="Avalonia" Version="0.10.0-preview5" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview5" />
@@ -31,6 +42,7 @@
     <!-- <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference> -->
+    </PackageReference>
+    <PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />
   </ItemGroup>
 </Project>
