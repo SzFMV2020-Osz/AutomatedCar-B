@@ -18,7 +18,6 @@ namespace AutomatedCar.Models
         private Ultrasound[] ultrasounds;
         private Radar radar;
 
-
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
         public AutomatedCar(int x, int y, string filename, int width, int height, List<List<Point>> polylist)
