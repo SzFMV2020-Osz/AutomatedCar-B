@@ -12,7 +12,8 @@
   <UserControl.Resources>
     <converters:BoolToColorConverter x:Key="ColorConverter" />
     <converters:IntegerToAngleRpmConverter x:Key="RpmAngleConverter" />
-    <converters:DoubleToAngleKmHConverter x:Key="KmHAngleConverter" />
+    <converters:PixelsPerTickToKmHAngleConverter x:Key="KmHAngleConverter" />
+    <converters:PixelsPerTickToKmPHConverter x:Key="KmHValueConverter" />
   </UserControl.Resources>
 
   <UserControl.Styles>
@@ -67,7 +68,7 @@
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="35 90 35 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, StringFormat={}{0:0}}}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, Converter={StaticResource KmHValueConverter}, StringFormat={}{0:0}}}"/>
                     <TextBlock Foreground="Black" Text=" km/h"/>
                   </WrapPanel>
                 </Canvas>

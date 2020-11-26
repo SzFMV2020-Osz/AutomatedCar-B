@@ -19,11 +19,9 @@ namespace AutomatedCar
 
         protected override void Tick()
         {
-
             // Demo-hoz
             // this.world.ControlledCar.NetPolygons = this.world.ControlledCar.GenerateNetPolygons(this.world.ControlledCar.BasePoints);
             // Collision.Handler();
-
             World.Instance.Tick();
         }
     }

@@ -149,9 +149,9 @@ namespace AutomatedCar.Models
             this.RadarSensorPacket.Update(this.getDangerousWorldObjects());
         }
 
-        public List<WorldObject> getDangerousWorldObjects()
+        public List<NoticedObject> getDangerousWorldObjects()
         {
-            List<WorldObject> dangerousList = new List<WorldObject>();
+            List<NoticedObject> dangerousList = new List<NoticedObject>();
             Vector carVector = new Vector(
                 World.Instance.ControlledCar.X - CarPreviousPosition.X,
                 World.Instance.ControlledCar.Y - CarPreviousPosition.Y
@@ -160,13 +160,20 @@ namespace AutomatedCar.Models
             double angle = World.Instance.ControlledCar.Angle;
             foreach (var item in noticedObjects)
             {
-                if(
-                    objectIsSlover(carVector, item) || approaching(angle, item)){
-                    dangerousList.Add(item.worldObject);
+                if(objectIsSlover(carVector, item) || approaching(angle, item)){
+                    item.DistanceFromCar_inMeter = computeObjectDistanceFromCar(item);
+                    dangerousList.Add(item);
                 }
             }
 
             return dangerousList;
+        }
+
+        private double computeObjectDistanceFromCar(NoticedObject item){
+            double x = item.worldObject.X-World.Instance.ControlledCar.X;
+            double y = item.worldObject.Y-World.Instance.ControlledCar.Y;
+            Vector V = new Vector(x, y);
+            return (V.Length-(World.Instance.ControlledCar.Height/2))/50;
         }
 
         private Boolean objectIsSlover(Vector carVector, NoticedObject item) {
