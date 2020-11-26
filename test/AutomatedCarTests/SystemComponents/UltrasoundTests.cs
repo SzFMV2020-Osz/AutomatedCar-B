@@ -25,7 +25,7 @@ namespace Tests.SystemComponents
             double s = (a + b + c) / 2;
             double area = HeronFormula(s, a, b, c);
             double expectedArea = ultrasound.range * (2 * ultrasound.range * Math.Tan(ultrasound.angleOfView / 2 * Math.PI / 180)) / 2;
-            Assert.Equal(area, expectedArea);
+            Assert.Equal(Math.Round(area, 3), Math.Round(expectedArea, 3));
         }
 
         private double HeronFormula(double s, double a, double b, double c)
