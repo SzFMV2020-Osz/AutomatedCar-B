@@ -103,7 +103,13 @@ namespace AutomatedCar.SystemComponents
             px -= car.X;
             py -= car.Y;
 
-            this.Start = new Point(py, -px);
+            //double xnew = (px * c) - (py * s);
+            //double ynew = (px * s) + (py * c);
+
+            //px = xnew + centerX;
+            //py = ynew + centerY;
+
+            this.Start = new Point(p.X, p.Y);
         }
 
         public Point RotatePoint(double centerX, double centerY, double angle, Point p)

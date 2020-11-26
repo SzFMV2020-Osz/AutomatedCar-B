@@ -46,11 +46,19 @@ namespace AutomatedCar.Views.CustomControls
             PolylineGeometry geometry;
             if (sensor.Points == null)
             {
-                geometry = new PolylineGeometry(sensor.CalculatePoints(), true);
+                var car = World.Instance.ControlledCar;
+                var radAngle = car.Angle * Math.PI / 180;
+                car.RotMatrix = new Matrix(Math.Cos(radAngle), -Math.Sin(radAngle), Math.Sin(radAngle), Math.Cos(radAngle), 0, 0);
+                var p = sensor.CalculatePoints();
+                var start = p[0];
+                List<Point> p2 = new List<Point>() { new Point(start.X + 10, start.Y + 10), new Point(start.X - 10, start.Y - 10), new Point(start.X + 10, start.Y - 10), new Point(start.X - 10, start.Y + 10) };
+                geometry = new PolylineGeometry(p2, true);
             }
             else
             {
-                geometry = new PolylineGeometry(sensor.Points, true);
+                var start = sensor.Points[0];
+                List<Point> p2 = new List<Point>() { new Point(start.X + 10, start.Y + 10), new Point(start.X - 10, start.Y - 10), new Point(start.X + 10, start.Y - 10), new Point(start.X - 10, start.Y + 10) };
+                geometry = new PolylineGeometry(p2, true);
             }
 
             this.Brush = sensor.Brush;
