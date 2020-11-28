@@ -6,8 +6,11 @@ namespace AutomatedCar.Models
 {
     public class AEB
     {
+        public Radar radarClassHelper;
+
         public AEB()
         {
+            radarClassHelper = new Radar();
         }
 
         public bool IsUseable(){
@@ -42,6 +45,15 @@ namespace AutomatedCar.Models
             double y = item.Y-World.Instance.ControlledCar.Y;
             Vector V = new Vector(x, y);
             return (V.Length-(World.Instance.ControlledCar.Height/2));
+        }
+
+        public bool isThereObjInRadarTriangle()
+        {
+            if (this.radarClassHelper.NoticedObjects.Count > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

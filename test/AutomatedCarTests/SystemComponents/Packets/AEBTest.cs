@@ -71,5 +71,21 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(91*50, distance);
         }
+
+        [Fact]
+        public void thereIsAnObjectInRadarTraingle() //isThereObjInRadarTriangle()
+        {
+            aeb.radarClassHelper.NoticedObjects.Add(new NoticedObject());
+
+            Assert.True(aeb.isThereObjInRadarTriangle());
+        }
+
+        [Fact]
+        public void thereIsNoObjectInRadarTraingle() //isThereObjInRadarTriangle()
+        {
+            aeb.radarClassHelper.NoticedObjects.Clear();
+
+            Assert.False(aeb.isThereObjInRadarTriangle());
+        }
     }
 }
