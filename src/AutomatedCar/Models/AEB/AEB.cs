@@ -30,7 +30,7 @@ namespace AutomatedCar.Models
             double carSpeed = pxm_into_ms(World.Instance.ControlledCar.Speed);
             double decceleration =  9;
 
-            return computeObjectDistanceFromCar_inPixel(worldObject) - ((Math.Pow(carSpeed, 2)/decceleration)*50); 
+            return ((Math.Pow(carSpeed, 2)/decceleration)*50); 
         }
 
         private double pxm_into_ms(double pxm){
