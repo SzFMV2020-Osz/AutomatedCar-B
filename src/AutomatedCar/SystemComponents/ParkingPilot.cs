@@ -119,6 +119,7 @@ namespace AutomatedCar.SystemComponents
             {
                 lastSeen = objectInFocus;
                 parkingStartAngle = World.Instance.ControlledCar.Angle;
+                ableToPark = false;
             }         
         }
 
