@@ -18,6 +18,7 @@
     <converters:UltrasoundIndexToDistanceValueConverter x:Key="DistanceConverter" />
     <converters:UltrasoundIndexToForeGroundColorConverter x:Key="ForegroundConverter" />
     <converters:UltrasoundReversRadarValueConverter x:Key="DistanceValueConver" />
+    <converters:LastSeenSignConverter x:Key="SignConverter" />
   </UserControl.Resources>
 
   <UserControl.Styles>
@@ -248,8 +249,9 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
-                  <Image Source="resm:AutomatedCar.Assets.steering-wheel.png?assembly=AutomatedCar" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                             Height="90" Width="90">
+                  <!--<Image Source="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Sign, Converter={StaticResource SignConverter}}"-->
+                  <Image Source="resm:AutomatedCar.Assets.no_sign.png?assembly=AutomatedCar"
+                         HorizontalAlignment="Center" VerticalAlignment="Center">
                   </Image>
                 </Border>
                 <WrapPanel Grid.Row="3" Grid.Column="1"
