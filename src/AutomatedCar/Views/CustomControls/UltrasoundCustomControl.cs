@@ -56,6 +56,7 @@ namespace AutomatedCar.Views.CustomControls
             this.Brush = sensor.Brush;
 
             this.Opacity = 60;
+
             context.DrawGeometry(new SolidColorBrush(new Color(this.Opacity, this.Brush.Color.R, this.Brush.Color.G, this.Brush.Color.B)), new Pen(), geometry);
         }
     }

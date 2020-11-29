@@ -13,12 +13,9 @@ namespace AutomatedCar.Models
     public class AutomatedCar : WorldObject, IMoveable
     {
         private VirtualFunctionBus virtualFunctionBus;
-        private DummySensor dummySensor;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
-
-        public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -28,7 +25,6 @@ namespace AutomatedCar.Models
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
-            this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
