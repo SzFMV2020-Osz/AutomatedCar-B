@@ -37,35 +37,37 @@ namespace Tests.Models
             Assert.Equal(0, objects.Count);
         }
 
-        [Fact(Skip = "something wrong with this")]
-        public void CollisonLandmarkTest()
-        {
-            World world = World.Instance;
-            Matrix testRotMatrix = new Matrix(1, 0, 0, 1, 0, 0);
+        // meghal tőle a teszt futtatás
+        // CollisonTests\WorldTest.cs(69,27): error CS1503: Argument 1: cannot convert from 'int' to 'System.Collections.IEnumerable' [D:\egocar\AutomatedCar-B\test\AutomatedCarTests\AutomatedCarTests.csproj]
+        // [Fact(Skip = "something wrong with this")]
+        // public void CollisonLandmarkTest()
+        // {
+        //     World world = World.Instance;
+        //     Matrix testRotMatrix = new Matrix(1, 0, 0, 1, 0, 0);
 
-            List<WorldObject> objects = new List<WorldObject>();
+        //     List<WorldObject> objects = new List<WorldObject>();
 
-            int W = 108;
-            int H = 240;
-            List<List<Point>> polyList = new List<List<Point>>();
-            polyList.Add(new List<Point>(new Point[] { new Point(0, 0), new Point(0, 200), new Point(200, 0), new Point(200, 200) }));
-            AutomatedCar controlledCar = new AutomatedCar(0, 0, "car_1_white", W, H, polyList);
+        //     int W = 108;
+        //     int H = 240;
+        //     List<List<Point>> polyList = new List<List<Point>>();
+        //     polyList.Add(new List<Point>(new Point[] { new Point(0, 0), new Point(0, 200), new Point(200, 0), new Point(200, 200) }));
+        //     AutomatedCar controlledCar = new AutomatedCar(0, 0, "car_1_white", W, H, polyList);
 
-            world.ControlledCar = controlledCar;
+        //     world.ControlledCar = controlledCar;
 
-            Tree tree = new Tree(0, 0, null, 5, 5, 0, 0, testRotMatrix, polyList);
+        //     Tree tree = new Tree(0, 0, null, 5, 5, 0, 0, testRotMatrix, polyList);
 
-            world.AddObject(tree);
+        //     world.AddObject(tree);
 
-            world.OnCollideWithLandmark += delegate (WorldObject worldObject)
-            {
-                objects.Add(worldObject);
-            };
+        //     world.OnCollideWithLandmark += delegate (WorldObject worldObject)
+        //     {
+        //         objects.Add(worldObject);
+        //     };
 
-            world.IsColisonWhitWorldObject();
+        //     world.IsColisonWhitWorldObject();
 
-            Assert.Single(1, objects.Count);
-        }
+        //     Assert.Single(1, objects.Count);
+        // }
 
         [Fact]
         public void CollisonNPCTest()
