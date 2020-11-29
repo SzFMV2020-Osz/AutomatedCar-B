@@ -71,5 +71,16 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(9*50, distance);
         }
+
+        [Fact]
+        public void getStoppingDistanceTo_carPosition_speed9ms_x100m_y0_worldobjectPosition_speed0_x0_y0() {
+            World.Instance.ControlledCar = new AutomatedCar(100*50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            World.Instance.ControlledCar.Speed = 9*50; //9ms
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            double distance = aeb.getStoppingDistanceTo_inPixels(wo);
+
+            Assert.Equal(91*50, distance);
+        }
     }
 }
