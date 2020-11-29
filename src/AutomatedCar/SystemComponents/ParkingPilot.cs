@@ -55,7 +55,7 @@ namespace AutomatedCar.SystemComponents
 
         private bool ableToPark;
     
-        private double requiredParkingSpace;
+        private const double requiredParkingSpace = 300;
         public ParkingPilot(VirtualFunctionBus functionBus, Ultrasound[] sensors)
           : base(functionBus)
         {
@@ -66,7 +66,7 @@ namespace AutomatedCar.SystemComponents
             this.Sensors = sensors;
 
             this.sensorMaxRange = sensors[0].range + 50;
-            this.requiredParkingSpace = 200;
+
             this.ableToPark = false;
         }
 
