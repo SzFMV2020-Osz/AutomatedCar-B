@@ -6,8 +6,10 @@ namespace AutomatedCar.Models
 {
     public class AEB
     {
+        public AutomatedCar controlledCar;
         public AEB()
         {
+            this.controlledCar = World.Instance.ControlledCar;
         }
 
         public bool IsUseable(){
@@ -15,7 +17,7 @@ namespace AutomatedCar.Models
         }
 
         private bool isCarFasterThanKmh(double speed) {
-            return World.Instance.ControlledCar.Speed > kmh_into_pxs(speed);
+            return this.controlledCar.Speed > kmh_into_pxs(speed);
         }
 
         private double kmh_into_pxs(double kmh) {
@@ -27,7 +29,7 @@ namespace AutomatedCar.Models
         }
 
         public double getStoppingDistanceTo_inPixels(WorldObject worldObject)  {
-            double carSpeed = pxm_into_ms(World.Instance.ControlledCar.Speed);
+            double carSpeed = pxm_into_ms(this.controlledCar.Speed);
             double decceleration =  9;
 
             return Math.Abs(computeObjectDistanceFromCar_inPixel(worldObject)-((Math.Pow(carSpeed, 2)/decceleration)*50)); 
@@ -38,10 +40,10 @@ namespace AutomatedCar.Models
         }
 
         private double computeObjectDistanceFromCar_inPixel(WorldObject item){
-            double x = item.X-World.Instance.ControlledCar.X;
-            double y = item.Y-World.Instance.ControlledCar.Y;
+            double x = item.X-this.controlledCar.X;
+            double y = item.Y-this.controlledCar.Y;
             Vector V = new Vector(x, y);
-            return (V.Length-(World.Instance.ControlledCar.Height/2));
+            return (V.Length-(this.controlledCar.Height/2));
         }
     }
 }
