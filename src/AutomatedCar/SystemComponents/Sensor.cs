@@ -13,6 +13,7 @@ namespace AutomatedCar.SystemComponents
         public int rotate;
         public int range;
         public int angleOfView;
+        public double maxReach;
         public SolidColorBrush Brush;
 
         public Sensor(VirtualFunctionBus virtualFunction)
