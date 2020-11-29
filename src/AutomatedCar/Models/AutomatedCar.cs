@@ -17,6 +17,8 @@ namespace AutomatedCar.Models
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
 
+        private ParkingPilot parkingAssistant;
+
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
         public AutomatedCar(int x, int y, string filename, int width, int height, List<List<Point>> polylist)
@@ -41,6 +43,9 @@ namespace AutomatedCar.Models
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
+
+            parkingAssistant = new ParkingPilot(this.virtualFunctionBus,ultrasounds);
+
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
