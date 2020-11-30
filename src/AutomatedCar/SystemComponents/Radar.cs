@@ -6,8 +6,9 @@ namespace AutomatedCar.SystemComponents
     using Avalonia;
     using Avalonia.Media;
 
-    public class Ultrasound : Sensor
+    public class Radar : Sensor
     {
+        
         private List<Type> types = new List<Type>()
         {
             typeof(Tree),
@@ -26,15 +27,15 @@ namespace AutomatedCar.SystemComponents
 
         public SolidColorBrush LastSeenObjectBrush { get; set; }
 
-        public Ultrasound(VirtualFunctionBus virtualFunction, int offsetX, int offsetY, int rotate)
+        public Radar(VirtualFunctionBus virtualFunction)
             : base(virtualFunction)
         {
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
+            this.offsetX = 120;
+            this.offsetY = 0;
             this.rotate = rotate - 90;
-            this.range = 150;
-            this.angleOfView = 100;
-            this.Brush = SolidColorBrush.Parse("green");
+            this.range = 200*50;
+            this.angleOfView = 60;
+            this.Brush = SolidColorBrush.Parse("red");
             this.dif = this.range * Math.Tan((double)this.angleOfView / 2 * (Math.PI / 180));
             this.maxDetect = Math.Sqrt(Math.Pow(this.range, 2) + Math.Pow(this.range, 2));
         }
@@ -60,7 +61,6 @@ namespace AutomatedCar.SystemComponents
             WorldObject obj = null;
             foreach (WorldObject item in this.WorldObjects)
             {
-                // A későbbiekben hozzáadott npc auto és gyalogos majd bekerül még, eddig ezt a 2-t találtam.
                 if (this.types.Contains(item.GetType()))
                 {
                     actual = Math.Sqrt(Math.Pow(this.Points[0].X - item.X, 2) + Math.Pow(this.Points[0].Y - item.Y, 2));
