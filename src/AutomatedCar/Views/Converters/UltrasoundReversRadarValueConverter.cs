@@ -1,34 +1,45 @@
 namespace AutomatedCar.Views.Converters
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using AutomatedCar.Models;
     using AutomatedCar.SystemComponents;
+    using Avalonia;
 
     class UltrasoundReversRadarValueConverter : UltrasoundConvert
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Ultrasound leftUltra = (value as AutomatedCar).Ultrasounds[6];
-            Ultrasound rightUltra = (value as AutomatedCar).Ultrasounds[4];
-
-            var d1 = leftUltra.Distance;
-            var d2 = rightUltra.Distance;
-
-            if (d1 == leftUltra.maxReach + 1)
+            if (World.Instance.ControlledCar.VirtualFunctionBus.HMIPacket.Gear != Gears.R)
             {
-                d1 = leftUltra.maxReach / 50;
+                return 0;
             }
-
-            if (d2 == rightUltra.maxReach + 1)
+            else
             {
-                d2 = leftUltra.maxReach / 50;
+                Ultrasound[] ultras = World.Instance.ControlledCar.Ultrasounds;
+                Ultrasound leftUltra = ultras[6];
+                Ultrasound rightUltra = ultras[4];
+
+                var d1 = leftUltra.Distance;
+                var d2 = rightUltra.Distance;
+
+                if (d1 == leftUltra.maxReach + 1)
+                {
+                    d1 = leftUltra.maxReach / 50;
+                }
+
+                if (d2 == rightUltra.maxReach + 1)
+                {
+                    d2 = leftUltra.maxReach / 50;
+                }
+
+                d1 /= 50;
+                d2 /= 50;
+
+                return Math.Min(d1, d2);
             }
-
-            d1 /= 50;
-            d2 /= 50;
-
-            return Math.Min(d1, d2);
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

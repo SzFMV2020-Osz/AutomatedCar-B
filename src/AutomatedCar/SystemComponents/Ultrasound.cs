@@ -53,6 +53,11 @@ namespace AutomatedCar.SystemComponents
             else if (this.LastSeenObject != null)
             {
                 this.ResetLastSeenObjectBrush();
+                this.Distance = this.maxReach + 1;
+            }
+            else
+            {
+                this.Distance = this.maxReach + 1;
             }
         }
 

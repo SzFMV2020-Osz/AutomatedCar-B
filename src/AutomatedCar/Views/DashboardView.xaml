@@ -5,6 +5,7 @@
              xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
              xmlns:view="clr-namespace:AutomatedCar.ViewModels;assembly=AutomatedCar"
              xmlns:converters="clr-namespace:AutomatedCar.Views.Converters"
+             xmlns:customcontrols="clr-namespace:AutomatedCar.Views.CustomControls"
              Width="320" Height="720"
              x:Class="AutomatedCar.Views.DashboardView"
              DataContext="{Binding Dashboard}"
@@ -108,25 +109,25 @@
               </Grid>
               <WrapPanel Height="50" VerticalAlignment="Center">
                 <TextBlock Text="L" FontSize="18" Padding="5" VerticalAlignment="Center" />
-                <ProgressBar MaxWidth="100" Width="100" Height="15" MaxHeight="15"
-                             Background="{Binding ControlledCar.Ultrasounds[6], Converter={StaticResource BackgroundConverter}}"
-                             Foreground="{Binding ControlledCar.Ultrasounds[6], Converter={StaticResource ForegroundConverter}}"
-                             Value="{Binding ControlledCar.Ultrasounds[6], Converter={StaticResource DistanceConverter}}"
+                <ProgressBar MaxWidth="100" Width="100" Height="20" MaxHeight="20"
+                             Background="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource BackgroundConverter}}"
+                             Foreground="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource ForegroundConverter}}"
+                             Value="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource DistanceConverter}}"
                              BorderBrush="Black" MinWidth="10" MinHeight="10" VerticalAlignment="Center" />
-                <TextBlock FontSize="30" Padding="10" VerticalAlignment="Center"
-                            Text="{Binding ControlledCar, Converter={StaticResource DistanceValueConver}, StringFormat={}{0:0}}}}"
+                <TextBlock FontSize="30" Padding="10" VerticalAlignment="Center" Width="40" MaxWidth="40" MinWidth="10"
+                            Text="{Binding ControlledCar.Ultrasounds[0].Points, Converter={StaticResource DistanceValueConver}, StringFormat={}{0:0}}}}"
                 />
                 <ProgressBar MaxWidth="100" Width="100" Height="20" MaxHeight="20"
-                             Background="{Binding ControlledCar.Ultrasounds[4], Converter={StaticResource BackgroundConverter}}"
-                             Foreground="{Binding ControlledCar.Ultrasounds[4], Converter={StaticResource ForegroundConverter}}"
-                             Value="{Binding ControlledCar.Ultrasounds[4], Converter={StaticResource DistanceConverter}}"
+                             Background="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource BackgroundConverter}}"
+                             Foreground="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource ForegroundConverter}}"
+                             Value="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource DistanceConverter}}"
                              BorderBrush="Black" MinWidth="10" MinHeight="10" VerticalAlignment="Center">
                   <ProgressBar.RenderTransform>
                     <RotateTransform Angle="180"/>
                   </ProgressBar.RenderTransform>
                 </ProgressBar>
                 <TextBlock Text="R" FontSize="18" Padding="5" VerticalAlignment="Center" />  
-              </WrapPanel>              
+              </WrapPanel>
               <TextBlock Padding="0 10"  HorizontalAlignment="Left" VerticalAlignment="Center">ACC opts:</TextBlock>
               <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
                 <WrapPanel Grid.Row="0" Grid.Column="0"

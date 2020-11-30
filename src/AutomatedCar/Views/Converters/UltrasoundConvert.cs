@@ -5,6 +5,7 @@ namespace AutomatedCar.Views.Converters
     using AutomatedCar.Models;
     using AutomatedCar.SystemComponents;
     using Avalonia.Data.Converters;
+    using Avalonia.Media;
 
     public abstract class UltrasoundConvert : IValueConverter
     {
@@ -12,58 +13,52 @@ namespace AutomatedCar.Views.Converters
 
         public abstract object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture);
 
-        public double DistanceConvert(Ultrasound i)
+        public double DistanceConvert(double i)
         {
-            Ultrasound us = i;
-            double max = us.maxReach;
-            double val = us.Distance;
-            if (val == max + 1)
+            if (World.Instance.ControlledCar.VirtualFunctionBus.HMIPacket.Gear != Gears.R)
             {
                 return 0;
             }
+            else
+            {
+                double max = World.Instance.ControlledCar.Ultrasounds[0].maxReach;
+                double val = i;
+                if (val == max + 1)
+                {
+                    return 0;
+                }
 
-            return (max - val) / max * 100;
+                return (max - val) / max * 100;
+            }
         }
 
-        public bool YellowThreshold(Ultrasound i)
+        public bool YellowThreshold(double i)
+            => i > 50;
+
+        public bool RedThreshold(double i)
+            => i > 75;
+
+        public object ColorSwitcher(double i, string red, string yellow, string green)
         {
-            Ultrasound us = i;
-            double max = us.maxReach;
-            double val = us.Distance;
-            if (val == max + 1)
+            if (World.Instance.ControlledCar.VirtualFunctionBus.HMIPacket.Gear != Gears.R)
             {
-                return false;
-            }
-
-            return val / 50 < 0.8;
-        }
-
-        public bool RedThreshold(Ultrasound i)
-        {
-            Ultrasound us = i;
-            double max = us.maxReach;
-            double val = us.Distance;
-            if (val == max + 1)
-            {
-                return false;
-            }
-
-            return val / 50 < 0.4;
-        }
-
-        public string ColorSwitcher(Ultrasound i, string red, string yellow, string green)
-        {
-            if (this.RedThreshold(i))
-            {
-                return red;
-            }
-            else if (this.YellowThreshold(i))
-            {
-                return yellow;
+                return Brush.Parse("#85929E");
             }
             else
             {
-                return green;
+                double dist = this.DistanceConvert(i);
+                if (this.RedThreshold(dist))
+                {
+                    return Brush.Parse(red);
+                }
+                else if (this.YellowThreshold(dist))
+                {
+                    return Brush.Parse(yellow);
+                }
+                else
+                {
+                    return Brush.Parse(green);
+                }
             }
         }
     }
