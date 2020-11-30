@@ -49,7 +49,7 @@
               <customcontrols:SensorCustomControl Name="Camera" Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="-20, 0" Opacity="60" />
 
               <!-- Radar -->
-              <customcontrols:SensorCustomControl Name="Radar" Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="120, 0" Opacity="60" />
+              <!-- <customcontrols:SensorCustomControl Name="Radar" Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="120, 0" Opacity="60" /> -->
 
               <!-- Front ultrasound sensors --><!--
               <customcontrols:SensorCustomControl Distance="3" FOV="100" Rotation="0" Brush="Green" Offset="110, 30" Opacity="60" />
@@ -71,7 +71,7 @@
                   <RotateTransform Angle="{Binding Angle}" />
                 </TransformGroup>
               </Canvas.RenderTransform>
-              <Image Width="{Binding Width}" Height="{Binding Height}"
+               <Image Width="{Binding Width}" Height="{Binding Height}"
                      Source="{Binding Filename, Converter={x:Static visualization:WorldObjectTransformer.Instance}}">
                 <Image.RenderTransform>
                   <TransformGroup>
@@ -79,7 +79,7 @@
                     <TranslateTransform Y="{Binding referenceOffsetY}" />
                   </TransformGroup>
                 </Image.RenderTransform>
-              </Image>
+              </Image> 
             </Canvas>
             <Canvas>
               <Canvas.RenderTransform>
@@ -100,6 +100,8 @@
               <customcontrols:UltrasoundCustomControl Indexer="5"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="6"></customcontrols:UltrasoundCustomControl>
               <customcontrols:UltrasoundCustomControl Indexer="7"></customcontrols:UltrasoundCustomControl>
+
+              <customcontrols:RadarCustomControl Indexer="0"></customcontrols:RadarCustomControl>
             </Canvas>
           </Canvas>
         </DataTemplate>
