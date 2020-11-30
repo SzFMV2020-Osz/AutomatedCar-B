@@ -3,8 +3,8 @@ namespace AutomatedCar.SystemComponents
     using System;
     using System.Collections.Generic;
     using AutomatedCar.Models;
-    using Avalonia;
     using Avalonia.Media;
+    using ReactiveUI;
 
     public class Ultrasound : Sensor
     {
@@ -17,9 +17,12 @@ namespace AutomatedCar.SystemComponents
             typeof(Garage),
         };
 
+        private double distance;
+
         private double dif;
 
-        public double Distance { get; set; }
+        // public double Distance { get; set; }
+        public double Distance { get => this.distance; set { this.RaiseAndSetIfChanged(ref this.distance, value); } }
 
         public WorldObject LastSeenObject { get; set; }
 
