@@ -2,6 +2,7 @@ namespace AutomatedCar.Views.Converters
 {
     using System;
     using System.Globalization;
+    using System.Reflection;
     using Avalonia.Data.Converters;
     using Avalonia.Media.Imaging;
 
@@ -11,11 +12,13 @@ namespace AutomatedCar.Views.Converters
         {
             if ((string)value == String.Empty)
             {
-                return new Bitmap(@"..\..\..\\Assets\no_sign.png");
+                return new Bitmap(Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream($"AutomatedCar.Assets.no_sign.png"));
             }
             else
             {
-                return new Bitmap(@"..\..\..\\Assets\WorldObjects\" + "roadsign_speed_60" + ".png");
+                return new Bitmap(Assembly.GetExecutingAssembly()
+                    .GetManifestResourceStream($"AutomatedCar.Assets.WorldObjects." + (string)value + ".png"));
             }
         }
 
