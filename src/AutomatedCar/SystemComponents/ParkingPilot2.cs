@@ -31,7 +31,7 @@ namespace AutomatedCar.SystemComponents
                 
         private double sensorMaxRange;
 
-        private WorldObject firstSeenCar;
+        private WorldObject firstSeen;
 
         private WorldObject lastSeen;
 
@@ -58,7 +58,7 @@ namespace AutomatedCar.SystemComponents
         {
             if (HMIPacket.ParkingPilot)
             {
-                SearchParkingSpace();
+                //SearchParkingSpace();
             }
         }
 
@@ -72,7 +72,7 @@ namespace AutomatedCar.SystemComponents
                 System.Console.WriteLine("abort");
             }
 
-            if (requiredParkingSpace * requiredParkingSpace < CalculateSpace())
+            if (requiredParkingSpace < CalculateSpace())
             {
                 ableToPark = true;
                 System.Console.WriteLine("CanPark");
@@ -99,11 +99,19 @@ namespace AutomatedCar.SystemComponents
 
         private void RegisterObject(WorldObject objectInFocus)
         {
-            if (lastSeen != objectInFocus)
+            if (firstSeen == null)
+            {
+                firstSeen = objectInFocus;
+            }
+            else if (firstSeen != objectInFocus && lastSeen == null)
             {
                 lastSeen = objectInFocus;
                 parkingStartAngle = World.Instance.ControlledCar.Angle;
-                ableToPark = false;
+            }
+            else if (lastSeen != objectInFocus)
+            {
+                firstSeen = null;
+                lastSeen = null;
             }
         }
 
@@ -128,13 +136,14 @@ namespace AutomatedCar.SystemComponents
 
         private double CalculateSpace()
         {
-            if (lastSeen != null)
+            if (lastSeen != null && firstSeen != null)
             {
-                int x1 = World.Instance.ControlledCar.X;
-                int y1 = World.Instance.ControlledCar.Y;
-                int x2 = lastSeen.X;
-                int y2 = lastSeen.Y;
-                return (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2);
+                int firstX = firstSeen.X;
+                int firstY = firstSeen.Y;
+                int lastX = lastSeen.X;
+                int lastY = lastSeen.Y;
+
+                return firstY - lastY - World.Instance.ControlledCar.Height;
             }
             else
             {
