@@ -249,9 +249,8 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
-                  <!--<Image Source="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Sign, Converter={StaticResource SignConverter}}"-->
-                  <Image Source="resm:AutomatedCar.Assets.no_sign.png?assembly=AutomatedCar"
-                         HorizontalAlignment="Center" VerticalAlignment="Center">
+                  <Image Source="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Sign, Converter={StaticResource SignConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Height="90" Width="90">
                   </Image>
                 </Border>
                 <WrapPanel Grid.Row="3" Grid.Column="1"

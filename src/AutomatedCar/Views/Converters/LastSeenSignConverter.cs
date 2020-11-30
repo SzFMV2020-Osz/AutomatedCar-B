@@ -3,6 +3,7 @@ namespace AutomatedCar.Views.Converters
     using System;
     using System.Globalization;
     using Avalonia.Data.Converters;
+    using Avalonia.Media.Imaging;
 
     class LastSeenSignConverter : IValueConverter
     {
@@ -10,11 +11,13 @@ namespace AutomatedCar.Views.Converters
         {
             if ((string)value == String.Empty)
             {
+                return new Bitmap(@"..\..\..\\Assets\no_sign.png");
                 return "resm:AutomatedCar.Assets.no_sign.png?assembly=AutomatedCar";
             }
             else
             {
-                return "resm:AutomatedCar.Assets.WorldObjects" + (string)value + "?assembly=AutomatedCar";
+                return new Bitmap(@"..\..\..\\Assets\WorldObjects\" + "roadsign_speed_60" + ".png");
+                return new Bitmap(@"..\..\..\\Assets\WorldObjects\" + (string)value + ".png");
             }
         }
 
