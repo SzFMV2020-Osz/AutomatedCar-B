@@ -12,12 +12,10 @@ namespace AutomatedCar.Views.Converters
             if ((string)value == String.Empty)
             {
                 return new Bitmap(@"..\..\..\\Assets\no_sign.png");
-                return "resm:AutomatedCar.Assets.no_sign.png?assembly=AutomatedCar";
             }
             else
             {
                 return new Bitmap(@"..\..\..\\Assets\WorldObjects\" + "roadsign_speed_60" + ".png");
-                return new Bitmap(@"..\..\..\\Assets\WorldObjects\" + (string)value + ".png");
             }
         }
 
