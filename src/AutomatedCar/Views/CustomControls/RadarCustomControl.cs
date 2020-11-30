@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace AutomatedCar.Views.CustomControls
 {
-    class UltrasoundCustomControl : Control
+    class RadarCustomControl : Control
     {
         private byte indexer;
         private SolidColorBrush brush;
@@ -23,26 +23,26 @@ namespace AutomatedCar.Views.CustomControls
 
         public byte Opacity { get => this.opacity; set { this.opacity = value; } }
 
-        public DirectProperty<UltrasoundCustomControl, byte> IndexerProperty = AvaloniaProperty.RegisterDirect<UltrasoundCustomControl, byte>(nameof(Indexer), s => s.Indexer, (s, v) => s.Indexer = v);
+        public DirectProperty<RadarCustomControl, byte> IndexerProperty = AvaloniaProperty.RegisterDirect<RadarCustomControl, byte>(nameof(Indexer), s => s.Indexer, (s, v) => s.Indexer = v);
 
-        public StyledProperty<SolidColorBrush> BrushProperty = AvaloniaProperty.Register<UltrasoundCustomControl, SolidColorBrush>(nameof(Brush));
+        public StyledProperty<SolidColorBrush> BrushProperty = AvaloniaProperty.Register<RadarCustomControl, SolidColorBrush>(nameof(Brush));
 
-        public StyledProperty<byte> OpacityProperty = AvaloniaProperty.Register<UltrasoundCustomControl, byte>(nameof(Opacity));
+        public StyledProperty<byte> OpacityProperty = AvaloniaProperty.Register<RadarCustomControl, byte>(nameof(Opacity));
 
-        public UltrasoundCustomControl()
+        public RadarCustomControl()
         {
             // this.RenderTransform = new RotateTransform(0);
         }
 
         public override void Render(DrawingContext context)
         {
-            if (!World.Instance.ControlledCar.UltraSoundVisible)
+            if (!World.Instance.ControlledCar.RadarVisible)
             {
                 return;
             }
 
             base.Render(context);
-            Ultrasound sensor = World.Instance.ControlledCar.Ultrasounds[this.indexer];
+            Radar sensor = World.Instance.ControlledCar.Radar;
             PolylineGeometry geometry;
             if (sensor.Points == null)
             {

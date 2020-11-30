@@ -13,12 +13,10 @@ namespace AutomatedCar.Models
     public class AutomatedCar : WorldObject, IMoveable
     {
         private VirtualFunctionBus virtualFunctionBus;
-        private DummySensor dummySensor;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
-
-        public ObservableCollection<DummySensor> Sensors { get; } = new ObservableCollection<DummySensor>();
+        private Radar radar;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -28,7 +26,6 @@ namespace AutomatedCar.Models
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus);
-            this.dummySensor = new DummySensor(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
@@ -41,7 +38,7 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -120, -25, 180),
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
-
+            this.Radar = new Radar(this.virtualFunctionBus);
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
@@ -54,6 +51,8 @@ namespace AutomatedCar.Models
         public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
         public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
+        
+        public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
 
         public Geometry Geometry { get; set; }
 
