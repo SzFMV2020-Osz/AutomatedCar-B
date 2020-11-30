@@ -115,8 +115,7 @@
                              Value="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource DistanceConverter}}"
                              BorderBrush="Black" MinWidth="10" MinHeight="10" VerticalAlignment="Center" />
                 <TextBlock FontSize="30" Padding="10" VerticalAlignment="Center" Width="40" MaxWidth="40" MinWidth="10"
-                            Text="{Binding ControlledCar.Ultrasounds[0].Points, Converter={StaticResource DistanceValueConver}, StringFormat={}{0:0}}}}"
-                />
+                            Text="{Binding ControlledCar.Ultrasounds[0].Points, Converter={StaticResource DistanceValueConver}, StringFormat={}{0:0}}"/>
                 <ProgressBar MaxWidth="100" Width="100" Height="20" MaxHeight="20"
                              Background="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource BackgroundConverter}}"
                              Foreground="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource ForegroundConverter}}"

@@ -17,7 +17,7 @@ namespace AutomatedCar.Views.Converters
             if (ultras.Where(x => x.Points == (List<Point>)value).FirstOrDefault() != null)
             {
                 double distance = ultras.Where(x => x.Points == (List<Point>)value).FirstOrDefault().Distance;
-                return this.ColorSwitcher(distance, "#EA0B0B", "#F4D03F", "#1E8449");
+                return this.ColorSwitcher(distance, "#EA0B0B", "#FFA500", "#1E8449");
             }
             else
             {
