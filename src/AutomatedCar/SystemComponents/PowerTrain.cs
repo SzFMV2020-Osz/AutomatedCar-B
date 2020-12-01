@@ -13,6 +13,7 @@ namespace AutomatedCar.SystemComponents
             this.Steering = new SteeringController();
             this.PowerTrainPacket = new PowerTrainPacket();
             this.HMIPacket = this.virtualFunctionBus.HMIPacket;
+            this.AEBActionPacket = virtualFunctionBus.AEBActionPacket;
             this.virtualFunctionBus.PowerTrainPacket = this.PowerTrainPacket;
             this.Steering.SetStartPosition(start_x, start_y);
         }
@@ -22,14 +23,14 @@ namespace AutomatedCar.SystemComponents
         private ISteeringController Steering { get; set; }
 
         private IReadOnlyHMIPacket HMIPacket { get; set; }
-        
-        private IReadOnlyAEBAction AEBPacket { get; set; }
 
         private PowerTrainPacket PowerTrainPacket { get; set; }
 
+        private IReadOnlyAEBAction AEBActionPacket { get; set; }
+
         public override void Process()
         {
-            this.Engine.UpdateEngineProperties(this.HMIPacket);
+            this.Engine.UpdateEngineProperties(this.HMIPacket,this.AEBActionPacket);
             this.Steering.UpdateSteeringProperties(this.HMIPacket);
             this.UpdateCarPosition();
             this.UpdatePowerTrainPacket();
