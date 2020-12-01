@@ -183,7 +183,7 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush CameraBrush { get; set; }
 
-        public Geometry CameraGeometry { get; set; }
+        public PolylineGeometry CameraGeometry { get; set; }
 
         private bool cameraVisible;
 
@@ -223,6 +223,52 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
+        }
+
+        public Sign getClosestSign()
+        {
+            List<WorldObject> seenObjects = World.Instance.GetWorldObjectsInsideTriangle(this.CameraGeometry.Points.ToList());
+            var signs = seenObjects.Where(worldObj => worldObj is Sign && (int)worldObj.Angle == this.getRelevantSignOrientation());
+            Sign closestSign = (Sign)signs.FirstOrDefault();
+            if (signs.Count() > 1)
+            {
+                double closestDist = getDistance(new Point(this.X, this.Y), new Point(closestSign.X, closestSign.Y));
+                foreach (Sign sign in signs)
+                {
+                    double tempDist = getDistance(new Point(this.X, this.Y), new Point(sign.X, sign.Y));
+                    if (closestDist > tempDist)
+                    {
+                        closestSign = sign;
+                        closestDist = tempDist;
+                    }
+                }
+            }
+
+            return null;
+        }
+        private double getDistance(Point car, Point worldObj)
+        {
+            return Math.Abs(Math.Sqrt(Math.Pow(worldObj.X - car.X, 2) + Math.Pow(worldObj.Y - car.Y, 2)));
+        }
+
+        private int getRelevantSignOrientation()
+        {
+            if (this.Angle > -135 && this.Angle <= -45)
+            {
+                return 90;
+            }
+            else if (this.Angle > -45 && this.Angle <= 45)
+            {
+                return 180;
+            }
+            else if (this.Angle > 45 && this.Angle <= 135)
+            {
+                return -90;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
