@@ -2,6 +2,7 @@ namespace AutomatedCar.SystemComponents
 {
     using System;
     using System.Collections.Generic;
+    using System.Numerics;
     using System.Text;
     using AutomatedCar.Models;
     using AutomatedCar.SystemComponents.Packets;
@@ -70,6 +71,11 @@ namespace AutomatedCar.SystemComponents
             this.ableToPark = false;
         }
 
+        public ParkingPilot()
+        {
+
+        }
+
         public override void Process()
         {
             if (HMIPacket.ParkingPilot)
@@ -88,7 +94,7 @@ namespace AutomatedCar.SystemComponents
                 System.Console.WriteLine("abort");
             }
 
-            if( requiredParkingSpace*requiredParkingSpace < CalculateSpace())
+            if(requiredParkingSpace < this.CalculateSpace())
             {
                 ableToPark = true;
                 System.Console.WriteLine("CanPark");
@@ -146,16 +152,27 @@ namespace AutomatedCar.SystemComponents
         {
             if(lastSeen != null)
             {
-                int x1 = World.Instance.ControlledCar.X; 
-                int y1 = World.Instance.ControlledCar.Y; 
-                int x2 = lastSeen.X;
-                int y2 = lastSeen.Y;
-                return (x1-x2)*(x1-x2)+(y1-y2)*(y1-y2);
+                Vector2 carCenter = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
+                Vector2 objectClosestCorner = new Vector2(this.lastSeen.X - (this.lastSeen.Width / 2), this.lastSeen.Y - (this.lastSeen.Height / 2));
+                Vector2 straightLineFromObjectToCar = Vector2.Subtract(carCenter, objectClosestCorner);
+                double angleOfCarDirectionAndStraightLine = ((World.Instance.ControlledCar.Angle-90) * (Math.PI / 180)) - Math.Atan2(straightLineFromObjectToCar.Y, straightLineFromObjectToCar.X);
+                double parallelDistanceFromObjectToCar = Math.Cos(angleOfCarDirectionAndStraightLine) * straightLineFromObjectToCar.Length();
+
+                return Math.Abs(parallelDistanceFromObjectToCar);
             }
             else
             {
                 return 0;
             }
+        }
+
+        public double CalculateSpace(Vector2 carCenter, Vector2 lastSeenObjectClosestCorner, double carAngle)
+        {
+            Vector2 straightLineFromObjectToCar = Vector2.Subtract(carCenter, lastSeenObjectClosestCorner);
+            double angleOfCarDirectionAndStraightLine = ((carAngle-90) * (Math.PI / 180)) - Math.Atan2(straightLineFromObjectToCar.Y, straightLineFromObjectToCar.X);
+            double parallelDistanceFromObjectToCar = Math.Cos(angleOfCarDirectionAndStraightLine) * straightLineFromObjectToCar.Length();
+
+            return Math.Abs(parallelDistanceFromObjectToCar);
         }
 
         private void StartParking()
