@@ -19,26 +19,14 @@ namespace AutomatedCar.Views.Converters
             else
             {
                 Ultrasound[] ultras = World.Instance.ControlledCar.Ultrasounds;
-                Ultrasound leftUltra = ultras[6];
-                Ultrasound rightUltra = ultras[4];
 
-                var d1 = leftUltra.Distance;
-                var d2 = rightUltra.Distance;
-
-                if (d1 == leftUltra.maxReach + 1)
+                double distance = ultras.Where(x => x.Points == (List<Point>)value).Select(x => x.Distance).FirstOrDefault();
+                if (distance == ultras[0].maxReach + 1)
                 {
-                    d1 = leftUltra.maxReach / 50;
+                    return 0;
                 }
 
-                if (d2 == rightUltra.maxReach + 1)
-                {
-                    d2 = leftUltra.maxReach / 50;
-                }
-
-                d1 /= 50;
-                d2 /= 50;
-
-                return Math.Min(d1, d2);
+                return distance / 50;
             }
         }
 
