@@ -1,18 +1,18 @@
-﻿namespace AutomatedCar.SystemComponents
+namespace AutomatedCar.SystemComponents
 {
     using SystemComponents.Packets;
 
     public class EngineController
     {
         private const double GearRatioReverse = 2.9; // Az egyik linkelt pelda atteteibol nezve, konzisztens a tobbi attettel
-        private const int RPMDecayPerTick = -10; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
+        private const int RPMDecayPerTick = -50; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
         private const double MinimumBrakeForce = 0.9; 
         private const double MaximumBrakeForce = 0.1;
-        private const int ForceToPixelVelocityConversionConstant = 10; // Nagyjabol 10 autohossz/sec-re akartam maximalizalni a sebesseget (~162 km/h 4,5m hosszu autonal), ez a szam azt kozeliti (230px az auto, MaxRPM miatt max ResultantForce 11500)
+        private const int ForceToPixelVelocityConversionConstant = 5; // Nagyjabol 10 autohossz/sec-re akartam maximalizalni a sebesseget (~162 km/h 4,5m hosszu autonal), ez a szam azt kozeliti (230px az auto, MaxRPM miatt max ResultantForce 11500)
         private const int MaxRPM = 6000; // Nagyjabol realisztikus maximum, de ez is valtozhat, ha szukseges
         private const int NeutralRPMIncrease = 500; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
         private const int BrakePedalScaling = 10; // Ugy valasztottam, hogy a max fekezesi ero kozelitse a max eloremeneti erot (jelenleg eloremenetMax: 11500, fekMax: 10500). Valtozhat meg
-        private const int GasPedalScaling = 1; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
+        private const double GasPedalScaling = 0.3; // Egyelore tetszolegesen eldontott ertek - meg valtozik valoszinuleg
 
         public int RPM { get; private set; }
         
@@ -83,7 +83,7 @@
         }
 
         private int CalculateRPMChange() =>
-            this.HMIPacket.Gaspedal != 0 ? (int)this.HMIPacket.Gaspedal * GasPedalScaling : RPMDecayPerTick - ((int)this.HMIPacket.Breakpedal * BrakePedalScaling);
+            this.HMIPacket.Gaspedal != 0 ? (int)(this.HMIPacket.Gaspedal * GasPedalScaling) : RPMDecayPerTick - ((int)this.HMIPacket.Breakpedal * BrakePedalScaling);
 
         private void SetVelocityInPixels() =>
             this.VelocityPixelsPerSecond = this.CalculateResultantForce() / ForceToPixelVelocityConversionConstant;
