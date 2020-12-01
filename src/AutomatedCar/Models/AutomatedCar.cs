@@ -25,7 +25,7 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
-            this.powerTrain = new PowerTrain(this.virtualFunctionBus);
+            this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
@@ -58,7 +58,9 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
-        public int Speed { get; set; }
+        public int Speed { get{return (int)Math.Round(speed);} set{speed = value;} }
+
+        public double speed;
 
         public int Mass { get; set; } = 5;
 
@@ -72,8 +74,8 @@ namespace AutomatedCar.Models
         {
             var crashedObjects = GetCrashedObjects();
             newPosition = this.CrashEffects(newPosition, crashedObjects);
-            this.X = (int)newPosition.X;
-            this.Y = (int)newPosition.Y;
+            this.X = (int)Math.Round(newPosition.X);
+            this.Y = (int)Math.Round(newPosition.Y);
         }
 
         private static List<WorldObject> GetCrashedObjects()
