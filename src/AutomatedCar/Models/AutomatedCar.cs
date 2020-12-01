@@ -9,6 +9,7 @@ namespace AutomatedCar.Models
     using ReactiveUI;
     using System;
     using System.Linq;
+    using static global::AutomatedCar.Models.World;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -75,6 +76,8 @@ namespace AutomatedCar.Models
             newPosition = this.CrashEffects(newPosition, crashedObjects);
             this.X = (int)newPosition.X;
             this.Y = (int)newPosition.Y;
+
+            //LaneKeepingAssistantFunction();
         }
 
         private static List<WorldObject> GetCrashedObjects()
@@ -182,7 +185,7 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush CameraBrush { get; set; }
 
-        public Geometry CameraGeometry { get; set; }
+        public PolylineGeometry CameraGeometry { get; set; }
 
         private bool cameraVisible;
 
@@ -222,6 +225,107 @@ namespace AutomatedCar.Models
         public void Start()
         {
             this.virtualFunctionBus.Start();
+        }
+
+        public void LaneKeepingAssistantFunction()
+        {
+            if (virtualFunctionBus.HMIPacket.LaneKeeping)
+            {
+                NetTopologySuite.Geometries.Coordinate coordinate = isCarInMidleOfRoad();
+
+                if (coordinate != null)
+                {
+                    VirtualFunctionBus.LaneKeepingPacket.Active = true;
+
+                    VirtualFunctionBus.LaneKeepingPacket.Steering = 10 * CalculateDirection(coordinate);
+                }
+                else {
+                    VirtualFunctionBus.LaneKeepingPacket.Active = false;
+                }
+            }
+            else 
+            {
+                VirtualFunctionBus.LaneKeepingPacket.Active = false;
+            }
+        }
+
+        private NetTopologySuite.Geometries.Coordinate isCarInMidleOfRoad() 
+        {
+            
+            Road road = World.Instance.GetRoadUnderCar();
+            NetTopologySuite.Geometries.Coordinate[] coordinates = TwoclosestRoadPoligonCoordinates(road);
+
+            double c1_d = Math.Sqrt(Math.Pow(this.X - coordinates[0].X, 2) + Math.Pow(this.Y - coordinates[0].Y, 2));
+
+            double c2_d = Math.Sqrt(Math.Pow(this.X - coordinates[1].X, 2) + Math.Pow(this.Y - coordinates[1].Y, 2));
+
+            if (c1_d > c2_d)
+            {
+                return coordinates[0];
+            }
+            else if (c1_d < c2_d)
+            {
+                return coordinates[1];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private NetTopologySuite.Geometries.Coordinate[] TwoclosestRoadPoligonCoordinates(Road road) {
+
+            List<KeyValuePair<NetTopologySuite.Geometries.LineString, double>> r_d = new List<KeyValuePair<NetTopologySuite.Geometries.LineString, double>>();
+
+            foreach (var item in road.NetPolygons)
+            {
+                foreach (var item2 in item.Coordinates)
+                {
+                    r_d.Add(new KeyValuePair<NetTopologySuite.Geometries.LineString, double>( item, Math.Sqrt(Math.Pow(this.X - item2.X, 2) + Math.Pow(this.Y - item2.Y, 2))));
+                }
+            }
+
+            r_d.OrderByDescending(x => x.Value);
+
+
+            List<KeyValuePair<NetTopologySuite.Geometries.Coordinate, double>> coordinates1 = new List<KeyValuePair<NetTopologySuite.Geometries.Coordinate, double>>();
+
+            foreach (var item2 in r_d[0].Key.Coordinates)
+            {
+                coordinates1.Add(new KeyValuePair<NetTopologySuite.Geometries.Coordinate, double>(item2,Math.Sqrt(Math.Pow(this.X - item2.X, 2) + Math.Pow(this.Y - item2.Y, 2))));
+            }
+
+            coordinates1.OrderByDescending(x => x.Value);
+
+            List<KeyValuePair<NetTopologySuite.Geometries.Coordinate, double>> coordinates2 = new List<KeyValuePair<NetTopologySuite.Geometries.Coordinate, double>>();
+
+            foreach (var item2 in r_d[1].Key.Coordinates)
+            {
+                coordinates2.Add(new KeyValuePair<NetTopologySuite.Geometries.Coordinate, double>(item2, Math.Sqrt(Math.Pow(this.X - item2.X, 2) + Math.Pow(this.Y - item2.Y, 2))));
+            }
+
+            coordinates2.OrderByDescending(x => x.Value);
+
+            return new NetTopologySuite.Geometries.Coordinate[] { coordinates1[0].Key, coordinates2[1].Key };
+        }
+
+        private int CalculateDirection(NetTopologySuite.Geometries.Coordinate coordinate) {
+            if (Angle > 315 || Angle < 45)
+            {
+                return Math.Sign(coordinate.X - this.X);
+            }
+            else if (Angle >= 45 && Angle < 135)
+            {
+                return Math.Sign(coordinate.Y - this.Y);
+            }
+            else if (Angle >= 135 && Angle < 225)
+            {
+                return Math.Sign(this.X - coordinate.X);
+            }
+            else
+            {
+                return Math.Sign(this.Y - coordinate.Y);
+            }
         }
     }
 }

@@ -154,5 +154,15 @@ namespace AutomatedCar.Models
                 }
             }
         }
+
+        public Road GetRoadUnderCar()
+        {
+            List<WorldObject> worldObjects = GetWorldObjectsInsideTriangle(ControlledCar.CameraGeometry.Points.ToList());
+            List<Road> roads = worldObjects.Where(x => x is Road).Select(x => x as Road).ToList();
+            roads.OrderBy(x => this.DistanceBeetwenCarAndRoad(x));
+            return roads.First();
+        }
+
+        private double DistanceBeetwenCarAndRoad(Road road) => Math.Sqrt(Math.Pow(road.X - this.ControlledCar.X, 2) + Math.Pow(road.Y - this.ControlledCar.Y, 2));
     }
 }
