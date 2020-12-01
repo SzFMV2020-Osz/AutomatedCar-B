@@ -25,7 +25,7 @@
         private const int UpShiftRPMThreshold = 3000;
         private const int DownShiftRPMThreshold = 1000;
         private DriveGear[] driveGearLabels = { DriveGear.NotInDrive, DriveGear.DriveOne, DriveGear.DriveTwo, DriveGear.DriveThree, DriveGear.DriveFour, DriveGear.DriveFive, DriveGear.DriveSix };
-        private double[] driveGearRatios = { 0, 2.66, 1.78, 1.3, 1, 0.74, 0.5 };
+        private double[] driveGearRatios = { 0, 2.2, 1.78, 1.3, 1, 0.8, 0.7 };
         private Gears position;
 
         // Trackeli, valtozott-e a DriveGear az aktualis ciklusban
