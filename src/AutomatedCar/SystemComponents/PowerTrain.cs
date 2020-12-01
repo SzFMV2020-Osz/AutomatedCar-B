@@ -22,6 +22,8 @@ namespace AutomatedCar.SystemComponents
         private ISteeringController Steering { get; set; }
 
         private IReadOnlyHMIPacket HMIPacket { get; set; }
+        
+        private IReadOnlyAEBAction AEBPacket { get; set; }
 
         private PowerTrainPacket PowerTrainPacket { get; set; }
 

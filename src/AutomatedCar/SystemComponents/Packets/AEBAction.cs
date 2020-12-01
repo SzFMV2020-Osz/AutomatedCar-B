@@ -1,7 +1,7 @@
 namespace AutomatedCar.SystemComponents.Packets
 {
     using ReactiveUI;
-    public class EABAction : ReactiveObject, IPowerTrainAction
+    public class EABAction : ReactiveObject, IPowerTrainAction, IReadOnlyAEBAction
     {
         public bool Active { get; set; }
         private double breakpedal;

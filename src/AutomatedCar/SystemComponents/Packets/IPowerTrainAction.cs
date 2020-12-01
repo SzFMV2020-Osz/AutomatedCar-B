@@ -1,4 +1,4 @@
 public interface IPowerTrainAction
 {
-    bool Active { get; }
+    bool Active { get; set; }
 }
