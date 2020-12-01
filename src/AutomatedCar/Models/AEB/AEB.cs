@@ -45,5 +45,14 @@ namespace AutomatedCar.Models
             Vector V = new Vector(x, y);
             return (V.Length-(this.controlledCar.Height/2));
         }
+
+        public bool isThereAnObjectInRadar()
+        {
+            if(controlledCar.Radar.LastSeenObject != null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
