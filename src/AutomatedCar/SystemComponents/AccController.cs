@@ -43,7 +43,7 @@ namespace AutomatedCar.SystemComponents
                 {
                     if (selectedObjectFromRadar is NpcCar)
                     {
-                        var mpcAngleModulo = (selectedObjectFromRadar.Angle + 90) % 360;
+                        var mpcAngleModulo = (selectedObjectFromRadar.Angle) % 360;
                         var controlledCarAngleModulo = car.Angle % 360;
                         var angleDifference = Math.Abs(mpcAngleModulo - controlledCarAngleModulo) % 360;
 
@@ -52,7 +52,7 @@ namespace AutomatedCar.SystemComponents
                             angleDifference = 360 - angleDifference;
                         }
 
-                        if (angleDifference > 60)
+                        if (angleDifference < 60)
                         {
                             var controlledCarPosition = new Vector2(car.X, car.Y);
                             var npmPosition = new Vector2((selectedObjectFromRadar as NpcCar).X, (selectedObjectFromRadar as NpcCar).Y);
