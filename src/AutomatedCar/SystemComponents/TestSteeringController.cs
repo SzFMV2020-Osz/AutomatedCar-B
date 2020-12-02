@@ -95,5 +95,10 @@
         {
             this.carCenterPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y) + this.displacementFromCarCornerToCenter;
         }
+
+        public void SetStartPosition(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

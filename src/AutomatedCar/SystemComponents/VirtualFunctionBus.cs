@@ -7,8 +7,6 @@ namespace AutomatedCar.SystemComponents
     {
         private List<SystemComponent> components = new List<SystemComponent>();
 
-        public IReadOnlyDummyPacket DummyPacket { get; set; }
-
         public IReadOnlyHMIPacket HMIPacket { get; set; }
 
         public IReadOnlyDebugPacket DebugPacket { get; set; }

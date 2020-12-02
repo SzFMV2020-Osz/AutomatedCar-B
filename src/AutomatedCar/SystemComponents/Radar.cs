@@ -3,11 +3,12 @@ namespace AutomatedCar.SystemComponents
     using System;
     using System.Collections.Generic;
     using AutomatedCar.Models;
+    using Avalonia;
     using Avalonia.Media;
-    using ReactiveUI;
 
-    public class Ultrasound : Sensor
+    public class Radar : Sensor
     {
+        
         private List<Type> types = new List<Type>()
         {
             typeof(Tree),
@@ -17,35 +18,32 @@ namespace AutomatedCar.SystemComponents
             typeof(Garage),
         };
 
-        private double distance;
-
         private double dif;
+        private double maxDetect;
 
-        // public double Distance { get; set; }
-        public double Distance { get => this.distance; set { this.RaiseAndSetIfChanged(ref this.distance, value); } }
+        public double Distance { get; set; }
 
         public WorldObject LastSeenObject { get; set; }
 
         public SolidColorBrush LastSeenObjectBrush { get; set; }
 
-        public Ultrasound(VirtualFunctionBus virtualFunction, int offsetX, int offsetY, int rotate)
+        public Radar(VirtualFunctionBus virtualFunction)
             : base(virtualFunction)
         {
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
+            this.offsetX = 120;
+            this.offsetY = 0;
             this.rotate = rotate - 90;
-            this.range = 150;
-            this.angleOfView = 100;
-            this.Brush = SolidColorBrush.Parse("green");
+            this.range = 200*50;
+            this.angleOfView = 60;
+            this.Brush = SolidColorBrush.Parse("red");
             this.dif = this.range * Math.Tan((double)this.angleOfView / 2 * (Math.PI / 180));
-            this.maxReach = Math.Sqrt(Math.Pow(this.dif, 2) + Math.Pow(this.range, 2));
+            this.maxDetect = Math.Sqrt(Math.Pow(this.range, 2) + Math.Pow(this.range, 2));
         }
 
         public override void Process()
         {
             this.Points = this.CalculatePoints();
             this.WorldObjects = this.GetWorldObjectsInRange();
-            this.WorldObjects = this.WorldObjectSort();
             if (this.WorldObjects.Count > 0)
             {
                 this.Distance = this.CalculateDistance();
@@ -53,26 +51,24 @@ namespace AutomatedCar.SystemComponents
             else if (this.LastSeenObject != null)
             {
                 this.ResetLastSeenObjectBrush();
-                this.Distance = this.maxReach + 1;
-            }
-            else
-            {
-                this.Distance = this.maxReach + 1;
             }
         }
 
         public double CalculateDistance()
         {
-            double distance = this.maxReach;
+            double distance = this.maxDetect;
             double actual;
             WorldObject obj = null;
             foreach (WorldObject item in this.WorldObjects)
             {
-                actual = Math.Sqrt(Math.Pow(this.Points[0].X - item.X, 2) + Math.Pow(this.Points[0].Y - item.Y, 2));
-                if (actual <= distance)
+                if (this.types.Contains(item.GetType()))
                 {
-                    distance = actual;
-                    obj = item;
+                    actual = Math.Sqrt(Math.Pow(this.Points[0].X - item.X, 2) + Math.Pow(this.Points[0].Y - item.Y, 2));
+                    if (actual < distance)
+                    {
+                        distance = actual;
+                        obj = item;
+                    }
                 }
             }
 
@@ -82,21 +78,7 @@ namespace AutomatedCar.SystemComponents
                 return distance;
             }
 
-            return this.maxReach + 1;
-        }
-
-        private List<WorldObject> WorldObjectSort()
-        {
-            List<WorldObject> wos = new List<WorldObject>();
-            foreach (WorldObject obj in this.WorldObjects)
-            {
-                if (this.types.Contains(obj.GetType()))
-                {
-                    wos.Add(obj);
-                }
-            }
-
-            return wos;
+            return 99999;
         }
 
         public void SetClosestWorldObjectBrustToHighlighted(WorldObject obj)

@@ -21,34 +21,82 @@ namespace Tests.SystemComponents.Packets
 
         [Fact]
         public void IsAEBUseable_carSpeed0(){
-            World.Instance.ControlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
-            World.Instance.ControlledCar.Speed = kmh_into_pxs(0);
+            aeb.controlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Speed = kmh_into_pxs(0);
 
             Assert.Equal(true, aeb.IsUseable());
         }
 
         [Fact]
         public void IsAEBUseable_carSpeed10(){
-            World.Instance.ControlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
-            World.Instance.ControlledCar.Speed = kmh_into_pxs(10);
+            aeb.controlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Speed = kmh_into_pxs(10);
 
             Assert.Equal(true, aeb.IsUseable());
         }
 
         [Fact]
         public void IsAEBUseable_carSpeed69(){
-            World.Instance.ControlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
-            World.Instance.ControlledCar.Speed = kmh_into_pxs(69);
+            aeb.controlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Speed = kmh_into_pxs(69);
 
             Assert.Equal(true, aeb.IsUseable());
         }
 
         [Fact]
         public void IsAEBUseable_carSpeed71(){
-            World.Instance.ControlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
-            World.Instance.ControlledCar.Speed = kmh_into_pxs(71);
+            aeb.controlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Speed = kmh_into_pxs(71);
 
             Assert.Equal(false, aeb.IsUseable());
+        }
+
+        [Fact]
+        public void getStoppingDistanceTo_carPosition_speed0_x0_y0_worldobjectPosition_speed0_x0_y0() {
+            aeb.controlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            double distance = aeb.getStoppingDistanceTo_inPixels(wo);
+
+            Assert.Equal(0, distance);
+        }
+
+        [Fact]
+        public void getStoppingDistanceTo_carPosition_speed9ms_x0m_y0_worldobjectPosition_speed0_x0_y0() {
+            aeb.controlledCar = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Speed = 9*50; //9ms
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            double distance = aeb.getStoppingDistanceTo_inPixels(wo);
+
+            Assert.Equal(9*50, distance);
+        }
+
+        [Fact]
+        public void getStoppingDistanceTo_carPosition_speed9ms_x100m_y0_worldobjectPosition_speed0_x0_y0() {
+            aeb.controlledCar = new AutomatedCar(100*50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Speed = 9*50; //9ms
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            double distance = aeb.getStoppingDistanceTo_inPixels(wo);
+
+            Assert.Equal(91*50, distance);
+        }
+
+        [Fact]
+        public void thereIsAnObjectInRadar()
+        {
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());            
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Radar.LastSeenObject = wo;
+            Assert.True(aeb.isThereAnObjectInRadar());
+        }
+
+        [Fact]
+        public void thereIsNoObjectInRadar()
+        {
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());          
+            Assert.False(aeb.isThereAnObjectInRadar());
         }
     }
 }

@@ -5,6 +5,7 @@
              xmlns:models="clr-namespace:AutomatedCar.Models;assembly=AutomatedCar"
              xmlns:view="clr-namespace:AutomatedCar.ViewModels;assembly=AutomatedCar"
              xmlns:converters="clr-namespace:AutomatedCar.Views.Converters"
+             xmlns:customcontrols="clr-namespace:AutomatedCar.Views.CustomControls"
              Width="320" Height="720"
              x:Class="AutomatedCar.Views.DashboardView"
              DataContext="{Binding Dashboard}"
@@ -12,7 +13,13 @@
   <UserControl.Resources>
     <converters:BoolToColorConverter x:Key="ColorConverter" />
     <converters:IntegerToAngleRpmConverter x:Key="RpmAngleConverter" />
-    <converters:DoubleToAngleKmHConverter x:Key="KmHAngleConverter" />
+    <converters:PixelsPerTickToKmHAngleConverter x:Key="KmHAngleConverter" />
+    <converters:PixelsPerTickToKmPHConverter x:Key="KmHValueConverter" />
+    <converters:UltrasoundIndexToBackGroundColorConverter x:Key="BackgroundConverter" />
+    <converters:UltrasoundIndexToDistanceValueConverter x:Key="DistanceConverter" />
+    <converters:UltrasoundIndexToForeGroundColorConverter x:Key="ForegroundConverter" />
+    <converters:UltrasoundReversRadarValueConverter x:Key="DistanceValueConver" />
+    <converters:LastSeenSignConverter x:Key="SignConverter" />
   </UserControl.Resources>
 
   <UserControl.Styles>
@@ -67,7 +74,7 @@
                     </Line.RenderTransform>
                   </Line>
                   <WrapPanel Margin="35 90 35 20" >
-                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, StringFormat={}{0:0}}}"/>
+                    <TextBlock Foreground="Black" Text="{Binding ControlledCar.VirtualFunctionBus.PowerTrainPacket.Velocity, Converter={StaticResource KmHValueConverter}, StringFormat={}{0:0}}}"/>
                     <TextBlock Foreground="Black" Text=" km/h"/>
                   </WrapPanel>
                 </Canvas>
@@ -99,6 +106,28 @@
                     </Path.RenderTransform>
                   </Path>
                 </Canvas>
+              </Grid>
+              <Grid ColumnDefinitions="20,120,20,120,20" RowDefinitions="30,30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="L" FontSize="18" Padding="5" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
+                <ProgressBar MaxWidth="120" Width="120" Height="20" MaxHeight="20" Grid.Row="1" Grid.Column="1"
+                             Background="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource BackgroundConverter}}"
+                             Foreground="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource ForegroundConverter}}"
+                             Value="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource DistanceConverter}}"
+                             BorderBrush="Black" MinWidth="10" MinHeight="10" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock FontSize="15" Padding="10" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Text="{Binding ControlledCar.Ultrasounds[6].Points, Converter={StaticResource DistanceValueConver}, StringFormat=\{0:0.00\}}"/>
+                <TextBlock FontSize="15" Padding="10" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                          Text="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource DistanceValueConver}, StringFormat=\{0:0.00\}}"/>
+                <ProgressBar MaxWidth="120" Width="120" Height="20" MaxHeight="20" Grid.Row="1" Grid.Column="3"
+                             Background="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource BackgroundConverter}}"
+                             Foreground="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource ForegroundConverter}}"
+                             Value="{Binding ControlledCar.Ultrasounds[4].Points, Converter={StaticResource DistanceConverter}}"
+                             BorderBrush="Black" MinWidth="10" MinHeight="10" VerticalAlignment="Center" HorizontalAlignment="Right">
+                  <ProgressBar.RenderTransform>
+                    <RotateTransform Angle="180"/>
+                  </ProgressBar.RenderTransform>
+                </ProgressBar>
+                <TextBlock Text="R" FontSize="18" Padding="5" VerticalAlignment="Center" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Right" />
               </Grid>
               <TextBlock Padding="0 10"  HorizontalAlignment="Left" VerticalAlignment="Center">ACC opts:</TextBlock>
               <Grid ColumnDefinitions="160,160" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
@@ -222,10 +251,9 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
-                  <TextBlock Foreground="#000000"
-                             FontSize="10"
-                             FontWeight="Bold"
-                             Text="Last seen sign"/>
+                  <Image Source="{Binding ControlledCar.VirtualFunctionBus.HMIPacket.Sign, Converter={StaticResource SignConverter}}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center" Height="90" Width="90">
+                  </Image>
                 </Border>
                 <WrapPanel Grid.Row="3" Grid.Column="1"
                            HorizontalAlignment="Center" VerticalAlignment="Center">
