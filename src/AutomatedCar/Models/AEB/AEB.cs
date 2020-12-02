@@ -96,8 +96,8 @@ namespace AutomatedCar.Models
         }
 
         public void InactiveAEB(){
-            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
-            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = true;
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 0;
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = false;
         }
 
         public bool isThereAnObjectInRadar()
