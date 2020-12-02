@@ -23,7 +23,6 @@ namespace AutomatedCar
             // this.world.ControlledCar.NetPolygons = this.world.ControlledCar.GenerateNetPolygons(this.world.ControlledCar.BasePoints);
             // Collision.Handler();
             World.Instance.Tick();
-            World.Instance.ControlledCar.AEB.AEB_process();
         }
     }
 }

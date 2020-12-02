@@ -5,7 +5,7 @@ using AutomatedCar.SystemComponents.Packets;
 
 namespace AutomatedCar.Models
 {
-    public class AEB//: SystemComponent
+    public class AEB: SystemComponent
     {
         public AutomatedCar controlledCar;
         VirtualFunctionBus virtualFunctionBus;
@@ -14,7 +14,7 @@ namespace AutomatedCar.Models
             this.controlledCar = World.Instance.ControlledCar;
         }
 
-        public AEB(VirtualFunctionBus virtualFunctionBus = null)//: base(virtualFunctionBus)
+        public AEB(VirtualFunctionBus virtualFunctionBus = null): base(virtualFunctionBus)
         {
             this.virtualFunctionBus = virtualFunctionBus;
             this.controlledCar = World.Instance.ControlledCar;
@@ -56,22 +56,15 @@ namespace AutomatedCar.Models
             return (V.Length-(this.controlledCar.Height/2));
         }
 
-        // public override void Process()
-        // {
-        //     if(isCarFasterThanKmh(70)) {
-        //         this.SetWarning("AEB off");
-        //     }
-        // }
-
-        public void AEB_process(){
+        public override void Process()
+        {
             this.controlledCar = World.Instance.ControlledCar;
-
             if(isCarFasterThanKmh(70)) {
-                 this.SetWarning("AEB off");
-             } else {
-                 this.SetWarning("");
-             }
+                this.SetWarning("AEB off");
+            }
         }
+
+        
 
         public void SetWarning(String message){
             ((EABAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
