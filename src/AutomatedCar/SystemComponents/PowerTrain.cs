@@ -6,7 +6,7 @@ namespace AutomatedCar.SystemComponents
 
     public class PowerTrain : SystemComponent
     {
-        public PowerTrain(VirtualFunctionBus functionBus)
+        public PowerTrain(VirtualFunctionBus functionBus,int start_x, int start_y)
             : base(functionBus)
         {
             this.Engine = new EngineController();
@@ -14,6 +14,7 @@ namespace AutomatedCar.SystemComponents
             this.PowerTrainPacket = new PowerTrainPacket();
             this.HMIPacket = this.virtualFunctionBus.HMIPacket;
             this.virtualFunctionBus.PowerTrainPacket = this.PowerTrainPacket;
+            this.Steering.SetStartPosition(start_x, start_y);
         }
 
         private EngineController Engine { get; set; }
@@ -21,6 +22,8 @@ namespace AutomatedCar.SystemComponents
         private ISteeringController Steering { get; set; }
 
         private IReadOnlyHMIPacket HMIPacket { get; set; }
+        
+        private IReadOnlyAEBAction AEBPacket { get; set; }
 
         private PowerTrainPacket PowerTrainPacket { get; set; }
 
@@ -36,7 +39,7 @@ namespace AutomatedCar.SystemComponents
         {
             World.Instance.ControlledCar.Move(this.Steering.NewCarPosition);
             World.Instance.ControlledCar.Angle = this.Steering.NewCarAngle;
-            World.Instance.ControlledCar.Speed = (int)this.Engine.VelocityPixelsPerSecond;
+            World.Instance.ControlledCar.speed = (int)this.Engine.VelocityPixelsPerSecond;
         }
 
         private void UpdatePowerTrainPacket()
