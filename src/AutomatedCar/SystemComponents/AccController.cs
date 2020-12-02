@@ -30,7 +30,7 @@ namespace AutomatedCar.SystemComponents
 
                 if (powerTrainPacket.Velocity < speed)
                 {
-                    hmiPacket.Gaspedal = 10;
+                    hmiPacket.Gaspedal = 40;
                 }
                 else if (powerTrainPacket.Velocity > speed)
                 {
