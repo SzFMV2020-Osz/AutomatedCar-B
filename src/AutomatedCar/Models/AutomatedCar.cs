@@ -18,6 +18,7 @@ namespace AutomatedCar.Models
         private Ultrasound[] ultrasounds;
         private AccController accController;
         private Radar radar;
+        private AEB aEB;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -25,6 +26,7 @@ namespace AutomatedCar.Models
             : base(x, y, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polylist)
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
+            this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.accController = new AccController(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
@@ -41,9 +43,10 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
             this.Radar = new Radar(this.virtualFunctionBus);
-            this.ultraSoundVisible = true;
-            this.radarVisible = true;
-            this.cameraVisible = true;
+            this.ultraSoundVisible = false;
+            this.radarVisible = false;
+            this.cameraVisible = false;
+            this.polygonVisible = false;
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -53,6 +56,8 @@ namespace AutomatedCar.Models
         public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
+
+        public AEB AEB { get; set; }//{ get => this.aEB; set { this.RaiseAndSetIfChanged(ref this.aEB, value); } }
 
         public Geometry Geometry { get; set; }
 
@@ -175,10 +180,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value);
         }
 
-        public SolidColorBrush CameraBrush { get; set; }
-
-        public Geometry CameraGeometry { get; set; }
-
         private bool cameraVisible;
 
         public bool CameraVisible
@@ -186,6 +187,18 @@ namespace AutomatedCar.Models
             get => cameraVisible;
             set => this.RaiseAndSetIfChanged(ref cameraVisible, value);
         }
+
+        private bool polygonVisible;
+
+        public bool PolygonVisible
+        {
+            get => polygonVisible;
+            set => this.RaiseAndSetIfChanged(ref polygonVisible, value);
+        }
+
+        public SolidColorBrush CameraBrush { get; set; }
+
+        public Geometry CameraGeometry { get; set; }
 
         public int VisibleX { get; set; }
 

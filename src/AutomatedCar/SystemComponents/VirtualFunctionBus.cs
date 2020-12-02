@@ -9,11 +9,11 @@ namespace AutomatedCar.SystemComponents
 
         public IReadOnlyHMIPacket HMIPacket { get; set; }
 
-        public IReadOnlyDebugPacket DebugPacket { get; set; }
-
         public IReadOnlyPowerTrainPacket PowerTrainPacket { get; set; }
 
-        public IReadOnlyRadarSensorPacket RadarSensorPacket {get;set;}
+        public IReadOnlyRadarSensorPacket RadarSensorPacket { get; set; }
+
+        public IReadOnlyAEBAction AEBActionPacket { get; set; } 
 
         public VirtualFunctionBus()
         {
