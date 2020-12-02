@@ -1,7 +1,10 @@
+using AutomatedCar.Models;
 using AutomatedCar.Views.CustomControls;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.TextFormatting.Unicode;
+using RTools_NTS.Util;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -47,6 +50,22 @@ namespace AutomatedCar.Views.CustomControls
 
         public override void Render(DrawingContext context)
         {
+            if (this.Name == "Camera")
+            {
+                if (!World.Instance.ControlledCar.CameraVisible)
+                {
+                    return;
+                }
+            }
+
+            if (this.Name == "Radar")
+            {
+                if (!World.Instance.ControlledCar.RadarVisible)
+                {
+                    return;
+                }
+            }
+
             base.Render(context);
 
             var transformGroup = new TransformGroup();

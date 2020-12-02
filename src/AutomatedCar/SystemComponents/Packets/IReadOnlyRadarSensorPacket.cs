@@ -7,6 +7,6 @@ namespace AutomatedCar.SystemComponents.Packets
 {
     public interface IReadOnlyRadarSensorPacket
     {
-        public List<WorldObject> DangerousObjects { get; }
+        public List<NoticedObject> DangerousObjects { get; }
     }
 }
