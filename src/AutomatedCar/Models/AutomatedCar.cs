@@ -61,6 +61,8 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
+        public bool Invincible = false;
+
         public int Speed { get{return (int)Math.Round(speed);} set{speed = value;} }
 
         public double speed;
@@ -98,6 +100,11 @@ namespace AutomatedCar.Models
                 if (col is Sign)
                 {
                     newPosition = this.SignCrash(newPosition, col);
+                }
+
+                if(col is NpcPedestrian && !Invincible)
+                {
+                    //event?
                 }
             }
 
@@ -222,7 +229,10 @@ namespace AutomatedCar.Models
         /// <param name="otherObjectVector">The velocity vector of the other object involved in the collision.</param>
         public void DamageOnCollision(Vector2 carVector, Vector2 otherObjectVector)
         {
-            this.healthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+            if (!Invincible)
+            {
+                this.HealthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+            }
         }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
