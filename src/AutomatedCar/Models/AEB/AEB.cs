@@ -23,6 +23,8 @@ namespace AutomatedCar.Models
             virtualFunctionBus.AEBActionPacket = this.AEBActionPacket;
         }
 
+        private bool IsActive { get; set; }
+
         public bool IsUseable(){
             return !isCarFasterThanKmh(70);
         }
@@ -66,16 +68,17 @@ namespace AutomatedCar.Models
     
         public void Run() {
             if(IsUseable()) {
-                this.SetWarning("");
                 if(controlledCar.PowerTrain.Engine.GearShifter.Position == Gears.D && controlledCar.Radar.LastSeenObject != null){
-                    if(getStoppingDistanceTo_inPixels(controlledCar.Radar.LastSeenObject) > 50) {
-                        this.SetWarning("Break please!");
-                        InactiveAEB();
-                    } else {
-                        this.SetWarning("AEB active");
+                    var distanceToObject = getStoppingDistanceTo_inPixels(controlledCar.Radar.LastSeenObject);
+                    if(distanceToObject <= 5) {
+                        this.SetWarning("AEB active! N to inactivate");
                         Stop();
+                    } else if (distanceToObject <= 10) {
+                        this.SetWarning("Please brake!");
                     }
-                } else {
+                }
+
+                if (this.controlledCar.PowerTrain.Engine.GearShifter.Position == Gears.N) {
                     this.SetWarning("");
                     InactiveAEB();
                 }
@@ -91,12 +94,17 @@ namespace AutomatedCar.Models
         }
 
         public void Stop(){
-            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
+            if (this.IsActive) return;
+            this.IsActive = true;
+            ((HMIPacket)this.virtualFunctionBus.HMIPacket).Breakpedal = 100;
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = true;
         }
 
-        public void InactiveAEB(){
-            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 0;
+        public void InactiveAEB()
+        {
+            if (!this.IsActive) return;
+            this.IsActive = false;
+            ((HMIPacket)this.virtualFunctionBus.HMIPacket).Breakpedal = 0;
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = false;
         }
 
