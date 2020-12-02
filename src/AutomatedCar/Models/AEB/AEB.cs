@@ -9,7 +9,7 @@ namespace AutomatedCar.Models
     {
         public AutomatedCar controlledCar;
         VirtualFunctionBus virtualFunctionBus;
-        private EABAction AEBActionPacket;
+        private AEBAction AEBActionPacket;
         public AEB()
         {
             this.controlledCar = World.Instance.ControlledCar;
@@ -19,7 +19,7 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus = virtualFunctionBus;
             this.controlledCar = World.Instance.ControlledCar;
-            this.AEBActionPacket = new EABAction();
+            this.AEBActionPacket = new AEBAction();
             virtualFunctionBus.AEBActionPacket = this.AEBActionPacket;
         }
 
@@ -69,7 +69,8 @@ namespace AutomatedCar.Models
         
 
         public void SetWarning(String message){
-            ((EABAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
         }
 
         public bool isThereAnObjectInRadar()
