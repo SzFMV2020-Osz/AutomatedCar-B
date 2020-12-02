@@ -8,15 +8,19 @@ namespace AutomatedCar.Models
     public class AEB: SystemComponent
     {
         public AutomatedCar controlledCar;
+
+        public AEBAction AEBActionPacket;
+
         public AEB()
         {
             this.controlledCar = World.Instance.ControlledCar;
         }
 
-        public AEB(VirtualFunctionBus virtualFunctionBus = null)
+        public AEB(VirtualFunctionBus virtualFunctionBus)
         {
             this.controlledCar = World.Instance.ControlledCar;
-            virtualFunctionBus.AEBActionPacket = new AEBAction();
+            this.AEBActionPacket = new AEBAction();
+            virtualFunctionBus.AEBActionPacket = this.AEBActionPacket;
         }
 
         public bool IsUseable(){
