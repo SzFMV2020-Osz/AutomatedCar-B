@@ -31,7 +31,7 @@ namespace AutomatedCar.SystemComponents
 
         public bool GearDown { get; private set; }
 
-        public bool Acc { get; private set; }
+        public bool Acc { get; set; }
 
         public bool AccDistance { get; private set; }
 

@@ -17,10 +17,17 @@ namespace AutomatedCar.SystemComponents
         {
             var hmiPacket = (HMIPacket)virtualFunctionBus.HMIPacket;
             var powerTrainPacket = (PowerTrainPacket)virtualFunctionBus.PowerTrainPacket;
+            var aebActionPacket = (AEBAction)virtualFunctionBus.AEBActionPacket;
             var speed = hmiPacket.AccSpeed;
+
+            if (aebActionPacket.Active)
+            {
+                World.Instance.ControlledCar.HumanMachineInterface.Acc = false;
+            }
 
             if (hmiPacket.Acc)
             {
+
                 hmiPacket.Gaspedal = 0;
                 if (hmiPacket.Sign != null && hmiPacket.Sign != "")
                 {
