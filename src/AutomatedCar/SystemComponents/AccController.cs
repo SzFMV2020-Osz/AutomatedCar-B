@@ -27,7 +27,6 @@ namespace AutomatedCar.SystemComponents
 
             if (hmiPacket.Acc)
             {
-
                 hmiPacket.Gaspedal = 0;
                 if (hmiPacket.Sign != null && hmiPacket.Sign != "")
                 {
