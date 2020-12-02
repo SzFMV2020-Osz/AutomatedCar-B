@@ -17,6 +17,7 @@ namespace AutomatedCar.Models
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
         private Radar radar;
+        private AEB aEB;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -24,6 +25,7 @@ namespace AutomatedCar.Models
             : base(x, y, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polylist)
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
+            this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
@@ -52,6 +54,8 @@ namespace AutomatedCar.Models
         public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
+
+        public AEB AEB { get; set; }//{ get => this.aEB; set { this.RaiseAndSetIfChanged(ref this.aEB, value); } }
 
         public Geometry Geometry { get; set; }
 
