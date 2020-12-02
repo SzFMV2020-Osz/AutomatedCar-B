@@ -54,21 +54,6 @@ namespace AutomatedCar.Models
             Vector V = new Vector(x, y);
             return (V.Length-(this.controlledCar.Height/2));
         }
-        
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
-        }
 
         public override void Process()
         {
