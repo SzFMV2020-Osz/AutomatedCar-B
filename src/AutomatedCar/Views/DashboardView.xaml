@@ -241,11 +241,7 @@
                       <TextBlock  Foreground="#000000"
                           FontSize="10"
                           FontWeight="Bold"
-                          Text="AEB Warn:"/>
-                      <TextBlock Foreground="#000000"
-                         FontSize="10"
-                         FontWeight="Bold"
-                         Text="***"/>
+                          Text="{Binding ControlledCar.VirtualFunctionBus.AEBActionPacket.Message}"/>
                     </WrapPanel>
                   </Border>
                 </WrapPanel>

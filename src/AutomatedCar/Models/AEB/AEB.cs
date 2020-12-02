@@ -1,15 +1,22 @@
 using System;
 using AutomatedCar.SystemComponents;
+using AutomatedCar.SystemComponents.Packets;
 using Avalonia;
 
 namespace AutomatedCar.Models
 {
-    public class AEB
+    public class AEB: SystemComponent
     {
         public AutomatedCar controlledCar;
         public AEB()
         {
             this.controlledCar = World.Instance.ControlledCar;
+        }
+
+        public AEB(VirtualFunctionBus virtualFunctionBus = null)
+        {
+            this.controlledCar = World.Instance.ControlledCar;
+            virtualFunctionBus.AEBActionPacket = new AEBAction();
         }
 
         public bool IsUseable(){
@@ -44,6 +51,26 @@ namespace AutomatedCar.Models
             double y = item.Y-this.controlledCar.Y;
             Vector V = new Vector(x, y);
             return (V.Length-(this.controlledCar.Height/2));
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public override void Process()
+        {
+            Console.WriteLine("......");
         }
     }
 }

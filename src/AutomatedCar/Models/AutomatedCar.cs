@@ -15,6 +15,7 @@ namespace AutomatedCar.Models
         private VirtualFunctionBus virtualFunctionBus;
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
+        private AEB aEB;
         private Ultrasound[] ultrasounds;
         private Radar radar;
 
@@ -26,6 +27,7 @@ namespace AutomatedCar.Models
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
+            
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
@@ -39,6 +41,7 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
             this.Radar = new Radar(this.virtualFunctionBus);
+            this.AEB = new AEB(this.virtualFunctionBus);
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
@@ -53,6 +56,7 @@ namespace AutomatedCar.Models
         public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
         
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
+        public AEB AEB { get; set; }//{ get => this.aEB; set { this.RaiseAndSetIfChanged(ref this.aEB, value); } }
 
         public Geometry Geometry { get; set; }
 
