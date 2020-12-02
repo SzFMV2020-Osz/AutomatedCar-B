@@ -68,6 +68,8 @@ namespace AutomatedCar.Models
 
             if(isCarFasterThanKmh(70)) {
                  this.SetWarning("AEB off");
+             } else {
+                 this.SetWarning("");
              }
         }
 
