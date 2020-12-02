@@ -13,8 +13,9 @@ namespace AutomatedCar.Models
             this.controlledCar = World.Instance.ControlledCar;
         }
 
-        public AEB(VirtualFunctionBus virtualFunctionBus = null)
+        public AEB(VirtualFunctionBus virtualFunctionBus = null): base(virtualFunctionBus)
         {
+            
             this.controlledCar = World.Instance.ControlledCar;
             virtualFunctionBus.AEBActionPacket = new EABAction();
         }
