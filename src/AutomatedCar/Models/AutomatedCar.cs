@@ -17,6 +17,7 @@ namespace AutomatedCar.Models
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
         private Radar radar;
+        private AEB aEB;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -39,6 +40,7 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
             this.Radar = new Radar(this.virtualFunctionBus);
+            this.AEB = new AEB(this.virtualFunctionBus);
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
@@ -53,6 +55,8 @@ namespace AutomatedCar.Models
         public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
         
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
+
+        public AEB AEB { get; set; }//{ get => this.aEB; set { this.RaiseAndSetIfChanged(ref this.aEB, value); } }
 
         public Geometry Geometry { get; set; }
 
