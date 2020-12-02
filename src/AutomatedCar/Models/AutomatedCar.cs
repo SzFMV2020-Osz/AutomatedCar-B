@@ -41,9 +41,10 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
             this.Radar = new Radar(this.virtualFunctionBus);
-            this.ultraSoundVisible = true;
-            this.radarVisible = true;
-            this.cameraVisible = true;
+            this.ultraSoundVisible = false;
+            this.radarVisible = false;
+            this.cameraVisible = false;
+            this.polygonVisible = false;
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -183,10 +184,6 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref ultraSoundVisible, value);
         }
 
-        public SolidColorBrush CameraBrush { get; set; }
-
-        public Geometry CameraGeometry { get; set; }
-
         private bool cameraVisible;
 
         public bool CameraVisible
@@ -194,6 +191,18 @@ namespace AutomatedCar.Models
             get => cameraVisible;
             set => this.RaiseAndSetIfChanged(ref cameraVisible, value);
         }
+
+        private bool polygonVisible;
+
+        public bool PolygonVisible
+        {
+            get => polygonVisible;
+            set => this.RaiseAndSetIfChanged(ref polygonVisible, value);
+        }
+
+        public SolidColorBrush CameraBrush { get; set; }
+
+        public Geometry CameraGeometry { get; set; }
 
         public int VisibleX { get; set; }
 
