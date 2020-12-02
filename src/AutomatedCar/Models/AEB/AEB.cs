@@ -73,7 +73,7 @@ namespace AutomatedCar.Models
         public override void Process()
         {
             if(isCarFasterThanKmh(70)) {
-                
+                this.SetWarning("AEB off");
             }
         }
 
