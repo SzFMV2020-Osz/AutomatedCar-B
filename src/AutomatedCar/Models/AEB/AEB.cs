@@ -8,6 +8,7 @@ namespace AutomatedCar.Models
     public class AEB: SystemComponent
     {
         public AutomatedCar controlledCar;
+        VirtualFunctionBus virtualFunctionBus;
         public AEB()
         {
             this.controlledCar = World.Instance.ControlledCar;
@@ -15,7 +16,7 @@ namespace AutomatedCar.Models
 
         public AEB(VirtualFunctionBus virtualFunctionBus = null): base(virtualFunctionBus)
         {
-            
+            this.virtualFunctionBus = virtualFunctionBus;
             this.controlledCar = World.Instance.ControlledCar;
             virtualFunctionBus.AEBActionPacket = new EABAction();
         }
@@ -71,7 +72,13 @@ namespace AutomatedCar.Models
 
         public override void Process()
         {
-            Console.WriteLine("-----");
+            if(isCarFasterThanKmh(70)) {
+                
+            }
+        }
+
+        public void SetWarning(String message){
+            ((EABAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
         }
     }
 }

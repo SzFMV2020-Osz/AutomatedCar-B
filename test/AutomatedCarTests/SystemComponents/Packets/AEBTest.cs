@@ -3,6 +3,7 @@ namespace Tests.SystemComponents.Packets
     using System;
     using System.Collections.Generic;
     using AutomatedCar.Models;
+    using AutomatedCar.SystemComponents;
     using Avalonia;
     using Xunit;
     
@@ -81,6 +82,16 @@ namespace Tests.SystemComponents.Packets
             double distance = aeb.getStoppingDistanceTo_inPixels(wo);
 
             Assert.Equal(91*50, distance);
+        }
+
+        [Fact]
+        public void setAEB_Warning() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+
+            aeb.SetWarning("Text");
+
+            Assert.Equal("Text", virtualFunctionBus.AEBActionPacket.Message);
         }
     }
 }
