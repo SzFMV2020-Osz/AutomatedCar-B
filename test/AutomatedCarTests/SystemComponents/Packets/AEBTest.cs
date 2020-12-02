@@ -84,15 +84,7 @@ namespace Tests.SystemComponents.Packets
             Assert.Equal(91*50, distance);
         }
 
-        [Fact]
-        public void setAEB_Warning() {
-            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
-            aeb = new AEB(virtualFunctionBus);
-
-            aeb.SetWarning("Text");
-
-            Assert.Equal("Text", virtualFunctionBus.AEBActionPacket.Message);
-        }
+       
         public void thereIsAnObjectInRadar()
         {
             aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());            
@@ -106,6 +98,40 @@ namespace Tests.SystemComponents.Packets
         {
             aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());          
             Assert.False(aeb.isThereAnObjectInRadar());
+        }
+
+         [Fact]
+        public void setAEB_Warning() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+
+            aeb.SetWarning("Text");
+
+            Assert.Equal("Text", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+         [Fact]
+        public void setAEB_Warning_over70() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.Speed = kmh_into_pxs(71);
+
+            aeb.Run();
+
+            Assert.Equal("AEB off", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+        [Fact]
+        public void setAEB_Warning_lessthan70() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.Speed = kmh_into_pxs(69);
+
+            aeb.Run();
+
+            Assert.Equal("", virtualFunctionBus.AEBActionPacket.Message);
         }
     }
 }

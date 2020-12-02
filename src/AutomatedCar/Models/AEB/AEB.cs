@@ -61,15 +61,26 @@ namespace AutomatedCar.Models
         public override void Process()
         {
             this.controlledCar = World.Instance.ControlledCar;
+            Run();
+        }
+    
+        public void Run(){
             if(isCarFasterThanKmh(70)) {
                 this.SetWarning("AEB off");
+            } else {
+                this.SetWarning("");
             }
         }
+        
 
         
 
         public void SetWarning(String message){
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
+            
+        }
+
+        public void Stop(){
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = true;
         }
