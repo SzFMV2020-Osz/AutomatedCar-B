@@ -64,11 +64,24 @@ namespace AutomatedCar.Models
             Run();
         }
     
-        public void Run(){
-            if(isCarFasterThanKmh(70)) {
-                this.SetWarning("AEB off");
-            } else {
+        public void Run() {
+            if(IsUseable()) {
                 this.SetWarning("");
+                if(controlledCar.Radar.LastSeenObject != null){
+                    if(getStoppingDistanceTo_inPixels(controlledCar.Radar.LastSeenObject) > 50) {
+                        this.SetWarning("Break please!");
+                        InactiveAEB();
+                    } else {
+                        this.SetWarning("AEB active");
+                        Stop();
+                    }
+                } else {
+                    this.SetWarning("");
+                    InactiveAEB();
+                }
+            } else {
+                this.SetWarning("AEB off");
+                InactiveAEB();
             }
         }
 
@@ -78,6 +91,11 @@ namespace AutomatedCar.Models
         }
 
         public void Stop(){
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = true;
+        }
+
+        public void InactiveAEB(){
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = true;
         }

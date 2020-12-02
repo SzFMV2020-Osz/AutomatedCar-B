@@ -115,6 +115,7 @@ namespace Tests.SystemComponents.Packets
             aeb = new AEB(virtualFunctionBus);
             aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
             aeb.controlledCar.Speed = kmh_into_pxs(71);
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(200 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
 
             aeb.Run();
 
@@ -127,10 +128,37 @@ namespace Tests.SystemComponents.Packets
             aeb = new AEB(virtualFunctionBus);
             aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
             aeb.controlledCar.Speed = kmh_into_pxs(69);
+            aeb.controlledCar.Radar.LastSeenObject = null;
 
             aeb.Run();
 
             Assert.Equal("", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+        [Fact]
+        public void setAEB_Warning_lessthan70_LastSeenObject() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.Speed = kmh_into_pxs(9);
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(200 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            aeb.Run();
+
+            Assert.Equal("Break please!", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+        [Fact]
+        public void setAEB_Warning_lessthan70_Stop() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.Speed = kmh_into_pxs(9);
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(90 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            aeb.Run();
+
+            Assert.Equal("AEB active", virtualFunctionBus.AEBActionPacket.Message);
         }
     }
 }
