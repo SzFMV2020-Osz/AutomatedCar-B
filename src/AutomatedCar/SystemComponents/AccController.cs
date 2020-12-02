@@ -39,26 +39,26 @@ namespace AutomatedCar.SystemComponents
                 var car = World.Instance.ControlledCar;
                 var radar = car.Radar;
                 var wos = radar.WorldObjects;
-                foreach (var wo in wos)
+                foreach (var selectedObjectFromRadar in wos)
                 {
-                    if (wo is NpcCar)
+                    if (selectedObjectFromRadar is NpcCar)
                     {
-                        var wom = (wo.Angle + 90) % 360;
-                        var cam = car.Angle % 360;
-                        var dif = Math.Abs(wom - cam) % 360;
+                        var mpcAngleModulo = (selectedObjectFromRadar.Angle + 90) % 360;
+                        var controlledCarAngleModulo = car.Angle % 360;
+                        var angleDifference = Math.Abs(mpcAngleModulo - controlledCarAngleModulo) % 360;
 
-                        if (dif > 180)
+                        if (angleDifference > 180)
                         {
-                            dif = 360 - dif;
+                            angleDifference = 360 - angleDifference;
                         }
 
-                        if (dif > 60)
+                        if (angleDifference > 60)
                         {
-                            var cv = new Vector2(car.X, car.Y);
-                            var nv = new Vector2((wo as NpcCar).X, (wo as NpcCar).Y);
-                            var dis = Vector2.Distance(cv, nv);
+                            var controlledCarPosition = new Vector2(car.X, car.Y);
+                            var npmPosition = new Vector2((selectedObjectFromRadar as NpcCar).X, (selectedObjectFromRadar as NpcCar).Y);
+                            var distance = Vector2.Distance(controlledCarPosition, npmPosition);
 
-                            if (dis < 50 * Kmh2ms(Pxs2kmh(powerTrainPacket.Velocity)) * hmiPacket.AccDistance)
+                            if (distance < 50 * Kmh2ms(Pxs2kmh(powerTrainPacket.Velocity)) * hmiPacket.AccDistance)
                             {
                                 hmiPacket.Gaspedal = 0;
                             }
