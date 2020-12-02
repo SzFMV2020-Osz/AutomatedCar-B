@@ -13,20 +13,46 @@ namespace AutomatedCar.SystemComponents
         {
         }
 
+        private static bool buttonPress = false;
+        private static double gspeed = 0;
         public override void Process()
         {
             var hmiPacket = (HMIPacket)virtualFunctionBus.HMIPacket;
             var powerTrainPacket = (PowerTrainPacket)virtualFunctionBus.PowerTrainPacket;
             var aebActionPacket = (AEBAction)virtualFunctionBus.AEBActionPacket;
-            var speed = hmiPacket.AccSpeed;
+            double speed = hmiPacket.AccSpeed;
 
             if (aebActionPacket.Active)
             {
-                World.Instance.ControlledCar.HumanMachineInterface.Acc = false;
+                //World.Instance.ControlledCar.HumanMachineInterface.Acc = false;
+            }
+
+            if (buttonPress && !hmiPacket.Acc)
+            {
+                buttonPress = false;
+                gspeed = 0;
             }
 
             if (hmiPacket.Acc)
             {
+                if (!buttonPress)
+                {
+                    buttonPress = true;
+                    gspeed = hmiPacket.AccSpeed > Pxs2kmh(powerTrainPacket.Velocity)
+                        ? hmiPacket.AccSpeed
+                        : Pxs2kmh(powerTrainPacket.Velocity);
+                }
+
+
+                if (gspeed > speed)
+                {
+                    speed = gspeed;
+                }
+                else
+                {
+                    gspeed = 0;
+                }
+
                 hmiPacket.Gaspedal = 0;
                 if (hmiPacket.Sign != null && hmiPacket.Sign != "")
                 {
