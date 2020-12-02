@@ -9,6 +9,7 @@ namespace AutomatedCar.Models
     {
         public AutomatedCar controlledCar;
         VirtualFunctionBus virtualFunctionBus;
+        private EABAction AEBActionPacket;
         public AEB()
         {
             this.controlledCar = World.Instance.ControlledCar;
@@ -18,7 +19,8 @@ namespace AutomatedCar.Models
         {
             this.virtualFunctionBus = virtualFunctionBus;
             this.controlledCar = World.Instance.ControlledCar;
-            virtualFunctionBus.AEBActionPacket = new EABAction();
+            this.AEBActionPacket = new EABAction();
+            virtualFunctionBus.AEBActionPacket = this.AEBActionPacket;
         }
 
         public bool IsUseable(){
