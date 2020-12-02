@@ -67,7 +67,7 @@ namespace AutomatedCar.Models
         public void Run() {
             if(IsUseable()) {
                 this.SetWarning("");
-                if(controlledCar.Radar.LastSeenObject != null){
+                if(controlledCar.PowerTrain.Engine.GearShifter.Position == Gears.D && controlledCar.Radar.LastSeenObject != null){
                     if(getStoppingDistanceTo_inPixels(controlledCar.Radar.LastSeenObject) > 50) {
                         this.SetWarning("Break please!");
                         InactiveAEB();

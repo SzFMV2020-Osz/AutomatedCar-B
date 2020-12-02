@@ -18,7 +18,7 @@ namespace AutomatedCar.SystemComponents
             this.Steering.SetStartPosition(start_x, start_y);
         }
 
-        private EngineController Engine { get; set; }
+        public  EngineController Engine { get; private set; }
 
         private ISteeringController Steering { get; set; }
 
