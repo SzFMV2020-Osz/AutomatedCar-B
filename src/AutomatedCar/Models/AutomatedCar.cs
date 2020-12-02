@@ -50,8 +50,6 @@ namespace AutomatedCar.Models
 
         public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
-        public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
-        
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
 
         public Geometry Geometry { get; set; }
