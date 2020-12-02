@@ -24,7 +24,7 @@ namespace AutomatedCar.SystemComponents
 
             if (aebActionPacket.Active)
             {
-                //World.Instance.ControlledCar.HumanMachineInterface.Acc = false;
+                World.Instance.ControlledCar.HumanMachineInterface.Acc = false;
             }
 
             if (buttonPress && !hmiPacket.Acc)
