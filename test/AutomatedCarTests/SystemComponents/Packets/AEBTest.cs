@@ -154,7 +154,7 @@ namespace Tests.SystemComponents.Packets
             aeb = new AEB(virtualFunctionBus);
             aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
             aeb.controlledCar.Speed = kmh_into_pxs(9);
-            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(90 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(99 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
 
             aeb.Run();
 
