@@ -9,6 +9,8 @@ namespace AutomatedCar.Models
     using ReactiveUI;
     using System;
     using System.Linq;
+    using Views;
+    using AvaloniaAppTemplate.Namespace;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -18,6 +20,7 @@ namespace AutomatedCar.Models
         private Ultrasound[] ultrasounds;
         private Radar radar;
         private AEB aEB;
+        private GameOverCondition gameOver;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -28,6 +31,7 @@ namespace AutomatedCar.Models
             this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
+            this.gameOver = new GameOverCondition(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
@@ -104,7 +108,7 @@ namespace AutomatedCar.Models
 
                 if(col is NpcPedestrian && !Invincible)
                 {
-                    //event?
+                    HealthPoints = 0;
                 }
             }
 
@@ -232,6 +236,7 @@ namespace AutomatedCar.Models
             if (!Invincible)
             {
                 this.HealthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+                GameOverMessage.Show(null, GameOverMessage.GameOverMessageButtons.Ok);
             }
         }
 
