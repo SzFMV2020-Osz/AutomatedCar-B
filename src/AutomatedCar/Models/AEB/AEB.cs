@@ -71,9 +71,6 @@ namespace AutomatedCar.Models
                 this.SetWarning("");
             }
         }
-        
-
-        
 
         public void SetWarning(String message){
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Message = message;

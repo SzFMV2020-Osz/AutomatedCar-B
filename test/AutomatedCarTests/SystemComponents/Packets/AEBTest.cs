@@ -83,7 +83,6 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal(91*50, distance);
         }
-
        
         public void thereIsAnObjectInRadar()
         {
