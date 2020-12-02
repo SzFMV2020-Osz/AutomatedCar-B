@@ -25,6 +25,7 @@ namespace AutomatedCar.Models
             : base(x, y, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polylist)
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
+            this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
@@ -40,7 +41,6 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
             this.Radar = new Radar(this.virtualFunctionBus);
-            this.AEB = new AEB(this.virtualFunctionBus);
             this.ultraSoundVisible = true;
             this.radarVisible = true;
             this.cameraVisible = true;
