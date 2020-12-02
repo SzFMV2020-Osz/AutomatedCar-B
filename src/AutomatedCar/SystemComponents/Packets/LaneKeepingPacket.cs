@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AutomatedCar.SystemComponents.Packets
 {
-    public class LaneKeepingPacket
+    public class LaneKeepingPacket : IReadOnlyLaneKeepingPacket
     {
         public bool Active { get; set; }
         public double Steering { get; set; }

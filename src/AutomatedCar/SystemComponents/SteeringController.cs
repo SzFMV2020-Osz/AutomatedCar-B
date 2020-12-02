@@ -23,15 +23,15 @@
 
         public double NewCarAngle { get; set; }
 
-        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
+        public void UpdateSteeringProperties(IReadOnlyHMIPacket HMIpacket, IReadOnlyLaneKeepingPacket laneKeepingPacket)
         {
             this.SetVelocityPixelPerTick();
             if (this.velocityPixelPerTick != 0)
             {
                 this.carPoint = new Vector2(World.Instance.ControlledCar.X, World.Instance.ControlledCar.Y);
                 this.carCurrentAngle = World.Instance.ControlledCar.Angle;
-                this.steeringAngle = packet.Steering * SteeringWheelConversionConstant;
-                this.isInReverseGear = packet.Gear == Gears.R;
+                this.steeringAngle = laneKeepingPacket.Active ? laneKeepingPacket.Steering * SteeringWheelConversionConstant : HMIpacket.Steering * SteeringWheelConversionConstant;
+                this.isInReverseGear = HMIpacket.Gear == Gears.R;
                 this.SetCarDirectionUnitVector();
                 this.SetNewDirectionUnitVector();
                 this.SetNewCarPosition();

@@ -58,7 +58,7 @@
             get => new Vector2((float)Math.Cos(this.carCurrentAngle + this.SteeringAngle), (float)Math.Sin(this.carCurrentAngle + this.SteeringAngle));
         }
 
-        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet)
+        public void UpdateSteeringProperties(IReadOnlyHMIPacket packet, IReadOnlyLaneKeepingPacket LaneKeepingPacket)
         {
             this.SetDistanceFromCarCornerToCenter();
             this.carCurrentAngle = World.Instance.ControlledCar.Angle;

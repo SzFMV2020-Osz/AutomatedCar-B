@@ -13,6 +13,7 @@ namespace AutomatedCar.SystemComponents
             this.Steering = new SteeringController();
             this.PowerTrainPacket = new PowerTrainPacket();
             this.HMIPacket = this.virtualFunctionBus.HMIPacket;
+            this.LaneKeepingPacket = this.virtualFunctionBus.LaneKeepingPacket;
             this.virtualFunctionBus.PowerTrainPacket = this.PowerTrainPacket;
         }
 
@@ -24,10 +25,12 @@ namespace AutomatedCar.SystemComponents
 
         private PowerTrainPacket PowerTrainPacket { get; set; }
 
+        private IReadOnlyLaneKeepingPacket LaneKeepingPacket { get; set; }
+
         public override void Process()
         {
             this.Engine.UpdateEngineProperties(this.HMIPacket);
-            this.Steering.UpdateSteeringProperties(this.HMIPacket);
+            this.Steering.UpdateSteeringProperties(this.HMIPacket,this.LaneKeepingPacket);
             this.UpdateCarPosition();
             this.UpdatePowerTrainPacket();
         }
