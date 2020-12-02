@@ -71,6 +71,7 @@ namespace AutomatedCar.Models
         public void SetWarning(String message){
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
             ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Breakpedal = 100;
+            ((AEBAction)this.virtualFunctionBus.AEBActionPacket).Active = true;
         }
 
         public bool isThereAnObjectInRadar()
