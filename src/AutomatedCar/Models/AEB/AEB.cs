@@ -54,7 +54,7 @@ namespace AutomatedCar.Models
             Vector V = new Vector(x, y);
             return (V.Length-(this.controlledCar.Height/2));
         }
-
+        
         public override bool Equals(object obj)
         {
             return base.Equals(obj);
@@ -79,6 +79,15 @@ namespace AutomatedCar.Models
 
         public void SetWarning(String message){
             ((EABAction)this.virtualFunctionBus.AEBActionPacket).Message = message;
+        }
+
+        public bool isThereAnObjectInRadar()
+        {
+            if(controlledCar.Radar.LastSeenObject != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

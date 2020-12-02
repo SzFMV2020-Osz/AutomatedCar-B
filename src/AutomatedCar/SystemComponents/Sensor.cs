@@ -5,6 +5,7 @@ namespace AutomatedCar.SystemComponents
     using AutomatedCar.Models;
     using Avalonia;
     using Avalonia.Media;
+    using ReactiveUI;
 
     public abstract class Sensor : SystemComponent
     {
@@ -13,14 +14,16 @@ namespace AutomatedCar.SystemComponents
         public int rotate;
         public int range;
         public int angleOfView;
+        public double maxReach;
         public SolidColorBrush Brush;
+        private List<Point> points;
 
         public Sensor(VirtualFunctionBus virtualFunction)
             : base(virtualFunction)
         {
         }
 
-        public List<Point> Points { get; set; }
+        public List<Point> Points { get => this.points; set { this.RaiseAndSetIfChanged(ref this.points, value); } }
 
         public List<WorldObject> WorldObjects { get; set; }
 

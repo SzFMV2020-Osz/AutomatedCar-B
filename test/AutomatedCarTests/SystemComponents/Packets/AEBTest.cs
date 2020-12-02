@@ -93,5 +93,19 @@ namespace Tests.SystemComponents.Packets
 
             Assert.Equal("Text", virtualFunctionBus.AEBActionPacket.Message);
         }
+        public void thereIsAnObjectInRadar()
+        {
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());            
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Radar.LastSeenObject = wo;
+            Assert.True(aeb.isThereAnObjectInRadar());
+        }
+
+        [Fact]
+        public void thereIsNoObjectInRadar()
+        {
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());          
+            Assert.False(aeb.isThereAnObjectInRadar());
+        }
     }
 }

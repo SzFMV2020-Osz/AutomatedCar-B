@@ -259,6 +259,11 @@ namespace AutomatedCar.SystemComponents
             {
                 this.hmiPacket.Gaspedal = this.Decrease(this.hmiPacket.Gaspedal, 1000);
             }
+
+            if (this.BreakpedalDown)
+            {
+                this.hmiPacket.Gaspedal = 0;
+            }
         }
 
         public void HandleBrakePedal(bool isBrakePedalDown)

@@ -47,7 +47,8 @@
               <!-- Camera -->
 
               <customcontrols:SensorCustomControl Name="Camera" Distance="80" FOV="60" Rotation="0" Brush="Blue" Offset="-20, 0" Opacity="60" />
-
+              <customcontrols:ReverseRadarCustomControl />
+              
               <!-- Radar -->
               <!-- <customcontrols:SensorCustomControl Name="Radar" Distance="200" FOV="60" Rotation="0" Brush="Red" Offset="120, 0" Opacity="60" /> -->
 
