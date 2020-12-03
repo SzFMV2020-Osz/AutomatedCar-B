@@ -31,7 +31,7 @@ namespace AutomatedCar.SystemComponents
 
         public bool GearDown { get; private set; }
 
-        public bool Acc { get; private set; }
+        public bool Acc { get; set; }
 
         public bool AccDistance { get; private set; }
 
@@ -250,6 +250,7 @@ namespace AutomatedCar.SystemComponents
             if (isGasPedalDown)
             {
                 this.hmiPacket.Gaspedal = this.Increase(this.hmiPacket.Gaspedal, 1000);
+                Acc = false;
             }
             else
             {
@@ -267,6 +268,7 @@ namespace AutomatedCar.SystemComponents
             if (isBrakePedalDown)
             {
                 this.hmiPacket.Breakpedal = this.Increase(this.hmiPacket.Breakpedal, 500);
+                Acc = false;
             }
             else
             {
