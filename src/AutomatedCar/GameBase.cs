@@ -1,6 +1,7 @@
 namespace AutomatedCar
 {
     using System;
+    using AutomatedCar.Models;
     using Avalonia.Threading;
 
     public abstract class GameBase
@@ -28,5 +29,6 @@ namespace AutomatedCar
         public void Start() => this._timer.IsEnabled = true;
 
         public void Stop() => this._timer.IsEnabled = false;
+
     }
 }

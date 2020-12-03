@@ -9,8 +9,6 @@ namespace AutomatedCar.Models
     using ReactiveUI;
     using System;
     using System.Linq;
-    using Views;
-    using AvaloniaAppTemplate.Namespace;
 
     public class AutomatedCar : WorldObject, IMoveable
     {
@@ -85,6 +83,11 @@ namespace AutomatedCar.Models
             newPosition = this.CrashEffects(newPosition, crashedObjects);
             this.X = (int)Math.Round(newPosition.X);
             this.Y = (int)Math.Round(newPosition.Y);
+        }
+
+        public void Reset()
+        {
+            this.HealthPoints = 100;
         }
 
         private static List<WorldObject> GetCrashedObjects()
@@ -236,7 +239,6 @@ namespace AutomatedCar.Models
             if (!Invincible)
             {
                 this.HealthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
-                GameOverMessage.Show(null, GameOverMessage.GameOverMessageButtons.Ok);
             }
         }
 
