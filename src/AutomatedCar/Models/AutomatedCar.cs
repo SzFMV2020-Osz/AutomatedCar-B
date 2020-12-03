@@ -16,6 +16,7 @@ namespace AutomatedCar.Models
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
+        private AccController accController;
         private Radar radar;
         private AEB aEB;
         private GameOverCondition gameOver;
@@ -28,6 +29,7 @@ namespace AutomatedCar.Models
             this.virtualFunctionBus = new VirtualFunctionBus();
             this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
+            this.accController = new AccController(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
             this.gameOver = new GameOverCondition(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
@@ -72,12 +74,6 @@ namespace AutomatedCar.Models
         public double speed;
 
         public int Mass { get; set; } = 5;
-
-        public void SetNextPosition(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
 
         public void Move(Vector2 newPosition)
         {
