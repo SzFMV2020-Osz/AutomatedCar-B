@@ -1,12 +1,7 @@
 namespace AutomatedCar.SystemComponents
 {
-    using System.Net.Http.Headers;
     using AutomatedCar.Models;
-    using AutomatedCar.SystemComponents.Packets;
-    using Avalonia.Input;
     using AvaloniaAppTemplate.Namespace;
-    using MsgBox;
-    using Views;
 
     public class GameOverCondition : SystemComponent
     {
@@ -17,11 +12,6 @@ namespace AutomatedCar.SystemComponents
         {
             this.IsGameOver = false;
         }
-
-        #region Properties
-
-
-        #endregion
 
         public override void Process()
         {

@@ -29,6 +29,5 @@ namespace AutomatedCar
         public void Start() => this._timer.IsEnabled = true;
 
         public void Stop() => this._timer.IsEnabled = false;
-
     }
 }
