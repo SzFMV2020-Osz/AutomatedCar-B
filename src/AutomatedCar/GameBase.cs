@@ -1,6 +1,7 @@
 namespace AutomatedCar
 {
     using System;
+    using AutomatedCar.Models;
     using Avalonia.Threading;
 
     public abstract class GameBase
