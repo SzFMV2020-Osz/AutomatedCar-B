@@ -18,6 +18,7 @@ namespace AutomatedCar.Models
         private Ultrasound[] ultrasounds;
         private Radar radar;
         private AEB aEB;
+        private GameOverCondition gameOver;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -28,6 +29,7 @@ namespace AutomatedCar.Models
             this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
+            this.gameOver = new GameOverCondition(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
@@ -63,6 +65,8 @@ namespace AutomatedCar.Models
 
         public SolidColorBrush Brush { get; private set; }
 
+        public bool Invincible = false;
+
         public int Speed { get{return (int)Math.Round(speed);} set{speed = value;} }
 
         public double speed;
@@ -83,6 +87,11 @@ namespace AutomatedCar.Models
             this.Y = (int)Math.Round(newPosition.Y);
         }
 
+        public void Reset()
+        {
+            this.HealthPoints = 100;
+        }
+
         private static List<WorldObject> GetCrashedObjects()
         {
             return World.Instance.GetWorldObjectsInsideTriangle(World.Instance.ControlledCar.NetPolygons[0].Coordinates.Select(x => new Point(x.X, x.Y)).ToList());
@@ -100,6 +109,11 @@ namespace AutomatedCar.Models
                 if (col is Sign)
                 {
                     newPosition = this.SignCrash(newPosition, col);
+                }
+
+                if(col is NpcPedestrian && !Invincible)
+                {
+                    HealthPoints = 0;
                 }
             }
 
@@ -224,7 +238,10 @@ namespace AutomatedCar.Models
         /// <param name="otherObjectVector">The velocity vector of the other object involved in the collision.</param>
         public void DamageOnCollision(Vector2 carVector, Vector2 otherObjectVector)
         {
-            this.healthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+            if (!Invincible)
+            {
+                this.HealthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+            }
         }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>
