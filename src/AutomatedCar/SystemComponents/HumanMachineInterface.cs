@@ -247,6 +247,10 @@ namespace AutomatedCar.SystemComponents
 
         public void HandleGasPedal(bool isGasPedalDown)
         {
+            if (this.virtualFunctionBus.AEBActionPacket.Active) {
+                this.hmiPacket.Gaspedal = this.Decrease(this.hmiPacket.Gaspedal, 100);
+            }
+
             if (isGasPedalDown)
             {
                 this.hmiPacket.Gaspedal = this.Increase(this.hmiPacket.Gaspedal, 1000);
@@ -265,6 +269,10 @@ namespace AutomatedCar.SystemComponents
 
         public void HandleBrakePedal(bool isBrakePedalDown)
         {
+            if (this.virtualFunctionBus.AEBActionPacket.Active) {
+                this.hmiPacket.Breakpedal = this.Increase(this.hmiPacket.Breakpedal, 500);
+            }
+
             if (isBrakePedalDown)
             {
                 this.hmiPacket.Breakpedal = this.Increase(this.hmiPacket.Breakpedal, 500);

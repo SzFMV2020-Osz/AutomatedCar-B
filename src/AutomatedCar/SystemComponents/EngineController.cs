@@ -32,7 +32,7 @@ namespace AutomatedCar.SystemComponents
         public void UpdateEngineProperties(IReadOnlyHMIPacket HMIPacket, IReadOnlyAEBAction AEBActionPacket)
         {
             this.Gaspedal = HMIPacket.Gaspedal;
-            this.Breakpedal = AEBActionPacket.Active ? AEBActionPacket.Breakpedal : HMIPacket.Breakpedal;
+            this.Breakpedal = HMIPacket.Breakpedal;
             this.GearShifter.Position = HMIPacket.Gear;
             this.GearShifter.SetDriveGear(this.RPM, this.CalculateRPMChange());
             this.SetRPM();

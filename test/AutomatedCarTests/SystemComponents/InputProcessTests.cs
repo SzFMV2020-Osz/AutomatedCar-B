@@ -12,10 +12,13 @@ namespace Tests.SystemComponents
     public class InputProcessTests : IDisposable
     {
         static HumanMachineInterface hmi;
+        static VirtualFunctionBus vfb;
 
         public InputProcessTests()
         {
-            hmi = new HumanMachineInterface(new VirtualFunctionBus());
+            vfb = new VirtualFunctionBus();
+            vfb.AEBActionPacket = new AEBAction() { Active = false };
+            hmi = new HumanMachineInterface(vfb);
         }
 
         #region GearShiftTests
@@ -239,7 +242,7 @@ namespace Tests.SystemComponents
             }
             Assert.Equal(0, ((HMIPacket)hmi.HmiPacket).Gaspedal);
         }
-
+        
         [Fact]
         public void HandleBrakePedalGouesUpTo100ThenWithGoesDownTo0WithNoumerousTrueInput()
         {

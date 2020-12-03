@@ -59,6 +59,8 @@ namespace AutomatedCar.Models
 
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
 
+        public PowerTrain PowerTrain { get { return this.powerTrain; } }
+
         public AEB AEB { get; set; }//{ get => this.aEB; set { this.RaiseAndSetIfChanged(ref this.aEB, value); } }
 
         public Geometry Geometry { get; set; }
