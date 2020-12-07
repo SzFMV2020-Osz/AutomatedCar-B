@@ -30,7 +30,7 @@ namespace AutomatedCar.Models
             this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
             this.accController = new AccController(this.virtualFunctionBus);
-            this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
+            this.powerTrain = new PowerTrain(this.virtualFunctionBus, x, y);
             this.gameOver = new GameOverCondition(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
@@ -69,7 +69,7 @@ namespace AutomatedCar.Models
 
         public bool Invincible = false;
 
-        public int Speed { get{return (int)Math.Round(speed);} set{speed = value;} }
+        public int Speed { get { return (int)Math.Round(speed); } set { speed = value; } }
 
         public double speed;
 
@@ -107,7 +107,7 @@ namespace AutomatedCar.Models
                     newPosition = this.SignCrash(newPosition, col);
                 }
 
-                if(col is NpcPedestrian && !Invincible)
+                if (col is NpcPedestrian && !Invincible)
                 {
                     HealthPoints = 0;
                 }
@@ -143,7 +143,7 @@ namespace AutomatedCar.Models
             Sign sign = (col as Sign);
             var singPosition = new Vector2(sign.X, sign.Y);
             var res = Vector2.Add(signVelocity, singPosition);
-            sign.SetNextPosition((int) res.X, (int) res.Y);
+            sign.SetNextPosition((int)res.X, (int)res.Y);
         }
 
         private Vector2 TreeCrash(Vector2 newPosition)
@@ -215,9 +215,9 @@ namespace AutomatedCar.Models
             set => this.RaiseAndSetIfChanged(ref polygonVisible, value);
         }
 
-        public SolidColorBrush CameraBrush { get; set; }
+        // public SolidColorBrush CameraBrush { get; set; }
 
-        public Geometry CameraGeometry { get; set; }
+        // public Geometry CameraGeometry { get; set; }
 
         public int VisibleX { get; set; }
 
