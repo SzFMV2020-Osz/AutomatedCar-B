@@ -3,6 +3,8 @@ namespace Tests.SystemComponents.Packets
     using System;
     using System.Collections.Generic;
     using AutomatedCar.Models;
+    using AutomatedCar.SystemComponents;
+    using AutomatedCar.SystemComponents.Packets;
     using Avalonia;
     using Xunit;
     
@@ -81,6 +83,89 @@ namespace Tests.SystemComponents.Packets
             double distance = aeb.getStoppingDistanceTo_inPixels(wo);
 
             Assert.Equal(91*50, distance);
+        }
+       
+        public void thereIsAnObjectInRadar()
+        {
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());            
+            WorldObject wo = new AutomatedCar(0, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+            aeb.controlledCar.Radar.LastSeenObject = wo;
+            Assert.True(aeb.isThereAnObjectInRadar());
+        }
+
+        [Fact]
+        public void thereIsNoObjectInRadar()
+        {
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());          
+            Assert.False(aeb.isThereAnObjectInRadar());
+        }
+
+         [Fact]
+        public void setAEB_Warning() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+
+            aeb.SetWarning("Text");
+
+            Assert.Equal("Text", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+         [Fact]
+        public void setAEB_Warning_over70() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.PowerTrain.Engine.GearShifter.Position = Gears.D;
+            aeb.controlledCar.Speed = kmh_into_pxs(71);
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(200 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            aeb.Run();
+
+            Assert.Equal("AEB off", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+        [Fact]
+        public void setAEB_Warning_lessthan70() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.PowerTrain.Engine.GearShifter.Position = Gears.D;
+            aeb.controlledCar.Speed = kmh_into_pxs(69);
+            aeb.controlledCar.Radar.LastSeenObject = null;
+
+            aeb.Run();
+
+            Assert.Equal("", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+        [Fact]
+        public void setAEB_Warning_distancelessthan5_Warning() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            aeb = new AEB(virtualFunctionBus);
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.PowerTrain.Engine.GearShifter.Position = Gears.D;
+            aeb.controlledCar.Speed = kmh_into_pxs(9);
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(99 * 50 + 10, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            aeb.Run();
+
+            Assert.Equal("Please brake!", virtualFunctionBus.AEBActionPacket.Message);
+        }
+
+        [Fact]
+        public void setAEB_Warning_distancelessthan5_Stop() {
+            VirtualFunctionBus virtualFunctionBus = new VirtualFunctionBus();
+            virtualFunctionBus.HMIPacket = new HMIPacket() { Breakpedal = 100 };
+            aeb = new AEB(virtualFunctionBus);
+            aeb.SetWarning("");
+            aeb.controlledCar = new AutomatedCar(100 * 50, 0, "", 0, 0, new List<List<Avalonia.Point>>()); 
+            aeb.controlledCar.PowerTrain.Engine.GearShifter.Position = Gears.D;
+            aeb.controlledCar.Speed = kmh_into_pxs(9);
+            aeb.controlledCar.Radar.LastSeenObject = new AutomatedCar(99 * 50 + 15, 0, "", 0, 0, new List<List<Avalonia.Point>>());
+
+            aeb.Run();
+
+            Assert.Equal("AEB active! N to inactivate", virtualFunctionBus.AEBActionPacket.Message);
         }
     }
 }

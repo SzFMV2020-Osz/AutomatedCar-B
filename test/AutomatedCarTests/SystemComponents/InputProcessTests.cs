@@ -1,4 +1,5 @@
-﻿using AutomatedCar.SystemComponents;
+using AutomatedCar.Models;
+using AutomatedCar.SystemComponents;
 using AutomatedCar.SystemComponents.Packets;
 using Avalonia.Media;
 using System;
@@ -11,10 +12,13 @@ namespace Tests.SystemComponents
     public class InputProcessTests : IDisposable
     {
         static HumanMachineInterface hmi;
+        static VirtualFunctionBus vfb;
 
         public InputProcessTests()
         {
-            hmi = new HumanMachineInterface(new VirtualFunctionBus());
+            vfb = new VirtualFunctionBus();
+            vfb.AEBActionPacket = new AEBAction() { Active = false };
+            hmi = new HumanMachineInterface(vfb);
         }
 
         #region GearShiftTests
@@ -238,7 +242,7 @@ namespace Tests.SystemComponents
             }
             Assert.Equal(0, ((HMIPacket)hmi.HmiPacket).Gaspedal);
         }
-
+        
         [Fact]
         public void HandleBrakePedalGouesUpTo100ThenWithGoesDownTo0WithNoumerousTrueInput()
         {
@@ -361,73 +365,89 @@ namespace Tests.SystemComponents
         [Fact]
         public void PolygonSetDoesNotChangeTheStateOfPolygonWithNoInput()
         {
-            var polygon = ((DebugPacket)hmi.DebugPacket).Polygon;
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0,0,"",5,5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
+            var polygon = car.PolygonVisible;
             hmi.PolygonSet(false);
 
-            Assert.Equal(polygon, ((DebugPacket)hmi.DebugPacket).Polygon);
+            Assert.Equal(polygon, car.PolygonVisible);
         }
 
         [Fact]
         public void PolygonSetSwitchBetweenOnAndOffWithNumerousInput()
         {
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
             hmi.PolygonSet(true);
-            Assert.True(((DebugPacket)hmi.DebugPacket).Polygon);
+            Assert.True(car.PolygonVisible);
             hmi.PolygonSet(false);
-            Assert.False(((DebugPacket)hmi.DebugPacket).Polygon);
+            Assert.False(car.PolygonVisible);
         }
 
         [Fact]
         public void UtrasoundSensorSetDoesNotChangeTheStateOfUtrasoundSensorWithNoInput()
         {
-            var ultrasound = ((DebugPacket)hmi.DebugPacket).UtrasoundSensor;
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
+            var ultrasound = car.UltraSoundVisible;
             hmi.UtrasoundSensorSet(false);
 
-            Assert.Equal(ultrasound, ((DebugPacket)hmi.DebugPacket).UtrasoundSensor);
+            Assert.Equal(ultrasound, car.UltraSoundVisible);
         }
 
         [Fact]
         public void UtrasoundSensorSetSwitchBetweenOnAndOffWithNumerousInput()
         {
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
             hmi.UtrasoundSensorSet(true);
-            Assert.True(((DebugPacket)hmi.DebugPacket).UtrasoundSensor);
+            Assert.True(car.UltraSoundVisible);
             hmi.UtrasoundSensorSet(false);
-            Assert.False(((DebugPacket)hmi.DebugPacket).UtrasoundSensor);
+            Assert.False(car.UltraSoundVisible);
         }
 
         [Fact]
         public void RadarSensorSetDoesNotChangeTheStateOfRadarSensorWithNoInput()
         {
-            var radar = ((DebugPacket)hmi.DebugPacket).RadarSensor;
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
+            var radar = car.RadarVisible;
             hmi.RadarSensorSet(false);
 
-            Assert.Equal(radar, ((DebugPacket)hmi.DebugPacket).RadarSensor);
+            Assert.Equal(radar, car.RadarVisible);
         }
 
         [Fact]
         public void RadarSensorSetSwitchBetweenOnAndOffWithNumerousInput()
         {
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
             hmi.RadarSensorSet(true);
-            Assert.True(((DebugPacket)hmi.DebugPacket).RadarSensor);
+            Assert.True(car.RadarVisible);
             hmi.RadarSensorSet(false);
-            Assert.False(((DebugPacket)hmi.DebugPacket).RadarSensor);
+            Assert.False(car.RadarVisible);
         }
 
         [Fact]
         public void BoardCameraSetDoesNotChangeTheStateOfBoardCameraWithNoInput()
         {
-            var camera = ((DebugPacket)hmi.DebugPacket).BoardCamera;
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
+            var camera = car.CameraVisible;
             hmi.BoardCameraSet(false);
 
-            Assert.Equal(camera, ((DebugPacket)hmi.DebugPacket).BoardCamera);
+            Assert.Equal(camera, car.CameraVisible);
         }
 
         [Fact]
         public void BoardCameraSetSwitchBetweenOnAndOffWithNumerousInput()
         {
+            World.Instance.ControlledCar = new AutomatedCar.Models.AutomatedCar(0, 0, "", 5, 5, new List<List<Avalonia.Point>>());
+            AutomatedCar.Models.AutomatedCar car = World.Instance.ControlledCar;
             hmi.BoardCameraSet(true);
-            Assert.True(((DebugPacket)hmi.DebugPacket).BoardCamera);
+            Assert.True(car.CameraVisible);
             hmi.BoardCameraSet(false);
-            Assert.False(((DebugPacket)hmi.DebugPacket).BoardCamera);
+            Assert.False(car.CameraVisible);
         }
 
         public void Dispose()

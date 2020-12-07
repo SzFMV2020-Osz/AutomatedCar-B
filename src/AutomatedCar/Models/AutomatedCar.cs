@@ -16,7 +16,10 @@ namespace AutomatedCar.Models
         private HumanMachineInterface humanMachineInterface;
         private PowerTrain powerTrain;
         private Ultrasound[] ultrasounds;
+        private AccController accController;
         private Radar radar;
+        private AEB aEB;
+        private GameOverCondition gameOver;
 
         /*public AutomatedCar(int x, int y, string filename)
             : base(x, y, filename, true,  new RotationMatrix(1.0, 0.0, 0.0, 1.0))*/
@@ -24,8 +27,11 @@ namespace AutomatedCar.Models
             : base(x, y, filename, width, height, -width / 2, -height / 2, new Matrix(1, 0, 0, 1, 1, 1), polylist)
         {
             this.virtualFunctionBus = new VirtualFunctionBus();
+            this.AEB = new AEB(this.virtualFunctionBus);
             this.humanMachineInterface = new HumanMachineInterface(this.virtualFunctionBus);
+            this.accController = new AccController(this.virtualFunctionBus);
             this.powerTrain = new PowerTrain(this.virtualFunctionBus,x,y);
+            this.gameOver = new GameOverCondition(this.virtualFunctionBus);
             this.Brush = new SolidColorBrush(Color.Parse("red"));
             this.Ultrasounds = new Ultrasound[]
             {
@@ -39,9 +45,10 @@ namespace AutomatedCar.Models
                 new Ultrasound(this.virtualFunctionBus, -105, -45, -90),
             };
             this.Radar = new Radar(this.virtualFunctionBus);
-            this.ultraSoundVisible = true;
-            this.radarVisible = true;
-            this.cameraVisible = true;
+            this.ultraSoundVisible = false;
+            this.radarVisible = false;
+            this.cameraVisible = false;
+            this.polygonVisible = false;
         }
 
         public VirtualFunctionBus VirtualFunctionBus { get => this.virtualFunctionBus; }
@@ -50,13 +57,17 @@ namespace AutomatedCar.Models
 
         public Ultrasound[] Ultrasounds { get => this.ultrasounds; set { this.RaiseAndSetIfChanged(ref this.ultrasounds, value); } }
 
-        public Ultrasound Ultrasound0 { get => this.ultrasounds[0]; set { this.RaiseAndSetIfChanged(ref this.ultrasounds[0], value); } }
-        
         public Radar Radar { get => this.radar; set { this.RaiseAndSetIfChanged(ref this.radar, value); } }
+
+        public PowerTrain PowerTrain { get { return this.powerTrain; } }
+
+        public AEB AEB { get; set; }//{ get => this.aEB; set { this.RaiseAndSetIfChanged(ref this.aEB, value); } }
 
         public Geometry Geometry { get; set; }
 
         public SolidColorBrush Brush { get; private set; }
+
+        public bool Invincible = false;
 
         public int Speed { get{return (int)Math.Round(speed);} set{speed = value;} }
 
@@ -64,18 +75,17 @@ namespace AutomatedCar.Models
 
         public int Mass { get; set; } = 5;
 
-        public void SetNextPosition(int x, int y)
-        {
-            this.X = x;
-            this.Y = y;
-        }
-
         public void Move(Vector2 newPosition)
         {
             var crashedObjects = GetCrashedObjects();
             newPosition = this.CrashEffects(newPosition, crashedObjects);
             this.X = (int)Math.Round(newPosition.X);
             this.Y = (int)Math.Round(newPosition.Y);
+        }
+
+        public void Reset()
+        {
+            this.HealthPoints = 100;
         }
 
         private static List<WorldObject> GetCrashedObjects()
@@ -95,6 +105,11 @@ namespace AutomatedCar.Models
                 if (col is Sign)
                 {
                     newPosition = this.SignCrash(newPosition, col);
+                }
+
+                if(col is NpcPedestrian && !Invincible)
+                {
+                    HealthPoints = 0;
                 }
             }
 
@@ -184,7 +199,6 @@ namespace AutomatedCar.Models
         public SolidColorBrush CameraBrush { get; set; }
 
         public PolylineGeometry CameraGeometry { get; set; }
-
         private bool cameraVisible;
 
         public bool CameraVisible
@@ -192,6 +206,18 @@ namespace AutomatedCar.Models
             get => cameraVisible;
             set => this.RaiseAndSetIfChanged(ref cameraVisible, value);
         }
+
+        private bool polygonVisible;
+
+        public bool PolygonVisible
+        {
+            get => polygonVisible;
+            set => this.RaiseAndSetIfChanged(ref polygonVisible, value);
+        }
+
+        public SolidColorBrush CameraBrush { get; set; }
+
+        public Geometry CameraGeometry { get; set; }
 
         public int VisibleX { get; set; }
 
@@ -211,7 +237,10 @@ namespace AutomatedCar.Models
         /// <param name="otherObjectVector">The velocity vector of the other object involved in the collision.</param>
         public void DamageOnCollision(Vector2 carVector, Vector2 otherObjectVector)
         {
-            this.healthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+            if (!Invincible)
+            {
+                this.HealthPoints -= Math.Abs(((int)carVector.X + (int)carVector.Y) - ((int)otherObjectVector.X + (int)otherObjectVector.Y));
+            }
         }
 
         /// <summary>Stops the automated car by stopping the ticker in the Virtual Function Bus, that cyclically calls the system components.</summary>

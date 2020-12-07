@@ -1,6 +1,7 @@
 namespace AutomatedCar.SystemComponents
 {
     using System.Net.Http.Headers;
+    using AutomatedCar.Models;
     using AutomatedCar.SystemComponents.Packets;
     using Avalonia.Input;
     using MsgBox;
@@ -9,15 +10,12 @@ namespace AutomatedCar.SystemComponents
     public class HumanMachineInterface : SystemComponent, IHumanMachineInterface
     {
         private HMIPacket hmiPacket;
-        private DebugPacket debugPacket;
 
         public HumanMachineInterface(VirtualFunctionBus virtualFunctionBus)
             : base(virtualFunctionBus)
         {
             this.hmiPacket = new HMIPacket();
-            this.debugPacket = new DebugPacket();
             virtualFunctionBus.HMIPacket = this.hmiPacket;
-            virtualFunctionBus.DebugPacket = this.debugPacket;
         }
 
         #region Properties
@@ -33,7 +31,7 @@ namespace AutomatedCar.SystemComponents
 
         public bool GearDown { get; private set; }
 
-        public bool Acc { get; private set; }
+        public bool Acc { get; set; }
 
         public bool AccDistance { get; private set; }
 
@@ -58,8 +56,6 @@ namespace AutomatedCar.SystemComponents
         public bool PolygonDebug { get; private set; }
 
         public HMIPacket HmiPacket { get => this.hmiPacket; }
-
-        public DebugPacket DebugPacket { get => this.debugPacket; }
         #endregion
 
         public override void Process()
@@ -79,7 +75,7 @@ namespace AutomatedCar.SystemComponents
             this.BoardCameraSet(this.CameraDebug);
             this.RadarSensorSet(this.RadarDebug);
             this.UtrasoundSensorSet(this.UltrasoundDebug);
-            this.PolygonDebugSet(this.PolygonDebug);
+            this.PolygonSet(this.PolygonDebug);
         }
 
         #region InputHandler
@@ -251,21 +247,36 @@ namespace AutomatedCar.SystemComponents
 
         public void HandleGasPedal(bool isGasPedalDown)
         {
+            if (this.virtualFunctionBus.AEBActionPacket.Active) {
+                this.hmiPacket.Gaspedal = this.Decrease(this.hmiPacket.Gaspedal, 100);
+            }
+
             if (isGasPedalDown)
             {
                 this.hmiPacket.Gaspedal = this.Increase(this.hmiPacket.Gaspedal, 1000);
+                Acc = false;
             }
             else
             {
                 this.hmiPacket.Gaspedal = this.Decrease(this.hmiPacket.Gaspedal, 1000);
             }
+
+            if (this.BreakpedalDown)
+            {
+                this.hmiPacket.Gaspedal = 0;
+            }
         }
 
         public void HandleBrakePedal(bool isBrakePedalDown)
         {
+            if (this.virtualFunctionBus.AEBActionPacket.Active) {
+                this.hmiPacket.Breakpedal = this.Increase(this.hmiPacket.Breakpedal, 500);
+            }
+
             if (isBrakePedalDown)
             {
                 this.hmiPacket.Breakpedal = this.Increase(this.hmiPacket.Breakpedal, 500);
+                Acc = false;
             }
             else
             {
@@ -386,27 +397,22 @@ namespace AutomatedCar.SystemComponents
 
         public void PolygonSet(bool newValue)
         {
-            this.debugPacket.Polygon = newValue;
+            World.Instance.ControlledCar.PolygonVisible = newValue;
         }
 
         public void UtrasoundSensorSet(bool newValue)
         {
-            this.debugPacket.UtrasoundSensor = newValue;
+            World.Instance.ControlledCar.UltraSoundVisible = newValue;
         }
 
         public void RadarSensorSet(bool newValue)
         {
-            this.debugPacket.RadarSensor = newValue;
+            World.Instance.ControlledCar.RadarVisible = newValue;
         }
 
         public void BoardCameraSet(bool newValue)
         {
-            this.debugPacket.BoardCamera = newValue;
-        }
-
-        public void PolygonDebugSet(bool newValue)
-        {
-            this.debugPacket.Polygon = newValue;
+            World.Instance.ControlledCar.CameraVisible = newValue;
         }
         #endregion
     }

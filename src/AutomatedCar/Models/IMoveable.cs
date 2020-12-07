@@ -11,8 +11,6 @@ namespace AutomatedCar.Models
         /// </summary>
         public int Mass { get; set; }
 
-        public void SetNextPosition(int x, int y);
-
         public void Move(Vector2 with);
     }
 }
